@@ -196,9 +196,33 @@
   function updateFilterCount() {
     var el = byId('filter-count'); if (el) el.textContent = '共 ' + filteredQuestions().length + ' 题';
   }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  // 每组抽题：优先未做过的题，不足再补已做过的
+  function sampleQuestions(list, limit) {
+    if (!limit || limit === 'all' || limit >= list.length) return list;
+    var n = Number(limit);
+    var fresh = [], done = [];
+    list.forEach(function (q) {
+      var p = progress[q.id];
+      (p && p.a ? done : fresh).push(q);
+    });
+    return shuffle(fresh).concat(shuffle(done)).slice(0, n);
+  }
   function startQuiz(list) {
     var qs = list || filteredQuestions();
     if (!qs.length) { alert('当前筛选条件下没有题目，换个条件试试。'); return; }
+    // 显式传入的列表（如「只重做错题」「刷本章」）不抽样，只对筛选结果抽
+    if (!list) {
+      var limitEl = byId('quiz-limit');
+      qs = sampleQuestions(qs, limitEl ? limitEl.value : 'all');
+    }
     session = { list: qs.slice(), idx: 0, answered: 0, correct: 0, peeked: 0, revealed: false, userAns: null };
     byId('quiz-home').classList.add('hidden');
     byId('quiz-summary').classList.add('hidden');

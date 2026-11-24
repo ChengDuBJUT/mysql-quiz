@@ -14,14 +14,46 @@
       "pageRange": "5-13",
       "summary": "本节介绍会话与会话系统变量的概念，说明自定义变量的三要素及用户会话变量与局部变量两种类型；分别讲解用户会话变量的定义与赋值方式、局部变量的定义与作用域，并比较两者的区别。",
       "points": [
-        { "term": "会话系统变量", "desc": "客户机成功连接服务器后产生对应会话，服务器内存生成会话系统变量，其初始值是全局系统变量值的拷贝。", "page": 5 },
-        { "term": "自定义变量三要素", "desc": "MySQL语言中的自定义变量由变量名、变量类型和变量值3要素构成；分为以@开头的用户会话变量和局部变量。", "page": 5 },
-        { "term": "用户会话变量命名", "desc": "用户会话变量一般以一个“@”开头，系统会话变量以两个“@”开头；变量名大小写不敏感，系统会话变量无需定义可直接用。", "page": 6 },
-        { "term": "会话变量生存期", "desc": "服务器为每个会话开辟独立的会话连接空间，不同会话互不干扰；会话变量的生存期就是会话空间开辟到释放的时间。", "page": 7 },
-        { "term": "会话变量定义与赋值", "desc": "定义与赋值同时进行，可用set或select语句：set @var=expression、select @var:=expression 或 select expression into @var。", "page": 8 },
-        { "term": "赋值号比较", "desc": "“:=”是赋值号，“=”一般作比较操作符，仅在set语句（含update的set子句）中作赋值号；select用“:=”产生结果集，into方式不产生结果集。", "page": 9 },
-        { "term": "局部变量", "desc": "局部变量在定义的局部程序范围内有效，用declare命令定义并指定数据类型，如 declare myvar int default 100; 再用set赋值。", "page": 11 },
-        { "term": "局部变量的使用", "desc": "局部变量必须定义在函数、触发器、存储过程等存储程序内；可作为存储过程或函数的参数，此时不需declare但需指定数据类型。", "page": 12 }
+        {
+          "term": "会话系统变量",
+          "desc": "客户机成功连接服务器后产生对应会话，服务器内存生成会话系统变量，其初始值是全局系统变量值的拷贝。",
+          "page": 5
+        },
+        {
+          "term": "自定义变量三要素",
+          "desc": "MySQL语言中的自定义变量由变量名、变量类型和变量值3要素构成；分为以@开头的用户会话变量和局部变量。",
+          "page": 5
+        },
+        {
+          "term": "用户会话变量命名",
+          "desc": "用户会话变量一般以一个“@”开头，系统会话变量以两个“@”开头；变量名大小写不敏感，系统会话变量无需定义可直接用。",
+          "page": 6
+        },
+        {
+          "term": "会话变量生存期",
+          "desc": "服务器为每个会话开辟独立的会话连接空间，不同会话互不干扰；会话变量的生存期就是会话空间开辟到释放的时间。",
+          "page": 7
+        },
+        {
+          "term": "会话变量定义与赋值",
+          "desc": "定义与赋值同时进行，可用set或select语句：set @var=expression、select @var:=expression 或 select expression into @var。",
+          "page": 8
+        },
+        {
+          "term": "赋值号比较",
+          "desc": "“:=”是赋值号，“=”一般作比较操作符，仅在set语句（含update的set子句）中作赋值号；select用“:=”产生结果集，into方式不产生结果集。",
+          "page": 9
+        },
+        {
+          "term": "局部变量",
+          "desc": "局部变量在定义的局部程序范围内有效，用declare命令定义并指定数据类型，如 declare myvar int default 100; 再用set赋值。",
+          "page": 11
+        },
+        {
+          "term": "局部变量的使用",
+          "desc": "局部变量必须定义在函数、触发器、存储过程等存储程序内；可作为存储过程或函数的参数，此时不需declare但需指定数据类型。",
+          "page": 12
+        }
       ],
       "code": [
         "set @user_variable1=expression1 [,@user_variable2=expression2 , …]",
@@ -42,10 +74,26 @@
       "pageRange": "14-15",
       "summary": "本节给出MySQL表达式的定义，并分别按表达式值的类型、值的形式和表达式形式三种标准对表达式进行分类说明。",
       "points": [
-        { "term": "表达式的定义", "desc": "MySQL表达式是由运算符将常量、变量、字段名和函数等组合连接而成的有意义的字符序列，通常可以得到一个值。", "page": 14 },
-        { "term": "按值类型分类", "desc": "根据表达式值的类型，表达式可分为字符型表达式、数值型表达式和日期型表达式。", "page": 14 },
-        { "term": "按值形式分类", "desc": "结果只是一个值的是标量表达式（如1+2）；结果是一行值的是行表达式；结果是0个、1个或多个行表达式集合的是表表达式。", "page": 15 },
-        { "term": "按形式分类", "desc": "分为单一表达式（一个常量、变量、函数或列名）和复合表达式（由运算符连接多个单一表达式，如1+7+3）。", "page": 15 }
+        {
+          "term": "表达式的定义",
+          "desc": "MySQL表达式是由运算符将常量、变量、字段名和函数等组合连接而成的有意义的字符序列，通常可以得到一个值。",
+          "page": 14
+        },
+        {
+          "term": "按值类型分类",
+          "desc": "根据表达式值的类型，表达式可分为字符型表达式、数值型表达式和日期型表达式。",
+          "page": 14
+        },
+        {
+          "term": "按值形式分类",
+          "desc": "结果只是一个值的是标量表达式（如1+2）；结果是一行值的是行表达式；结果是0个、1个或多个行表达式集合的是表表达式。",
+          "page": 15
+        },
+        {
+          "term": "按形式分类",
+          "desc": "分为单一表达式（一个常量、变量、函数或列名）和复合表达式（由运算符连接多个单一表达式，如1+7+3）。",
+          "page": 15
+        }
       ],
       "code": [],
       "tips": []
@@ -56,10 +104,26 @@
       "pageRange": "16-19",
       "summary": "本节说明创建函数和存储过程时需用delimiter更改命令结束标记以避免语句被拆分，介绍delimiter的作用与恢复默认结束符的习惯，并给出begin-end语句块的结构与适用场合。",
       "points": [
-        { "term": "更改结束标记的原因", "desc": "默认结束符是分号，而函数和存储过程中含多个分号会报错，需事先把delimiter换成其它符号，如//或$$。", "page": 16 },
-        { "term": "delimiter的作用", "desc": "利用delimiter命令重新定义语句执行的结束符，避免begin-end语句块中的多条语句被拆开。", "page": 17 },
-        { "term": "恢复默认结束符", "desc": "编程结束应把结束符改回分号，因为这是MySQL的默认结束符，实际编程要养成习惯。", "page": 18 },
-        { "term": "begin-end语句块", "desc": "用于定义一组语句块；局部变量、begin-end语句块和流程控制语句只能用于函数、存储过程、游标和触发器的定义内部。", "page": 19 }
+        {
+          "term": "更改结束标记的原因",
+          "desc": "默认结束符是分号，而函数和存储过程中含多个分号会报错，需事先把delimiter换成其它符号，如//或$$。",
+          "page": 16
+        },
+        {
+          "term": "delimiter的作用",
+          "desc": "利用delimiter命令重新定义语句执行的结束符，避免begin-end语句块中的多条语句被拆开。",
+          "page": 17
+        },
+        {
+          "term": "恢复默认结束符",
+          "desc": "编程结束应把结束符改回分号，因为这是MySQL的默认结束符，实际编程要养成习惯。",
+          "page": 18
+        },
+        {
+          "term": "begin-end语句块",
+          "desc": "用于定义一组语句块；局部变量、begin-end语句块和流程控制语句只能用于函数、存储过程、游标和触发器的定义内部。",
+          "page": 19
+        }
       ],
       "code": [
         "delimiter //",
@@ -77,13 +141,41 @@
       "pageRange": "20-27",
       "summary": "本节对比静态SQL与动态SQL，说明预处理语句“一次解析、多次执行”的性能优势，介绍prepare、execute、deallocate三种语句的语法、说明与三个使用步骤，并给出应用示例和限制。",
       "points": [
-        { "term": "静态SQL与预处理SQL", "desc": "静态SQL每次发送都要解析执行；预处理SQL运行期间语句或参数可动态变化，第一次解析后保存到服务器缓存，以后无需再次解析。", "page": 20 },
-        { "term": "性能优势", "desc": "将某些SQL语句封装为预处理SQL语句，可以实现“一次解析，多次执行”的性能优势。", "page": 21 },
-        { "term": "预处理语句组成", "desc": "prepare、execute、deallocate（drop）统称为预处理语句，分别用于预备、执行和释放语句。", "page": 21 },
-        { "term": "prepare说明", "desc": "preparable_stmt必须是单一SQL语句；“?”作为参数制作符只能用于数据值位置；同名预处理语句会隐含解除分配；其范围是客户端会话。", "page": 22 },
-        { "term": "execute说明", "desc": "含参数制作符时必须提供using子句列出用户会话变量，参数值只能由用户会话变量提供，其数目须与参数制作符数量一样多。", "page": 23 },
-        { "term": "三个步骤", "desc": "预处理SQL语句的使用主要包含3个步骤：创建预处理SQL语句、执行预处理SQL语句、释放预处理SQL语句。", "page": 24 },
-        { "term": "使用限制", "desc": "预处理语法不能嵌套；可在存储过程中使用，但不能在存储函数或触发器中使用；参数制作符不用于SQL关键词和标识符。", "page": 27 }
+        {
+          "term": "静态SQL与预处理SQL",
+          "desc": "静态SQL每次发送都要解析执行；预处理SQL运行期间语句或参数可动态变化，第一次解析后保存到服务器缓存，以后无需再次解析。",
+          "page": 20
+        },
+        {
+          "term": "性能优势",
+          "desc": "将某些SQL语句封装为预处理SQL语句，可以实现“一次解析，多次执行”的性能优势。",
+          "page": 21
+        },
+        {
+          "term": "预处理语句组成",
+          "desc": "prepare、execute、deallocate（drop）统称为预处理语句，分别用于预备、执行和释放语句。",
+          "page": 21
+        },
+        {
+          "term": "prepare说明",
+          "desc": "preparable_stmt必须是单一SQL语句；“?”作为参数制作符只能用于数据值位置；同名预处理语句会隐含解除分配；其范围是客户端会话。",
+          "page": 22
+        },
+        {
+          "term": "execute说明",
+          "desc": "含参数制作符时必须提供using子句列出用户会话变量，参数值只能由用户会话变量提供，其数目须与参数制作符数量一样多。",
+          "page": 23
+        },
+        {
+          "term": "三个步骤",
+          "desc": "预处理SQL语句的使用主要包含3个步骤：创建预处理SQL语句、执行预处理SQL语句、释放预处理SQL语句。",
+          "page": 24
+        },
+        {
+          "term": "使用限制",
+          "desc": "预处理语法不能嵌套；可在存储过程中使用，但不能在存储函数或触发器中使用；参数制作符不用于SQL关键词和标识符。",
+          "page": 27
+        }
       ],
       "code": [
         "prepare stmt_name from preparable_stmt;",
@@ -105,10 +197,26 @@
       "pageRange": "28-28",
       "summary": "本节介绍注释的概念及MySQL中三种注释方式：井号#、双连线--（后须加空格）和正斜杠星号/*…*/，并给出示例代码。",
       "points": [
-        { "term": "注释的概念", "desc": "注释是程序代码中不被执行的文本字符串，用于对代码进行说明或进行诊断的部分语句。", "page": 28 },
-        { "term": "#注释", "desc": "井号字符#：从该字符到行尾都是注释内容。", "page": 28 },
-        { "term": "--注释", "desc": "双连线字符--：从该字符到行尾都是注释内容，注意双连线后一定要加一个空格。", "page": 28 },
-        { "term": "/*…*/注释", "desc": "开始注释对/*和结束注释对*/之间的所有内容均视为注释。", "page": 28 }
+        {
+          "term": "注释的概念",
+          "desc": "注释是程序代码中不被执行的文本字符串，用于对代码进行说明或进行诊断的部分语句。",
+          "page": 28
+        },
+        {
+          "term": "#注释",
+          "desc": "井号字符#：从该字符到行尾都是注释内容。",
+          "page": 28
+        },
+        {
+          "term": "--注释",
+          "desc": "双连线字符--：从该字符到行尾都是注释内容，注意双连线后一定要加一个空格。",
+          "page": 28
+        },
+        {
+          "term": "/*…*/注释",
+          "desc": "开始注释对/*和结束注释对*/之间的所有内容均视为注释。",
+          "page": 28
+        }
       ],
       "code": [
         "USE  teaching;     -- 打开数据库",
@@ -125,12 +233,36 @@
       "pageRange": "29-35",
       "summary": "本节介绍创建自定义函数的权限要求和语法格式，解释参数形式in/out/inout、函数特征选项和函数体中的return语句，并通过示例说明自定义函数的创建与调用方式。",
       "points": [
-        { "term": "创建函数的权限", "desc": "用create function创建自定义函数必须具有create routine权限，alter routine和execute权限自动授予创建者；定义时需指定当前数据库。", "page": 29 },
-        { "term": "创建函数语法", "desc": "create function func_name(参数列表) returns return_type [characteristic…] begin function_body_statements; return[return_values]; end;。", "page": 30 },
-        { "term": "参数形式", "desc": "in表示输入参数，out表示输出参数，inout表示输入输出参数；func_parameter为参数名，type为参数类型。", "page": 31 },
-        { "term": "函数特征选项", "desc": "characteristics由language sql、[not] deterministic、{contains sql|no sql|reads sql data|modifies sql data}、sql security、comment等一种或多种组合而成。", "page": 32 },
-        { "term": "函数体", "desc": "begin…end为函数体起止符，内含函数要实现的任务；函数体内要有return return_values;语句表示函数返回值表达式。", "page": 32 },
-        { "term": "调用函数", "desc": "因函数与数据库相关，调用时需打开相应数据库或指定数据库名称；调用方式与MySQL内部函数相同，如 select rectangle_area(5,4);。", "page": 35 }
+        {
+          "term": "创建函数的权限",
+          "desc": "用create function创建自定义函数必须具有create routine权限，alter routine和execute权限自动授予创建者；定义时需指定当前数据库。",
+          "page": 29
+        },
+        {
+          "term": "创建函数语法",
+          "desc": "create function func_name(参数列表) returns return_type [characteristic…] begin function_body_statements; return[return_values]; end;。",
+          "page": 30
+        },
+        {
+          "term": "参数形式",
+          "desc": "in表示输入参数，out表示输出参数，inout表示输入输出参数；func_parameter为参数名，type为参数类型。",
+          "page": 31
+        },
+        {
+          "term": "函数特征选项",
+          "desc": "characteristics由language sql、[not] deterministic、{contains sql|no sql|reads sql data|modifies sql data}、sql security、comment等一种或多种组合而成。",
+          "page": 32
+        },
+        {
+          "term": "函数体",
+          "desc": "begin…end为函数体起止符，内含函数要实现的任务；函数体内要有return return_values;语句表示函数返回值表达式。",
+          "page": 32
+        },
+        {
+          "term": "调用函数",
+          "desc": "因函数与数据库相关，调用时需打开相应数据库或指定数据库名称；调用方式与MySQL内部函数相同，如 select rectangle_area(5,4);。",
+          "page": 35
+        }
       ],
       "code": [
         "create function func_name([[in | out | inout]func_parameter type[,…]]) returns return_type [characteristic…] begin function_body_statements; return[return_values]; end;",
@@ -150,11 +282,31 @@
       "pageRange": "36-40",
       "summary": "本节介绍函数的查看、修改和删除：用show function status、show create function及information_schema.routines表查看；用alter function修改特性；用drop function删除。",
       "points": [
-        { "term": "查看函数信息", "desc": "用 show function status; 查看当前数据库所有自定义函数信息，函数较多时可用 show function status like 模式;。", "page": 36 },
-        { "term": "按数据库查看函数名", "desc": "可用 select name from MySQL.proc where db = 'teaching' and type='function'; 查看指定数据库中的所有自定义函数名。", "page": 36 },
-        { "term": "查看函数详细信息", "desc": "用 show create function 函数名; 查看；函数信息保存在information_schema数据库的routines表中。", "page": 37 },
-        { "term": "修改函数", "desc": "alter function sp_name [characteristic …] 仅用于更改函数特性（如COMMENT、SQL SECURITY、数据访问特性），不能更改参数和函数体。", "page": 38 },
-        { "term": "删除函数", "desc": "使用MySQL命令 drop function func_name 删除自定义函数，如 drop function get_name;。", "page": 40 }
+        {
+          "term": "查看函数信息",
+          "desc": "用 show function status; 查看当前数据库所有自定义函数信息，函数较多时可用 show function status like 模式;。",
+          "page": 36
+        },
+        {
+          "term": "按数据库查看函数名",
+          "desc": "可用 select name from MySQL.proc where db = 'teaching' and type='function'; 查看指定数据库中的所有自定义函数名。",
+          "page": 36
+        },
+        {
+          "term": "查看函数详细信息",
+          "desc": "用 show create function 函数名; 查看；函数信息保存在information_schema数据库的routines表中。",
+          "page": 37
+        },
+        {
+          "term": "修改函数",
+          "desc": "alter function sp_name [characteristic …] 仅用于更改函数特性（如COMMENT、SQL SECURITY、数据访问特性），不能更改参数和函数体。",
+          "page": 38
+        },
+        {
+          "term": "删除函数",
+          "desc": "使用MySQL命令 drop function func_name 删除自定义函数，如 drop function get_name;。",
+          "page": 40
+        }
       ],
       "code": [
         "show function status;",
@@ -174,13 +326,41 @@
       "pageRange": "41-49",
       "summary": "本节说明通过控制流语句实现顺序、选择和循环三种基本结构，介绍if语句、case语句的语法形式，以及if()、ifnull()和case函数等条件判断函数的使用。",
       "points": [
-        { "term": "三种基本结构", "desc": "通过控制流语句可实现程序的顺序、选择和循环等3种基本结构，乃至编写较复杂的存储过程、函数和触发器。", "page": 41 },
-        { "term": "if语句", "desc": "用来进行条件判断，根据不同条件执行不同操作，形式为 if condition then … [elseif condition then] … [else] … end if。", "page": 42 },
-        { "term": "case语句", "desc": "多分支结构，从when后的value中查找与case后value相等的值执行该分支，否则执行else；有两种语法表示结构。", "page": 44 },
-        { "term": "条件判断函数", "desc": "常用的条件控制函数有if()、ifnull()以及case函数，可根据条件表达式的值返回不同的值，能在MySQL客户机中直接调用。", "page": 46 },
-        { "term": "if()函数", "desc": "if(condition,v1,v2)中condition为条件表达式，其值为true时返回v1的值，否则返回v2的值。", "page": 46 },
-        { "term": "ifnull()函数", "desc": "ifnull(v1,v2)中如果v1的值为null则返回v2的值，如果v1不为null则返回v1的值。", "page": 47 },
-        { "term": "case函数", "desc": "有2种格式：表达式的值等于when语句中某个“值n”时返回“结果n”，与所有值都不相等时返回“其他值”。", "page": 47 }
+        {
+          "term": "三种基本结构",
+          "desc": "通过控制流语句可实现程序的顺序、选择和循环等3种基本结构，乃至编写较复杂的存储过程、函数和触发器。",
+          "page": 41
+        },
+        {
+          "term": "if语句",
+          "desc": "用来进行条件判断，根据不同条件执行不同操作，形式为 if condition then … [elseif condition then] … [else] … end if。",
+          "page": 42
+        },
+        {
+          "term": "case语句",
+          "desc": "多分支结构，从when后的value中查找与case后value相等的值执行该分支，否则执行else；有两种语法表示结构。",
+          "page": 44
+        },
+        {
+          "term": "条件判断函数",
+          "desc": "常用的条件控制函数有if()、ifnull()以及case函数，可根据条件表达式的值返回不同的值，能在MySQL客户机中直接调用。",
+          "page": 46
+        },
+        {
+          "term": "if()函数",
+          "desc": "if(condition,v1,v2)中condition为条件表达式，其值为true时返回v1的值，否则返回v2的值。",
+          "page": 46
+        },
+        {
+          "term": "ifnull()函数",
+          "desc": "ifnull(v1,v2)中如果v1的值为null则返回v2的值，如果v1不为null则返回v1的值。",
+          "page": 47
+        },
+        {
+          "term": "case函数",
+          "desc": "有2种格式：表达式的值等于when语句中某个“值n”时返回“结果n”，与所有值都不相等时返回“其他值”。",
+          "page": 47
+        }
       ],
       "code": [
         "if condition then … [elseif condition then] … [else] … endif",
@@ -200,12 +380,36 @@
       "pageRange": "50-58",
       "summary": "本节介绍while、loop、repeat三种循环语句的语法与执行特点，以及leave和iterate两个控制语句的作用与区别，并提醒编写循环程序时注意变量值变化以防死循环。",
       "points": [
-        { "term": "while循环", "desc": "执行时首先判断condition是否为真，是则执行循环体，否则退出循环；形式为 while condition do … end while;。", "page": 50 },
-        { "term": "loop循环", "desc": "没有内置的循环条件，可通过leave语句退出循环；形式为 loop … end loop。", "page": 52 },
-        { "term": "leave语句", "desc": "leave label 经常和begin…end或循环一起使用，label是自定义名字，用来退出被标注的循环语句。", "page": 52 },
-        { "term": "iterate语句", "desc": "iterate label 可出现在loop、repeat和while语句内，意为结束本次循环；leave是结束循环，iterate是结束本次循环。", "page": 54 },
-        { "term": "repeat循环", "desc": "先执行一次循环体，之后判断condition是否为真，为真则退出循环，否则继续执行；形式为 repeat … until condition end repeat。", "page": 56 },
-        { "term": "循环编程注意", "desc": "编写循环类程序时应特别注意函数参数和函数体内变量值的变化情况，稍有不慎就会出现数据错误、死循环等问题。", "page": 57 }
+        {
+          "term": "while循环",
+          "desc": "执行时首先判断condition是否为真，是则执行循环体，否则退出循环；形式为 while condition do … end while;。",
+          "page": 50
+        },
+        {
+          "term": "loop循环",
+          "desc": "没有内置的循环条件，可通过leave语句退出循环；形式为 loop … end loop。",
+          "page": 52
+        },
+        {
+          "term": "leave语句",
+          "desc": "leave label 经常和begin…end或循环一起使用，label是自定义名字，用来退出被标注的循环语句。",
+          "page": 52
+        },
+        {
+          "term": "iterate语句",
+          "desc": "iterate label 可出现在loop、repeat和while语句内，意为结束本次循环；leave是结束循环，iterate是结束本次循环。",
+          "page": 54
+        },
+        {
+          "term": "repeat循环",
+          "desc": "先执行一次循环体，之后判断condition是否为真，为真则退出循环，否则继续执行；形式为 repeat … until condition end repeat。",
+          "page": 56
+        },
+        {
+          "term": "循环编程注意",
+          "desc": "编写循环类程序时应特别注意函数参数和函数体内变量值的变化情况，稍有不慎就会出现数据错误、死循环等问题。",
+          "page": 57
+        }
       ],
       "code": [
         "while condition do … end while;",
@@ -226,7 +430,12 @@
       "id": "ch6-ppt-s01",
       "type": "single",
       "stem": "MySQL脚本文件保存时，后缀名一般为（ ）。",
-      "options": ["A. .mysql", "B. .sql", "C. .txt", "D. .db"],
+      "options": [
+        "A. .mysql",
+        "B. .sql",
+        "C. .txt",
+        "D. .db"
+      ],
       "answer": "B",
       "analysis": "解析：PPT第2页指出，MySQL的脚本文件保存时后缀名一般为.sql。故选B。",
       "page": 2
@@ -235,7 +444,12 @@
       "id": "ch6-ppt-s02",
       "type": "single",
       "stem": "MySQL中的用户会话变量一般以（ ）开头。",
-      "options": ["A. @@", "B. @", "C. #", "D. $"],
+      "options": [
+        "A. @@",
+        "B. @",
+        "C. #",
+        "D. $"
+      ],
       "answer": "B",
       "analysis": "解析：PPT第6页说明，用户会话变量一般以一个“@”开头，系统会话变量以两个“@”开头。故选B。",
       "page": 6
@@ -244,7 +458,12 @@
       "id": "ch6-ppt-s03",
       "type": "single",
       "stem": "MySQL中，declare命令专门用于定义（ ）及其对应的数据类型。",
-      "options": ["A. 用户会话变量", "B. 局部变量", "C. 系统变量", "D. 全局系统变量"],
+      "options": [
+        "A. 用户会话变量",
+        "B. 局部变量",
+        "C. 系统变量",
+        "D. 全局系统变量"
+      ],
       "answer": "B",
       "analysis": "解析：PPT第11页指出，局部变量的定义与赋值中，declare命令专门用于定义局部变量及对应的数据类型。故选B。",
       "page": 11
@@ -253,7 +472,12 @@
       "id": "ch6-ppt-s04",
       "type": "single",
       "stem": "创建函数或存储过程时，用来重新定义命令结束标记的关键字是（ ）。",
-      "options": ["A. delimiter", "B. declare", "C. set", "D. execute"],
+      "options": [
+        "A. delimiter",
+        "B. declare",
+        "C. set",
+        "D. execute"
+      ],
       "answer": "A",
       "analysis": "解析：PPT第16-17页指出，利用delimiter定界符命令可以重新定义一个语句执行的结束符，如//或$$。故选A。",
       "page": 17
@@ -262,7 +486,12 @@
       "id": "ch6-ppt-s05",
       "type": "single",
       "stem": "下列关键字中，不属于MySQL预处理语句的是（ ）。",
-      "options": ["A. prepare", "B. execute", "C. deallocate", "D. call"],
+      "options": [
+        "A. prepare",
+        "B. execute",
+        "C. deallocate",
+        "D. call"
+      ],
       "answer": "D",
       "analysis": "解析：PPT第21页指出，prepare、execute、deallocate统称为预处理语句；call是调用存储过程的语句。故选D。",
       "page": 21
@@ -271,7 +500,12 @@
       "id": "ch6-ppt-s06",
       "type": "single",
       "stem": "MySQL中，if(condition,v1,v2)函数在condition为true时返回（ ）。",
-      "options": ["A. v1", "B. v2", "C. null", "D. 0"],
+      "options": [
+        "A. v1",
+        "B. v2",
+        "C. null",
+        "D. 0"
+      ],
       "answer": "A",
       "analysis": "解析：PPT第46页指出，if(condition,v1,v2)中condition为条件表达式，当值为true时函数返回v1的值，否则返回v2的值。故选A。",
       "page": 46
@@ -280,7 +514,12 @@
       "id": "ch6-ppt-s07",
       "type": "single",
       "stem": "MySQL循环语句中，用于“结束本次循环”的语句是（ ）。",
-      "options": ["A. leave", "B. iterate", "C. break", "D. exit"],
+      "options": [
+        "A. leave",
+        "B. iterate",
+        "C. break",
+        "D. exit"
+      ],
       "answer": "B",
       "analysis": "解析：PPT第54页指出，iterate语句意为结束本次循环，而leave语句是结束循环，二者区别在于此。故选B。",
       "page": 54
@@ -289,7 +528,10 @@
       "id": "ch6-ppt-b01",
       "type": "blank",
       "stem": "MySQL程序包含3种基本结构，即顺序结构、选择结构和____结构。",
-      "answer": ["循环", "循环结构"],
+      "answer": [
+        "循环",
+        "循环结构"
+      ],
       "answerText": "循环",
       "analysis": "解析：PPT第2页指出，MySQL程序包含3种基本结构即顺序结构、选择结构和循环结构。",
       "page": 2
@@ -298,7 +540,10 @@
       "id": "ch6-ppt-b02",
       "type": "blank",
       "stem": "MySQL语言中的自定义变量由变量名、变量类型和____3要素构成。",
-      "answer": ["变量值", "值"],
+      "answer": [
+        "变量值",
+        "值"
+      ],
       "answerText": "变量值",
       "analysis": "解析：PPT第5页指出，MySQL语言中的自定义变量由变量名、变量类型和变量值3要素构成。",
       "page": 5
@@ -307,7 +552,11 @@
       "id": "ch6-ppt-b03",
       "type": "blank",
       "stem": "MySQL中专门用来定义局部变量及对应数据类型的命令是____。",
-      "answer": ["declare", "DECLARE", "define"],
+      "answer": [
+        "declare",
+        "DECLARE",
+        "define"
+      ],
       "answerText": "declare",
       "analysis": "解析：PPT第11页指出，declare命令专门用于定义局部变量及对应的数据类型，如 declare myvar int default 100;。",
       "page": 11
@@ -316,7 +565,11 @@
       "id": "ch6-ppt-b04",
       "type": "blank",
       "stem": "预处理SQL语句的使用主要包含创建、执行和____三个步骤。",
-      "answer": ["释放", "解除分配", "deallocate"],
+      "answer": [
+        "释放",
+        "解除分配",
+        "deallocate"
+      ],
       "answerText": "释放",
       "analysis": "解析：PPT第24页指出，预处理SQL语句的使用主要包含创建、执行和释放预处理SQL语句3个步骤。",
       "page": 24
@@ -325,10 +578,566 @@
       "id": "ch6-ppt-b05",
       "type": "blank",
       "stem": "循环语句中，____语句用来结束本次循环，而leave语句用来结束整个循环。",
-      "answer": ["iterate", "ITERATE"],
+      "answer": [
+        "iterate",
+        "ITERATE"
+      ],
       "answerText": "iterate",
       "analysis": "解析：PPT第54页指出，leave语句是结束循环，而iterate语句是结束本次循环。",
       "page": 54
+    },
+    {
+      "id": "ch6-ppt-s08",
+      "type": "single",
+      "stem": "每一个客户机成功连接服务器后，服务器内存中生成的会话系统变量，其初始值是（ ）的拷贝。",
+      "options": [
+        "A. 用户会话变量",
+        "B. 全局系统变量",
+        "C. 局部变量",
+        "D. 系统常量"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第5页指出，会话期间服务器内存中生成的会话系统变量，其初始值是全局系统变量值的拷贝。考点为“会话系统变量”。故选B。",
+      "page": 5
+    },
+    {
+      "id": "ch6-ppt-s09",
+      "type": "single",
+      "stem": "下列关于用户会话变量定义、赋值及赋值号的说法，正确的是（ ）。",
+      "options": [
+        "A. 用户会话变量必须使用declare命令定义",
+        "B. “:=”是赋值号，select @var:=表达式能够产生结果集；“=”一般作比较运算符，仅在set语句（含update的set子句）中作赋值号",
+        "C. 用户会话变量只能使用set语句定义和赋值",
+        "D. 使用into方式赋值的select语句同样会产生结果集"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第8-9页指出，用户会话变量可用set或select定义赋值（select @var:=表达式产生结果集，into方式不产生结果集）；“:=”是赋值号，“=”一般作比较运算符，仅在set语句（含update的set子句）中作赋值号。考点为“会话变量定义与赋值”和“赋值号比较”。故选B。",
+      "page": 9
+    },
+    {
+      "id": "ch6-ppt-s10",
+      "type": "single",
+      "stem": "下列不属于局部变量主要使用场合的是（ ）。",
+      "options": [
+        "A. 定义在begin-end语句块之间",
+        "B. 作为存储过程或函数的参数使用",
+        "C. 直接嵌入select、insert、update、delete语句的条件表达式中",
+        "D. 在MySQL客户机命令行直接定义并长期使用"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第12页列出局部变量的3种使用场合：定义在begin-end语句块之间、作为存储过程或函数的参数、在SQL语句中使用。局部变量只在定义的局部程序范围内有效，不能在客户机命令行直接定义并长期使用。考点为“局部变量的使用”。故选D。",
+      "page": 12
+    },
+    {
+      "id": "ch6-ppt-s11",
+      "type": "single",
+      "stem": "下列语句中，“=”起赋值作用的是（ ）。",
+      "options": [
+        "A. select * from student where sname='张三';",
+        "B. set @a=5;",
+        "C. select 1=1;",
+        "D. select studentno from student where sex='女';"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第9页指出，“=”一般情况下是比较操作符，仅在set语句（包括update语句的set子句）中作为赋值号。A、D的“=”用于条件比较，C是比较运算；只有B的set语句中“=”起赋值作用。考点为“赋值号比较”。故选B。",
+      "page": 9
+    },
+    {
+      "id": "ch6-ppt-b06",
+      "type": "blank",
+      "stem": "会话变量的生存期就是所在会话空间____到释放的这一段时间。",
+      "answer": [
+        "开辟",
+        "创建",
+        "分配"
+      ],
+      "answerText": "开辟",
+      "analysis": "解析：PPT第7页指出，会话变量的生存期就是所在会话空间开辟到释放的这一段时间。",
+      "page": 7
+    },
+    {
+      "id": "ch6-ppt-s12",
+      "type": "single",
+      "stem": "下列不属于按表达式值的类型划分的表达式类型是（ ）。",
+      "options": [
+        "A. 字符型表达式",
+        "B. 数值型表达式",
+        "C. 日期型表达式",
+        "D. 表表达式"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第14页指出，按表达式值的类型可分为字符型、数值型和日期型表达式；表表达式是按值形式分类的结果。考点为“按值类型分类”。故选D。",
+      "page": 14
+    },
+    {
+      "id": "ch6-ppt-s13",
+      "type": "single",
+      "stem": "表达式的结果为0个、1个或多个行表达式的集合，这种表达式称为（ ）。",
+      "options": [
+        "A. 标量表达式",
+        "B. 行表达式",
+        "C. 表表达式",
+        "D. 复合表达式"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第15页指出，结果为0个、1个或多个行表达式集合的表达式叫做表表达式；结果只是一个值的叫标量表达式，结果是一行值的叫行表达式。考点为“按值形式分类”。故选C。",
+      "page": 15
+    },
+    {
+      "id": "ch6-ppt-b07",
+      "type": "blank",
+      "stem": "由运算符将多个单一表达式连接而成的表达式称为____表达式。",
+      "answer": [
+        "复合",
+        "复合型"
+      ],
+      "answerText": "复合",
+      "analysis": "解析：PPT第15页指出，单一表达式是一个单一的值（常量、变量、函数或列名），复合表达式由运算符将多个单一表达式连接而成，如1+7+3。",
+      "page": 15
+    },
+    {
+      "id": "ch6-ppt-b08",
+      "type": "blank",
+      "stem": "MySQL表达式是由运算符将常量、变量、字段名和____等组合连接而成的有意义的字符序列。",
+      "answer": [
+        "函数",
+        "函数名"
+      ],
+      "answerText": "函数",
+      "analysis": "解析：PPT第14页给出表达式的定义：由运算符将常量、变量、字段名和函数等组合连接而成的有意义的字符序列。",
+      "page": 14
+    },
+    {
+      "id": "ch6-ppt-s14",
+      "type": "single",
+      "stem": "使用delimiter把结束符改为“//”或“$$”后，编程结束时应执行（ ）将结束符改回默认值。",
+      "options": [
+        "A. delimiter ;",
+        "B. delimiter //",
+        "C. delimiter $$",
+        "D. reset delimiter"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第18页强调，最后要把结束符定义为“;”，因为这是MySQL的默认结束符，实际编程要养成这个习惯。考点为“恢复默认结束符”。故选A。",
+      "page": 18
+    },
+    {
+      "id": "ch6-ppt-s15",
+      "type": "single",
+      "stem": "在MySQL中，局部变量、begin-end语句块和流程控制语句只能用于（ ）的定义内部。",
+      "options": [
+        "A. 函数、存储过程、游标和触发器",
+        "B. 视图、索引和表",
+        "C. 数据库和表空间",
+        "D. 任意一条SQL语句"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第19页指出，局部变量、begin-end语句块和流程控制语句等只能用于函数、存储过程、游标和触发器的定义内部。考点为“begin-end语句块”。故选A。",
+      "page": 19
+    },
+    {
+      "id": "ch6-ppt-b09",
+      "type": "blank",
+      "stem": "MySQL命令行默认的语句结束符是____。",
+      "answer": [
+        "分号",
+        "；",
+        ";"
+      ],
+      "answerText": "分号",
+      "analysis": "解析：PPT第16页指出，默认MySQL的命令行结束符就是“;”，而函数和存储过程中含有很多分号，因此创建前需用delimiter更换结束符。",
+      "page": 16
+    },
+    {
+      "id": "ch6-ppt-s16",
+      "type": "single",
+      "stem": "预处理SQL语句能实现“一次解析，多次执行”的性能优势，主要原因是解析成功后的语句被保存到了（ ）。",
+      "options": [
+        "A. 客户端内存",
+        "B. MySQL服务器缓存",
+        "C. 临时表",
+        "D. 错误日志"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第20-21页指出，预处理语句第一次运行解析成功后保存到MySQL服务器缓存中，以后每次执行无需再次解析，从而实现“一次解析，多次执行”。考点为“静态SQL与预处理SQL”“性能优势”。故选B。",
+      "page": 20
+    },
+    {
+      "id": "ch6-ppt-s17",
+      "type": "single",
+      "stem": "关于prepare语句，下列说法正确的是（ ）。",
+      "options": [
+        "A. preparable_stmt可以包含多条SQL语句",
+        "B. 参数制作符“?”只能用于数据值应出现的位置，不能用于SQL关键词和标识符",
+        "C. 预处理语句的范围是全局的，所有客户端会话都能看到",
+        "D. 同名预处理语句已存在时会直接报错，不会解除分配"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第22页说明，preparable_stmt必须是单一SQL语句；“?”只能用于数据值应出现的位置，不用于SQL关键词和标识符；同名预处理语句会隐含解除分配；其范围是客户端会话。考点为“prepare说明”。故选B。",
+      "page": 22
+    },
+    {
+      "id": "ch6-ppt-s18",
+      "type": "single",
+      "stem": "预处理语句的SQL语法可以在已存储的过程中使用，但不能在（ ）中使用。",
+      "options": [
+        "A. 存储函数或触发器",
+        "B. 存储过程",
+        "C. 客户端会话",
+        "D. select语句"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第27页指出，预处理语句的SQL语法可在已存储的过程中使用，但不能在已存储的函数或触发程序中使用。考点为“使用限制”。故选A。",
+      "page": 27
+    },
+    {
+      "id": "ch6-ppt-b10",
+      "type": "blank",
+      "stem": "execute语句执行含参数制作符的预处理语句时，必须提供____子句列出用户会话变量。",
+      "answer": [
+        "using",
+        "USING"
+      ],
+      "answerText": "using",
+      "analysis": "解析：PPT第23页指出，若预处理语句包含参数制造符，必须提供列举用户会话变量的using子句，且变量数目须与参数制作符数量相同。",
+      "page": 23
+    },
+    {
+      "id": "ch6-ppt-s19",
+      "type": "single",
+      "stem": "使用双连线“--”作注释时，其后必须加一个（ ）。",
+      "options": [
+        "A. 空格",
+        "B. 分号",
+        "C. 逗号",
+        "D. 引号"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第28页特别提示，双连线“--”后一定要加一个空格，否则不构成注释。考点为“--注释”。故选A。",
+      "page": 28
+    },
+    {
+      "id": "ch6-ppt-s20",
+      "type": "single",
+      "stem": "下列注释方式中，可对多行内容进行块注释的是（ ）。",
+      "options": [
+        "A. #",
+        "B. --",
+        "C. /* … */",
+        "D. //"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第28页指出，开始注释对“/*”和结束注释对“*/”之间的所有内容均视为注释，可跨行；#和--都只注释到行尾。考点为“/*…*/注释”。故选C。",
+      "page": 28
+    },
+    {
+      "id": "ch6-ppt-b11",
+      "type": "blank",
+      "stem": "使用井号“#”注释时，从该字符到____都是注释内容。",
+      "answer": [
+        "行尾",
+        "行末",
+        "该行末尾"
+      ],
+      "answerText": "行尾",
+      "analysis": "解析：PPT第28页指出，井号字符“#”从该字符到行尾都是注释内容。",
+      "page": 28
+    },
+    {
+      "id": "ch6-ppt-b12",
+      "type": "blank",
+      "stem": "注释是程序代码中____的文本字符串，用于对代码进行说明或诊断。",
+      "answer": [
+        "不被执行",
+        "不执行",
+        "不会被执行"
+      ],
+      "answerText": "不被执行",
+      "analysis": "解析：PPT第28页给出注释的概念：注释是程序代码中不被执行的文本字符串，用于对代码进行说明或进行诊断。",
+      "page": 28
+    },
+    {
+      "id": "ch6-ppt-s21",
+      "type": "single",
+      "stem": "在MySQL中，利用create function语句创建自定义函数必须具有（ ）权限。",
+      "options": [
+        "A. create routine",
+        "B. create user",
+        "C. select",
+        "D. alter"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第29页指出，创建函数必须具有create routine权限，并且alter routine和execute权限被自动授予它的创建者。考点为“创建函数的权限”。故选A。",
+      "page": 29
+    },
+    {
+      "id": "ch6-ppt-s22",
+      "type": "single",
+      "stem": "创建自定义函数的语法中，用于指定函数返回值类型的关键字是（ ）。",
+      "options": [
+        "A. returns",
+        "B. return",
+        "C. begin",
+        "D. characteristics"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第30页的语法格式为create function func_name(参数列表) returns return_type …，其中returns用于指定函数返回值类型；return是函数体中的返回语句。考点为“创建函数语法”。故选A。",
+      "page": 30
+    },
+    {
+      "id": "ch6-ppt-s23",
+      "type": "single",
+      "stem": "自定义函数参数形式中，表示“输入输出参数”的是（ ）。",
+      "options": [
+        "A. in",
+        "B. out",
+        "C. inout",
+        "D. returns"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第31页指出，in表示输入参数，out表示输出参数，inout表示输入输出参数。考点为“参数形式”。故选C。",
+      "page": 31
+    },
+    {
+      "id": "ch6-ppt-s24",
+      "type": "single",
+      "stem": "函数体以begin…end为起止符，其中必须有（ ）语句表示函数返回值表达式。",
+      "options": [
+        "A. return",
+        "B. returns",
+        "C. select",
+        "D. set"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第32页指出，begin…end为函数体起止符，函数体内要有“return return_values;”语句表示函数返回值表达式。考点为“函数体”。故选A。",
+      "page": 32
+    },
+    {
+      "id": "ch6-ppt-b13",
+      "type": "blank",
+      "stem": "函数特征选项中，用于指定SQL安全性的写法是 sql ____ {definer|invoker}。",
+      "answer": [
+        "security",
+        "SECURITY"
+      ],
+      "answerText": "security",
+      "analysis": "解析：PPT第32页列出函数特征选项，其中包括“sql security {definer|invoker}”，用于指定SQL安全性。",
+      "page": 32
+    },
+    {
+      "id": "ch6-ppt-b14",
+      "type": "blank",
+      "stem": "函数rectangle_area(long1,wide1)用于计算长方形面积，调用select rectangle_area(5,4)的结果是____。",
+      "answer": [
+        "20"
+      ],
+      "answerText": "20",
+      "analysis": "解析：PPT第33页定义rectangle_area返回long1*wide1，第35页示例调用select rectangle_area(5,4)，即5×4=20。考点为“调用函数”。",
+      "page": 35
+    },
+    {
+      "id": "ch6-ppt-s25",
+      "type": "single",
+      "stem": "查看当前数据库中所有自定义函数信息，在函数较少时可使用（ ）。",
+      "options": [
+        "A. show function status;",
+        "B. show create function;",
+        "C. drop function;",
+        "D. alter function;"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第36页指出，show function status用于查看当前数据库所有自定义函数信息，函数较多时可用show function status like 模式。考点为“查看函数信息”。故选A。",
+      "page": 36
+    },
+    {
+      "id": "ch6-ppt-s26",
+      "type": "single",
+      "stem": "要查看指定数据库（如teaching）中的所有自定义函数名，可查询MySQL.proc表，其type字段应等于（ ）。",
+      "options": [
+        "A. 'procedure'",
+        "B. 'function'",
+        "C. 'trigger'",
+        "D. 'table'"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第36页给出的语句为select name from MySQL.proc where db='teaching' and type='function';，用于查看指定数据库中的所有自定义函数名。考点为“按数据库查看函数名”。故选B。",
+      "page": 36
+    },
+    {
+      "id": "ch6-ppt-s27",
+      "type": "single",
+      "stem": "函数的详细信息保存在information_schema数据库的（ ）表中。",
+      "options": [
+        "A. tables",
+        "B. columns",
+        "C. routines",
+        "D. triggers"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第37页指出，函数信息都保存在information_schema数据库的routines表中，可用select语句检索。考点为“查看函数详细信息”。故选C。",
+      "page": 37
+    },
+    {
+      "id": "ch6-ppt-s28",
+      "type": "single",
+      "stem": "alter function语句仅用于更改函数的特性，不能更改（ ）。",
+      "options": [
+        "A. 注释（comment）",
+        "B. SQL安全性",
+        "C. 数据访问特性",
+        "D. 参数和函数体"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第38页说明，alter function仅用于更改函数特性（注释、SQL安全性、数据访问特性等），不能更改函数参数或主体，需修改时必须drop后重建。考点为“修改函数”。故选D。",
+      "page": 38
+    },
+    {
+      "id": "ch6-ppt-b15",
+      "type": "blank",
+      "stem": "MySQL中删除自定义函数使用的语句是 drop ____。",
+      "answer": [
+        "function",
+        "FUNCTION"
+      ],
+      "answerText": "function",
+      "analysis": "解析：PPT第40页指出，使用“drop function func_name”删除自定义函数，如drop function get_name;。",
+      "page": 40
+    },
+    {
+      "id": "ch6-ppt-s29",
+      "type": "single",
+      "stem": "利用MySQL语言编程，通过控制流语句可以实现程序的（ ）3种基本结构。",
+      "options": [
+        "A. 顺序、选择和循环",
+        "B. 输入、处理和输出",
+        "C. 定义、赋值和调用",
+        "D. 创建、修改和删除"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第41页指出，通过控制流语句可以实现程序的顺序、选择和循环等3种基本结构，进而编写较复杂的存储过程、函数和触发器。考点为“三种基本结构”。故选A。",
+      "page": 41
+    },
+    {
+      "id": "ch6-ppt-s30",
+      "type": "single",
+      "stem": "if语句执行时，当所有条件都不满足，则执行（ ）后的内容。",
+      "options": [
+        "A. then",
+        "B. elseif",
+        "C. else",
+        "D. end if"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第42页指出，if语句依次判断条件，以上都不满足时执行else语句后的内容。考点为“if语句”。故选C。",
+      "page": 42
+    },
+    {
+      "id": "ch6-ppt-s31",
+      "type": "single",
+      "stem": "case语句首先从when后的value中查找与（ ）后的value相等的值，找到则执行该分支。",
+      "options": [
+        "A. case",
+        "B. when",
+        "C. else",
+        "D. end"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第44页指出，case语句首先从when后的value中查找与case后的value相等的值，查找到则执行该分支，否则执行else后的内容。考点为“case语句”。故选A。",
+      "page": 44
+    },
+    {
+      "id": "ch6-ppt-s32",
+      "type": "single",
+      "stem": "ifnull(v1,v2)函数中，当v1的值为null时返回（ ）。",
+      "options": [
+        "A. v1",
+        "B. v2",
+        "C. null",
+        "D. 0"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第47页指出，ifnull(v1,v2)中若v1为null则返回v2的值，v1不为null则返回v1的值。考点为“ifnull()函数”。故选B。",
+      "page": 47
+    },
+    {
+      "id": "ch6-ppt-b16",
+      "type": "blank",
+      "stem": "MySQL中常用的条件控制函数有if()、ifnull()以及____函数。",
+      "answer": [
+        "case",
+        "CASE"
+      ],
+      "answerText": "case",
+      "analysis": "解析：PPT第46页指出，MySQL中常用的条件控制函数有if()、ifnull()以及case函数，它们可在MySQL客户机中直接调用。",
+      "page": 46
+    },
+    {
+      "id": "ch6-ppt-b17",
+      "type": "blank",
+      "stem": "case函数中，如果表达式的值与所有when后的“值n”都不相等，则返回____。",
+      "answer": [
+        "其他值",
+        "else后的值",
+        "else值"
+      ],
+      "answerText": "其他值",
+      "analysis": "解析：PPT第47页指出，case函数中若表达式的值等于某个“值n”则返回“结果n”，与所有值都不相等时返回“其他值”。",
+      "page": 47
+    },
+    {
+      "id": "ch6-ppt-s33",
+      "type": "single",
+      "stem": "while循环执行时首先判断condition是否为真，若为真则（ ）。",
+      "options": [
+        "A. 执行循环体",
+        "B. 退出循环",
+        "C. 结束本次循环",
+        "D. 跳过循环体"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第50页指出，while执行时首先判断condition条件是否为真，为真则执行循环体，否则退出循环。考点为“while循环”。故选A。",
+      "page": 50
+    },
+    {
+      "id": "ch6-ppt-s34",
+      "type": "single",
+      "stem": "loop循环本身没有内置的循环条件，通常通过（ ）语句退出循环。",
+      "options": [
+        "A. leave",
+        "B. iterate",
+        "C. exit",
+        "D. break"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第52页指出，loop循环没有内置循环条件，但可以通过leave语句退出循环；leave label中的label是自定义的标注名。考点为“loop循环”“leave语句”。故选A。",
+      "page": 52
+    },
+    {
+      "id": "ch6-ppt-s35",
+      "type": "single",
+      "stem": "repeat循环的特点是（ ）。",
+      "options": [
+        "A. 先执行一次循环体，再判断condition是否为真",
+        "B. 先判断condition，再执行循环体",
+        "C. 循环体只能执行一次",
+        "D. 没有循环条件也无法退出"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第56页指出，repeat循环语句先执行一次循环体，之后判断condition条件是否为真，为真则退出循环，否则继续执行。考点为“repeat循环”。故选A。",
+      "page": 56
+    },
+    {
+      "id": "ch6-ppt-b18",
+      "type": "blank",
+      "stem": "编写循环类程序时，应特别注意函数参数和函数体内____的变化情况，稍有不慎就会出现数据错误、死循环等问题。",
+      "answer": [
+        "变量值",
+        "变量的值",
+        "变量"
+      ],
+      "answerText": "变量值",
+      "analysis": "解析：PPT第57页提醒，编写循环类程序时应特别注意函数参数和函数体内变量值的变化情况，否则容易出现数据错误、死循环等问题。",
+      "page": 57
     }
   ]
 }

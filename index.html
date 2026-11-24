@@ -16,7 +16,7 @@
       } catch (e) {}
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=20261124d" />
+  <link rel="stylesheet" href="styles.css?v=20261124e" />
 </head>
 <body>
   <div class="wrap">
@@ -80,8 +80,16 @@
             <option value="single">单选题</option>
             <option value="blank">填空题</option>
           </select>
+          <label for="quiz-limit">每组</label>
+          <select id="quiz-limit">
+            <option value="20">20 题</option>
+            <option value="30" selected>30 题</option>
+            <option value="50">50 题</option>
+            <option value="all">全部</option>
+          </select>
           <span class="filter-count" id="filter-count"></span>
         </div>
+        <p class="tiny-note" id="quiz-tip">每组题会优先抽还没做过的题；做题时点「不会 · 看答案」跳过，回头在「错题」里重练。</p>
         <div class="quiz-actions">
           <button type="button" class="btn btn-primary" id="btn-quiz-start">开始练习 →</button>
         </div>
@@ -149,8 +157,8 @@
     </footer>
   </div>
 
-  <script src="data/review.js?v=20261124d"></script>
-  <script src="data/questions.js?v=20261124d"></script>
-  <script src="app.js?v=20261124d"></script>
+  <script src="data/review.js?v=20261124e"></script>
+  <script src="data/questions.js?v=20261124e"></script>
+  <script src="app.js?v=20261124e"></script>
 </body>
 </html>

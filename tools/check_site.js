@@ -42,7 +42,7 @@ function check(cond, label, detail) {
   });
   check(d.chapters === 7, '7 章数据', d.chapters);
   check(d.sections >= 40, '小节数 >= 40', d.sections);
-  check(d.total >= 60, '题目数 >= 60', d.total);
+  check(d.total >= 400, '题目数 >= 400', d.total);
   check(d.single > 0 && d.blank > 0, '选择/填空均存在', `${d.single}/${d.blank}`);
   check(d.withPage === d.total, '全部题目带页码', `${d.withPage}/${d.total}`);
   check(d.chaptersCovered === 7, '题目覆盖 7 章', d.chaptersCovered);

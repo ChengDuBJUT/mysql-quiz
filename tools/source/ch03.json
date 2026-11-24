@@ -1038,6 +1038,1432 @@
       "answerText": "unique",
       "analysis": "解析：PPT第92页指出一个数据表只能创建一个主键，但可以有若干个unique约束。",
       "page": 92
+    },
+    {
+      "id": "ch3-ppt-s09",
+      "type": "single",
+      "stem": "MySQL 8.0数据库文件的默认存放位置是？",
+      "options": [
+        "A. C:\\Users\\MySQL\\Data\\",
+        "B. C:\\Program Files\\MySQL\\MySQL Server 8.0\\Data\\",
+        "C. C:\\MySQL\\Data\\",
+        "D. C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Data\\"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第4页指出数据库文件的默认存放位置是 C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Data\\。",
+      "page": 4
+    },
+    {
+      "id": "ch3-ppt-s10",
+      "type": "single",
+      "stem": "若要修改MySQL数据库文件的默认存放位置，可采用的方式是？",
+      "options": [
+        "A. 通过配置向导或手工配置修改",
+        "B. 数据库位置不可修改",
+        "C. 执行alter database语句",
+        "D. 只能重新安装MySQL"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第4页指出可通过配置向导或手工配置修改数据库的默认存放位置。",
+      "page": 4
+    },
+    {
+      "id": "ch3-ppt-b07",
+      "type": "blank",
+      "stem": "MySQL 8.0中，MySQL数据表的文件合并到数据根目录下的____文件中。",
+      "answer": [
+        "mysql.ibd",
+        "mysql.ibd文件",
+        "mysql.ibd 文件"
+      ],
+      "answerText": "mysql.ibd",
+      "analysis": "解析：PPT第4页指出MySQL8.0中MySQL数据表的文件合并到数据根目录中的mysql.ibd中。",
+      "page": 4
+    },
+    {
+      "id": "ch3-ppt-s11",
+      "type": "single",
+      "stem": "MySQL安装完成后，会在其data目录下自动创建几个必须的数据库，这些数据库通常称为？",
+      "options": [
+        "A. 临时数据库",
+        "B. 系统数据库",
+        "C. 用户数据库",
+        "D. 分区数据库"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第5页指出MySQL安装完成后会在data目录下自动创建几个必须的数据库，即可用show databases查看的系统数据库。",
+      "page": 5
+    },
+    {
+      "id": "ch3-ppt-s12",
+      "type": "single",
+      "stem": "在关系数据库中数据的存储以表的形式进行，因此存储引擎简而言之是指？",
+      "options": [
+        "A. 索引的类型",
+        "B. 表的类型",
+        "C. 数据库的类型",
+        "D. 用户的类型"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第7页指出在关系数据库中数据以表的形式存储，所以存储引擎简而言之就是指表的类型。",
+      "page": 7
+    },
+    {
+      "id": "ch3-ppt-s13",
+      "type": "single",
+      "stem": "MySQL 8.0支持的存储引擎共有多少种？",
+      "options": [
+        "A. 7种",
+        "B. 11种",
+        "C. 9种",
+        "D. 5种"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第8页列出InnoDB、MRG_MyISAM、Memory、BLACKHOLE、MyISAM、CSV、Archive、Federated和PERFORMANCE-SCHEMA共9种。",
+      "page": 8
+    },
+    {
+      "id": "ch3-ppt-s14",
+      "type": "single",
+      "stem": "PPT中指出InnoDB存储引擎除支持事务外，还支持自动增长列auto_increment和？",
+      "options": [
+        "A. 数据全部存于内存",
+        "B. 表级锁定",
+        "C. 不支持外键",
+        "D. 全文检索"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第10页指出InnoDB还支持自动增长列auto_increment和全文检索功能；表级锁定是MyISAM的特性。",
+      "page": 10
+    },
+    {
+      "id": "ch3-ppt-s15",
+      "type": "single",
+      "stem": "对事务完整性没有要求、以SELECT/INSERT为主、占用空间小的表，适合使用哪个存储引擎？",
+      "options": [
+        "A. Archive",
+        "B. MyISAM",
+        "C. InnoDB",
+        "D. MEMORY"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第12页指出MyISAM不支持事务和外键，但访问速度快、占用空间小，适合以SELECT/INSERT为主的表。",
+      "page": 12
+    },
+    {
+      "id": "ch3-ppt-s16",
+      "type": "single",
+      "stem": "MEMORY存储引擎中每个表可放置的数据量大小受哪个系统变量约束？",
+      "options": [
+        "A. innodb_buffer_pool_size",
+        "B. default_storage_engine",
+        "C. max_heap_table_size",
+        "D. InnoDB_file_per_table"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第12页指出每个MEMORY表可放置数据量的大小受max_heap_table_size系统变量的约束。",
+      "page": 12
+    },
+    {
+      "id": "ch3-ppt-b08",
+      "type": "blank",
+      "stem": "查看当前MySQL服务实例支持的存储引擎，可使用____命令。",
+      "answer": [
+        "show engines",
+        "show engines;",
+        "SHOW ENGINES"
+      ],
+      "answerText": "show engines",
+      "analysis": "解析：PPT第9页指出执行show engines即可查看当前MySQL服务实例支持的存储引擎。",
+      "page": 9
+    },
+    {
+      "id": "ch3-ppt-b09",
+      "type": "blank",
+      "stem": "创建表时指定存储引擎，或在alter table中修改存储引擎，都是通过____关键字设置的。",
+      "answer": [
+        "engine",
+        "ENGINE",
+        "engine="
+      ],
+      "answerText": "engine",
+      "analysis": "解析：PPT第13页指出每个表都有存储引擎，可在创建时指定也可用alter table修改，都通过engine关键字设置。",
+      "page": 13
+    },
+    {
+      "id": "ch3-ppt-s17",
+      "type": "single",
+      "stem": "数据库设计是指？",
+      "options": [
+        "A. 为给定应用环境构造优化的数据库逻辑模式和物理结构，并据此建立数据库及其应用系统",
+        "B. 编写数据库应用系统的界面代码",
+        "C. 只对数据库进行备份和恢复",
+        "D. 只对表中的数据进行录入和删除"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第14页指出数据库设计是对给定应用环境构造优化的数据库逻辑模式和物理结构，并据此建立数据库及其应用系统。",
+      "page": 14
+    },
+    {
+      "id": "ch3-ppt-s18",
+      "type": "single",
+      "stem": "数据库设计的目标是？",
+      "options": [
+        "A. 尽量减小硬盘容量",
+        "B. 为用户和各种应用系统提供信息基础设施和高效率的运行环境",
+        "C. 只保证数据不丢失",
+        "D. 只提高CPU利用率"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第14页指出数据库设计的目标是为用户和各种应用系统提供一个信息基础设施和高效率的运行环境。",
+      "page": 14
+    },
+    {
+      "id": "ch3-ppt-b10",
+      "type": "blank",
+      "stem": "数据库设计可分为需求分析、概念设计、____和物理设计4个阶段。",
+      "answer": [
+        "逻辑设计",
+        "逻辑设计阶段"
+      ],
+      "answerText": "逻辑设计",
+      "analysis": "解析：PPT第16页指出数据库设计分为需求分析、概念设计、逻辑设计和物理设计4个阶段。",
+      "page": 16
+    },
+    {
+      "id": "ch3-ppt-s19",
+      "type": "single",
+      "stem": "需求分析阶段按一定格式整理形成的文档是？",
+      "options": [
+        "A. 需求说明书",
+        "B. 索引文件",
+        "C. 存储过程",
+        "D. E-R图"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第17页指出需求分析的目标是了解用户的数据要求和处理要求，并按一定格式整理形成需求说明书。",
+      "page": 17
+    },
+    {
+      "id": "ch3-ppt-s20",
+      "type": "single",
+      "stem": "概念设计阶段目前最常用的设计方法是？",
+      "options": [
+        "A. 事务设计方法",
+        "B. 实体关系(E-R)方法",
+        "C. 规范化方法",
+        "D. 索引优化方法"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第17页指出实体关系(E-R)的数据库设计方法是目前最常用的方法。",
+      "page": 17
+    },
+    {
+      "id": "ch3-ppt-s21",
+      "type": "single",
+      "stem": "把与DBMS无关的概念数据模型转换成等价的、并为特定DBMS所接受的逻辑模型，属于哪个阶段？",
+      "options": [
+        "A. 物理设计",
+        "B. 概念设计",
+        "C. 需求分析",
+        "D. 逻辑设计"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第18页指出逻辑设计阶段把与DBMS无关的概念数据模型转换成特定DBMS接受的逻辑模型。",
+      "page": 18
+    },
+    {
+      "id": "ch3-ppt-s22",
+      "type": "single",
+      "stem": "设计数据的存储形式和存取路径（如文件结构、索引设计），属于哪个阶段？",
+      "options": [
+        "A. 概念设计",
+        "B. 逻辑设计",
+        "C. 物理设计",
+        "D. 需求分析"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第18页指出物理设计的主要内容是设计数据的存储形式和存取路径，如文件结构、索引设计等。",
+      "page": 18
+    },
+    {
+      "id": "ch3-ppt-s23",
+      "type": "single",
+      "stem": "满足一定条件的关系模式称为？",
+      "options": [
+        "A. 范式(NF)",
+        "B. 索引",
+        "C. 主键",
+        "D. 视图"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第19页指出满足一定条件的关系模式称为范式(Normal Form，NF)。",
+      "page": 19
+    },
+    {
+      "id": "ch3-ppt-s24",
+      "type": "single",
+      "stem": "一个关系内部属性与属性之间的约束关系称为？",
+      "options": [
+        "A. 数据依赖",
+        "B. 参照完整性",
+        "C. 实体完整性",
+        "D. 存储引擎"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第20页指出数据依赖是一个关系内部属性与属性之间的一种约束关系。",
+      "page": 20
+    },
+    {
+      "id": "ch3-ppt-s25",
+      "type": "single",
+      "stem": "用单一关系模式表示学生信息时，出现的问题不包括？",
+      "options": [
+        "A. 插入异常",
+        "B. 更新异常",
+        "C. 数据冗余度大",
+        "D. 查询速度变慢"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第21页指出单一关系模式存在数据冗余度大、更新异常、插入异常和删除异常，未提及查询速度变慢。",
+      "page": 21
+    },
+    {
+      "id": "ch3-ppt-s26",
+      "type": "single",
+      "stem": "第1范式的目标是确保每列的？",
+      "options": [
+        "A. 完整性",
+        "B. 安全性",
+        "C. 原子性",
+        "D. 唯一性"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第22页指出第1范式的目标是确保每列的原子性，即每列都是不可再分的最小数据单元。",
+      "page": 22
+    },
+    {
+      "id": "ch3-ppt-b11",
+      "type": "blank",
+      "stem": "第2范式要求每一个非主属性都要____依赖于码。",
+      "answer": [
+        "完全函数",
+        "完全函数依赖",
+        "完全"
+      ],
+      "answerText": "完全函数",
+      "analysis": "解析：PPT第23页指出第2范式要求确保表中每列都和码相关，即每一个非主属性都要完全函数依赖于码。",
+      "page": 23
+    },
+    {
+      "id": "ch3-ppt-s27",
+      "type": "single",
+      "stem": "按第2范式把单一学生关系分解后，选修表包含的属性是？",
+      "options": [
+        "A. 学生学号、学生姓名、成绩",
+        "B. 课程号、课程名称",
+        "C. 学生学号、学生姓名、学生性别、电话",
+        "D. 学生学号、课程号、成绩"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第23页给出分解结果：选修{学生学号，课程号，成绩}。",
+      "page": 23
+    },
+    {
+      "id": "ch3-ppt-b12",
+      "type": "blank",
+      "stem": "第3范式要求表中的每列都和码____相关，而不是间接相关。",
+      "answer": [
+        "直接",
+        "直接相关",
+        "直接函数"
+      ],
+      "answerText": "直接",
+      "analysis": "解析：PPT第24页指出第3范式要求确保表中的每列都和码直接相关，而不是间接相关。",
+      "page": 24
+    },
+    {
+      "id": "ch3-ppt-s28",
+      "type": "single",
+      "stem": "除create database外，还可以使用哪个命令创建数据库？",
+      "options": [
+        "A. create view",
+        "B. create schema",
+        "C. create index",
+        "D. create table"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第27页指出使用create database或create schema命令都可以创建数据库。",
+      "page": 27
+    },
+    {
+      "id": "ch3-ppt-s29",
+      "type": "single",
+      "stem": "语句 create database if not exists mysqltest 中，if not exists的作用是？",
+      "options": [
+        "A. 强制覆盖已有数据库",
+        "B. 数据库已存在时不报错",
+        "C. 数据库不存在时报错",
+        "D. 创建后立即打开数据库"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第28页例2使用if not exists创建mysqltest，可避免数据库已存在时出现错误。",
+      "page": 28
+    },
+    {
+      "id": "ch3-ppt-b13",
+      "type": "blank",
+      "stem": "创建数据库时，指定字符集使用的子句是 default ____ charset_name。",
+      "answer": [
+        "character set",
+        "character",
+        "CHARACTER SET"
+      ],
+      "answerText": "character set",
+      "analysis": "解析：PPT第27页给出语法[[default]character set charset_name]，用于指定数据库字符集。",
+      "page": 27
+    },
+    {
+      "id": "ch3-ppt-s30",
+      "type": "single",
+      "stem": "例3创建teaching数据库时指定的校对原则是？",
+      "options": [
+        "A. gb2312_chinese_ci",
+        "B. utf8mb4_general_ci",
+        "C. utf8mb4_0900_ai_ci",
+        "D. utf8mb4_bin"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第28页例3中teaching库指定字符集utf8mb4、校对原则utf8mb4_0900_ai_ci。",
+      "page": 28
+    },
+    {
+      "id": "ch3-ppt-s31",
+      "type": "single",
+      "stem": "将某个数据库设为当前默认数据库，应使用？",
+      "options": [
+        "A. set",
+        "B. open",
+        "C. use",
+        "D. select"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第29页指出可以使用USE语句打开一个数据库，使其成为当前默认数据库。",
+      "page": 29
+    },
+    {
+      "id": "ch3-ppt-b14",
+      "type": "blank",
+      "stem": "修改数据库的字符集和校对原则等参数，使用的语句是____。",
+      "answer": [
+        "alter database",
+        "alter database 库名",
+        "ALTER DATABASE"
+      ],
+      "answerText": "alter database",
+      "analysis": "解析：PPT第30页给出修改数据库的语法alter {database|schema}，其中alter是修改数据库的命令关键词。",
+      "page": 30
+    },
+    {
+      "id": "ch3-ppt-s32",
+      "type": "single",
+      "stem": "例4将mysqltest库的字符集改为gb2312后，其校对原则改为？",
+      "options": [
+        "A. gb2312_bin",
+        "B. gb2312_chinese_ci",
+        "C. utf8mb4_0900_ai_ci",
+        "D. gb2312_general_ci"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第31页例4将字符集改为gb2312、校对原则改为gb2312_chinese_ci。",
+      "page": 31
+    },
+    {
+      "id": "ch3-ppt-b15",
+      "type": "blank",
+      "stem": "查看数据库的相关信息（如MySQL版本id号、默认字符集），可使用____语句。",
+      "answer": [
+        "show create database",
+        "show create database 库名",
+        "SHOW CREATE DATABASE"
+      ],
+      "answerText": "show create database",
+      "analysis": "解析：PPT第32页指出使用show create database可查看数据库的相关信息，如版本id号、默认字符集。",
+      "page": 32
+    },
+    {
+      "id": "ch3-ppt-s33",
+      "type": "single",
+      "stem": "删除已存在数据库使用的语句是？",
+      "options": [
+        "A. delete database",
+        "B. alter database",
+        "C. drop table",
+        "D. drop database"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第33页指出删除数据库的语法为drop database [if exists] db_name。",
+      "page": 33
+    },
+    {
+      "id": "ch3-ppt-s34",
+      "type": "single",
+      "stem": "关于drop database，下列说法正确的是？",
+      "options": [
+        "A. 只能删除空数据库",
+        "B. 只删除库中的表结构，数据保留",
+        "C. 会删除该库中所有的表和所有数据，删除前最好备份",
+        "D. 删除后原分配的空间不能收回"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第33页指出删除数据库会删除该库中所有的表和所有数据，删除前最好存有备份，删除后原空间被收回。",
+      "page": 33
+    },
+    {
+      "id": "ch3-ppt-s35",
+      "type": "single",
+      "stem": "InnoDB共享表空间默认的文件名和初始大小分别是？",
+      "options": [
+        "A. ibdata1、12M",
+        "B. ib_logfile1、12M",
+        "C. mysql.ibd、12M",
+        "D. ibdata1、8M"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第38页指出共享表空间文件位于数据库根目录下，文件名ibdata1，初始大小12M，能自动扩展。",
+      "page": 38
+    },
+    {
+      "id": "ch3-ppt-s36",
+      "type": "single",
+      "stem": "独立表空间中每个表对应的.ibd文件包含的内容是？",
+      "options": [
+        "A. 只有数据字典元数据",
+        "B. 表的数据内容和索引内容",
+        "C. 只有表结构定义",
+        "D. 只有事务回滚信息"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第38页指出独立表空间中每个表都有一个.ibd文件，该文件包括一个表单独的数据内容以及索引内容。",
+      "page": 38
+    },
+    {
+      "id": "ch3-ppt-b16",
+      "type": "blank",
+      "stem": "查看数据库的表空间信息，可使用 show variables like '____';",
+      "answer": [
+        "InnoDB_data%",
+        "innodb_data%",
+        "InnoDB_data"
+      ],
+      "answerText": "InnoDB_data%",
+      "analysis": "解析：PPT第39页给出命令 show variables like 'InnoDB_data%'; 用于查看数据库的表空间。",
+      "page": 39
+    },
+    {
+      "id": "ch3-ppt-s37",
+      "type": "single",
+      "stem": "共享表空间的主要缺点是？",
+      "options": [
+        "A. 分配后不能回缩，大量删除后表空间中会有大量空隙",
+        "B. 不能存放索引",
+        "C. 不能自动扩展",
+        "D. 不能存放事务回滚信息"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第40页指出共享表空间分配后不能回缩，大量删除后会有大量空隙，不适合经常删除的统计分析类应用。",
+      "page": 40
+    },
+    {
+      "id": "ch3-ppt-s38",
+      "type": "single",
+      "stem": "对于使用独立表空间的表，哪种操作能自动回收表空间？",
+      "options": [
+        "A. update",
+        "B. delete",
+        "C. select",
+        "D. drop table"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第41页指出独立表空间的Drop table操作能自动回收表空间。",
+      "page": 41
+    },
+    {
+      "id": "ch3-ppt-b17",
+      "type": "blank",
+      "stem": "系统变量InnoDB_file_per_table的值为ON时，代表使用____表空间管理。",
+      "answer": [
+        "独立",
+        "独立表空间",
+        "独立表空间管理"
+      ],
+      "answerText": "独立",
+      "analysis": "解析：PPT第42页指出InnoDB_file_per_table的值为ON代表独立表空间管理，OFF代表共享表空间管理。",
+      "page": 42
+    },
+    {
+      "id": "ch3-ppt-s39",
+      "type": "single",
+      "stem": "把共享表空间转换为独立表空间，需要把参数InnoDB_file_per_table设置为？",
+      "options": [
+        "A. 1",
+        "B. OFF",
+        "C. NULL",
+        "D. 0"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第43页指出共享表空间转化为独立表空间需要设置参数InnoDB_file_per_table=1。",
+      "page": 43
+    },
+    {
+      "id": "ch3-ppt-s40",
+      "type": "single",
+      "stem": "下列选项中，不属于列定义 col_name type 之后可跟的选项的是？",
+      "options": [
+        "A. engine",
+        "B. default",
+        "C. not null",
+        "D. auto_increment"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第45页列出列定义可跟not null、default、auto_increment、unique、primary key、comment等，engine是表选项而非列选项。",
+      "page": 45
+    },
+    {
+      "id": "ch3-ppt-s41",
+      "type": "single",
+      "stem": "student表中sex列的数据类型和默认值分别是？",
+      "options": [
+        "A. enum('男','女')，默认'男'",
+        "B. varchar(2)，默认'女'",
+        "C. int，默认1",
+        "D. char(8)，默认'男'"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第46页student表定义中sex enum('男','女') default '男' comment'性别'。",
+      "page": 46
+    },
+    {
+      "id": "ch3-ppt-b18",
+      "type": "blank",
+      "stem": "course表的主键列是____。",
+      "answer": [
+        "courseno",
+        "课程号",
+        "courseno列"
+      ],
+      "answerText": "courseno",
+      "analysis": "解析：PPT第47页course表定义末尾为primary key (courseno)，即课程号courseno为主键。",
+      "page": 47
+    },
+    {
+      "id": "ch3-ppt-s42",
+      "type": "single",
+      "stem": "score表的主键由哪两列构成？",
+      "options": [
+        "A. studentno和daily",
+        "B. courseno和final",
+        "C. studentno和courseno",
+        "D. daily和final"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第48页score表的定义为primary key (studentno , courseno)，即由学号和课程号构成复合主键。",
+      "page": 48
+    },
+    {
+      "id": "ch3-ppt-b19",
+      "type": "blank",
+      "stem": "自增主键的计数器持久化到____中，数据库重启时InnoDB据此初始化计数器的内存值。",
+      "answer": [
+        "重做日志",
+        "redo log",
+        "重做日志文件"
+      ],
+      "answerText": "重做日志",
+      "analysis": "解析：PPT第51页指出自增主键的计数器持久化到重做日志中，数据库重启时InnoDB根据重做日志初始化计数器内存值。",
+      "page": 51
+    },
+    {
+      "id": "ch3-ppt-b20",
+      "type": "blank",
+      "stem": "auto_increment约束的字段可以是任何____类型（tinyint、smallint、int、bigint等）。",
+      "answer": [
+        "整数",
+        "整型",
+        "integer"
+      ],
+      "answerText": "整数",
+      "analysis": "解析：PPT第52页指出auto_increment约束的字段可以是任何整数类型，如tinyint、smallint、int、bigint等。",
+      "page": 52
+    },
+    {
+      "id": "ch3-ppt-b21",
+      "type": "blank",
+      "stem": "sc表中选课时间sc_time的默认值设置为____，表示当前时间。",
+      "answer": [
+        "now()",
+        "NOW()",
+        "current_timestamp"
+      ],
+      "answerText": "now()",
+      "analysis": "解析：PPT第52页sc表定义中sc_time timestamp not null default now()，即默认当前时间。",
+      "page": 52
+    },
+    {
+      "id": "ch3-ppt-s43",
+      "type": "single",
+      "stem": "查看当前数据库中已创建的表，应使用？",
+      "options": [
+        "A. show tables",
+        "B. describe",
+        "C. show databases",
+        "D. show create table"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第53页指出数据表创建后可以用show tables命令查询已创建的表的情况。",
+      "page": 53
+    },
+    {
+      "id": "ch3-ppt-s44",
+      "type": "single",
+      "stem": "查看表的基本定义（字段名、数据类型等），应使用？",
+      "options": [
+        "A. alter",
+        "B. describe",
+        "C. delete",
+        "D. select"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第53页指出describe语句可以查看表的基本定义，如describe student。",
+      "page": 53
+    },
+    {
+      "id": "ch3-ppt-b22",
+      "type": "blank",
+      "stem": "能查看表的字段名、数据类型、完整性约束条件，以及默认存储引擎和字符编码的语句是____。",
+      "answer": [
+        "show create table",
+        "show create table 表名",
+        "SHOW CREATE TABLE"
+      ],
+      "answerText": "show create table",
+      "analysis": "解析：PPT第54页指出show create table可查看字段名、数据类型、完整性约束条件，还可查看默认存储引擎和字符编码。",
+      "page": 54
+    },
+    {
+      "id": "ch3-ppt-b23",
+      "type": "blank",
+      "stem": "describe student; 可以简写为____ student;",
+      "answer": [
+        "desc",
+        "DESC"
+      ],
+      "answerText": "desc",
+      "analysis": "解析：PPT第53页介绍describe语句，PPT第60页例16中使用其简写形式desc example。",
+      "page": 53
+    },
+    {
+      "id": "ch3-ppt-s45",
+      "type": "single",
+      "stem": "关于修改表，下列说法正确的是？",
+      "options": [
+        "A. 会影响正在进行的服务",
+        "B. 不需要重新加载数据，也不影响正在进行的服务",
+        "C. 需要重新加载全部数据",
+        "D. 必须先删除原表"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第55页指出修改表不需要重新加载数据，也不会影响正在进行的服务。",
+      "page": 55
+    },
+    {
+      "id": "ch3-ppt-s46",
+      "type": "single",
+      "stem": "在student表的Email列后面增加address列，应使用哪个子句指定位置？",
+      "options": [
+        "A. first",
+        "B. before Email",
+        "C. after Email",
+        "D. last"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第56页例12使用alter table student add address varchar(30) not null after Email，after用于指定插入位置。",
+      "page": 56
+    },
+    {
+      "id": "ch3-ppt-s47",
+      "type": "single",
+      "stem": "将表sc改名为se_course，正确的语句是？",
+      "options": [
+        "A. rename sc to se_course",
+        "B. update sc rename se_course",
+        "C. alter table sc rename to se_course",
+        "D. alter table sc modify se_course"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第57页例13使用alter table sc rename to se_course修改表名。",
+      "page": 57
+    },
+    {
+      "id": "ch3-ppt-b24",
+      "type": "blank",
+      "stem": "修改course表type字段的数据类型：alter table course ____ type enum('必修','选修') default '必修';",
+      "answer": [
+        "modify",
+        "MODIFY",
+        "modify column"
+      ],
+      "answerText": "modify",
+      "analysis": "解析：PPT第58页例14使用modify修改字段的数据类型。",
+      "page": 58
+    },
+    {
+      "id": "ch3-ppt-s48",
+      "type": "single",
+      "stem": "删除student表中已定义的address字段，应使用？",
+      "options": [
+        "A. alter table student delete address",
+        "B. drop address from student",
+        "C. delete address from student",
+        "D. alter table student drop address"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第59页例15使用alter table student drop address删除字段。",
+      "page": 59
+    },
+    {
+      "id": "ch3-ppt-s49",
+      "type": "single",
+      "stem": "删除数据库中已存在的表，应使用？",
+      "options": [
+        "A. delete table",
+        "B. alter table",
+        "C. drop table",
+        "D. truncate database"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第60页指出MySQL中通过drop table语句来删除表，语法为drop table table_name。",
+      "page": 60
+    },
+    {
+      "id": "ch3-ppt-b25",
+      "type": "blank",
+      "stem": "删除表时，会删除表中的____，因此删除时要特别注意。",
+      "answer": [
+        "所有数据",
+        "全部数据",
+        "数据"
+      ],
+      "answerText": "所有数据",
+      "analysis": "解析：PPT第60页指出删除表是指删除数据库中已存在的表，删除表时会删除表中的所有数据。",
+      "page": 60
+    },
+    {
+      "id": "ch3-ppt-s50",
+      "type": "single",
+      "stem": "下列语句中会删除表结构本身的是？",
+      "options": [
+        "A. update",
+        "B. select",
+        "C. drop table",
+        "D. delete"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第60页指出drop table删除表本身及其所有数据；delete只删除表记录，不删除表结构。",
+      "page": 60
+    },
+    {
+      "id": "ch3-ppt-b26",
+      "type": "blank",
+      "stem": "例16中创建example表时，today列的数据类型是____。",
+      "answer": [
+        "datetime",
+        "DATETIME"
+      ],
+      "answerText": "datetime",
+      "analysis": "解析：PPT第60页例16中create table example(today datetime, name char(20))，today列为datetime类型。",
+      "page": 60
+    },
+    {
+      "id": "ch3-ppt-s51",
+      "type": "single",
+      "stem": "临时表最适合的应用场景是？",
+      "options": [
+        "A. 替代所有永久表",
+        "B. 在非常大的表上偶尔运行查询，获得一个小的数据子集",
+        "C. 存放系统元数据",
+        "D. 长期保存核心业务数据"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第61页指出临时表适合在非常大的表上偶尔运行很多查询获得一个小的子集时使用。",
+      "page": 61
+    },
+    {
+      "id": "ch3-ppt-s52",
+      "type": "single",
+      "stem": "创建临时表使用的语句是？",
+      "options": [
+        "A. create table",
+        "B. create view",
+        "C. create temp database",
+        "D. create temporary table"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第61页例中使用create temporary table tmp_emp1创建临时表。",
+      "page": 61
+    },
+    {
+      "id": "ch3-ppt-b27",
+      "type": "blank",
+      "stem": "临时表将在____期间存在，断开时MySQL自动删除表并释放空间。",
+      "answer": [
+        "连接MySQL",
+        "连接",
+        "连接数据库"
+      ],
+      "answerText": "连接MySQL",
+      "analysis": "解析：PPT第62页指出临时表将在连接MySQL期间存在，断开时MySQL自动删除表并释放所用的空间。",
+      "page": 62
+    },
+    {
+      "id": "ch3-ppt-b28",
+      "type": "blank",
+      "stem": "show ____ 语句不会列举临时表。",
+      "answer": [
+        "tables",
+        "TABLES"
+      ],
+      "answerText": "tables",
+      "analysis": "解析：PPT第62页说明show tables语句不会列举临时表，且不能用rename重命名临时表。",
+      "page": 62
+    },
+    {
+      "id": "ch3-ppt-s53",
+      "type": "single",
+      "stem": "下列方式中，不能用于向表中输入数据的是？",
+      "options": [
+        "A. update ... set",
+        "B. load data infile",
+        "C. insert into",
+        "D. replace into"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第64页指出常见的有insert into、replace into插入，也可用load data infile装入文本数据；update用于修改数据。",
+      "page": 64
+    },
+    {
+      "id": "ch3-ppt-b29",
+      "type": "blank",
+      "stem": "insert语句中除了values子句，还可以用____子句直接给列赋值。",
+      "answer": [
+        "set",
+        "SET"
+      ],
+      "answerText": "set",
+      "analysis": "解析：PPT第64页给出insert语法，values子句或set col_name={expr|default}两种写法。",
+      "page": 64
+    },
+    {
+      "id": "ch3-ppt-b30",
+      "type": "blank",
+      "stem": "使用insert语句不给出列名时，若某列值为空，则该值必须置为____，否则会出错。",
+      "answer": [
+        "null",
+        "NULL"
+      ],
+      "answerText": "null",
+      "analysis": "解析：PPT第69页指出若表名后不给出列名则values要给出每一列的值，如果列值为空，则值必须置为null。",
+      "page": 69
+    },
+    {
+      "id": "ch3-ppt-s54",
+      "type": "single",
+      "stem": "replace into插入数据时，若表中已有该行数据（按主键或唯一索引判断），则？",
+      "options": [
+        "A. 自动修改主键后插入",
+        "B. 忽略本次插入",
+        "C. 先删除该行数据，然后插入新数据",
+        "D. 报主键冲突错误"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第70页指出replace into发现表中已有此行数据时先删除此行数据，然后插入新的数据。",
+      "page": 70
+    },
+    {
+      "id": "ch3-ppt-s55",
+      "type": "single",
+      "stem": "insert into tablename1 select * from tablename2 这种成批插入方式要求？",
+      "options": [
+        "A. 两个表必须在同一数据库",
+        "B. 两个表主键相同",
+        "C. 两个表存储引擎相同",
+        "D. 两个表结构相同"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第70页指出向表中插入其他表的数据，要求两个表要有相同的结构。",
+      "page": 70
+    },
+    {
+      "id": "ch3-ppt-b31",
+      "type": "blank",
+      "stem": "使用 load data ____ 'filename.txt' into table tablename 可将文本文件中的数据装入表中。",
+      "answer": [
+        "infile",
+        "INFILE",
+        "local infile"
+      ],
+      "answerText": "infile",
+      "analysis": "解析：PPT第71页给出load data infile 'filename.txt' into table tablename的语法形式。",
+      "page": 71
+    },
+    {
+      "id": "ch3-ppt-s56",
+      "type": "single",
+      "stem": "使用set子句插入数据的好处是？",
+      "options": [
+        "A. 可以不按列顺序插入数据",
+        "B. 可以跳过主键约束",
+        "C. 可以自动创建表",
+        "D. 可以自动建立索引"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第72页指出用set子句直接赋值时可以不按列顺序插入数据，对允许空值的列可以不插入。",
+      "page": 72
+    },
+    {
+      "id": "ch3-ppt-b32",
+      "type": "blank",
+      "stem": "在MySQL中，存放图片的字段要使用____类型。",
+      "answer": [
+        "blob",
+        "BLOB",
+        "mediumblob"
+      ],
+      "answerText": "blob",
+      "analysis": "解析：PPT第73页说明存放图片的字段要使用blob类型，blob是专门存储二进制文件的类型。",
+      "page": 73
+    },
+    {
+      "id": "ch3-ppt-s57",
+      "type": "single",
+      "stem": "直接插入图片本身（而不是图片路径）应使用哪个函数？",
+      "options": [
+        "A. insert_file()",
+        "B. blob()",
+        "C. load_file()",
+        "D. load data()"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第73页指出也可以直接插入图片本身，只要用load_file()函数即可。",
+      "page": 73
+    },
+    {
+      "id": "ch3-ppt-s58",
+      "type": "single",
+      "stem": "修改表中数据使用的语句是？",
+      "options": [
+        "A. insert",
+        "B. alter",
+        "C. update",
+        "D. delete"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第75页指出用update...set...命令可以修改一个表的数据。",
+      "page": 75
+    },
+    {
+      "id": "ch3-ppt-s59",
+      "type": "single",
+      "stem": "update语句中若不设定where子句，则？",
+      "options": [
+        "A. 不更新任何行",
+        "B. 只更新第一行",
+        "C. 报语法错误",
+        "D. 更新表中所有行"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第75页指出set子句根据where条件修改数据行，若语句中不设定where子句，则更新所有行。",
+      "page": 75
+    },
+    {
+      "id": "ch3-ppt-b33",
+      "type": "blank",
+      "stem": "update语句的set子句中要同时修改多个列值时，各列之间用____隔开。",
+      "answer": [
+        "逗号",
+        ",",
+        "，"
+      ],
+      "answerText": "逗号",
+      "analysis": "解析：PPT第75页指出expr可以是常量、变量或表达式，可同时修改多个列值，中间用逗号隔开。",
+      "page": 75
+    },
+    {
+      "id": "ch3-ppt-s60",
+      "type": "single",
+      "stem": "将学号20112111208、课程号c06108的平时成绩daily修改为87分，正确的语句是？",
+      "options": [
+        "A. alter table score set daily=87 where studentno='20112111208';",
+        "B. update score set 87=daily where courseno='c06108';",
+        "C. update score daily=87 where studentno='20112111208' && courseno='c06108';",
+        "D. update score set daily=87 where studentno='20112111208' && courseno='c06108';"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第76页例25使用update score set daily=87 where studentno='20112111208' && courseno='c06108'。",
+      "page": 76
+    },
+    {
+      "id": "ch3-ppt-s61",
+      "type": "single",
+      "stem": "将入学成绩高于700分的entrance增加5%，正确的赋值表达式是？",
+      "options": [
+        "A. entrance=entrance*5",
+        "B. entrance=entrance*1.05",
+        "C. entrance=entrance+5",
+        "D. entrance=entrance/1.05"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第77页例26中set entrance=entrance*1.05 where entrance>700，即增加5%。",
+      "page": 77
+    },
+    {
+      "id": "ch3-ppt-s62",
+      "type": "single",
+      "stem": "删除student01表中入学成绩低于750分的记录，正确的语句是？",
+      "options": [
+        "A. update student01 where entrance<750;",
+        "B. delete student01 where entrance<750;",
+        "C. drop from student01 where entrance<750;",
+        "D. delete from student01 where entrance<750;"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第79页例27使用delete from student01 where entrance<750删除符合条件的记录。",
+      "page": 79
+    },
+    {
+      "id": "ch3-ppt-b34",
+      "type": "blank",
+      "stem": "删除student01表中入学成绩最低的2行记录：delete from student01 order by entrance ____ 2;",
+      "answer": [
+        "limit",
+        "LIMIT"
+      ],
+      "answerText": "limit",
+      "analysis": "解析：PPT第79页例28使用delete from student01 order by entrance limit 2删除最低的2行。",
+      "page": 79
+    },
+    {
+      "id": "ch3-ppt-s63",
+      "type": "single",
+      "stem": "delete语句中可以配合使用哪两个子句实现按顺序删除指定行数？",
+      "options": [
+        "A. order by和limit",
+        "B. add和drop",
+        "C. where和set",
+        "D. group by和having"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第78页delete语法中可跟order by子句和limit row_count，实现按排序限制删除行数。",
+      "page": 78
+    },
+    {
+      "id": "ch3-ppt-s64",
+      "type": "single",
+      "stem": "null（允许空值）表示？",
+      "options": [
+        "A. 数值未确定",
+        "B. 数值为0",
+        "C. 数值为空字符串",
+        "D. 数值为负数"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第82页指出null（允许空值）表示数值未确定。",
+      "page": 82
+    },
+    {
+      "id": "ch3-ppt-s65",
+      "type": "single",
+      "stem": "not null表示？",
+      "options": [
+        "A. 数据列不允许修改",
+        "B. 数据列中不允许空值出现",
+        "C. 数据列必须有默认值",
+        "D. 数据列必须为0"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第82页指出not null（不允许空值）表示数据列中不允许空值出现，确保数据列中必须包含有意义的值。",
+      "page": 82
+    },
+    {
+      "id": "ch3-ppt-b35",
+      "type": "blank",
+      "stem": "定义表结构时，每个字段都要有一个是否为____值的选择，这就是对数据表中数据提出的约束条件。",
+      "answer": [
+        "null",
+        "NULL",
+        "空"
+      ],
+      "answerText": "null",
+      "analysis": "解析：PPT第82页指出每个字段都要有一个是否为null值的选择，这就是对数据提出的约束条件。",
+      "page": 82
+    },
+    {
+      "id": "ch3-ppt-s66",
+      "type": "single",
+      "stem": "关于非空约束，下列说法正确的是？",
+      "options": [
+        "A. 与唯一性约束等价",
+        "B. 只能定义在表级",
+        "C. 可以确保数据列中必须包含有意义的值",
+        "D. 允许该列取null值"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第82页指出not null可确保数据列中必须包含有意义的值；非空约束在字段定义时选择，与唯一性不同。",
+      "page": 82
+    },
+    {
+      "id": "ch3-ppt-s67",
+      "type": "single",
+      "stem": "设置主键的主要作用是？",
+      "options": [
+        "A. 帮助MySQL以最快的速度查找表中的指定信息",
+        "B. 对表中的数据加密",
+        "C. 自动备份表中的数据",
+        "D. 减少表占用的磁盘空间"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第83页指出设置主键主要是可以帮助MySQL以最快的速度查找到表中的指定信息。",
+      "page": 83
+    },
+    {
+      "id": "ch3-ppt-b36",
+      "type": "blank",
+      "stem": "设置主键通常有两种方式：表的完整性约束和____的完整性约束。",
+      "answer": [
+        "列",
+        "列级",
+        "列的"
+      ],
+      "answerText": "列",
+      "analysis": "解析：PPT第83页指出设置主键通常有两种方式：表的完整性约束和列的完整性约束。",
+      "page": 83
+    },
+    {
+      "id": "ch3-ppt-s68",
+      "type": "single",
+      "stem": "当表中的主键为复合主键时，只能定义为？",
+      "options": [
+        "A. 检查约束",
+        "B. 列级完整性约束",
+        "C. 表级完整性约束",
+        "D. 唯一性约束"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第84页说明主键为单一字段时可用表级或列级约束，复合主键只能定义为表的完整性约束。",
+      "page": 84
+    },
+    {
+      "id": "ch3-ppt-s69",
+      "type": "single",
+      "stem": "courseno char(6) not null primary key 这种写法属于？",
+      "options": [
+        "A. 列级完整性约束",
+        "B. 检查约束",
+        "C. 表级完整性约束",
+        "D. 外键约束"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第84页指出若在列定义时加上关键字primary key，就可以定义列的完整性约束主键。",
+      "page": 84
+    },
+    {
+      "id": "ch3-ppt-s70",
+      "type": "single",
+      "stem": "修改表的主键时，正确的做法是？",
+      "options": [
+        "A. 直接add primary key，无需其他操作",
+        "B. 先drop primary key，再add primary key",
+        "C. 用modify primary key修改",
+        "D. 必须先删除整张表"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第86页例30先用alter table student02 drop primary key，再add primary key (studentno)修改主键。",
+      "page": 86
+    },
+    {
+      "id": "ch3-ppt-s71",
+      "type": "single",
+      "stem": "外键的作用是？",
+      "options": [
+        "A. 建立子表与其父表的关联关系，保证子表与父表关联的数据一致性",
+        "B. 限制列的取值范围",
+        "C. 加快表的查询速度",
+        "D. 为表自动生成序列编码"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第87页指出外键的作用是建立子表与其父表的关联关系，保证子表与父表关联的数据一致性。",
+      "page": 87
+    },
+    {
+      "id": "ch3-ppt-s72",
+      "type": "single",
+      "stem": "下列不属于设置外键原则的是？",
+      "options": [
+        "A. 必须依赖于数据库中已存在的父表的主键",
+        "B. 父表必须已经存在",
+        "C. 外键列的值必须唯一",
+        "D. 外键可以为空值"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第87页给出的原则是必须依赖已存在的父表主键、外键可以为空值；并未要求外键列唯一。",
+      "page": 87
+    },
+    {
+      "id": "ch3-ppt-b37",
+      "type": "blank",
+      "stem": "外键声明中外键列参照父表列的写法是 foreign key(col_name) ____ table_name(col_name)。",
+      "answer": [
+        "references",
+        "REFERENCES"
+      ],
+      "answerText": "references",
+      "analysis": "解析：PPT第87页给出外键语法：foreign key (col_name...) references table_name(col_name...)。",
+      "page": 87
+    },
+    {
+      "id": "ch3-ppt-s73",
+      "type": "single",
+      "stem": "为已有表score添加外键约束，使用的语句是？",
+      "options": [
+        "A. update score set foreign key(studentno)",
+        "B. create foreign key fk_st_score on score(studentno)",
+        "C. add foreign key on score(studentno)",
+        "D. alter table score add constraint fk_st_score foreign key(studentno) references student(studentno)"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第88页例31使用alter table score add constraint fk_st_score foreign key(studentno) references student(studentno)。",
+      "page": 88
+    },
+    {
+      "id": "ch3-ppt-b38",
+      "type": "blank",
+      "stem": "on delete ____ 表示级联删除，即父表删除记录时子表对应记录也随之删除。",
+      "answer": [
+        "cascade",
+        "CASCADE"
+      ],
+      "answerText": "cascade",
+      "analysis": "解析：PPT第89页例32在建表时指定on update cascade、on delete cascade，实现级联更新和级联删除。",
+      "page": 89
+    },
+    {
+      "id": "ch3-ppt-s74",
+      "type": "single",
+      "stem": "对数据表的列限制数值范围，可以使用哪种完整性约束？",
+      "options": [
+        "A. not null",
+        "B. unique",
+        "C. primary key",
+        "D. check"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第90页指出针对数据表的列限制数值范围的约束，可以使用check完整性约束来指定。",
+      "page": 90
+    },
+    {
+      "id": "ch3-ppt-s75",
+      "type": "single",
+      "stem": "check约束可以在创建表时定义为？",
+      "options": [
+        "A. 只能定义为列完整性约束",
+        "B. 只能通过alter table添加",
+        "C. 既可定义为列完整性约束，也可定义为表完整性约束",
+        "D. 只能定义为表完整性约束"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第90页指出check约束在创建表时定义，可以定义为列完整性约束，也可以定义为表完整性约束。",
+      "page": 90
+    },
+    {
+      "id": "ch3-ppt-b39",
+      "type": "blank",
+      "stem": "为birthdate列添加检查约束：alter table student02 add constraint ch_stu_birth ____(birthdate>'2000-12-31');",
+      "answer": [
+        "check",
+        "CHECK"
+      ],
+      "answerText": "check",
+      "analysis": "解析：PPT第91页例33使用add constraint ch_stu_birth check(birthdate>'2000-12-31')添加检查约束。",
+      "page": 91
+    },
+    {
+      "id": "ch3-ppt-s76",
+      "type": "single",
+      "stem": "例33中对student02表birthdate列的check约束要求是？",
+      "options": [
+        "A. 出生日期不能为空",
+        "B. 出生日期等于2000-12-31",
+        "C. 出生日期小于2000-12-31",
+        "D. 出生日期大于2000-12-31"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第91页例33要求出生日期必须大于2000年12月31日，即check(birthdate>'2000-12-31')。",
+      "page": 91
+    },
+    {
+      "id": "ch3-ppt-s77",
+      "type": "single",
+      "stem": "唯一性约束的作用是？",
+      "options": [
+        "A. 保证所有记录中该字段的值不能重复出现",
+        "B. 保证该字段值自动增长",
+        "C. 保证该字段的值不能为空",
+        "D. 保证该字段成为主键"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第92页指出唯一性是指所有记录中该字段的值不能重复出现，unique约束保证这一点。",
+      "page": 92
+    },
+    {
+      "id": "ch3-ppt-b40",
+      "type": "blank",
+      "stem": "主键列值不允许为null，而unique字段的值可取____。",
+      "answer": [
+        "null",
+        "NULL",
+        "空值"
+      ],
+      "answerText": "null",
+      "analysis": "解析：PPT第92页指出主键列值不允许为null，而unique字段的值可取null，但必须用null或not null声明。",
+      "page": 92
+    },
+    {
+      "id": "ch3-ppt-s78",
+      "type": "single",
+      "stem": "创建unique约束时，系统会自动产生？",
+      "options": [
+        "A. primary key索引",
+        "B. unique索引",
+        "C. 触发器",
+        "D. 外键"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第92页指出创建primary key约束时系统自动产生primary key索引，创建unique约束时自动产生unique索引。",
+      "page": 92
+    },
+    {
+      "id": "ch3-ppt-s79",
+      "type": "single",
+      "stem": "对student表Email列添加唯一约束后，插入重复Email会出现的错误是？",
+      "options": [
+        "A. ERROR 1062 重复键错误",
+        "B. ERROR 1064 语法错误",
+        "C. ERROR 1045 访问被拒绝",
+        "D. ERROR 1146 表不存在"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第93页例34插入重复han@163.com时提示ERROR 1062 Duplicate entry，违反唯一性约束。",
+      "page": 93
     }
   ]
 }

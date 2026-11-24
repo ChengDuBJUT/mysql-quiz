@@ -15,11 +15,31 @@
       "pageRange": "6-10",
       "summary": "本节介绍存储过程的概念、作用和优势，给出create procedure创建语法，并说明存储过程通过call语句调用、执行需要execute权限以及call的语法格式。",
       "points": [
-        { "term": "存储过程的作用", "desc": "利用存储过程可保证数据的完整性，提高执行重复任务的性能和数据一致性；主要应用于控制访问权限、创建审计追踪、分隔数据定义与操作语句。", "page": 6 },
-        { "term": "存储过程的优势", "desc": "提高处理复杂任务的能力、增强代码复用率和共享性、减少网络数据流量、在服务器注册加快运行速度、加强系统安全性。", "page": 7 },
-        { "term": "创建存储过程语法", "desc": "create procedure sp_name([proc_parameter[,...]]) [characteristic ...] routine_body；创建必须具有create routine权限。", "page": 8 },
-        { "term": "调用存储过程", "desc": "存储过程通过call语句调用，执行需要execute权限，其信息存储在information_schema的user_privileges表中。", "page": 9 },
-        { "term": "call语法", "desc": "call [dbname.]sp_name([parameter[,…]]); 语句中的参数个数必须总是等于存储过程的参数个数。", "page": 10 }
+        {
+          "term": "存储过程的作用",
+          "desc": "利用存储过程可保证数据的完整性，提高执行重复任务的性能和数据一致性；主要应用于控制访问权限、创建审计追踪、分隔数据定义与操作语句。",
+          "page": 6
+        },
+        {
+          "term": "存储过程的优势",
+          "desc": "提高处理复杂任务的能力、增强代码复用率和共享性、减少网络数据流量、在服务器注册加快运行速度、加强系统安全性。",
+          "page": 7
+        },
+        {
+          "term": "创建存储过程语法",
+          "desc": "create procedure sp_name([proc_parameter[,...]]) [characteristic ...] routine_body；创建必须具有create routine权限。",
+          "page": 8
+        },
+        {
+          "term": "调用存储过程",
+          "desc": "存储过程通过call语句调用，执行需要execute权限，其信息存储在information_schema的user_privileges表中。",
+          "page": 9
+        },
+        {
+          "term": "call语法",
+          "desc": "call [dbname.]sp_name([parameter[,…]]); 语句中的参数个数必须总是等于存储过程的参数个数。",
+          "page": 10
+        }
       ],
       "code": [
         "create procedure sp_name([proc_parameter[,...]]) [characteristic ...] routine_body",
@@ -36,14 +56,46 @@
       "pageRange": "11-25",
       "summary": "本节通过多个示例演示存储过程的创建与执行，包括in、out参数和嵌套调用，介绍查看存储过程状态与定义的方法，并重点讲解定义条件和处理程序的语法、错误类型及处理示例。",
       "points": [
-        { "term": "创建与执行示例", "desc": "例1创建proc_stu()检索电话以131开头的学生信息并调用；例2创建avg_score(in c_no)统计课程平均成绩；例3创建select_score(in s_no,c_no)按学号和课程号查询。", "page": 11 },
-        { "term": "out参数", "desc": "例4创建stu_scores(in s_no, out count_num)，用 select count(*) into count_num 赋值，调用时传入会话变量@c_num。", "page": 14 },
-        { "term": "条件与复合语句", "desc": "例5创建do_query，用declare声明局部变量、if…then…elseif判断成绩高于85分的科目数并输出相应提示。", "page": 15 },
-        { "term": "嵌套调用", "desc": "例6创建do_insert()插入记录，再创建do_outer()在其中call do_insert()，说明存储过程可以调用另一个存储过程。", "page": 17 },
-        { "term": "查看存储过程", "desc": "可用 show procedure status like 'do_%';、show create procedure do_outer; 以及查询information_schema.routines表查看状态和定义。", "page": 18 },
-        { "term": "定义条件与处理程序", "desc": "MySQL通过declare定义条件和处理程序，事先定义可能遇到的问题及解决办法以避免异常停止；条件类型分sqlstate_value（长度5的字符串）和mysql_error_code（数值型代码）。", "page": 20 },
-        { "term": "定义处理程序", "desc": "declare handler_type handler for condition_value[,…] sp_statement; handler_type取continue（遇错继续执行）或exit（遇错立即退出）。", "page": 22 },
-        { "term": "错误捕获类型", "desc": "sqlwarning匹配所有以01开头的sqlstate代码，not found匹配以02开头的，sqlexception匹配其他非前两类的错误代码。", "page": 23 }
+        {
+          "term": "创建与执行示例",
+          "desc": "例1创建proc_stu()检索电话以131开头的学生信息并调用；例2创建avg_score(in c_no)统计课程平均成绩；例3创建select_score(in s_no,c_no)按学号和课程号查询。",
+          "page": 11
+        },
+        {
+          "term": "out参数",
+          "desc": "例4创建stu_scores(in s_no, out count_num)，用 select count(*) into count_num 赋值，调用时传入会话变量@c_num。",
+          "page": 14
+        },
+        {
+          "term": "条件与复合语句",
+          "desc": "例5创建do_query，用declare声明局部变量、if…then…elseif判断成绩高于85分的科目数并输出相应提示。",
+          "page": 15
+        },
+        {
+          "term": "嵌套调用",
+          "desc": "例6创建do_insert()插入记录，再创建do_outer()在其中call do_insert()，说明存储过程可以调用另一个存储过程。",
+          "page": 17
+        },
+        {
+          "term": "查看存储过程",
+          "desc": "可用 show procedure status like 'do_%';、show create procedure do_outer; 以及查询information_schema.routines表查看状态和定义。",
+          "page": 18
+        },
+        {
+          "term": "定义条件与处理程序",
+          "desc": "MySQL通过declare定义条件和处理程序，事先定义可能遇到的问题及解决办法以避免异常停止；条件类型分sqlstate_value（长度5的字符串）和mysql_error_code（数值型代码）。",
+          "page": 20
+        },
+        {
+          "term": "定义处理程序",
+          "desc": "declare handler_type handler for condition_value[,…] sp_statement; handler_type取continue（遇错继续执行）或exit（遇错立即退出）。",
+          "page": 22
+        },
+        {
+          "term": "错误捕获类型",
+          "desc": "sqlwarning匹配所有以01开头的sqlstate代码，not found匹配以02开头的，sqlexception匹配其他非前两类的错误代码。",
+          "page": 23
+        }
       ],
       "code": [
         "create procedure proc_stu() reads sql data begin select studentno,sname,birthdate ,phone from student where phone like '%131%' order by studentno ; end//",
@@ -71,9 +123,21 @@
       "pageRange": "26-26",
       "summary": "本节介绍修改存储过程的两种方法：删除并重新创建，或用alter procedure语句修改某些参数，并给出alter的语法格式和示例。",
       "points": [
-        { "term": "修改存储过程的方法", "desc": "有两种方法：删除并重新创建存储过程，或使用alter procedure语句修改存储过程的某些参数。", "page": 26 },
-        { "term": "alter procedure语法", "desc": "alter procedure sp_name [characteristic ...]，用于修改存储过程的定义。", "page": 26 },
-        { "term": "修改示例", "desc": "例9用 alter procedure do_insert modifies sql data sql security invoker 将读写权限改为modifies sql data并指明调用者可执行。", "page": 26 }
+        {
+          "term": "修改存储过程的方法",
+          "desc": "有两种方法：删除并重新创建存储过程，或使用alter procedure语句修改存储过程的某些参数。",
+          "page": 26
+        },
+        {
+          "term": "alter procedure语法",
+          "desc": "alter procedure sp_name [characteristic ...]，用于修改存储过程的定义。",
+          "page": 26
+        },
+        {
+          "term": "修改示例",
+          "desc": "例9用 alter procedure do_insert modifies sql data sql security invoker 将读写权限改为modifies sql data并指明调用者可执行。",
+          "page": 26
+        }
       ],
       "code": [
         "alter procedure sp_name [characteristic ...]",
@@ -87,9 +151,21 @@
       "pageRange": "27-27",
       "summary": "本节介绍使用drop procedure语句删除存储过程，说明if exists子句可防止不存在的程序报错，并给出示例。",
       "points": [
-        { "term": "删除语法", "desc": "使用drop procedure删除已存在的存储过程，语法为 drop procedure [if exists] sp_name。", "page": 27 },
-        { "term": "if exists子句", "desc": "if exists子句是MySQL的扩展，如果程序或函数不存在，它防止发生错误。", "page": 27 },
-        { "term": "删除示例", "desc": "删除存储过程do_update的示例为 MySQL>drop procedure if exists do_insert;。", "page": 27 }
+        {
+          "term": "删除语法",
+          "desc": "使用drop procedure删除已存在的存储过程，语法为 drop procedure [if exists] sp_name。",
+          "page": 27
+        },
+        {
+          "term": "if exists子句",
+          "desc": "if exists子句是MySQL的扩展，如果程序或函数不存在，它防止发生错误。",
+          "page": 27
+        },
+        {
+          "term": "删除示例",
+          "desc": "删除存储过程do_update的示例为 MySQL>drop procedure if exists do_insert;。",
+          "page": 27
+        }
       ],
       "code": [
         "drop procedure [if exists] sp_name",
@@ -103,11 +179,31 @@
       "pageRange": "28-30",
       "summary": "本节从共同点和不同之处两方面比较存储过程与函数，涉及重复使用、安全访问控制、返回值数量、结果集返回、调用方式和函数体限制等。",
       "points": [
-        { "term": "共同特点", "desc": "存储过程或函数可以重复使用，减少开发人员工作量；可增强数据安全访问控制，设定只有某些用户才有执行权。", "page": 28 },
-        { "term": "返回值区别", "desc": "函数必须有且仅有一个返回值并须指定类型；存储过程可以没有、也可以有一个或多个返回值，需用out或inout参数定义。", "page": 28 },
-        { "term": "结果集区别", "desc": "函数体可用select…into为变量赋值但不能返回结果集；存储过程没有此限制，甚至可以返回多个结果集。", "page": 29 },
-        { "term": "调用区别", "desc": "函数可直接嵌入SQL语句或表达式、扩展标准SQL；存储过程一般需单独调用，调用时需使用call关键字。", "page": 29 },
-        { "term": "限制区别", "desc": "函数体限制较多，不能使用事务语句、不能使用预处理SQL；存储过程限制较少，基本所有SQL语句都可使用。", "page": 30 }
+        {
+          "term": "共同特点",
+          "desc": "存储过程或函数可以重复使用，减少开发人员工作量；可增强数据安全访问控制，设定只有某些用户才有执行权。",
+          "page": 28
+        },
+        {
+          "term": "返回值区别",
+          "desc": "函数必须有且仅有一个返回值并须指定类型；存储过程可以没有、也可以有一个或多个返回值，需用out或inout参数定义。",
+          "page": 28
+        },
+        {
+          "term": "结果集区别",
+          "desc": "函数体可用select…into为变量赋值但不能返回结果集；存储过程没有此限制，甚至可以返回多个结果集。",
+          "page": 29
+        },
+        {
+          "term": "调用区别",
+          "desc": "函数可直接嵌入SQL语句或表达式、扩展标准SQL；存储过程一般需单独调用，调用时需使用call关键字。",
+          "page": 29
+        },
+        {
+          "term": "限制区别",
+          "desc": "函数体限制较多，不能使用事务语句、不能使用预处理SQL；存储过程限制较少，基本所有SQL语句都可使用。",
+          "page": 30
+        }
       ],
       "code": [],
       "tips": [
@@ -121,10 +217,26 @@
       "pageRange": "31-34",
       "summary": "本节介绍游标是对select结果集进行访问的机制，说明游标由结果集和游标位置组成，概括声明、打开、提取、关闭四个使用步骤，并给出声明游标的语法。",
       "points": [
-        { "term": "游标机制", "desc": "游标是对select语句结果集进行访问的机制，允许用户访问单独的数据行，而不是只能对整个结果集进行操作。", "page": 31 },
-        { "term": "游标的组成", "desc": "游标主要包括结果集和游标位置两部分，游标位置是指向结果集中某一行的指针。", "page": 32 },
-        { "term": "游标使用过程", "desc": "概括为声明游标、打开游标、从游标中提取数据以及关闭游标；在MySQL中游标只能在存储过程内部使用。", "page": 32 },
-        { "term": "声明游标语法", "desc": "声明游标使用declare语句：declare cursor_name cursor for select_statement;。", "page": 34 }
+        {
+          "term": "游标机制",
+          "desc": "游标是对select语句结果集进行访问的机制，允许用户访问单独的数据行，而不是只能对整个结果集进行操作。",
+          "page": 31
+        },
+        {
+          "term": "游标的组成",
+          "desc": "游标主要包括结果集和游标位置两部分，游标位置是指向结果集中某一行的指针。",
+          "page": 32
+        },
+        {
+          "term": "游标使用过程",
+          "desc": "概括为声明游标、打开游标、从游标中提取数据以及关闭游标；在MySQL中游标只能在存储过程内部使用。",
+          "page": 32
+        },
+        {
+          "term": "声明游标语法",
+          "desc": "声明游标使用declare语句：declare cursor_name cursor for select_statement;。",
+          "page": 34
+        }
       ],
       "code": [
         "declare cursor_name cursor for select_statement;",
@@ -141,9 +253,21 @@
       "pageRange": "35-35",
       "summary": "本节说明使用游标之前必须首先打开游标，介绍open语句的语法并给出打开teach_cursor游标的示例。",
       "points": [
-        { "term": "打开游标的要求", "desc": "打开游标需要使用open语句，使用游标之前必须首先打开游标。", "page": 35 },
-        { "term": "open语法", "desc": "打开游标的语法如下所示：open cursor_name;。", "page": 35 },
-        { "term": "打开游标示例", "desc": "打开前面创建的teach_cursor游标，使用语句 open teach_cursor;。", "page": 35 }
+        {
+          "term": "打开游标的要求",
+          "desc": "打开游标需要使用open语句，使用游标之前必须首先打开游标。",
+          "page": 35
+        },
+        {
+          "term": "open语法",
+          "desc": "打开游标的语法如下所示：open cursor_name;。",
+          "page": 35
+        },
+        {
+          "term": "打开游标示例",
+          "desc": "打开前面创建的teach_cursor游标，使用语句 open teach_cursor;。",
+          "page": 35
+        }
       ],
       "code": [
         "open cursor_name;",
@@ -159,12 +283,36 @@
       "pageRange": "36-38",
       "summary": "本节介绍用fetch语句获取游标当前指针记录并传给变量列表，说明MySQL游标向前只读的特点、变量个数须与字段个数一致，以及用错误处理程序判断遍历结束的方法。",
       "points": [
-        { "term": "fetch语句", "desc": "打开游标后可用fetch提取数据，其功能是获取游标当前指针的记录并传给指定变量列表，语法为 fetch cursor_name into var1[,var2,…];。", "page": 36 },
-        { "term": "游标只读向前", "desc": "MySQL的游标是向前只读的，只能顺序地从开始往后读取结果集，不能从后往前，也不能直接跳到中间的记录。", "page": 36 },
-        { "term": "变量个数要求", "desc": "变量名个数必须与声明游标时select结果集的字段个数一致；第一次fetch提取第一条，再次执行提取第二条。", "page": 37 },
-        { "term": "fetch与循环", "desc": "fetch每次仅提取一条记录，需要循环语句配合才能遍历整个结果集，一般用Loop和while比较清楚、代码简单。", "page": 37 },
-        { "term": "错误处理程序", "desc": "用 declare continue handler for not found …; 判断遍历结束；最后一条之后再fetch会产生ERROR 1329 (02000)，可自定义处理程序结束遍历。", "page": 38 },
-        { "term": "处理程序位置", "desc": "游标错误处理程序应该放在声明游标语句之后，游标通常结合错误处理程序一起使用以结束结果集访问。", "page": 38 }
+        {
+          "term": "fetch语句",
+          "desc": "打开游标后可用fetch提取数据，其功能是获取游标当前指针的记录并传给指定变量列表，语法为 fetch cursor_name into var1[,var2,…];。",
+          "page": 36
+        },
+        {
+          "term": "游标只读向前",
+          "desc": "MySQL的游标是向前只读的，只能顺序地从开始往后读取结果集，不能从后往前，也不能直接跳到中间的记录。",
+          "page": 36
+        },
+        {
+          "term": "变量个数要求",
+          "desc": "变量名个数必须与声明游标时select结果集的字段个数一致；第一次fetch提取第一条，再次执行提取第二条。",
+          "page": 37
+        },
+        {
+          "term": "fetch与循环",
+          "desc": "fetch每次仅提取一条记录，需要循环语句配合才能遍历整个结果集，一般用Loop和while比较清楚、代码简单。",
+          "page": 37
+        },
+        {
+          "term": "错误处理程序",
+          "desc": "用 declare continue handler for not found …; 判断遍历结束；最后一条之后再fetch会产生ERROR 1329 (02000)，可自定义处理程序结束遍历。",
+          "page": 38
+        },
+        {
+          "term": "处理程序位置",
+          "desc": "游标错误处理程序应该放在声明游标语句之后，游标通常结合错误处理程序一起使用以结束结果集访问。",
+          "page": 38
+        }
       ],
       "code": [
         "fetch cursor_name into var1[,var2,…];",
@@ -182,9 +330,21 @@
       "pageRange": "39-41",
       "summary": "本节介绍用close语句关闭游标以释放结果集和资源，说明未明确关闭时游标会在begin-end块末尾自动关闭，并给出proc_cursor完整示例。",
       "points": [
-        { "term": "关闭游标", "desc": "关闭游标使用close语句，语法为 close cursor_name; 目的在于释放结果集、通知服务器释放游标占用资源、节省内存。", "page": 39 },
-        { "term": "自动关闭", "desc": "游标如果没有被明确关闭，将在它被声明的begin-end语句块的末尾关闭；使用声明过的游标不需要再次声明。", "page": 39 },
-        { "term": "综合示例", "desc": "例10的proc_cursor用declare定义变量、游标与continue handler，再open游标、用loop+fetch遍历、leave退出并close游标。", "page": 40 }
+        {
+          "term": "关闭游标",
+          "desc": "关闭游标使用close语句，语法为 close cursor_name; 目的在于释放结果集、通知服务器释放游标占用资源、节省内存。",
+          "page": 39
+        },
+        {
+          "term": "自动关闭",
+          "desc": "游标如果没有被明确关闭，将在它被声明的begin-end语句块的末尾关闭；使用声明过的游标不需要再次声明。",
+          "page": 39
+        },
+        {
+          "term": "综合示例",
+          "desc": "例10的proc_cursor用declare定义变量、游标与continue handler，再open游标、用loop+fetch遍历、leave退出并close游标。",
+          "page": 40
+        }
       ],
       "code": [
         "close cursor_name;",
@@ -203,14 +363,46 @@
       "pageRange": "42-49",
       "summary": "本节介绍触发器是特殊的存储过程，说明其分类、优点和创建语法，解释触发事件与行级触发的特点及执行顺序，并讲解old、new关键字的使用规则。",
       "points": [
-        { "term": "触发器的概念", "desc": "触发器是一种特殊的存储过程，基于一个表创建，当预定义事件发生时自动激活，可防止不正确修改，实施复杂完整性约束。", "page": 42 },
-        { "term": "触发器的分类", "desc": "触发器分为insert、update和delete三类，每类按执行先后又分before和after触发器，一个表最多可设置6种触发器。", "page": 43 },
-        { "term": "触发器的优点", "desc": "自动执行并在数据修改后立即激活；可通过相关表层叠更改；可强制比check约束更复杂的限制且能引用其他表中的列。", "page": 44 },
-        { "term": "创建触发器语法", "desc": "create trigger trigger_name trigger_time trigger_event on table_name for each row trigger_statement；table_name必须引用永久性表。", "page": 45 },
-        { "term": "触发事件", "desc": "trigger_event指明激活触发程序的语句类型：insert插入新行时、update更改某行时、delete从表中删除某行时激活。", "page": 46 },
-        { "term": "行级触发与执行顺序", "desc": "目前MySQL仅支持行级触发器，for each row表示每条受影响记录执行一次；顺序为before触发器、表数据修改、after触发器。", "page": 47 },
-        { "term": "old与new关键字", "desc": "MySQL创建与本表结构相同的old和new临时表，old存既有数据、new存将要更新的数据；insert只有new合法，delete只有old合法，update两者都可用。", "page": 48 },
-        { "term": "old只读", "desc": "old记录是只读的只能引用不能更改；在before触发程序中可用 set new.col_name = value 更改new记录的值。", "page": 49 }
+        {
+          "term": "触发器的概念",
+          "desc": "触发器是一种特殊的存储过程，基于一个表创建，当预定义事件发生时自动激活，可防止不正确修改，实施复杂完整性约束。",
+          "page": 42
+        },
+        {
+          "term": "触发器的分类",
+          "desc": "触发器分为insert、update和delete三类，每类按执行先后又分before和after触发器，一个表最多可设置6种触发器。",
+          "page": 43
+        },
+        {
+          "term": "触发器的优点",
+          "desc": "自动执行并在数据修改后立即激活；可通过相关表层叠更改；可强制比check约束更复杂的限制且能引用其他表中的列。",
+          "page": 44
+        },
+        {
+          "term": "创建触发器语法",
+          "desc": "create trigger trigger_name trigger_time trigger_event on table_name for each row trigger_statement；table_name必须引用永久性表。",
+          "page": 45
+        },
+        {
+          "term": "触发事件",
+          "desc": "trigger_event指明激活触发程序的语句类型：insert插入新行时、update更改某行时、delete从表中删除某行时激活。",
+          "page": 46
+        },
+        {
+          "term": "行级触发与执行顺序",
+          "desc": "目前MySQL仅支持行级触发器，for each row表示每条受影响记录执行一次；顺序为before触发器、表数据修改、after触发器。",
+          "page": 47
+        },
+        {
+          "term": "old与new关键字",
+          "desc": "MySQL创建与本表结构相同的old和new临时表，old存既有数据、new存将要更新的数据；insert只有new合法，delete只有old合法，update两者都可用。",
+          "page": 48
+        },
+        {
+          "term": "old只读",
+          "desc": "old记录是只读的只能引用不能更改；在before触发程序中可用 set new.col_name = value 更改new记录的值。",
+          "page": 49
+        }
       ],
       "code": [
         "create trigger trigger_name trigger_time trigger_event on table_name for each row trigger_statement",
@@ -228,9 +420,21 @@
       "pageRange": "50-52",
       "summary": "本节通过同步更新课程号和删除教师备份两个示例演示触发器的创建与验证，并介绍用show triggers和information_schema.triggers表查看触发器的方法。",
       "points": [
-        { "term": "更新触发示例", "desc": "例11创建cno_update为after update触发器，当course表课程号更改时，同步更新score表中的课程号。", "page": 50 },
-        { "term": "删除触发示例", "desc": "例12创建trig_teacher为after delete触发器，当teacher表中教师信息被删除时，将编号和姓名添加到de_teacher表。", "page": 51 },
-        { "term": "查看触发器", "desc": "用户可通过 show triggers; 查看触发器状态，也可查询information_schema数据库下的triggers表查看触发器信息。", "page": 52 }
+        {
+          "term": "更新触发示例",
+          "desc": "例11创建cno_update为after update触发器，当course表课程号更改时，同步更新score表中的课程号。",
+          "page": 50
+        },
+        {
+          "term": "删除触发示例",
+          "desc": "例12创建trig_teacher为after delete触发器，当teacher表中教师信息被删除时，将编号和姓名添加到de_teacher表。",
+          "page": 51
+        },
+        {
+          "term": "查看触发器",
+          "desc": "用户可通过 show triggers; 查看触发器状态，也可查询information_schema数据库下的triggers表查看触发器信息。",
+          "page": 52
+        }
       ],
       "code": [
         "create trigger cno_update after update on course for each row begin update score set courseno=new.courseno where courseno=old.courseno; end $$",
@@ -246,13 +450,41 @@
       "pageRange": "53-58",
       "summary": "本节介绍触发器在实现复杂完整性约束、冗余数据处理和级联操作中的应用，通过删除学生级联删除成绩、before与after触发顺序的示例说明用法，并列出使用触发器的多项注意事项。",
       "points": [
-        { "term": "触发器的应用", "desc": "常用于实现数据完整性的复杂约束、数据管理中的冗余数据处理以及外键约束的级联操作，实现应用系统的自动维护。", "page": 53 },
-        { "term": "级联删除示例", "desc": "例13创建stu_delete为after delete触发器，当删除student表某学生记录时，同时删除score表中相应的成绩记录。", "page": 54 },
-        { "term": "触发顺序示例", "desc": "例14在de_teacher表上创建before insert和after insert两个触发器，通过向表中插入数据观察两个触发器的触发顺序。", "page": 55 },
-        { "term": "使用注意事项", "desc": "触发程序中的select不能返回结果集；同一个表不能创建两个相同触发时间、触发事件的触发程序；不能使用事务语句。", "page": 57 },
-        { "term": "性能与原子性", "desc": "批量更新数据时引入触发器会降低性能；MyISAM中触发器不能保证原子性，InnoDB支持事务可保证更新与触发程序原子性。", "page": 57 },
-        { "term": "外键与触发器", "desc": "InnoDB建议用级联选项维护外键；MyISAM可用触发器模拟外键约束；维护时应先维护子表再维护父表，否则可能出错。", "page": 58 },
-        { "term": "自增字段", "desc": "在before触发程序中，auto_increment字段的new值为0，不是实际插入新记录时自动生成的自增型字段值。", "page": 58 }
+        {
+          "term": "触发器的应用",
+          "desc": "常用于实现数据完整性的复杂约束、数据管理中的冗余数据处理以及外键约束的级联操作，实现应用系统的自动维护。",
+          "page": 53
+        },
+        {
+          "term": "级联删除示例",
+          "desc": "例13创建stu_delete为after delete触发器，当删除student表某学生记录时，同时删除score表中相应的成绩记录。",
+          "page": 54
+        },
+        {
+          "term": "触发顺序示例",
+          "desc": "例14在de_teacher表上创建before insert和after insert两个触发器，通过向表中插入数据观察两个触发器的触发顺序。",
+          "page": 55
+        },
+        {
+          "term": "使用注意事项",
+          "desc": "触发程序中的select不能返回结果集；同一个表不能创建两个相同触发时间、触发事件的触发程序；不能使用事务语句。",
+          "page": 57
+        },
+        {
+          "term": "性能与原子性",
+          "desc": "批量更新数据时引入触发器会降低性能；MyISAM中触发器不能保证原子性，InnoDB支持事务可保证更新与触发程序原子性。",
+          "page": 57
+        },
+        {
+          "term": "外键与触发器",
+          "desc": "InnoDB建议用级联选项维护外键；MyISAM可用触发器模拟外键约束；维护时应先维护子表再维护父表，否则可能出错。",
+          "page": 58
+        },
+        {
+          "term": "自增字段",
+          "desc": "在before触发程序中，auto_increment字段的new值为0，不是实际插入新记录时自动生成的自增型字段值。",
+          "page": 58
+        }
       ],
       "code": [
         "create trigger stu_delete after delete on student for each row begin delete from score where studentno=old.studentno; end $$",
@@ -271,9 +503,21 @@
       "pageRange": "59-59",
       "summary": "本节介绍使用drop trigger语句删除数据库中已存在的触发器，给出语法格式和示例。",
       "points": [
-        { "term": "删除触发器的概念", "desc": "删除触发器指删除数据库中已经存在的触发器，MySQL使用drop trigger语句来删除触发器。", "page": 59 },
-        { "term": "删除触发器语法", "desc": "基本形式为 drop trigger [schema_name.]trigger_name。", "page": 59 },
-        { "term": "删除示例", "desc": "删除触发器stu_score的代码为 mysql> drop trigger stu_score;。", "page": 59 }
+        {
+          "term": "删除触发器的概念",
+          "desc": "删除触发器指删除数据库中已经存在的触发器，MySQL使用drop trigger语句来删除触发器。",
+          "page": 59
+        },
+        {
+          "term": "删除触发器语法",
+          "desc": "基本形式为 drop trigger [schema_name.]trigger_name。",
+          "page": 59
+        },
+        {
+          "term": "删除示例",
+          "desc": "删除触发器stu_score的代码为 mysql> drop trigger stu_score;。",
+          "page": 59
+        }
       ],
       "code": [
         "drop trigger [schema_name.]trigger_name",
@@ -287,10 +531,26 @@
       "pageRange": "60-63",
       "summary": "本节介绍事件（事件调度器）是定时任务机制及其相对操作系统计划任务的实时优势，讲解如何用系统变量开启和查看事件调度器。",
       "points": [
-        { "term": "事件的概念", "desc": "事件又称事件调度器，是一种定时任务机制，可定时执行删除记录、数据汇总等任务，取代原先只能由操作系统计划任务执行的工作。", "page": 61 },
-        { "term": "事件的优势", "desc": "事件调度器可精确到每秒钟执行一个任务，比只能精确到每分钟的操作系统计划任务有实时优势，适合实时性要求高的应用。", "page": 61 },
-        { "term": "开启事件调度器", "desc": "用系统变量@@event_scheduler，true(1/on)为打开、false(0/off)为关闭；可用 set @@global.event_scheduler = true; 或在my.ini中加event_scheduler=1后重启。", "page": 62 },
-        { "term": "查看事件调度器", "desc": "可用 show variables like 'event_scheduler'; 或 select @@event_scheduler; 查看当前是否已开启。", "page": 63 }
+        {
+          "term": "事件的概念",
+          "desc": "事件又称事件调度器，是一种定时任务机制，可定时执行删除记录、数据汇总等任务，取代原先只能由操作系统计划任务执行的工作。",
+          "page": 61
+        },
+        {
+          "term": "事件的优势",
+          "desc": "事件调度器可精确到每秒钟执行一个任务，比只能精确到每分钟的操作系统计划任务有实时优势，适合实时性要求高的应用。",
+          "page": 61
+        },
+        {
+          "term": "开启事件调度器",
+          "desc": "用系统变量@@event_scheduler，true(1/on)为打开、false(0/off)为关闭；可用 set @@global.event_scheduler = true; 或在my.ini中加event_scheduler=1后重启。",
+          "page": 62
+        },
+        {
+          "term": "查看事件调度器",
+          "desc": "可用 show variables like 'event_scheduler'; 或 select @@event_scheduler; 查看当前是否已开启。",
+          "page": 63
+        }
       ],
       "code": [
         "set @@global.event_scheduler = true;",
@@ -308,12 +568,36 @@
       "pageRange": "64-69",
       "summary": "本节给出create event的语法格式，解释at和every两类时间调度及interval单位，通过示例演示创建某时刻发生、周期发生以及在事件中调用存储过程的方法。",
       "points": [
-        { "term": "创建事件语法", "desc": "create event [if not exists] event_name on schedule schedule [on completion [not] preserve] [enable|disable|disable on slave] [comment'comment'] do sql_statement;。", "page": 64 },
-        { "term": "时间调度", "desc": "schedule中at timestamp [+interval interval]表示事件在某个时刻发生；every interval [starts ...] [ends ...]表示在指定区间内周期性发生。", "page": 65 },
-        { "term": "某时刻发生的事件", "desc": "例15创建direct1用 on schedule at now() 立即执行建表；例16创建direct2用 at current_timestamp + interval 5 second 在5秒后建表。", "page": 66 },
-        { "term": "周期发生的事件", "desc": "例17创建test1_insert用 on schedule every 1 second 每秒插入一条记录到test1表。", "page": 67 },
-        { "term": "starts与ends", "desc": "例18创建startweeks，用 every 1 week starts curdate()+interval 1 week ends '2021-08-31 12:00:00' 从下周起每周清空test1表。", "page": 68 },
-        { "term": "事件中调用存储过程", "desc": "例19创建事件stu_week，每周用 call teaching.proc_stu(); 调用存储过程查看学生情况。", "page": 69 }
+        {
+          "term": "创建事件语法",
+          "desc": "create event [if not exists] event_name on schedule schedule [on completion [not] preserve] [enable|disable|disable on slave] [comment'comment'] do sql_statement;。",
+          "page": 64
+        },
+        {
+          "term": "时间调度",
+          "desc": "schedule中at timestamp [+interval interval]表示事件在某个时刻发生；every interval [starts ...] [ends ...]表示在指定区间内周期性发生。",
+          "page": 65
+        },
+        {
+          "term": "某时刻发生的事件",
+          "desc": "例15创建direct1用 on schedule at now() 立即执行建表；例16创建direct2用 at current_timestamp + interval 5 second 在5秒后建表。",
+          "page": 66
+        },
+        {
+          "term": "周期发生的事件",
+          "desc": "例17创建test1_insert用 on schedule every 1 second 每秒插入一条记录到test1表。",
+          "page": 67
+        },
+        {
+          "term": "starts与ends",
+          "desc": "例18创建startweeks，用 every 1 week starts curdate()+interval 1 week ends '2021-08-31 12:00:00' 从下周起每周清空test1表。",
+          "page": 68
+        },
+        {
+          "term": "事件中调用存储过程",
+          "desc": "例19创建事件stu_week，每周用 call teaching.proc_stu(); 调用存储过程查看学生情况。",
+          "page": 69
+        }
       ],
       "code": [
         "create event [if not exists] event_name on schedule schedule [on completion [not] preserve] [enable|disable|disable on slave] [comment'comment'] do sql_statement;",
@@ -333,10 +617,26 @@
       "pageRange": "70-73",
       "summary": "本节介绍事件的查看、修改和删除：用show events和show create event查看，用alter event修改调度、名称、注释及启用状态，用drop event删除。",
       "points": [
-        { "term": "查看事件", "desc": "用 show events [from schema_name] [like 'pattern'|where expr] 查看所有事件，用 show create event event_name; 查看创建信息。", "page": 70 },
-        { "term": "修改事件", "desc": "用alter event修改事件的定义和相关属性，可修改时间调度、重命名、注释以及enable/disable状态。", "page": 71 },
-        { "term": "修改示例", "desc": "例21对test1_insert执行disable临时关闭、enable开启、改变调度周期、rename to并加注释等操作。", "page": 72 },
-        { "term": "删除事件", "desc": "用 drop event [if exists][database name.] event_name 删除事件，如 drop event insert_test1;。", "page": 73 }
+        {
+          "term": "查看事件",
+          "desc": "用 show events [from schema_name] [like 'pattern'|where expr] 查看所有事件，用 show create event event_name; 查看创建信息。",
+          "page": 70
+        },
+        {
+          "term": "修改事件",
+          "desc": "用alter event修改事件的定义和相关属性，可修改时间调度、重命名、注释以及enable/disable状态。",
+          "page": 71
+        },
+        {
+          "term": "修改示例",
+          "desc": "例21对test1_insert执行disable临时关闭、enable开启、改变调度周期、rename to并加注释等操作。",
+          "page": 72
+        },
+        {
+          "term": "删除事件",
+          "desc": "用 drop event [if exists][database name.] event_name 删除事件，如 drop event insert_test1;。",
+          "page": 73
+        }
       ],
       "code": [
         "show events [from schema_name] [like 'pattern'|where expr]",
@@ -357,7 +657,12 @@
       "id": "ch7-ppt-s01",
       "type": "single",
       "stem": "存储过程是一组完成特定功能的（ ）。",
-      "options": ["A. MySQL语句的集合", "B. 数据表", "C. 视图", "D. 索引"],
+      "options": [
+        "A. MySQL语句的集合",
+        "B. 数据表",
+        "C. 视图",
+        "D. 索引"
+      ],
       "answer": "A",
       "analysis": "解析：PPT第2页指出，存储过程是一组完成特定功能的MySQL语句的集合，应用程序只需调用它就可以实现某个特定的任务。故选A。",
       "page": 2
@@ -366,7 +671,12 @@
       "id": "ch7-ppt-s02",
       "type": "single",
       "stem": "在MySQL中，调用存储过程使用的语句是（ ）。",
-      "options": ["A. select", "B. call", "C. execute", "D. run"],
+      "options": [
+        "A. select",
+        "B. call",
+        "C. execute",
+        "D. run"
+      ],
       "answer": "B",
       "analysis": "解析：PPT第9页指出，存储过程是通过call语句来调用的，执行存储过程需要拥有execute权限。故选B。",
       "page": 9
@@ -375,7 +685,12 @@
       "id": "ch7-ppt-s03",
       "type": "single",
       "stem": "MySQL中的游标只能在（ ）内部使用。",
-      "options": ["A. 视图", "B. 存储过程", "C. 触发器", "D. 事件"],
+      "options": [
+        "A. 视图",
+        "B. 存储过程",
+        "C. 触发器",
+        "D. 事件"
+      ],
       "answer": "B",
       "analysis": "解析：PPT第32页指出，在MySQL中游标只能在存储过程内部使用；游标一般通过存储过程来实现其操作。故选B。",
       "page": 32
@@ -384,7 +699,12 @@
       "id": "ch7-ppt-s04",
       "type": "single",
       "stem": "MySQL触发器的执行顺序是（ ）。",
-      "options": ["A. after触发器→表数据修改→before触发器", "B. before触发器→表数据修改→after触发器", "C. 表数据修改→before触发器→after触发器", "D. before触发器→after触发器→表数据修改"],
+      "options": [
+        "A. after触发器→表数据修改→before触发器",
+        "B. before触发器→表数据修改→after触发器",
+        "C. 表数据修改→before触发器→after触发器",
+        "D. before触发器→after触发器→表数据修改"
+      ],
       "answer": "B",
       "analysis": "解析：PPT第47页指出，触发器执行的顺序是before触发器、表数据修改操作、after触发器。故选B。",
       "page": 47
@@ -393,7 +713,12 @@
       "id": "ch7-ppt-s05",
       "type": "single",
       "stem": "对于insert语句，在触发程序中可以使用的关键字是（ ）。",
-      "options": ["A. old", "B. new", "C. old和new都可以", "D. old和new都不可以"],
+      "options": [
+        "A. old",
+        "B. new",
+        "C. old和new都可以",
+        "D. old和new都不可以"
+      ],
       "answer": "B",
       "analysis": "解析：PPT第49页指出，对于insert语句只有new是合法的；对于delete语句只有old才合法；update语句可以与new或old同时使用。故选B。",
       "page": 49
@@ -402,7 +727,12 @@
       "id": "ch7-ppt-s06",
       "type": "single",
       "stem": "要开启MySQL的事件调度器，可以使用系统变量（ ）。",
-      "options": ["A. @@event_scheduler", "B. @@autocommit", "C. @@version", "D. @@datadir"],
+      "options": [
+        "A. @@event_scheduler",
+        "B. @@autocommit",
+        "C. @@version",
+        "D. @@datadir"
+      ],
       "answer": "A",
       "analysis": "解析：PPT第62页指出，可以使用系统变量@@event_scheduler来打开事件调度器，true（或1或on）为打开。故选A。",
       "page": 62
@@ -411,7 +741,12 @@
       "id": "ch7-ppt-s07",
       "type": "single",
       "stem": "删除MySQL中已存在的事件，应使用（ ）语句。",
-      "options": ["A. drop event", "B. drop trigger", "C. drop procedure", "D. delete event"],
+      "options": [
+        "A. drop event",
+        "B. drop trigger",
+        "C. drop procedure",
+        "D. delete event"
+      ],
       "answer": "A",
       "analysis": "解析：PPT第73页指出，MySQL中用drop event删除事件，语法为 drop event [if exists][database name.] event_name。故选A。",
       "page": 73
@@ -420,7 +755,10 @@
       "id": "ch7-ppt-b01",
       "type": "blank",
       "stem": "存储过程是通过____语句来调用的。",
-      "answer": ["call", "CALL"],
+      "answer": [
+        "call",
+        "CALL"
+      ],
       "answerText": "call",
       "analysis": "解析：PPT第9页指出，存储过程是通过call语句来调用的。",
       "page": 9
@@ -429,7 +767,10 @@
       "id": "ch7-ppt-b02",
       "type": "blank",
       "stem": "游标的使用过程可概括为声明游标、打开游标、从游标中提取数据和____游标。",
-      "answer": ["关闭", "关闭游标"],
+      "answer": [
+        "关闭",
+        "关闭游标"
+      ],
       "answerText": "关闭",
       "analysis": "解析：PPT第32页指出，游标的使用过程概括为声明游标、打开游标、从游标中提取数据以及关闭游标。",
       "page": 32
@@ -438,7 +779,11 @@
       "id": "ch7-ppt-b03",
       "type": "blank",
       "stem": "触发器根据执行的先后顺序，可以分为before触发器和____触发器。",
-      "answer": ["after", "AFTER", "arfter"],
+      "answer": [
+        "after",
+        "AFTER",
+        "arfter"
+      ],
       "answerText": "after",
       "analysis": "解析：PPT第43页指出，触发器可以分为insert、update和delete等3类，每一类根据执行的先后顺序又可以分成before和after触发器。",
       "page": 43
@@ -447,7 +792,11 @@
       "id": "ch7-ppt-b04",
       "type": "blank",
       "stem": "MySQL中的事件（Event）又称事件____。",
-      "answer": ["调度器", "调度程序", "Scheduler"],
+      "answer": [
+        "调度器",
+        "调度程序",
+        "Scheduler"
+      ],
       "answerText": "调度器",
       "analysis": "解析：PPT第61页指出，MySQL中的事件又称事件调度器(Event Scheduler)，是一种定时任务机制。",
       "page": 61
@@ -456,10 +805,997 @@
       "id": "ch7-ppt-b05",
       "type": "blank",
       "stem": "MySQL使用____ trigger语句来删除数据库中已经存在的触发器。",
-      "answer": ["drop", "DROP"],
+      "answer": [
+        "drop",
+        "DROP"
+      ],
       "answerText": "drop",
       "analysis": "解析：PPT第59页指出，MySQL使用drop trigger语句来删除数据库中已经存在的触发器。",
       "page": 59
+    },
+    {
+      "id": "ch7-ppt-s08",
+      "type": "single",
+      "stem": "存储过程在实际应用中可发挥多方面作用，下列各项中不属于PPT所述存储过程主要应用的是（ ）。",
+      "options": [
+        "A. 控制访问权限",
+        "B. 为数据库表中的活动创建审计追踪",
+        "C. 将数据定义语句和数据操作语句分隔开",
+        "D. 自动为数据表选择合适的存储引擎"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第6页指出存储过程主要应用于控制访问权限、为数据库表中的活动创建审计追踪、将关系到数据库及其所有相关应用程序的数据定义语句和数据操作语句分隔开，并无“自动选择存储引擎”之说。故选D。",
+      "page": 6
+    },
+    {
+      "id": "ch7-ppt-s09",
+      "type": "single",
+      "stem": "下列各项中，不属于存储过程优势的是（ ）。",
+      "options": [
+        "A. 可以对表中数据自动加密存储",
+        "B. 提高了处理复杂任务的能力",
+        "C. 增强了代码的复用率和共享性",
+        "D. 减少了网络中数据的流量"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第7页列出存储过程的优势：提高处理复杂任务的能力、增强代码的复用率和共享性、减少网络中数据的流量、在服务器注册加快运行速度、加强系统的安全性，不含“自动加密存储”。故选A。",
+      "page": 7
+    },
+    {
+      "id": "ch7-ppt-s10",
+      "type": "single",
+      "stem": "在MySQL中创建存储过程，必须具有的权限是（ ）。",
+      "options": [
+        "A. create routine",
+        "B. execute",
+        "C. alter routine",
+        "D. create view"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第8页指出，创建存储过程可以使用create procedure语句，要创建存储过程必须具有create routine的权限；execute是执行（调用）存储过程所需的权限。故选A。",
+      "page": 8
+    },
+    {
+      "id": "ch7-ppt-b06",
+      "type": "blank",
+      "stem": "调用存储过程时，call语句中的参数个数必须总是等于存储过程的____个数。",
+      "answer": [
+        "参数",
+        "参数个数"
+      ],
+      "answerText": "参数",
+      "analysis": "解析：PPT第10页指出，call语句中的参数个数必须总是等于存储过程的参数个数。",
+      "page": 10
+    },
+    {
+      "id": "ch7-ppt-s11",
+      "type": "single",
+      "stem": "例2创建的存储过程为avg_score(in c_no char(6))，其中in表示该参数是（ ）。",
+      "options": [
+        "A. 输出参数",
+        "B. 输入输出参数",
+        "C. 无参数",
+        "D. 输入参数"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第12页例2创建avg_score(in c_no char(6))，in为输入参数，调用时用call avg_score('c05109')把课程号传入。故选D。",
+      "page": 12
+    },
+    {
+      "id": "ch7-ppt-s12",
+      "type": "single",
+      "stem": "例4创建的stu_scores(in s_no char(11), out count_num int)用于统计指定同学的考试门数，调用时为out参数传入的实参应使用（ ）。",
+      "options": [
+        "A. 字符串常量",
+        "B. 列名",
+        "C. 会话变量（如@c_num）",
+        "D. 数学表达式"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第14页指出，out参数由存储过程内部用select count(*) into count_num赋值，调用语句为call stu_scores('20125121109', @c_num)，再用select @c_num查看，故实参用会话变量。故选C。",
+      "page": 14
+    },
+    {
+      "id": "ch7-ppt-b07",
+      "type": "blank",
+      "stem": "例5的存储过程do_query中使用____关键字声明局部变量AA并指定默认值0。",
+      "answer": [
+        "declare",
+        "DECLARE"
+      ],
+      "answerText": "declare",
+      "analysis": "解析：PPT第15页例5中语句为declare AA tinyint default 0，用declare声明局部变量。",
+      "page": 15
+    },
+    {
+      "id": "ch7-ppt-s13",
+      "type": "single",
+      "stem": "例6中do_outer()要执行do_insert()的功能，其过程体内应使用的语句是（ ）。",
+      "options": [
+        "A. call do_insert();",
+        "B. exec do_insert();",
+        "C. run do_insert();",
+        "D. select do_insert();"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第17页do_outer()的过程体中以call do_insert();调用另一个存储过程，说明存储过程可以嵌套调用。故选A。",
+      "page": 17
+    },
+    {
+      "id": "ch7-ppt-s14",
+      "type": "single",
+      "stem": "要查看存储过程do_outer的创建语句（定义），应使用的语句是（ ）。",
+      "options": [
+        "A. show procedure status like 'do_%';",
+        "B. select * from do_outer;",
+        "C. describe procedure do_outer;",
+        "D. show create procedure do_outer;"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第18页指出，show procedure status用于查看状态，show create procedure用于查看定义，例中为show create procedure do_outer。故选D。",
+      "page": 18
+    },
+    {
+      "id": "ch7-ppt-b08",
+      "type": "blank",
+      "stem": "定义条件的基本语法为declare condition_name ____ for condition_type。",
+      "answer": [
+        "condition",
+        "CONDITION"
+      ],
+      "answerText": "condition",
+      "analysis": "解析：PPT第20页给出定义条件的语法：declare condition_name condition for condition_type。",
+      "page": 20
+    },
+    {
+      "id": "ch7-ppt-b09",
+      "type": "blank",
+      "stem": "处理程序的类型中，表示遇到错误不做处理、继续执行其他MySQL语句的是____。",
+      "answer": [
+        "continue",
+        "CONTINUE"
+      ],
+      "answerText": "continue",
+      "analysis": "解析：PPT第22页指出，handler_type取continue或exit，continue表示遇到错误不处理、继续执行其他MySQL语句。",
+      "page": 22
+    },
+    {
+      "id": "ch7-ppt-s15",
+      "type": "single",
+      "stem": "定义处理程序时，not found用于匹配所有以（ ）开头的sqlstate错误代码。",
+      "options": [
+        "A. 01",
+        "B. 02",
+        "C. 03",
+        "D. 99"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第23页指出，sqlwarning匹配以01开头的sqlstate代码，not found匹配以02开头的，sqlexception匹配其他非前两类的错误代码。故选B。",
+      "page": 23
+    },
+    {
+      "id": "ch7-ppt-s16",
+      "type": "single",
+      "stem": "下列各项中，不属于修改存储过程方法的是（ ）。",
+      "options": [
+        "A. 删除并重新创建存储过程",
+        "B. 使用alter procedure语句修改某些参数",
+        "C. 使用update procedure语句修改",
+        "D. 先drop procedure再create procedure"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第26页指出修改存储过程有两种方法：删除并重新创建，或使用alter procedure语句修改某些参数，MySQL并没有update procedure语句。故选C。",
+      "page": 26
+    },
+    {
+      "id": "ch7-ppt-s17",
+      "type": "single",
+      "stem": "例9执行alter procedure do_insert modifies sql data sql security invoker;，其中modifies sql data表示（ ）。",
+      "options": [
+        "A. 该存储过程只读",
+        "B. 将读写权限改为modifies sql data",
+        "C. 存储过程只包含SQL语句",
+        "D. 存储过程不包含任何SQL语句"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第26页例9说明将读写权限改为modifies sql data，并指明调用者可以执行。故选B。",
+      "page": 26
+    },
+    {
+      "id": "ch7-ppt-b10",
+      "type": "blank",
+      "stem": "修改存储过程可以使用____ procedure语句。",
+      "answer": [
+        "alter",
+        "ALTER"
+      ],
+      "answerText": "alter",
+      "analysis": "解析：PPT第26页指出，另一种修改存储过程的方法是使用alter procedure语句。",
+      "page": 26
+    },
+    {
+      "id": "ch7-ppt-s18",
+      "type": "single",
+      "stem": "例9中alter procedure语句末尾的sql security invoker表示（ ）。",
+      "options": [
+        "A. 以定义者权限执行",
+        "B. 指明调用者可以执行该存储过程",
+        "C. 禁止任何用户调用",
+        "D. 只允许DBA调用"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第26页例9说明sql security invoker用于指明调用者可以执行该存储过程。故选B。",
+      "page": 26
+    },
+    {
+      "id": "ch7-ppt-s19",
+      "type": "single",
+      "stem": "在MySQL中删除已经存在的存储过程，应使用的语句是（ ）。",
+      "options": [
+        "A. delete procedure",
+        "B. remove procedure",
+        "C. alter procedure",
+        "D. drop procedure"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第27页指出，删除存储过程可以使用drop procedure语句，语法为drop procedure [if exists] sp_name。故选D。",
+      "page": 27
+    },
+    {
+      "id": "ch7-ppt-s20",
+      "type": "single",
+      "stem": "drop procedure语句中[if exists]子句的作用是（ ）。",
+      "options": [
+        "A. 只删除有数据的存储过程",
+        "B. 删除同名的所有数据库对象",
+        "C. 如果程序或函数不存在，防止发生错误",
+        "D. 强制终止正在运行的存储过程"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第27页指出，if exists子句是MySQL的扩展，如果程序或函数不存在，它防止发生错误。故选C。",
+      "page": 27
+    },
+    {
+      "id": "ch7-ppt-b11",
+      "type": "blank",
+      "stem": "删除存储过程do_insert的语句是drop procedure if exists ____;",
+      "answer": [
+        "do_insert",
+        "DO_INSERT"
+      ],
+      "answerText": "do_insert",
+      "analysis": "解析：PPT第27页删除存储过程的示例为drop procedure if exists do_insert;，sp_name处写要删除的存储过程名。",
+      "page": 27
+    },
+    {
+      "id": "ch7-ppt-b12",
+      "type": "blank",
+      "stem": "drop procedure语句的基本语法为drop procedure [____] sp_name。",
+      "answer": [
+        "if exists",
+        "IF EXISTS"
+      ],
+      "answerText": "if exists",
+      "analysis": "解析：PPT第27页给出语法drop procedure [if exists] sp_name，方括号中为可选的if exists子句。",
+      "page": 27
+    },
+    {
+      "id": "ch7-ppt-s21",
+      "type": "single",
+      "stem": "关于函数与存储过程的返回值，下列说法正确的是（ ）。",
+      "options": [
+        "A. 函数必须有且仅有一个返回值并须指定类型",
+        "B. 函数可以有多个返回值",
+        "C. 存储过程必须有一个返回值",
+        "D. 存储过程与函数都必须有返回值"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第28页指出，函数必须有且仅有一个返回值且必须指定返回值类型；存储过程可以没有返回值，也可以有一个或多个返回值，需用out或inout参数定义。故选A。",
+      "page": 28
+    },
+    {
+      "id": "ch7-ppt-s22",
+      "type": "single",
+      "stem": "关于函数与存储过程对结果集的处理，下列说法正确的是（ ）。",
+      "options": [
+        "A. 函数可以返回多个结果集",
+        "B. 存储过程不能返回结果集",
+        "C. 函数体可用select…into赋值但不能返回结果集，存储过程可以返回多个结果集",
+        "D. 函数和存储过程都不能返回结果集"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第29页指出，函数体内可以使用select…into为变量赋值，但不能用select语句返回结果集；存储过程没有这方面的限制，甚至可以返回多个结果集。故选C。",
+      "page": 29
+    },
+    {
+      "id": "ch7-ppt-s23",
+      "type": "single",
+      "stem": "关于函数与存储过程的调用方式，下列说法正确的是（ ）。",
+      "options": [
+        "A. 函数可直接嵌入SQL语句或表达式，存储过程一般需用call单独调用",
+        "B. 函数必须使用call关键字调用",
+        "C. 存储过程可以直接嵌入SQL表达式中使用",
+        "D. 函数和存储过程都必须用call调用"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第29页指出，函数可以直接嵌入到SQL语句或MySQL表达式中，并可扩展标准SQL；存储过程一般需要单独调用，调用时需要使用call关键字。故选A。",
+      "page": 29
+    },
+    {
+      "id": "ch7-ppt-s24",
+      "type": "single",
+      "stem": "与存储过程相比，函数体的限制较多，下列语句中不能在函数体中使用的（ ）。",
+      "options": [
+        "A. select…into赋值语句",
+        "B. declare声明语句",
+        "C. if…then条件语句",
+        "D. start transaction、commit、rollback等事务语句"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第30页指出，函数体内不能使用以显式或隐式方式打开、开始或结束事务的语句（如start transaction、commit、rollback、set autocommit=0），也不能使用预处理SQL语句。故选D。",
+      "page": 30
+    },
+    {
+      "id": "ch7-ppt-b13",
+      "type": "blank",
+      "stem": "存储过程或函数可以重复使用，还可以增强数据的____访问控制。",
+      "answer": [
+        "安全",
+        "安全性"
+      ],
+      "answerText": "安全",
+      "analysis": "解析：PPT第28页指出，使用存储过程或者函数可以增强数据的安全访问控制，可以设定只有某些用户才具有执行权。",
+      "page": 28
+    },
+    {
+      "id": "ch7-ppt-s25",
+      "type": "single",
+      "stem": "游标在MySQL中是一种对（ ）进行访问的机制。",
+      "options": [
+        "A. 索引",
+        "B. 视图定义",
+        "C. select语句结果集",
+        "D. 存储引擎"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第31页指出，游标在MySQL中是一种对select语句结果集进行访问的机制，允许用户访问单独的数据行。故选C。",
+      "page": 31
+    },
+    {
+      "id": "ch7-ppt-s26",
+      "type": "single",
+      "stem": "游标主要包括（ ）两部分。",
+      "options": [
+        "A. 结果集和游标位置",
+        "B. 变量和循环",
+        "C. 条件和处理程序",
+        "D. 参数和返回值"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第32页指出，游标主要包括结果集和游标位置两部分，游标位置是指向结果集中某一行的指针。故选A。",
+      "page": 32
+    },
+    {
+      "id": "ch7-ppt-b14",
+      "type": "blank",
+      "stem": "声明游标需要使用____语句。",
+      "answer": [
+        "declare",
+        "DECLARE"
+      ],
+      "answerText": "declare",
+      "analysis": "解析：PPT第34页指出，声明游标需要使用declare语句，语法为declare cursor_name cursor for select_statement。",
+      "page": 34
+    },
+    {
+      "id": "ch7-ppt-s27",
+      "type": "single",
+      "stem": "关于打开游标，下列说法正确的是（ ）。",
+      "options": [
+        "A. 打开游标使用fetch语句",
+        "B. 游标打开后会自动关闭",
+        "C. 使用游标之前必须首先打开游标",
+        "D. 打开游标时不需要指定游标名"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第35页指出，打开游标需要使用open语句，使用游标之前必须首先打开游标。故选C。",
+      "page": 35
+    },
+    {
+      "id": "ch7-ppt-s28",
+      "type": "single",
+      "stem": "打开游标teach_cursor的正确语句是（ ）。",
+      "options": [
+        "A. start teach_cursor;",
+        "B. open teach_cursor;",
+        "C. begin teach_cursor;",
+        "D. use teach_cursor;"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第35页给出打开游标的语法open cursor_name;，打开teach_cursor的语句为open teach_cursor;。故选B。",
+      "page": 35
+    },
+    {
+      "id": "ch7-ppt-b15",
+      "type": "blank",
+      "stem": "打开游标需要使用____语句。",
+      "answer": [
+        "open",
+        "OPEN"
+      ],
+      "answerText": "open",
+      "analysis": "解析：PPT第35页指出，打开游标需要使用open语句。",
+      "page": 35
+    },
+    {
+      "id": "ch7-ppt-b16",
+      "type": "blank",
+      "stem": "打开前面创建的teach_cursor游标，应执行open ____;",
+      "answer": [
+        "teach_cursor",
+        "TEACH_CURSOR"
+      ],
+      "answerText": "teach_cursor",
+      "analysis": "解析：PPT第35页打开teach_cursor游标的示例语句为open teach_cursor;。",
+      "page": 35
+    },
+    {
+      "id": "ch7-ppt-s29",
+      "type": "single",
+      "stem": "从游标中提取数据需要使用fetch语句，其功能是（ ）。",
+      "options": [
+        "A. 声明结果集",
+        "B. 获取游标当前指针的记录并传给指定变量列表",
+        "C. 关闭游标并释放资源",
+        "D. 打开游标"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第36页指出，fetch语句的功能是获取游标当前指针的记录，并传给指定变量列表。故选B。",
+      "page": 36
+    },
+    {
+      "id": "ch7-ppt-s30",
+      "type": "single",
+      "stem": "MySQL的游标是（ ）的。",
+      "options": [
+        "A. 可双向滚动",
+        "B. 向前只读",
+        "C. 可随机定位任意行",
+        "D. 可直接修改结果集数据"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第36页指出，MySQL的游标是向前只读的，只能顺序地从开始往后读取结果集，不能从后往前，也不能直接跳到中间的记录。故选B。",
+      "page": 36
+    },
+    {
+      "id": "ch7-ppt-b17",
+      "type": "blank",
+      "stem": "fetch语句中变量名的个数必须与声明游标时select语句结果集中的____个数保持一致。",
+      "answer": [
+        "字段",
+        "列"
+      ],
+      "answerText": "字段",
+      "analysis": "解析：PPT第37页指出，变量名的个数必须与声明游标时使用的select语句结果集中的字段个数保持一致。",
+      "page": 37
+    },
+    {
+      "id": "ch7-ppt-s31",
+      "type": "single",
+      "stem": "fetch语句每次仅提取一条记录，因此需要（ ）配合才能遍历整个结果集。",
+      "options": [
+        "A. 子查询",
+        "B. 事务",
+        "C. 触发器",
+        "D. 循环语句"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第37页指出，fetch语句每次只提取一条记录，需要循环语句配合才能实现整个结果集的遍历，一般用Loop和while比较清楚。故选D。",
+      "page": 37
+    },
+    {
+      "id": "ch7-ppt-s32",
+      "type": "single",
+      "stem": "游标错误处理程序应该放在（ ）。",
+      "options": [
+        "A. 声明游标语句之前",
+        "B. begin语句之前",
+        "C. end语句之后",
+        "D. 声明游标语句之后"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第38页指出，游标错误处理程序应该放在声明游标语句之后，游标通常结合错误处理程序一起使用以结束结果集的访问。故选D。",
+      "page": 38
+    },
+    {
+      "id": "ch7-ppt-b18",
+      "type": "blank",
+      "stem": "提取完最后一条记录后再次执行fetch，将产生ERROR ____ (02000): No data to fetch错误。",
+      "answer": [
+        "1329"
+      ],
+      "answerText": "1329",
+      "analysis": "解析：PPT第38页指出，提取最后一条记录后再次执行fetch会产生“ERROR 1329 (02000): No data to fetch”错误。",
+      "page": 38
+    },
+    {
+      "id": "ch7-ppt-s33",
+      "type": "single",
+      "stem": "关闭游标的目的在于（ ）。",
+      "options": [
+        "A. 删除游标的定义",
+        "B. 重新声明游标以便再次使用",
+        "C. 释放游标打开时产生的结果集，通知服务器释放游标占用的资源",
+        "D. 提交当前事务"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第39页指出，关闭游标的目的在于释放游标打开时产生的结果集，以通知服务器释放游标所占用的资源，节省MySQL服务器的内存空间。故选C。",
+      "page": 39
+    },
+    {
+      "id": "ch7-ppt-s34",
+      "type": "single",
+      "stem": "如果游标没有被明确地关闭，它将（ ）。",
+      "options": [
+        "A. 在它被声明的begin-end语句块的末尾关闭",
+        "B. 永久占用内存直至重启服务器",
+        "C. 在下一次open时自动关闭",
+        "D. 必须由用户手工kill进程关闭"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第39页指出，游标如果没有被明确地关闭，将在它被声明的begin-end语句块的末尾关闭。故选A。",
+      "page": 39
+    },
+    {
+      "id": "ch7-ppt-s35",
+      "type": "single",
+      "stem": "例10的proc_cursor中，当@dovar=1表示已遍历结束时，用（ ）语句退出循环。",
+      "options": [
+        "A. exit loop",
+        "B. leave fetch_Loop",
+        "C. break",
+        "D. return"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第41页例10中，用if @dovar=1 then leave fetch_Loop;结束loop循环，再用close关闭游标。故选B。",
+      "page": 40
+    },
+    {
+      "id": "ch7-ppt-b19",
+      "type": "blank",
+      "stem": "关闭游标使用____语句。",
+      "answer": [
+        "close",
+        "CLOSE"
+      ],
+      "answerText": "close",
+      "analysis": "解析：PPT第39页指出，关闭游标使用close语句，语法为close cursor_name;。",
+      "page": 39
+    },
+    {
+      "id": "ch7-ppt-s36",
+      "type": "single",
+      "stem": "关于触发器，下列说法正确的是（ ）。",
+      "options": [
+        "A. 触发器必须由用户手工调用才会执行",
+        "B. 触发器是一种特殊的存储过程，基于一个表创建，但可以针对多个表进行操作",
+        "C. 触发器只能基于视图创建",
+        "D. 触发器与存储过程没有任何关系"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第42页指出，触发器是一种特殊的存储过程，基于一个表创建，但可以针对多个表进行操作，因此可用来对表实施复杂的完整性约束。故选B。",
+      "page": 42
+    },
+    {
+      "id": "ch7-ppt-s37",
+      "type": "single",
+      "stem": "下列各项中，属于触发器优点的是（ ）。",
+      "options": [
+        "A. 可以强制比check约束更复杂的限制，且能引用其他表中的列",
+        "B. 可以自动提高查询速度",
+        "C. 可以替代所有事务控制语句",
+        "D. 可以自动为表创建索引"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第44页指出，触发器可以强制限制，这些限制比用check约束定义的更复杂，而且与check约束不同，触发器可以引用其他表中的列。故选A。",
+      "page": 44
+    },
+    {
+      "id": "ch7-ppt-b20",
+      "type": "blank",
+      "stem": "create trigger语句中table_name必须引用____表，不能与temporary表或视图关联。",
+      "answer": [
+        "永久性",
+        "永久"
+      ],
+      "answerText": "永久性",
+      "analysis": "解析：PPT第45页指出，table_name必须引用永久性表，不能将触发程序与temporary表或视图关联起来。",
+      "page": 45
+    },
+    {
+      "id": "ch7-ppt-s38",
+      "type": "single",
+      "stem": "下列各项中，不属于触发器trigger_event取值的是（ ）。",
+      "options": [
+        "A. select",
+        "B. insert",
+        "C. update",
+        "D. delete"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第46页指出，trigger_event可以是insert、update、delete之一，分别在新行插入、更改某一行、删除某一行时激活，没有select。故选A。",
+      "page": 46
+    },
+    {
+      "id": "ch7-ppt-b21",
+      "type": "blank",
+      "stem": "触发器事件发生时，MySQL针对要修改数据的表创建的两个结构完全相同的临时表是old和____。",
+      "answer": [
+        "new",
+        "NEW"
+      ],
+      "answerText": "new",
+      "analysis": "解析：PPT第48页指出，MySQL针对要修改数据的表创建了与本表结构完全一样的2个临时表old和new。",
+      "page": 48
+    },
+    {
+      "id": "ch7-ppt-b22",
+      "type": "blank",
+      "stem": "old记录是____的，只能引用，不能更改。",
+      "answer": [
+        "只读",
+        "只读的",
+        "read only"
+      ],
+      "answerText": "只读",
+      "analysis": "解析：PPT第49页指出，old记录是只读的，只能引用，不能更改；在before触发程序中可用set new.col_name = value更改new记录的值。",
+      "page": 49
+    },
+    {
+      "id": "ch7-ppt-s39",
+      "type": "single",
+      "stem": "例11创建的触发器cno_update，其触发时机和触发事件是（ ）。",
+      "options": [
+        "A. before insert",
+        "B. after update",
+        "C. after delete",
+        "D. before delete"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第50页例11创建create trigger cno_update after update on course for each row，当course表课程号更改时同步更新score表中的课程号。故选B。",
+      "page": 50
+    },
+    {
+      "id": "ch7-ppt-s40",
+      "type": "single",
+      "stem": "例12中trig_teacher在teacher表删除教师信息后，把教师编号和姓名添加到de_teacher表，使用（ ）引用被删除的记录。",
+      "options": [
+        "A. new.teacherno、new.tname",
+        "B. teacherno、tname",
+        "C. delete.teacherno、delete.tname",
+        "D. old.teacherno、old.tname"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第51页例12为after delete触发器，插入语句为values(old.teacherno, old.tname)，即用old引用被删除的旧记录。故选D。",
+      "page": 51
+    },
+    {
+      "id": "ch7-ppt-s41",
+      "type": "single",
+      "stem": "查看数据库中已存在触发器的状态，可以使用（ ）语句。",
+      "options": [
+        "A. show triggers",
+        "B. show procedure status",
+        "C. show events",
+        "D. show create database"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第52页指出，用户可以通过show triggers语句查看触发器的状态，也可以通过查询information_schema数据库下的triggers表查看触发器信息。故选A。",
+      "page": 52
+    },
+    {
+      "id": "ch7-ppt-b23",
+      "type": "blank",
+      "stem": "查看触发器的状态可以使用show ____语句。",
+      "answer": [
+        "triggers",
+        "TRIGGERS"
+      ],
+      "answerText": "triggers",
+      "analysis": "解析：PPT第52页指出，用户可以通过show triggers语句来查看触发器的状态。",
+      "page": 52
+    },
+    {
+      "id": "ch7-ppt-s42",
+      "type": "single",
+      "stem": "下列各项中，不属于触发器常见应用的是（ ）。",
+      "options": [
+        "A. 实现数据完整性的复杂约束",
+        "B. 数据管理过程中的冗余数据处理",
+        "C. 替代索引以提高检索速度",
+        "D. 外键约束的级联操作"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第53页指出，触发器的常见应用有实现数据完整性的复杂约束、数据管理过程中的冗余数据处理以及外键约束的级联操作，不含“替代索引提高检索速度”。故选C。",
+      "page": 53
+    },
+    {
+      "id": "ch7-ppt-s43",
+      "type": "single",
+      "stem": "例13的stu_delete触发器实现的功能是（ ）。",
+      "options": [
+        "A. 修改student表时同步更新score表",
+        "B. 向student表插入记录时同时插入score表",
+        "C. 删除student表中记录时同时删除score表中相应的成绩记录",
+        "D. 删除score表记录时同时删除student表记录"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第54页例13创建after delete触发器stu_delete，触发器体中delete from score where studentno=old.studentno，实现删除学生记录时级联删除其成绩。故选C。",
+      "page": 54
+    },
+    {
+      "id": "ch7-ppt-s44",
+      "type": "single",
+      "stem": "例14在de_teacher表上创建before insert和after insert两个触发器，向de_teacher插入一行数据后，bef_after表中两条记录出现的先后顺序是（ ）。",
+      "options": [
+        "A. after触发器写入的记录在前",
+        "B. 两条记录顺序随机",
+        "C. 只出现before触发器的记录",
+        "D. before触发器写入的记录在前"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第47页、第56页表明触发器执行顺序为before触发器、表数据修改、after触发器，故before_insert先向bef_after写入记录，after_insert后写入。故选D。",
+      "page": 55
+    },
+    {
+      "id": "ch7-ppt-b24",
+      "type": "blank",
+      "stem": "触发程序中如果包含select语句，该select语句不能返回____。",
+      "answer": [
+        "结果集"
+      ],
+      "answerText": "结果集",
+      "analysis": "解析：PPT第57页“使用触发器的注意事项”指出，触发程序中如果包含select语句，该select语句不能返回结果集。",
+      "page": 57
+    },
+    {
+      "id": "ch7-ppt-s45",
+      "type": "single",
+      "stem": "关于触发器与事务的原子性，下列说法正确的是（ ）。",
+      "options": [
+        "A. MyISAM存储引擎中触发器能保证原子性",
+        "B. MyISAM和InnoDB都能保证触发器原子性",
+        "C. InnoDB存储引擎支持事务，使用触发器可以保证更新操作与触发程序的原子性",
+        "D. 触发器与原子性没有任何关系"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第57页指出，在MyISAM存储引擎中触发器不能保证原子性；InnoDB存储引擎支持事务，使用触发器可以保证更新操作与触发程序的原子性。故选C。",
+      "page": 57
+    },
+    {
+      "id": "ch7-ppt-s46",
+      "type": "single",
+      "stem": "使用触发器维护InnoDB外键约束的级联选项时，正确的做法是（ ）。",
+      "options": [
+        "A. 首先维护子表的数据，然后再维护父表的数据",
+        "B. 先维护父表的数据，再维护子表的数据",
+        "C. 父表与子表必须同时维护",
+        "D. 只维护父表数据即可"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第58页指出，应首先维护子表的数据，然后再维护父表的数据，否则可能出现错误。故选A。",
+      "page": 58
+    },
+    {
+      "id": "ch7-ppt-b25",
+      "type": "blank",
+      "stem": "在before触发程序中，auto_increment字段的new值为____。",
+      "answer": [
+        "0"
+      ],
+      "answerText": "0",
+      "analysis": "解析：PPT第58页指出，在before触发程序中，auto_increment字段的new值为0，不是实际插入新记录时自动生成的自增型字段值。",
+      "page": 58
+    },
+    {
+      "id": "ch7-ppt-s47",
+      "type": "single",
+      "stem": "删除触发器的基本形式是（ ）。",
+      "options": [
+        "A. delete trigger trigger_name",
+        "B. drop procedure trigger_name",
+        "C. alter trigger trigger_name",
+        "D. drop trigger [schema_name.]trigger_name"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第59页指出，MySQL使用drop trigger语句删除触发器，基本形式为drop trigger [schema_name.]trigger_name。故选D。",
+      "page": 59
+    },
+    {
+      "id": "ch7-ppt-s48",
+      "type": "single",
+      "stem": "删除名为stu_score的触发器，正确的语句是（ ）。",
+      "options": [
+        "A. delete trigger stu_score;",
+        "B. drop trigger stu_score;",
+        "C. drop trigger where name='stu_score';",
+        "D. remove trigger stu_score;"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第59页删除触发器的示例为mysql> drop trigger stu_score;。故选B。",
+      "page": 59
+    },
+    {
+      "id": "ch7-ppt-b26",
+      "type": "blank",
+      "stem": "MySQL使用drop ____语句来删除数据库中已经存在的触发器。",
+      "answer": [
+        "trigger",
+        "TRIGGER"
+      ],
+      "answerText": "trigger",
+      "analysis": "解析：PPT第59页指出，MySQL使用drop trigger语句来删除触发器。",
+      "page": 59
+    },
+    {
+      "id": "ch7-ppt-s49",
+      "type": "single",
+      "stem": "与操作系统的计划任务相比，MySQL事件调度器的优势是（ ）。",
+      "options": [
+        "A. 只能精确到每分钟执行一次",
+        "B. 不需要开启即可创建事件",
+        "C. 一个事件只能执行一次",
+        "D. 可以精确到每秒钟执行一个任务"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第61页指出，MySQL的事件调度器可以精确到每秒钟执行一个任务，而操作系统的计划任务只能精确到每分钟执行一次，因此有实时优势。故选D。",
+      "page": 61
+    },
+    {
+      "id": "ch7-ppt-b27",
+      "type": "blank",
+      "stem": "查看当前是否已开启事件调度器，可执行select @@____;",
+      "answer": [
+        "event_scheduler",
+        "EVENT_SCHEDULER"
+      ],
+      "answerText": "event_scheduler",
+      "analysis": "解析：PPT第63页指出，可用show variables like 'event_scheduler';或select @@event_scheduler;查看事件调度器是否开启。",
+      "page": 63
+    },
+    {
+      "id": "ch7-ppt-s50",
+      "type": "single",
+      "stem": "在MySQL中创建事件应使用的语句是（ ）。",
+      "options": [
+        "A. create schedule",
+        "B. create task",
+        "C. create event",
+        "D. create job"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第64页指出，创建事件可以使用create event语句，语法为create event [if not exists] event_name on schedule schedule … do sql_statement;。故选C。",
+      "page": 64
+    },
+    {
+      "id": "ch7-ppt-s51",
+      "type": "single",
+      "stem": "在create event的schedule子句中，at子句与every子句的含义分别是（ ）。",
+      "options": [
+        "A. at表示周期性发生，every表示某时刻发生",
+        "B. 两者都表示事件在某个时刻发生",
+        "C. at表示事件在某个时刻发生，every表示在指定时间区间内每隔多久发生一次",
+        "D. 两者都表示事件周期性发生"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第65页指出，at子句表示事件在某个时刻发生，后面可加时间间隔；every子句表示在指定时间区间内每隔多长时间事件发生一次。故选C。",
+      "page": 65
+    },
+    {
+      "id": "ch7-ppt-s52",
+      "type": "single",
+      "stem": "例16创建的direct2事件使用on schedule at current_timestamp + interval 5 second，其含义是（ ）。",
+      "options": [
+        "A. 5秒后执行",
+        "B. 立即执行",
+        "C. 5分钟后执行",
+        "D. 每天5点执行"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第66页例16指出，at current_timestamp + interval 5 second表示在5秒后创建一个表test2。故选A。",
+      "page": 66
+    },
+    {
+      "id": "ch7-ppt-s53",
+      "type": "single",
+      "stem": "例17创建的事件test1_insert使用on schedule every 1 second，其功能是（ ）。",
+      "options": [
+        "A. 每分钟向test1表插入一条记录",
+        "B. 每秒向test1表插入一条记录",
+        "C. 每秒清空test1表",
+        "D. 每周统计一次test1表"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第67页例17创建test1_insert，on schedule every 1 second，do子句为insert into test1 values(current_timestamp)，即每秒插入一条记录。故选B。",
+      "page": 67
+    },
+    {
+      "id": "ch7-ppt-b28",
+      "type": "blank",
+      "stem": "例18中语句 every 1 week ____ curdate()+interval 1 week ends '2021-08-31 12:00:00'，空格处应填____。",
+      "answer": [
+        "starts",
+        "STARTS"
+      ],
+      "answerText": "starts",
+      "analysis": "解析：PPT第68页例18用starts子句指定开始时间、ends子句指定结束时间，语句为starts curdate()+interval 1 week。",
+      "page": 68
+    },
+    {
+      "id": "ch7-ppt-s54",
+      "type": "single",
+      "stem": "例19在事件stu_week中调用存储过程proc_stu()，do子句中应使用的语句是（ ）。",
+      "options": [
+        "A. exec teaching.proc_stu;",
+        "B. select teaching.proc_stu();",
+        "C. run teaching.proc_stu();",
+        "D. call teaching.proc_stu();"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第69页例19在begin…end复合结构中用call teaching.proc_stu();调用存储过程。故选D。",
+      "page": 69
+    },
+    {
+      "id": "ch7-ppt-s55",
+      "type": "single",
+      "stem": "要查看数据库中的所有事件，可以使用（ ）语句。",
+      "options": [
+        "A. show triggers",
+        "B. show events",
+        "C. show procedure status",
+        "D. show create database"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第70页指出，查看所有事件的语法为show events [from schema_name] [like 'pattern'|where expr]，也可用show events\\G格式化显示。故选B。",
+      "page": 70
+    },
+    {
+      "id": "ch7-ppt-s56",
+      "type": "single",
+      "stem": "关于alter event语句，下列说法正确的是（ ）。",
+      "options": [
+        "A. 可以修改时间调度、重命名事件、添加注释以及临时enable/disable事件",
+        "B. 只能修改事件的名称",
+        "C. 只能用于删除事件",
+        "D. 不能临时关闭一个事件"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第71页指出，alter event可修改事件的时间调度、重命名、注释以及enable/disable状态，例21即演示了关闭、开启、改调度周期、重命名并加注释。故选A。",
+      "page": 71
+    },
+    {
+      "id": "ch7-ppt-b29",
+      "type": "blank",
+      "stem": "临时关闭事件test1_insert的语句是alter event test1_insert ____;",
+      "answer": [
+        "disable",
+        "DISABLE"
+      ],
+      "answerText": "disable",
+      "analysis": "解析：PPT第72页例21中临时关闭test1_insert事件的语句为alter event test1_insert disable;。",
+      "page": 72
+    },
+    {
+      "id": "ch7-ppt-b30",
+      "type": "blank",
+      "stem": "把事件test1_insert重命名为insert_test1，使用alter event test1_insert ____ to insert_test1;",
+      "answer": [
+        "rename",
+        "RENAME"
+      ],
+      "answerText": "rename",
+      "analysis": "解析：PPT第72页例21中重命名事件的语句为alter event test1_insert rename to insert_test1 comment '表test1的数据操作';。",
+      "page": 72
     }
   ]
 }
