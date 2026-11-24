@@ -233,8 +233,17 @@
     });
     return list;
   }
+  function quizLimit() {
+    var el = byId('quiz-limit');
+    return el ? el.value : 'all';
+  }
+  // 题池（当前筛选下全部题）与本次抽题量分开显示，避免误以为是总上限
   function updateFilterCount() {
-    var el = byId('filter-count'); if (el) el.textContent = '共 ' + filteredQuestions().length + ' 题';
+    var el = byId('filter-count'); if (!el) return;
+    var pool = filteredQuestions().length;
+    var lim = quizLimit();
+    var size = (!lim || lim === 'all') ? pool : Math.min(Number(lim), pool);
+    el.textContent = '题池 ' + pool + ' 题 · 本组 ' + size + ' 题';
   }
 
   /* 练习页工具栏：与首页筛选共用同一份状态（首页控件是权威，练习工具栏镜像它） */
@@ -263,6 +272,7 @@
     byId('p-chapter').value = byId('quiz-chapter').value;
     byId('p-type').value = byId('quiz-type').value;
     byId('p-scope').value = byId('quiz-scope').value;
+    if (byId('p-limit')) byId('p-limit').value = byId('quiz-limit').value;
     byId('p-shuffle').checked = byId('quiz-shuffle').checked;
     setQuizMode(currentMode());
     updateNoteCount();
@@ -272,6 +282,7 @@
     byId('quiz-chapter').value = byId('p-chapter').value;
     byId('quiz-type').value = byId('p-type').value;
     byId('quiz-scope').value = byId('p-scope').value;
+    if (byId('p-limit')) byId('quiz-limit').value = byId('p-limit').value;
     byId('quiz-shuffle').checked = byId('p-shuffle').checked;
     updateFilterCount();
     startQuiz();
@@ -285,16 +296,16 @@
     return a;
   }
   // 每组抽题：优先未做过的题，不足再补已做过的；ordered=true 时保持题库原顺序
+  // 注意：limit='all' 只是「不截断」，随机顺序照样要打乱
   function sampleQuestions(list, limit, ordered) {
-    if (!limit || limit === 'all' || limit >= list.length) return ordered ? list.slice() : list;
-    var n = Number(limit);
+    var useAll = (!limit || limit === 'all' || Number(limit) >= list.length);
     var fresh = [], done = [];
     list.forEach(function (q) {
       var p = progress[q.id];
       (p && p.a ? done : fresh).push(q);
     });
-    if (ordered) return fresh.concat(done).slice(0, n);
-    return shuffle(fresh).concat(shuffle(done)).slice(0, n);
+    var out = ordered ? fresh.concat(done) : shuffle(fresh).concat(shuffle(done));
+    return useAll ? out : out.slice(0, Number(limit));
   }
   function renderEmptyState() {
     var mode = currentMode();
@@ -325,9 +336,8 @@
     }
     // 显式传入的列表（如「只重做错题」「刷本章」）不抽样，只对筛选结果抽
     if (!list) {
-      var limitEl = byId('quiz-limit');
       var f = quizFilters();
-      qs = sampleQuestions(qs, limitEl ? limitEl.value : 'all', !f.shuffle);
+      qs = sampleQuestions(qs, quizLimit(), !f.shuffle);
     }
     flushNote();
     session = { list: qs.slice(), idx: 0, answered: 0, correct: 0, peeked: 0, revealed: false, userAns: null, wasAnswered: false, pendingAns: null, pendingText: '' };
@@ -662,6 +672,18 @@
       '<span>看答案 ' + session.peeked + ' 题</span></div>' +
       '<p class="tiny-note">百分比按本次作答计；「不会 · 看答案」按未掌握计入已答、不计入答对。错题已进错题本，可点「只重做错题」二轮。</p>';
     byId('btn-retry-wrong-2').classList.toggle('hidden', wrongIds().length === 0);
+    // 分组练习时补「再来一组」：接着从题池里抽没做过的题，不至于以为题库只有 30 道
+    var groupBtn = byId('btn-next-group');
+    if (groupBtn) {
+      var lim = quizLimit();
+      var left = filteredQuestions().filter(function (q) {
+        var p = progress[q.id]; return !(p && p.a);
+      }).length;
+      var grouped = lim && lim !== 'all';
+      groupBtn.classList.toggle('hidden', !grouped);
+      groupBtn.disabled = left === 0;
+      groupBtn.textContent = left === 0 ? '题池已刷完 ✓' : ('再来一组（剩 ' + left + ' 题没做）→');
+    }
   }
 
   /* ---------------- 问 AI（DeepSeek / 千问） ---------------- */
@@ -994,6 +1016,9 @@
     });
     byId('quiz-chapter').addEventListener('change', updateFilterCount);
     byId('quiz-type').addEventListener('change', updateFilterCount);
+    ['quiz-scope', 'quiz-limit'].forEach(function (id) {
+      var el = byId(id); if (el) el.addEventListener('change', updateFilterCount);
+    });
     byId('btn-quiz-start').addEventListener('click', function () { startQuiz(); });
     byId('btn-quiz-wrong').addEventListener('click', function () {
       var ids = wrongIds();
@@ -1008,7 +1033,7 @@
       setQuizMode(chip.getAttribute('data-mode'));
       applyPracticeFilter();
     });
-    ['p-chapter', 'p-type', 'p-scope'].forEach(function (id) {
+    ['p-chapter', 'p-type', 'p-scope', 'p-limit'].forEach(function (id) {
       var el = byId(id); if (el) el.addEventListener('change', applyPracticeFilter);
     });
     byId('p-shuffle').addEventListener('change', applyPracticeFilter);
@@ -1057,6 +1082,10 @@
     });
 
     byId('btn-retry').addEventListener('click', function () { startQuiz(session.list); });
+    byId('btn-next-group').addEventListener('click', function () {
+      if (byId('btn-next-group').disabled) return;
+      setView('quiz'); startQuiz();
+    });
     byId('btn-retry-wrong-2').addEventListener('click', function () {
       var ids = wrongIds();
       if (!ids.length) return;

@@ -86,17 +86,18 @@
             <option value="fresh">只练没做过的</option>
             <option value="done">只练做过的</option>
           </select>
-          <label for="quiz-limit">每组</label>
-          <select id="quiz-limit">
+          <label for="quiz-limit" title="一次练习抽多少题。题池是当前筛选下的全部题目，不是总上限">题量</label>
+          <select id="quiz-limit" title="一次练习抽多少题；题池是当前筛选下的全部题目，不是总上限">
             <option value="20">20 题</option>
-            <option value="30" selected>30 题</option>
+            <option value="30">30 题</option>
             <option value="50">50 题</option>
-            <option value="all">全部</option>
+            <option value="100">100 题</option>
+            <option value="all" selected>全部</option>
           </select>
           <label class="toggle-inline"><input type="checkbox" id="quiz-shuffle" checked /> 随机顺序</label>
           <span class="filter-count" id="filter-count"></span>
         </div>
-        <p class="tiny-note" id="quiz-tip">每组题会优先抽还没做过的题；做题时点「不会 · 看答案」跳过，回头在「错题」里重练。</p>
+        <p class="tiny-note" id="quiz-tip">「题量」只决定一次做多少题，题库本身是当前筛选下的全部题目（这里是 682 道）；选了 20/30/50/100 就分组成练习，一组做完点「再来一组」接着刷没做过的。做题时点「不会 · 看答案」跳过，回头在「错题」里重练。</p>
         <div class="quiz-actions">
           <button type="button" class="btn btn-primary" id="btn-quiz-start">开始练习 →</button>
           <button type="button" class="btn" id="btn-quiz-wrong">只做错题 <span id="wrong-btn-n">0</span></button>
@@ -134,6 +135,16 @@
                 <option value="done">只练做过的</option>
               </select>
             </div>
+            <div class="field">
+              <label for="p-limit">题量</label>
+              <select id="p-limit">
+                <option value="20">20 题</option>
+                <option value="30">30 题</option>
+                <option value="50">50 题</option>
+                <option value="100">100 题</option>
+                <option value="all">全部</option>
+              </select>
+            </div>
             <label class="toggle-inline pt-shuffle"><input type="checkbox" id="p-shuffle" checked /> 随机顺序</label>
           </div>
           <div class="pt-actions">
@@ -162,7 +173,8 @@
         <h2>练习完成</h2>
         <div class="summary-box" id="summary-box"></div>
         <div class="quiz-actions">
-          <button type="button" class="btn btn-primary" id="btn-retry">再练一次</button>
+          <button type="button" class="btn btn-primary" id="btn-next-group">再来一组 →</button>
+          <button type="button" class="btn" id="btn-retry">重做本组</button>
           <button type="button" class="btn" id="btn-retry-wrong-2">只重做错题</button>
           <button type="button" class="btn-ghost" id="btn-summary-home">返回</button>
         </div>

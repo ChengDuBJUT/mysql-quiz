@@ -136,7 +136,7 @@ function check(cond, label, detail) {
   await p.click('#nav-quiz'); await sleep(100);
   await p.click('#quiz-modes .chip[data-mode="wrong"]'); await sleep(100);
   const wrongCount = await p.$eval('#filter-count', e => e.textContent);
-  check(/共 [1-9]/.test(wrongCount), '错题筛选有结果', wrongCount);
+  check(/题池 \d+ 题/.test(wrongCount), '错题筛选有结果', wrongCount);
 
   // 9. 控制台
   check(errs.length === 0, '控制台零错误', errs.join(' | ') || 'none');

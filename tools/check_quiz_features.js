@@ -271,6 +271,13 @@ function check(ok, label, extra) {
   check(await p.$eval('#quiz-shuffle', e => e.checked) === true, '首页「随机顺序」默认勾选');
 
   console.log('\n[13] 工具栏筛选生效');
+  // 默认题量是「全部题目」，这里显式切到 30 题分组，顺带验证工具栏题量能写回首页
+  await p.evaluate(() => {
+    const el = document.getElementById('p-limit');
+    el.value = '30';
+    el.dispatchEvent(new Event('change'));
+  });
+  await new Promise(r => setTimeout(r, 450));
   await p.select('#p-chapter', '4');
   await new Promise(r => setTimeout(r, 450));
   const ch4 = await p.evaluate(() => {
@@ -296,9 +303,9 @@ function check(ok, label, extra) {
     const ch4 = PPR.getBank().filter(q => q.chapter === 4);
     const expect = ch4.filter(q => !prog[q.id]).concat(ch4.filter(q => prog[q.id])).slice(0, 30).map(q => q.id);
     const got = PPR.getSession().list.map(q => q.id);
-    return { same: expect.join(',') === got.join(','), first: got[0], expFirst: expect[0] };
+    return { same: expect.join(',') === got.join(','), first: got[0], expFirst: expect[0], n: got.length, en: expect.length };
   });
-  check(ordered.same, '取消随机后按题库顺序（首题 ' + ordered.first + '）');
+  check(ordered.same, '取消随机后按题库顺序（首题 ' + ordered.first + '）', '实得 ' + ordered.n + ' 题 期望 ' + ordered.en + ' 题 / 首题 ' + ordered.first + ' vs ' + ordered.expFirst);
 
   // 收藏模式（先把章节放开，否则收藏题被章节筛选挡掉）
   await p.select('#p-chapter', 'all');
@@ -360,7 +367,42 @@ function check(ok, label, extra) {
   const imported = await p.evaluate(() => PPR.getNotes()['ch1-ppt-s01'] || '');
   check(imported === '导入测试用的笔记', '导入笔记写入成功', imported);
 
-  console.log('\n[15] 控制台');
+  console.log('\n[15] 题量：默认全部 / 分组 / 再来一组');
+  await p.click('#btn-quiz-exit');
+  await new Promise(r => setTimeout(r, 200));
+  await p.select('#quiz-limit', 'all');
+  await new Promise(r => setTimeout(r, 150));
+  const cntAll = await p.$eval('#filter-count', e => e.textContent);
+  const mAll = /题池 (\d+) 题 · 本组 (\d+) 题/.exec(cntAll);
+  check(!!mAll && Number(mAll[1]) >= 400 && mAll[1] === mAll[2], '选「全部题目」时本组 = 题池', cntAll);
+  await p.click('#btn-quiz-start');
+  await new Promise(r => setTimeout(r, 400));
+  const allProg = await p.$eval('#quiz-progress', e => e.textContent);
+  const mProg = /^1 \/ (\d+)$/.exec(allProg);
+  check(!!mProg && Number(mProg[1]) >= 400, '全部题量不再被截到 30', allProg);
+
+  await p.click('#btn-quiz-exit');
+  await new Promise(r => setTimeout(r, 200));
+  await p.select('#quiz-limit', '30');
+  await new Promise(r => setTimeout(r, 150));
+  const cnt30 = await p.$eval('#filter-count', e => e.textContent);
+  check(/本组 30 题$/.test(cnt30), '切到 30 题时计数同步', cnt30);
+  await p.click('#btn-quiz-start');
+  await new Promise(r => setTimeout(r, 400));
+  const prog30 = await p.$eval('#quiz-progress', e => e.textContent);
+  check(/^1 \/ 30$/.test(prog30), '分组模式按 30 题抽题', prog30);
+  await p.click('#btn-quiz-finish');
+  await new Promise(r => setTimeout(r, 300));
+  const groupBtn = await p.evaluate(() => {
+    const b = document.getElementById('btn-next-group');
+    return b ? { hidden: b.classList.contains('hidden'), text: b.textContent } : null;
+  });
+  check(!!groupBtn && !groupBtn.hidden && /剩 \d+ 题/.test(groupBtn.text), '分组完成后出现「再来一组」', groupBtn && groupBtn.text);
+  await p.click('#btn-summary-home');
+  await new Promise(r => setTimeout(r, 200));
+  await p.select('#quiz-limit', 'all');
+
+  console.log('\n[16] 控制台');
   check(errs.length === 0, '控制台零错误', errs.slice(0, 3).join(' | '));
 
   console.log('\n──────────────');
