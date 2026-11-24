@@ -426,6 +426,12 @@ body {
   border-bottom-width: 2px; border-radius: 4px; padding: 1px 5px; background: var(--surface);
 }
 
+.empty-state { text-align: center; padding: 34px 20px 40px; }
+.empty-state .empty-icon {
+  font-size: 44px; line-height: 1; color: var(--accent); opacity: .45; margin-bottom: 12px;
+}
+.empty-state p { font-size: 14.5px; color: var(--muted); margin: 0 auto; max-width: 460px; }
+
 .summary-box {
   background: var(--surface); border: 1px solid var(--line-soft); border-radius: 12px;
   padding: 20px 24px; margin: 16px 0;

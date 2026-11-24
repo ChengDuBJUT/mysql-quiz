@@ -296,15 +296,30 @@
     if (ordered) return fresh.concat(done).slice(0, n);
     return shuffle(fresh).concat(shuffle(done)).slice(0, n);
   }
+  function renderEmptyState() {
+    var mode = currentMode();
+    var icon = mode === 'favorites' ? '♡' : (mode === 'wrong' ? '✓' : '—');
+    var msg = mode === 'favorites'
+      ? '还没有收藏任何题。做题时点题卡右上角「♡ 收藏」，题目就会出现在这里。'
+      : (mode === 'wrong'
+        ? '错题本是空的。答错的题、以及点「不会 · 看答案」的题会自动进来。'
+        : '当前筛选条件下没有题目，把章节 / 题型 / 范围放宽一点再试。');
+    byId('question-card').innerHTML =
+      '<div class="empty-state"><div class="empty-icon">' + icon + '</div><p>' + msg + '</p>' +
+      '<p class="tiny-note">也可以点上方「全部练习」回到全部题目。</p></div>';
+    var act = byId('quiz-actions');
+    if (act) act.classList.add('hidden');
+    var kbd = document.querySelector('.kbd-hint');
+    if (kbd) kbd.classList.add('hidden');
+  }
+
   function startQuiz(list) {
     var qs = list || filteredQuestions();
     if (!qs.length) {
-      var msg = '当前筛选条件下没有题目，换个条件试试。';
       if (!byId('quiz-card').classList.contains('hidden')) {
-        var h = byId('quiz-hint');
-        if (h) { h.textContent = msg; h.classList.remove('hidden'); }
+        renderEmptyState();
       } else {
-        alert(msg);
+        alert('当前筛选条件下没有题目，换个条件试试。');
       }
       return;
     }
@@ -354,6 +369,10 @@
     var q = session.list[session.idx];
     if (!q) return finishQuiz();
     flushNote();
+    var act = byId('quiz-actions');
+    if (act) act.classList.remove('hidden');
+    var kbd = document.querySelector('.kbd-hint');
+    if (kbd) kbd.classList.remove('hidden');
 
     var p = progress[q.id];
     var wasAnswered = !!(p && p.a);
