@@ -98,12 +98,12 @@ function check(cond, label, detail) {
   await p.click('#btn-submit'); await sleep(150);
   const verdict = await p.$eval('.verdict', e => e.textContent);
   check(verdict.includes('正确'), '单选判分正确', verdict);
-  check(await p.$eval('.analysis-box .basis', e => e.textContent.includes('PPT')), '解析含课件出处');
-  // 收藏（事件委托的题头按钮）
+  check(await p.$eval('.answer-panel .src', e => /课件 P\d+/.test(e.textContent)), '解析含课件出处');
+  // 收藏（题头胶囊按钮）
   await p.click('#btn-quiz-fav'); await sleep(100);
   check(await p.$eval('#btn-quiz-fav', e => e.classList.contains('on')), '收藏按钮生效');
-  await p.click('#btn-next'); await sleep(200);
-  check(await p.$eval('#view-quiz', e => !!e.querySelector('#quiz-summary:not(.hidden)')), '答完进入完成页');
+  await p.click('#btn-quiz-finish'); await sleep(200);
+  check(await p.$eval('#view-quiz', e => !!e.querySelector('#quiz-summary:not(.hidden)')), '交卷后进入完成页');
 
   // 6. 填空判分（等价写法）
   const fill = await p.evaluate(() => {

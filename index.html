@@ -16,7 +16,7 @@
       } catch (e) {}
     })();
   </script>
-  <link rel="stylesheet" href="styles.css?v=20261124e" />
+  <link rel="stylesheet" href="styles.css?v=20261124g" />
 </head>
 <body>
   <div class="wrap">
@@ -80,6 +80,12 @@
             <option value="single">单选题</option>
             <option value="blank">填空题</option>
           </select>
+          <label for="quiz-scope">范围</label>
+          <select id="quiz-scope">
+            <option value="all">全部题目</option>
+            <option value="fresh">只练没做过的</option>
+            <option value="done">只练做过的</option>
+          </select>
           <label for="quiz-limit">每组</label>
           <select id="quiz-limit">
             <option value="20">20 题</option>
@@ -87,31 +93,69 @@
             <option value="50">50 题</option>
             <option value="all">全部</option>
           </select>
+          <label class="toggle-inline"><input type="checkbox" id="quiz-shuffle" checked /> 随机顺序</label>
           <span class="filter-count" id="filter-count"></span>
         </div>
         <p class="tiny-note" id="quiz-tip">每组题会优先抽还没做过的题；做题时点「不会 · 看答案」跳过，回头在「错题」里重练。</p>
         <div class="quiz-actions">
           <button type="button" class="btn btn-primary" id="btn-quiz-start">开始练习 →</button>
+          <button type="button" class="btn" id="btn-quiz-wrong">只做错题 <span id="wrong-btn-n">0</span></button>
+          <button type="button" class="btn btn-ghost" id="btn-notes-export" title="把笔记导出成 .json 备份，换电脑或清缓存前用">导出笔记</button>
+          <button type="button" class="btn btn-ghost" id="btn-notes-import" title="从之前导出的 .json 恢复笔记">导入笔记</button>
         </div>
+        <input type="file" id="notes-file" accept=".json,application/json" class="hidden" />
       </div>
 
       <div id="quiz-card" class="hidden">
-        <div class="quiz-top">
-          <button type="button" class="btn-ghost" id="btn-quiz-exit">← 退出练习</button>
-          <span class="quiz-progress" id="quiz-progress"></span>
-          <button type="button" class="fav-btn" id="btn-quiz-fav" title="收藏本题">♡</button>
+        <div class="quiz-toolbar card">
+          <div class="mode-chips compact" id="practice-modes" role="tablist" aria-label="练习模式">
+            <button type="button" class="chip active" data-mode="all">全部练习</button>
+            <button type="button" class="chip" data-mode="favorites">收藏</button>
+            <button type="button" class="chip" data-mode="wrong">错题</button>
+          </div>
+          <div class="pt-filters">
+            <div class="field">
+              <label for="p-chapter">章节</label>
+              <select id="p-chapter"><option value="all">全部</option></select>
+            </div>
+            <div class="field">
+              <label for="p-type">题型</label>
+              <select id="p-type">
+                <option value="all">全部</option>
+                <option value="single">单选题</option>
+                <option value="blank">填空题</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="p-scope">范围</label>
+              <select id="p-scope">
+                <option value="all">全部题目</option>
+                <option value="fresh">只练没做过的</option>
+                <option value="done">只练做过的</option>
+              </select>
+            </div>
+            <label class="toggle-inline pt-shuffle"><input type="checkbox" id="p-shuffle" checked /> 随机顺序</label>
+          </div>
+          <div class="pt-actions">
+            <button type="button" class="btn" id="btn-p-restart">重新开始</button>
+            <button type="button" class="btn" id="btn-quiz-finish">交卷</button>
+            <button type="button" class="btn btn-ghost" id="btn-quiz-exit">返回首页</button>
+            <button type="button" class="btn btn-ghost" id="btn-p-notes-export">导出笔记（<span class="chip-n" id="p-notes-n">0</span>）</button>
+            <button type="button" class="btn btn-ghost" id="btn-p-notes-import">导入</button>
+          </div>
         </div>
         <div class="card question-card" id="question-card"></div>
         <div class="inline-hint hidden" id="quiz-hint"></div>
-        <div class="quiz-actions" id="quiz-actions">
-          <button type="button" class="btn btn-primary" id="btn-submit">提交答案</button>
-          <button type="button" class="btn" id="btn-peek">不会 · 看答案</button>
-          <button type="button" class="btn hidden" id="btn-next">下一题 →</button>
+        <p class="ai-hint hidden" id="ai-hint" role="status"></p>
+        <div class="quiz-actions nav-actions" id="quiz-actions">
+          <button type="button" class="btn btn-ghost" id="btn-prev">← 上一题</button>
+          <button type="button" class="btn btn-primary" id="btn-submit">提交</button>
+          <button type="button" class="btn btn-warn" id="btn-peek" title="不作答直接显示答案与解析，并自动记入错题本">不会 · 看答案</button>
+          <button type="button" class="btn btn-ghost ai-btn" id="btn-ai-ds" title="把题目、我的答案和参考答案一起发给 DeepSeek，让它讲清我错在哪（还没作答时只给思路）">问 DeepSeek</button>
+          <button type="button" class="btn btn-ghost ai-btn" id="btn-ai-qw" title="同样的问题换发给通义千问——DeepSeek 额度用完时可以换着用">问千问</button>
+          <button type="button" class="btn" id="btn-next">下一题 →</button>
         </div>
-        <div class="quiz-actions secondary" id="quiz-actions-secondary">
-          <button type="button" class="btn-ghost" id="btn-prev">← 上一题</button>
-          <button type="button" class="btn-ghost hidden" id="btn-retry-wrong">只重做错题</button>
-        </div>
+        <p class="kbd-hint">快捷键：<kbd>1</kbd>–<kbd>4</kbd> 选项 · <kbd>Enter</kbd> 提交 · <kbd>0</kbd> 不会看答案 · <kbd>←</kbd>/<kbd>→</kbd> 上一题/下一题</p>
       </div>
 
       <div id="quiz-summary" class="hidden">
@@ -157,8 +201,8 @@
     </footer>
   </div>
 
-  <script src="data/review.js?v=20261124e"></script>
-  <script src="data/questions.js?v=20261124e"></script>
-  <script src="app.js?v=20261124e"></script>
+  <script src="data/review.js?v=20261124g"></script>
+  <script src="data/questions.js?v=20261124g"></script>
+  <script src="app.js?v=20261124g"></script>
 </body>
 </html>
