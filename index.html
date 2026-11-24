@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MySQL 课件精读 · 复习站</title>
+  <link rel="icon" href="data:," />
+  <script>
+    /* 尽早应用主题，避免深色下先闪一帧白底 */
+    (function () {
+      try {
+        var saved = localStorage.getItem('myq-theme');
+        var dark = saved ? saved === 'dark'
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=20261124d" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="app-header">
+      <div>
+        <h1>MySQL 课件精读 · 复习站</h1>
+        <div class="sub">基于《数据库技术与应用》配套 PPT 第 1–7 章 · 知识点梳理 + 自测</div>
+      </div>
+      <div class="header-tools">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="切换深色模式" title="切换深色 / 浅色">🌙</button>
+      </div>
+    </header>
+
+    <div class="scope-note">
+      <strong>当前范围</strong>：课件知识点分析 + 基于 PPT 出的选择 / 填空题。作业大题等资料齐全后再补入「大题」板块（下方已预留入口）。
+    </div>
+
+    <nav class="top-nav" id="top-nav" aria-label="主导航">
+      <button type="button" class="nav-btn active" data-view="review" id="nav-review">📖 章节精读</button>
+      <button type="button" class="nav-btn" data-view="quiz" id="nav-quiz">✍️ PPT 自测</button>
+      <button type="button" class="nav-btn" data-view="stats" id="nav-stats">📊 学习统计</button>
+      <button type="button" class="nav-btn" data-view="essay" id="nav-essay">📝 大题（待补）</button>
+    </nav>
+
+    <!-- ============ 章节精读 ============ -->
+    <section id="view-review" class="view active">
+      <div id="review-home">
+        <div class="lead">
+          <p>按章浏览 PPT 的结构化知识点：学习目标、各小节要点、关键代码与易错提示，每条都标注课件页码，方便回查原 PPT。</p>
+        </div>
+        <div class="stats" id="review-stats"></div>
+        <h3 class="section-title">选择章节</h3>
+        <div class="chapter-grid" id="chapter-grid"></div>
+      </div>
+      <div id="review-detail" class="hidden">
+        <button type="button" class="btn-back" id="btn-review-back">← 返回章节列表</button>
+        <div id="review-detail-body"></div>
+        <div class="detail-actions">
+          <button type="button" class="btn btn-primary" id="btn-study-chapter">✍️ 刷本章自测题</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PPT 自测 ============ -->
+    <section id="view-quiz" class="view">
+      <div id="quiz-home">
+        <div class="lead">
+          <p>题目全部来自 PPT 原文，选择 / 填空即时判分。错题、收藏和进度保存在本机浏览器，不上传。</p>
+        </div>
+        <div class="mode-chips" id="quiz-modes" role="tablist" aria-label="练习模式">
+          <button type="button" class="chip active" data-mode="all">全部题目</button>
+          <button type="button" class="chip" data-mode="favorites">收藏 <span class="chip-n" id="chip-fav-n">0</span></button>
+          <button type="button" class="chip" data-mode="wrong">错题 <span class="chip-n" id="chip-wrong-n">0</span></button>
+        </div>
+        <div class="filter-row">
+          <label for="quiz-chapter">章节</label>
+          <select id="quiz-chapter"><option value="all">全部章节</option></select>
+          <label for="quiz-type">题型</label>
+          <select id="quiz-type">
+            <option value="all">全部题型</option>
+            <option value="single">单选题</option>
+            <option value="blank">填空题</option>
+          </select>
+          <span class="filter-count" id="filter-count"></span>
+        </div>
+        <div class="quiz-actions">
+          <button type="button" class="btn btn-primary" id="btn-quiz-start">开始练习 →</button>
+        </div>
+      </div>
+
+      <div id="quiz-card" class="hidden">
+        <div class="quiz-top">
+          <button type="button" class="btn-ghost" id="btn-quiz-exit">← 退出练习</button>
+          <span class="quiz-progress" id="quiz-progress"></span>
+          <button type="button" class="fav-btn" id="btn-quiz-fav" title="收藏本题">♡</button>
+        </div>
+        <div class="card question-card" id="question-card"></div>
+        <div class="inline-hint hidden" id="quiz-hint"></div>
+        <div class="quiz-actions" id="quiz-actions">
+          <button type="button" class="btn btn-primary" id="btn-submit">提交答案</button>
+          <button type="button" class="btn" id="btn-peek">不会 · 看答案</button>
+          <button type="button" class="btn hidden" id="btn-next">下一题 →</button>
+        </div>
+        <div class="quiz-actions secondary" id="quiz-actions-secondary">
+          <button type="button" class="btn-ghost" id="btn-prev">← 上一题</button>
+          <button type="button" class="btn-ghost hidden" id="btn-retry-wrong">只重做错题</button>
+        </div>
+      </div>
+
+      <div id="quiz-summary" class="hidden">
+        <h2>练习完成</h2>
+        <div class="summary-box" id="summary-box"></div>
+        <div class="quiz-actions">
+          <button type="button" class="btn btn-primary" id="btn-retry">再练一次</button>
+          <button type="button" class="btn" id="btn-retry-wrong-2">只重做错题</button>
+          <button type="button" class="btn-ghost" id="btn-summary-home">返回</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 学习统计 ============ -->
+    <section id="view-stats" class="view">
+      <div class="lead"><p>按章统计已答题数、正确率与掌握度，快速定位薄弱章节。</p></div>
+      <div class="stats" id="stats-overview"></div>
+      <h3 class="section-title">各章掌握度</h3>
+      <div id="stats-chapters" class="stats-chapters"></div>
+      <div class="data-tools">
+        <button type="button" class="btn-ghost" id="btn-export">导出学习数据</button>
+        <button type="button" class="btn-ghost" id="btn-import">导入学习数据</button>
+        <input type="file" id="import-file" accept="application/json,.json" class="hidden" />
+        <button type="button" class="btn-ghost danger" id="btn-reset">清空进度</button>
+      </div>
+      <p class="tiny-note">换设备或清浏览器前先导出备份。导入会按题 id 合并，同一题以备份为准。</p>
+    </section>
+
+    <!-- ============ 大题（预留） ============ -->
+    <section id="view-essay" class="view">
+      <div class="placeholder-card">
+        <div class="placeholder-icon">📝</div>
+        <h2>大题板块 · 待资料齐全后补入</h2>
+        <p>作业大题、综合题的权威题干与答案尚未收齐。收齐后会在本板块提供：题干浏览、参考答案对照、自评记录。</p>
+        <p class="tiny-note">当前可先用「章节精读」梳理 PPT 知识点，用「PPT 自测」巩固选择 / 填空。</p>
+        <button type="button" class="btn btn-primary" id="btn-essay-go-review">去看章节精读</button>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <span>数据源：配套 PPT 第 1–7 章（知识点 + 自出题均标注课件幻灯片序号）</span>
+      <span class="footer-note">纯静态站点 · 进度只存本机浏览器</span>
+    </footer>
+  </div>
+
+  <script src="data/review.js?v=20261124d"></script>
+  <script src="data/questions.js?v=20261124d"></script>
+  <script src="app.js?v=20261124d"></script>
+</body>
+</html>

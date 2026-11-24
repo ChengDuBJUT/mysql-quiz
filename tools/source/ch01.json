@@ -1,0 +1,1058 @@
+{
+  "chapter": 1,
+  "title": "MySQL数据库概述",
+  "goals": [
+    "认识MySQL数据库：了解发展背景、使用优势、系统特性、发行版本与8.0新功能",
+    "掌握数据、信息、数据库、SQL、DBMS、DBS等基本概念",
+    "理解概念模型、数据模型、关系运算与数据完整性",
+    "了解MySQL 8.0的安装配置、工作流程、常用工具与可视化操作"
+  ],
+  "ideology": "",
+  "sections": [
+    {
+      "id": "1.1",
+      "title": "MySQL数据库的发展背景",
+      "pageRange": "4-4",
+      "summary": "介绍MySQL作为开放源码、跨平台的数据库管理系统，属于甲骨文公司，并梳理从1996年1.0版到2026年26.7.0版的发布历程。",
+      "points": [
+        {
+          "term": "MySQL",
+          "desc": "开放源码的小型、跨平台数据库管理系统，广泛应用于Internet中小型网站，目前属于甲骨文公司。",
+          "page": 4
+        },
+        {
+          "term": "MySQL 1.0",
+          "desc": "1996年发布，是能够在小范围内使用的版本。",
+          "page": 4
+        },
+        {
+          "term": "MySQL 5.0",
+          "desc": "2003年12月发布。",
+          "page": 4
+        },
+        {
+          "term": "进入Oracle时代",
+          "desc": "2009年4月甲骨文公司收购Sun公司，MySQL自此进入Oracle时代。",
+          "page": 4
+        },
+        {
+          "term": "MySQL 5.7.1",
+          "desc": "2013年4月发布。",
+          "page": 4
+        },
+        {
+          "term": "MySQL 8.0.0",
+          "desc": "2016年9月正式发布。",
+          "page": 4
+        },
+        {
+          "term": "MySQL 26.7.0",
+          "desc": "2026年7月正式推出，是第一个采用新日历版本控制模型的MySQL版本。",
+          "page": 4
+        }
+      ],
+      "code": [],
+      "tips": []
+    },
+    {
+      "id": "1.2",
+      "title": "MySQL使用优势",
+      "pageRange": "5-5",
+      "summary": "从开放源代码、跨平台性、价格优势以及功能强大使用方便四个方面说明MySQL的使用优势。",
+      "points": [
+        {
+          "term": "开放源代码",
+          "desc": "MySQL数据库是开放源代码的数据库。",
+          "page": 5
+        },
+        {
+          "term": "跨平台性",
+          "desc": "可在Windows、UNIX、Linux和Mac OS等操作系统上运行。",
+          "page": 5
+        },
+        {
+          "term": "价格优势",
+          "desc": "社区版本免费使用，需要付费的附加功能价格也很便宜。",
+          "page": 5
+        },
+        {
+          "term": "多用户多线程",
+          "desc": "MySQL是多用户、多线程SQL数据库服务器，是C/S结构的实现。",
+          "page": 5
+        },
+        {
+          "term": "组成结构",
+          "desc": "由一个服务器守护程序mysqld和很多不同的客户程序和库组成。",
+          "page": 5
+        },
+        {
+          "term": "处理能力",
+          "desc": "能够快速、有效、安全地处理大量数据，达到快速、健壮和易用的目标。",
+          "page": 5
+        }
+      ],
+      "code": [],
+      "tips": [
+        "C/S结构由服务器守护程序mysqld与多个客户程序、库组成"
+      ]
+    },
+    {
+      "id": "1.3",
+      "title": "MySQL系统特性",
+      "pageRange": "6-7",
+      "summary": "介绍MySQL的可移植性、查询优化能力、多语言支持、多种连接技术与存储引擎，以及处理海量数据的能力。",
+      "points": [
+        {
+          "term": "可移植性",
+          "desc": "用C和C++编写并用多种编译器测试，为PHP、Java、C、C++、Python和Perl等提供API。",
+          "page": 6
+        },
+        {
+          "term": "自动优化查询",
+          "desc": "能够自动优化SQL查询算法，有效提高信息查询速度。",
+          "page": 6
+        },
+        {
+          "term": "应用方式",
+          "desc": "可作为单独应用程序用于客户服务器网络环境，也可作为库嵌入其他软件。",
+          "page": 6
+        },
+        {
+          "term": "多语言支持",
+          "desc": "GB2312、BIG5、UTF-8等可用作数据表名和列名；8.0以utf8mb4为默认字符集。",
+          "page": 7
+        },
+        {
+          "term": "连接技术",
+          "desc": "提供TCP/IP、ODBC和JDBC等多种数据库连接技术。",
+          "page": 7
+        },
+        {
+          "term": "存储引擎",
+          "desc": "支持多种存储引擎，提供管理、检查、优化数据库操作的管理工具。",
+          "page": 7
+        },
+        {
+          "term": "海量数据",
+          "desc": "具有大型数据库所有常用功能，可处理拥有亿万条记录级的海量数据。",
+          "page": 7
+        }
+      ],
+      "code": [],
+      "tips": [
+        "MySQL8.0默认字符集为utf8mb4，并提供utf8mb4_ja_0900_as_cs等新排序规则"
+      ]
+    },
+    {
+      "id": "1.4",
+      "title": "MySQL发行版本",
+      "pageRange": "8-9",
+      "summary": "讲解按操作系统和发布顺序划分版本的方法，说明三段式命名机制，并对比社区版与企业版的区别。",
+      "points": [
+        {
+          "term": "版本划分",
+          "desc": "按操作系统类型划分下载版本；按发布顺序划分，MySQL 8.0是普遍可用GA的稳定发布系列。",
+          "page": 8
+        },
+        {
+          "term": "命名机制",
+          "desc": "由3个数字和1个后缀组成，如MySQL-8.0.39。",
+          "page": 8
+        },
+        {
+          "term": "主版本号",
+          "desc": "第1个数字8，描述文件格式，所有版本的发行版都有相同文件格式。",
+          "page": 8
+        },
+        {
+          "term": "发行级别",
+          "desc": "第2个数字0，与主版本号组合构成发行序列号。",
+          "page": 8
+        },
+        {
+          "term": "发行系列版本号",
+          "desc": "第3个数字39，在此发行系列中的版本号，随每次新分发版本递增。",
+          "page": 8
+        },
+        {
+          "term": "社区版",
+          "desc": "Community Edition，可自由下载、免费开源。",
+          "page": 9
+        },
+        {
+          "term": "企业版",
+          "desc": "Enterprise提供最全面高级功能、管理工具和技术支持，需付费，官方提供电话技术支持。",
+          "page": 9
+        },
+        {
+          "term": "企业版特性",
+          "desc": "支持事务处理，提供完整的提交、回滚、崩溃恢复和行级锁定功能。",
+          "page": 9
+        }
+      ],
+      "code": [
+        "MySQL-8.0.39"
+      ],
+      "tips": [
+        "社区版免费开源；企业版付费并提供电话技术支持"
+      ]
+    },
+    {
+      "id": "1.5",
+      "title": "MySQL 8.0的新功能",
+      "pageRange": "10-13",
+      "summary": "概述MySQL 8.0在数据字典、原子DDL、InnoDB增强、安全账户管理、索引优化、JSON、资源管理及查询优化等方面的新功能。",
+      "points": [
+        {
+          "term": "数据字典",
+          "desc": "新增事务类型数据字典，所有数据字典信息和系统表存储在mysql.ibd，元数据用InnoDB存储。",
+          "page": 10
+        },
+        {
+          "term": "原子数据定义语句",
+          "desc": "支持原子DDL，将字典更新、存储引擎操作和二进制日志写入组合到单个原子事务中。",
+          "page": 10
+        },
+        {
+          "term": "InnoDB增强",
+          "desc": "自增主键计数器持久化到重做日志；索引损坏标志写入重做日志使其安全。",
+          "page": 10
+        },
+        {
+          "term": "死锁检测",
+          "desc": "动态变量innodb_deadlock_detect可用于禁用死锁检测，禁用后可能更有效率。",
+          "page": 11
+        },
+        {
+          "term": "安全和账户管理",
+          "desc": "授权表统一为InnoDB事务表；支持角色Role；维护密码历史；允许账户具有双密码。",
+          "page": 11
+        },
+        {
+          "term": "优化器索引",
+          "desc": "主要包括隐藏索引Invisible index、降序索引和函数索引三种方式。",
+          "page": 12
+        },
+        {
+          "term": "JSON增强",
+          "desc": "扩展对JSON的支持，性能更好，能结合结构化数据与JSON半结构化数据。",
+          "page": 12
+        },
+        {
+          "term": "查询的优化",
+          "desc": "增加公用表表达式、窗口函数、统计直方图、备份锁和配置持久化等功能。",
+          "page": 13
+        }
+      ],
+      "code": [],
+      "tips": [
+        "Grant授权语句不再支持隐式创建用户"
+      ]
+    },
+    {
+      "id": "2.1",
+      "title": "信息与数据库",
+      "pageRange": "15-17",
+      "summary": "解释数据与信息的概念及区别，给出数据库的定义与特点，并说明数据库中数据还包含语义描述。",
+      "points": [
+        {
+          "term": "数据(Data)",
+          "desc": "描述事物的符号记录，形式有文本、图表、图形、图像、音频、视频等。",
+          "page": 15
+        },
+        {
+          "term": "信息(Information)",
+          "desc": "具有特定意义的数据，是用一定规则或算法筛选的数据集合。",
+          "page": 15
+        },
+        {
+          "term": "信息属性",
+          "desc": "具有感知、存储、加工、传播和再生等自然属性，也是有重要价值的社会资源。",
+          "page": 15
+        },
+        {
+          "term": "数据库(DB)",
+          "desc": "长期存储在计算机内、有组织、可共享的大量数据的集合，冗余度小、独立性高、易扩展。",
+          "page": 16
+        },
+        {
+          "term": "数据模型",
+          "desc": "数据库中的数据需创建数据模型描述，如网络、层次、关系模型。",
+          "page": 16
+        },
+        {
+          "term": "教务管理数据库",
+          "desc": "teaching数据库包含学生信息表student和学生成绩表score等。",
+          "page": 16
+        },
+        {
+          "term": "语义描述",
+          "desc": "数据中还包含数据库对数据的语义描述，不经过语义描述其意义不完整。",
+          "page": 17
+        }
+      ],
+      "code": [],
+      "tips": [
+        "信息是具有特定意义的数据；数据是信息的载体"
+      ]
+    },
+    {
+      "id": "2.2",
+      "title": "结构化查询语言SQL",
+      "pageRange": "18-21",
+      "summary": "介绍SQL语言的定义与特点，并按功能说明DDL、DML/DQL、DCL、TPL和CCL各类语言的组成动词与作用。",
+      "points": [
+        {
+          "term": "SQL",
+          "desc": "Structured Query Language，用于管理数据的数据库查询和程序设计语言，用于存取、查询和更新数据。",
+          "page": 18
+        },
+        {
+          "term": "一体化",
+          "desc": "SQL集数据定义DDL、数据操纵DML和数据控制DCL于一体，可完成数据库中全部工作。",
+          "page": 19
+        },
+        {
+          "term": "非过程化",
+          "desc": "只需提供操作要求，不必描述操作步骤，也不需要导航。",
+          "page": 19
+        },
+        {
+          "term": "语言简洁",
+          "desc": "ANSI标准只含94个英文单词，核心功能只用6个动词，语法接近英语口语。",
+          "page": 19
+        },
+        {
+          "term": "DDL",
+          "desc": "数据定义语言，动词有create、alter和drop，用于创建、修改或删除数据库对象。",
+          "page": 20
+        },
+        {
+          "term": "DML",
+          "desc": "数据操作语言，动词有select、insert、update和delete，分别查询、插入、修改和删除数据行。",
+          "page": 20
+        },
+        {
+          "term": "DQL",
+          "desc": "select用得最多也称数据查询语言，常用保留字有where、order by、group by和having。",
+          "page": 20
+        },
+        {
+          "term": "DCL",
+          "desc": "数据控制语言，包括grant和revoke，确定用户和用户组对数据库对象的访问权限。",
+          "page": 21
+        }
+      ],
+      "code": [],
+      "tips": [
+        "select属于DML，也称DQL；where、order by、group by、having是DQL常用保留字"
+      ]
+    },
+    {
+      "id": "2.3",
+      "title": "数据库管理系统",
+      "pageRange": "22-23",
+      "summary": "说明DBMS位于用户和操作系统之间，是数据库系统的核心，并介绍其存储、查询、事务、恢复四大组成模块。",
+      "points": [
+        {
+          "term": "DBMS",
+          "desc": "数据库管理系统，位于用户和操作系统之间，用于建立、使用和维护数据库，是数据库系统的核心。",
+          "page": 22
+        },
+        {
+          "term": "DBMS作用",
+          "desc": "对数据库统一管理和控制以保证数据安全性和完整性，用户对数据的操作均要通过DBMS。",
+          "page": 22
+        },
+        {
+          "term": "DBA",
+          "desc": "数据库管理员通过DBMS进行数据库的维护工作。",
+          "page": 22
+        },
+        {
+          "term": "存储管理",
+          "desc": "Storage Manager，自行配置磁盘空间，将数据存入存储装置的数据库。",
+          "page": 23
+        },
+        {
+          "term": "查询处理",
+          "desc": "Query Processor，处理用户下达的查询命令，检查语法、优化查询命令。",
+          "page": 23
+        },
+        {
+          "term": "事务管理",
+          "desc": "Transaction Manager，处理数据库事务，保障事务操作及并发控制、资源锁定。",
+          "page": 23
+        },
+        {
+          "term": "恢复管理",
+          "desc": "Recovery Manager，主要是日志管理，记录所有操作并可恢复数据到指定时间点。",
+          "page": 23
+        }
+      ],
+      "code": [],
+      "tips": [
+        "DBMS系统架构包括存储管理、查询处理、事务管理、恢复管理4部分"
+      ]
+    },
+    {
+      "id": "2.4",
+      "title": "数据库系统",
+      "pageRange": "24-28",
+      "summary": "讲解数据库系统的组成与四大组件，说明用户、数据、软件、硬件的含义，并介绍集中式、C/S、B/S、分布式等体系结构。",
+      "points": [
+        {
+          "term": "DBS",
+          "desc": "数据库系统通常由硬件、软件、数据库和用户组成，管理对象是数据。",
+          "page": 24
+        },
+        {
+          "term": "四大组件",
+          "desc": "数据库系统包括用户、数据、软件和硬件四大组件。",
+          "page": 24
+        },
+        {
+          "term": "用户",
+          "desc": "执行DDL定义架构，用DML增删查改数据；分终端用户、设计者、系统分析师、应用程序设计师和DBA等。",
+          "page": 25
+        },
+        {
+          "term": "软件",
+          "desc": "数据库环境中使用的软件，包括DBMS、应用程序和开发工具等。",
+          "page": 26
+        },
+        {
+          "term": "硬件",
+          "desc": "安装数据库相关软件的硬件设备，含主机、磁盘阵列、光驱和备份装置等。",
+          "page": 26
+        },
+        {
+          "term": "体系结构",
+          "desc": "主要包括集中式、客户-服务器式C/S、浏览器-服务器式B/S和分布式等。",
+          "page": 27
+        },
+        {
+          "term": "B/S结构",
+          "desc": "将客户机上的应用层分离出来集中到高性能计算机上，成为应用服务器也称Web服务器。",
+          "page": 28
+        },
+        {
+          "term": "分布式结构",
+          "desc": "多数处理任务由本地计算机访问本地数据库完成，满足地理上分散组织的需求。",
+          "page": 28
+        }
+      ],
+      "code": [],
+      "tips": [
+        "DBA负责创建、监控和维护整个数据库，一般由业务水平较高、资历较深的人员担任"
+      ]
+    },
+    {
+      "id": "3.1",
+      "title": "概念模型及其表示方法",
+      "pageRange": "30-36",
+      "summary": "介绍概念模型及实体、属性、候选键、主键、实体型、实体集、联系等概念，说明实体间三种联系并用E-R图表示。",
+      "points": [
+        {
+          "term": "概念模型",
+          "desc": "现实世界信息的抽象反映，不依赖具体计算机系统，是现实世界到计算机世界的中间层次。",
+          "page": 30
+        },
+        {
+          "term": "实体(Entity)",
+          "desc": "客观存在并可以相互区分的事物。",
+          "page": 30
+        },
+        {
+          "term": "属性(Attribute)",
+          "desc": "实体所具有的某些特性，通过属性可以对实体的特征进行描述。",
+          "page": 30
+        },
+        {
+          "term": "候选键和主键",
+          "desc": "能唯一标识实体的属性或最小属性组合称候选键，可从中选一个作主键唯一标识数据行。",
+          "page": 31
+        },
+        {
+          "term": "联系(Relationship)",
+          "desc": "现实世界事物之间是有联系的，这些联系必然要在信息世界中加以反映。",
+          "page": 32
+        },
+        {
+          "term": "三种联系类型",
+          "desc": "两个实体型的联系有一对一1:1、一对多1:M和多对多M:N三种类型。",
+          "page": 34
+        },
+        {
+          "term": "E-R模型",
+          "desc": "实体-联系模型，信息由实体型、实体属性和实体间的联系三种概念单元表示。",
+          "page": 35
+        },
+        {
+          "term": "E-R图表示",
+          "desc": "实体型用长方框、属性用椭圆框、联系用菱形框，并用无向边连接。",
+          "page": 36
+        }
+      ],
+      "code": [],
+      "tips": [
+        "E-R图：实体型长方框、属性椭圆框、联系菱形框，边上标联系类型"
+      ]
+    },
+    {
+      "id": "3.2",
+      "title": "数据模型",
+      "pageRange": "37-39",
+      "summary": "说明数据模型建立在概念模型基础之上，介绍数据结构、数据操作、完整性约束三要素及四种常用数据模型。",
+      "points": [
+        {
+          "term": "数据模型",
+          "desc": "在概念模型基础上建立的适用于数据库层的模型，能精确描述静态特征、动态特征和完整性约束。",
+          "page": 37
+        },
+        {
+          "term": "数据结构",
+          "desc": "对象和对象间联系的表达与实现，是对象类型的集合，描述数据库系统的静态特性。",
+          "page": 37
+        },
+        {
+          "term": "数据操作",
+          "desc": "描述数据库系统的动态特征，主要指检索和更新（插入、删除、修改）两类操作。",
+          "page": 37
+        },
+        {
+          "term": "完整性约束条件",
+          "desc": "一组完整性规则集合，规定数据库状态及变化应满足的条件，保证数据正确、有效、相容。",
+          "page": 38
+        },
+        {
+          "term": "关系模型完整性",
+          "desc": "在关系模型中，一般关系必须满足实体完整性和参照完整性两个条件。",
+          "page": 38
+        },
+        {
+          "term": "常用数据模型",
+          "desc": "层次模型、网状模型、关系模型和面向对象模型。",
+          "page": 39
+        }
+      ],
+      "code": [],
+      "tips": [
+        "数据模型三要素：数据结构、数据操作、完整性约束条件"
+      ]
+    },
+    {
+      "id": "3.3",
+      "title": "关系运算",
+      "pageRange": "40-52",
+      "summary": "介绍选择、投影、连接三种关系运算，讲解数据依赖与1NF/2NF/3NF范式理论，并说明实体、域、参照、事务和用户定义完整性。",
+      "points": [
+        {
+          "term": "选择",
+          "desc": "从一个表中找出满足指定条件的记录行形成新表，从行的角度运算，新表关系模式不变。",
+          "page": 40
+        },
+        {
+          "term": "投影",
+          "desc": "从一个表中找出若干字段形成新表，从列的角度运算，字段个数一般比原表少或顺序不同。",
+          "page": 41
+        },
+        {
+          "term": "连接",
+          "desc": "将两个表中的行按一定条件横向结合形成新表，用于从两个表中选择满足条件的记录。",
+          "page": 42
+        },
+        {
+          "term": "数据依赖",
+          "desc": "一个关系内部属性与属性之间的约束关系，通过属性间值的相等与否体现，是数据内在性质。",
+          "page": 43
+        },
+        {
+          "term": "第一范式1NF",
+          "desc": "目标是确保每列的原子性，每列都是不可再分的最小数据单元。",
+          "page": 44
+        },
+        {
+          "term": "第二范式2NF",
+          "desc": "在1NF基础上确保表中每列都和主码相关，每个非主属性完全函数依赖于主码。",
+          "page": 44
+        },
+        {
+          "term": "第三范式3NF",
+          "desc": "在2NF基础上确保每列都和码直接相关而非间接相关，非码列之间不相互依赖。",
+          "page": 45
+        },
+        {
+          "term": "实体完整性",
+          "desc": "关系的主关键字不能取空值，主属性不得取空值，复合主键的所有主属性均不得取空。",
+          "page": 50
+        }
+      ],
+      "code": [],
+      "tips": [
+        "1NF原子性→2NF完全依赖主码→3NF直接依赖码；重复组非规范化"
+      ]
+    },
+    {
+      "id": "4.1",
+      "title": "MySQL 8.0安装和配置步骤",
+      "pageRange": "54-84",
+      "summary": "讲解官网下载、zip解压式与msi式安装，说明解压目录、my.ini配置、环境变量、服务安装启动、登录改密以及安装类型与配置用途。",
+      "points": [
+        {
+          "term": "下载来源",
+          "desc": "到MySQL官方网站(http://dev.mysql.com/downloads)找到要安装的版本下载。",
+          "page": 54
+        },
+        {
+          "term": "安装方式",
+          "desc": "zip解压式和msi式；MSI默认安装到C:\\Program Files\\MySQL且无法选择路径，C盘不足可选ZIP版。",
+          "page": 55
+        },
+        {
+          "term": "my.ini配置",
+          "desc": "设置port=3306、basedir、datadir、max_connections=200、字符集utf8mb4和默认引擎INNODB等。",
+          "page": 59
+        },
+        {
+          "term": "初始化",
+          "desc": "mysqld --initialize-insecure 对数据库初始化，执行后解压目录多出data目录存放日志和数据库。",
+          "page": 68
+        },
+        {
+          "term": "服务管理",
+          "desc": "mysqld install添加服务，sc delete删除服务，net start启动服务。",
+          "page": 69
+        },
+        {
+          "term": "登录与改密",
+          "desc": "mysql -u root -p -P3306登录；用ALTER USER修改密码；flush privileges刷新权限。",
+          "page": 72
+        },
+        {
+          "term": "安装类型",
+          "desc": "msi安装提供Developer Default、Server only、Client only、Full、Custom五种类型。",
+          "page": 79
+        },
+        {
+          "term": "Config Type",
+          "desc": "提供development、server、dedicated三种用途选项，本机一般选development占用资源少。",
+          "page": 83
+        }
+      ],
+      "code": [
+        "port=3306",
+        "basedir=D:/mysql8.0.27/mysql-8.0.27-winx64",
+        "datadir=D:/mysql8.0.27/mysql-8.0.27-winx64/data",
+        "max_connections=200",
+        "max_connect_errors=10",
+        "character-set-server=utf8mb4",
+        "default-storage-engine=INNODB",
+        "default_authentication_plugin=mysql_native_password",
+        "mysqld --initialize-insecure",
+        "mysqld install mysql8.0.27",
+        "sc delete mysql8.0.27",
+        "net start mysql8.0.27",
+        "mysql -u root -p -P3306",
+        "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';",
+        "flush privileges",
+        "exit 或者 quit",
+        "mysql -h localhost -u root -p"
+      ],
+      "tips": [
+        "删除服务用sc delete；修改密码后需flush privileges刷新权限"
+      ]
+    },
+    {
+      "id": "4.2",
+      "title": "MySQL的工作流程",
+      "pageRange": "85-88",
+      "summary": "按七个步骤说明MySQL服务启动、读取配置、生成实例进程、派生线程、建立通信链路、发送请求到返回响应的完整工作流程。",
+      "points": [
+        {
+          "term": "启动服务",
+          "desc": "操作系统用户启动MySQL服务。",
+          "page": 86
+        },
+        {
+          "term": "读取配置",
+          "desc": "服务启动期间首先将配置文件中的参数信息读入服务器内存。",
+          "page": 86
+        },
+        {
+          "term": "生成实例进程",
+          "desc": "根据配置参数或编译默认值生成一个服务实例进程Instance。",
+          "page": 86
+        },
+        {
+          "term": "派生线程",
+          "desc": "服务实例进程派生出多个线程为多个客户机提供服务。",
+          "page": 86
+        },
+        {
+          "term": "建立通信链路",
+          "desc": "数据库用户选择登录主机、开启客户机、输入账户名密码，建立客户机与服务器的通信链路。",
+          "page": 87
+        },
+        {
+          "term": "发送请求",
+          "desc": "用户在客户机输入MySQL命令或SQL语句，沿通信链路传送给服务实例。",
+          "page": 87
+        },
+        {
+          "term": "返回响应",
+          "desc": "服务实例解析命令并选择执行计划运行，将结果沿通信链路返回给客户机。",
+          "page": 88
+        },
+        {
+          "term": "会话结束",
+          "desc": "数据库用户关闭客户机，通信链路断开，该客户机对应的MySQL会话结束。",
+          "page": 88
+        }
+      ],
+      "code": [],
+      "tips": [
+        "请求：客户机→服务器；响应：服务器→客户机"
+      ]
+    },
+    {
+      "id": "4.3",
+      "title": "MySQL数据库工具简介",
+      "pageRange": "89-92",
+      "summary": "介绍MySQL服务器端和客户端的常用命令行工具，包括mysqld、mysql.server、mysql、mysqladmin、mysqldump等的作用。",
+      "points": [
+        {
+          "term": "mysqld",
+          "desc": "SQL后台程序即MySQL服务器进程，必须运行之后客户端才能连接服务器访问数据库。",
+          "page": 89
+        },
+        {
+          "term": "mysql.server",
+          "desc": "服务器启动脚本，UNIX分发版包括，可调用mysqld_safe来启动MySQL服务器。",
+          "page": 90
+        },
+        {
+          "term": "mysql_multi",
+          "desc": "服务器启动脚本，可以启动或停止系统上安装的多个服务器。",
+          "page": 90
+        },
+        {
+          "term": "mysql_install_db",
+          "desc": "用默认权限创建MySQL授权表，通常只在系统首次安装MySQL时执行一次。",
+          "page": 90
+        },
+        {
+          "term": "mysql",
+          "desc": "客户端工具，交互式输入SQL语句或从文件以批处理模式执行。",
+          "page": 91
+        },
+        {
+          "term": "mysqladmin",
+          "desc": "执行管理操作的客户程序，如创建删除数据库、重载授权表、刷新表到硬盘等。",
+          "page": 91
+        },
+        {
+          "term": "mysqlbinlog",
+          "desc": "从二进制日志读取语句的工具，可帮助系统从崩溃中恢复。",
+          "page": 92
+        },
+        {
+          "term": "mysqldump",
+          "desc": "将MySQL数据库转储到一个文件（如SQL语句或文本文件）的客户程序。",
+          "page": 92
+        }
+      ],
+      "code": [],
+      "tips": [
+        "mysqld是服务器进程；mysql是交互式客户端工具"
+      ]
+    },
+    {
+      "id": "4.4",
+      "title": "MySQL8.0的启动和登录",
+      "pageRange": "93-101",
+      "summary": "说明Windows下启动服务的两种方式与三种启动类型，介绍DOS窗口和客户端两种登录方式及登录成功后的提示信息含义。",
+      "points": [
+        {
+          "term": "启动方式",
+          "desc": "Windows下通过cmd控制台(net start/stop mysql80)或手动执行services.msc两种方式启动服务。",
+          "page": 93
+        },
+        {
+          "term": "启动类型",
+          "desc": "服务启动类型有自动、手动和已禁用三种。",
+          "page": 94
+        },
+        {
+          "term": "登录方式",
+          "desc": "Windows下有两种：DOS窗口命令行方式登录，或在MySQL客户端直接登录。",
+          "page": 95
+        },
+        {
+          "term": "登录命令",
+          "desc": "mysql -u root -p，-u后紧跟用户名，-p表示用户密码，按Enter输入密码。",
+          "page": 96
+        },
+        {
+          "term": "命令结束符",
+          "desc": "MySQL控制台命令以分号(;)或\\g结束，遇到结束符就开始执行命令。",
+          "page": 98
+        },
+        {
+          "term": "连接id",
+          "desc": "Your MySQL connection id表示数据库连接次数，新安装首次登录显示1。",
+          "page": 98
+        },
+        {
+          "term": "帮助命令",
+          "desc": "输入help;或\\h可以查看帮助信息，\\c可清除当前输入语句。",
+          "page": 100
+        },
+        {
+          "term": "查看时间",
+          "desc": "select now();可查看系统当前时间。",
+          "page": 101
+        }
+      ],
+      "code": [
+        "net start mysql80",
+        "net stop mysql80",
+        "services.msc",
+        "mysql -u root -p",
+        "help;",
+        "select now();"
+      ],
+      "tips": [
+        "连接的id表示连接次数，新安装首次登录显示1"
+      ]
+    },
+    {
+      "id": "4.5",
+      "title": "MySQL常用可视化软件的基本操作",
+      "pageRange": "102-110",
+      "summary": "介绍MySQL Workbench、phpMyAdmin和Navicat等图形管理工具，说明Workbench的安装步骤与创建连接、测试连接的操作。",
+      "points": [
+        {
+          "term": "图形管理工具",
+          "desc": "常用的有MySQL Workbench、phpMyAdmin和Navicat等软件。",
+          "page": 102
+        },
+        {
+          "term": "MySQL Workbench",
+          "desc": "为数据库管理员、程序开发者和系统规划师提供可视化设计、模型建立及数据库管理功能。",
+          "page": 102
+        },
+        {
+          "term": "Workbench功能",
+          "desc": "包含创建复杂E-R数据模型、正向和逆向数据库工程，以及文档任务管理。",
+          "page": 102
+        },
+        {
+          "term": "独立安装",
+          "desc": "mysql-workbench-community-8.0.22-winx64版本可独立于软件集合安装。",
+          "page": 103
+        },
+        {
+          "term": "连接数据库",
+          "desc": "通过Database|Manage Connections命令输入连接名称，Test Connection测试并输入root密码。",
+          "page": 110
+        },
+        {
+          "term": "可视化操作",
+          "desc": "连接后可通过图形界面执行SQL实现数据库、表和数据添加、删除、修改等操作。",
+          "page": 110
+        }
+      ],
+      "code": [],
+      "tips": [
+        "创建连接后需Test Connection并输入root密码，测试成功再单击OK"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "ch1-ppt-s01",
+      "type": "single",
+      "stem": "目前MySQL数据库属于下列哪家公司？",
+      "options": [
+        "A. 微软(Microsoft)",
+        "B. 甲骨文(Oracle)",
+        "C. IBM",
+        "D. Sun公司"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第4页指出MySQL目前属于甲骨文公司，2009年4月甲骨文收购Sun公司后MySQL进入Oracle时代。",
+      "page": 4
+    },
+    {
+      "id": "ch1-ppt-s02",
+      "type": "single",
+      "stem": "MySQL 8.0.0正式发布的时间是？",
+      "options": [
+        "A. 1996年",
+        "B. 2003年12月",
+        "C. 2016年9月",
+        "D. 2026年7月"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第4页明确2016年9月MySQL 8.0.0正式发布；2026年7月推出的是26.7.0。",
+      "page": 4
+    },
+    {
+      "id": "ch1-ppt-s03",
+      "type": "single",
+      "stem": "MySQL 8.0默认的字符集是？",
+      "options": [
+        "A. latin1",
+        "B. gb2312",
+        "C. utf8mb4",
+        "D. BIG5"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第7页指出MySQL8.0以utf8mb4为默认字符集，并提供新的排序规则。",
+      "page": 7
+    },
+    {
+      "id": "ch1-ppt-s04",
+      "type": "single",
+      "stem": "下列不属于数据定义语言DDL的动词是？",
+      "options": [
+        "A. create",
+        "B. alter",
+        "C. drop",
+        "D. grant"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第20页指出DDL的语句包括create、alter和drop；第21页指出grant属于数据控制语言DCL。",
+      "page": 20
+    },
+    {
+      "id": "ch1-ppt-s05",
+      "type": "single",
+      "stem": "DBMS的中文含义是？",
+      "options": [
+        "A. 数据库系统",
+        "B. 数据库管理系统",
+        "C. 数据库",
+        "D. 数据字典"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第22页指出数据库管理系统(DBMS)位于用户和操作系统之间，是数据库系统的核心。",
+      "page": 22
+    },
+    {
+      "id": "ch1-ppt-s06",
+      "type": "single",
+      "stem": "关系数据库主要支持的关系运算不包括下列哪一种？",
+      "options": [
+        "A. 选择",
+        "B. 投影",
+        "C. 连接",
+        "D. 删除"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第40页指出关系数据库主要支持选择、投影和连接三种关系运算，删除不属于关系运算。",
+      "page": 40
+    },
+    {
+      "id": "ch1-ppt-s07",
+      "type": "single",
+      "stem": "在E-R图中，实体型用哪种图形表示？",
+      "options": [
+        "A. 椭圆框",
+        "B. 菱形框",
+        "C. 长方框",
+        "D. 圆形框"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第36页指出实体型用长方框表示，属性用椭圆框表示，联系用菱形框表示。",
+      "page": 36
+    },
+    {
+      "id": "ch1-ppt-s08",
+      "type": "single",
+      "stem": "第一范式（1NF）的目标是？",
+      "options": [
+        "A. 确保每列的原子性",
+        "B. 确保每列都和主码相关",
+        "C. 确保每列和码直接相关",
+        "D. 消除传递依赖"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第44页指出第一范式的目标是确保每列的原子性，每列都是不可再分的最小数据单元。",
+      "page": 44
+    },
+    {
+      "id": "ch1-ppt-b01",
+      "type": "blank",
+      "stem": "MySQL是一个开放源码的____、跨平台数据库管理系统。",
+      "answer": [
+        "小型",
+        "small"
+      ],
+      "answerText": "小型",
+      "analysis": "解析：PPT第4页首句指出MySQL是一个开放源码的小型、跨平台数据库管理系统。",
+      "page": 4
+    },
+    {
+      "id": "ch1-ppt-b02",
+      "type": "blank",
+      "stem": "数据库(Database，DB)是长期存储在计算机内、有组织、可____的大量数据的集合。",
+      "answer": [
+        "共享",
+        "可共享"
+      ],
+      "answerText": "共享",
+      "analysis": "解析：PPT第16页给出数据库定义：长期存储在计算机内、有组织、可共享的大量数据的集合。",
+      "page": 16
+    },
+    {
+      "id": "ch1-ppt-b03",
+      "type": "blank",
+      "stem": "数据定义语言DDL的语句包括动词create、alter和____。",
+      "answer": [
+        "drop",
+        "DROP"
+      ],
+      "answerText": "drop",
+      "analysis": "解析：PPT第20页指出数据定义语言DDL的语句包括动词create、alter和drop。",
+      "page": 20
+    },
+    {
+      "id": "ch1-ppt-b04",
+      "type": "blank",
+      "stem": "数据库系统的四大组件是用户、数据、____和硬件。",
+      "answer": [
+        "软件"
+      ],
+      "answerText": "软件",
+      "analysis": "解析：PPT第24页指出数据库系统包括四大组件：用户、数据、软件和硬件。",
+      "page": 24
+    },
+    {
+      "id": "ch1-ppt-b05",
+      "type": "blank",
+      "stem": "在E-R概念模型中，实体间的联系用____框表示。",
+      "answer": [
+        "菱形",
+        "菱形框"
+      ],
+      "answerText": "菱形",
+      "analysis": "解析：PPT第36页指出实体间的联系用菱形框表示，框内写联系名。",
+      "page": 36
+    },
+    {
+      "id": "ch1-ppt-b06",
+      "type": "blank",
+      "stem": "确保每列都是不可再分的最小数据单元，即满足第____范式。",
+      "answer": [
+        "一",
+        "1",
+        "1NF"
+      ],
+      "answerText": "一",
+      "analysis": "解析：PPT第44页指出第一范式（1NF）的目标是确保每列的原子性，每列都是不可再分的最小数据单元。",
+      "page": 44
+    }
+  ]
+}

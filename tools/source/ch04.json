@@ -1,0 +1,1000 @@
+{
+  "chapter": 4,
+  "title": "数据检索",
+  "goals": [
+    "掌握select基本查询语句与单表查询（where、order by、limit）",
+    "掌握函数查询：聚合函数、group by分组与窗口函数",
+    "掌握多表连接（内连接、外连接、交叉连接、union）与子查询",
+    "掌握正则表达式模糊查询与通用表表达式CTE"
+  ],
+  "ideology": "",
+  "sections": [
+    {
+      "id": "1",
+      "title": "基本查询语句",
+      "pageRange": "4-7",
+      "summary": "介绍select语句的基本语法格式，以及查询所有列、指定列和多表数据的方法。",
+      "points": [
+        {
+          "term": "select语句",
+          "desc": "SQL从数据库获取信息的基本语句，语法含select、from、where、group by、having、order by、limit等子句。",
+          "page": 4
+        },
+        {
+          "term": "查询所有列",
+          "desc": "使用select语句首先要确定查询的列，“*”代表所有的列。",
+          "page": 5
+        },
+        {
+          "term": "指定列",
+          "desc": "在select后指定要查询的列名，多列之间用逗号分隔。",
+          "page": 6
+        },
+        {
+          "term": "多表查询",
+          "desc": "可用逗号对多个表分隔，主要采用多表连接或子查询方式，也可通过where连接运算确定表间联系。",
+          "page": 7
+        }
+      ],
+      "code": [
+        "select [all|distinct]selection_list from table_source [where search_condition] [group by grouping_columns][with rollup] [having search_condition] [order by order_expression [asc|desc]] [limit count]",
+        "select * from course;",
+        "select studentno,sname,phone from student;"
+      ],
+      "tips": [
+        "select语句是SQL从数据库中获取信息的基本语句"
+      ]
+    },
+    {
+      "id": "2.1",
+      "title": "select……from基本子句的使用",
+      "pageRange": "9-12",
+      "summary": "介绍Select与from子句的作用、为字段取别名的方法以及用distinct过滤重复行。",
+      "points": [
+        {
+          "term": "Select与from",
+          "desc": "Select子句输出字段或表达式的值，from子句指定数据源，两者在表查询时都是必选项。",
+          "page": 9
+        },
+        {
+          "term": "字段别名",
+          "desc": "可为输出字段或表达式取别名增加可读性，语法为“select项的原名 as 别名”。",
+          "page": 9
+        },
+        {
+          "term": "distinct",
+          "desc": "利用distinct子句从结果集中除去重复的行，所有值的组合决定行的唯一性。",
+          "page": 11
+        },
+        {
+          "term": "应用示例",
+          "desc": "可查询出生日期2002年以后的学生的学号、姓名、电话和年龄。",
+          "page": 10
+        }
+      ],
+      "code": [
+        "select 项的原名 as 别名",
+        "select studentno as '学号',sname as '姓名',phone as '手机号',year(now())-year(birthdate) as '年龄' from student where year(birthdate)>2002;",
+        "select distinct studentno,courseno from score where final>95 order by studentno;"
+      ],
+      "tips": [
+        "Select和from子句在数据库表查询时都是必选项"
+      ]
+    },
+    {
+      "id": "2.2",
+      "title": "使用where子句过滤结果集",
+      "pageRange": "13-21",
+      "summary": "介绍where子句设定查询条件的方法，涵盖in、between and、like、is null、and和or等常用查询条件。",
+      "points": [
+        {
+          "term": "where子句",
+          "desc": "设定查询条件应用where子句，需要使用比较运算符来确定查询条件。",
+          "page": 13
+        },
+        {
+          "term": "in查询",
+          "desc": "判断字段值是否在指定集合中，相当于用or连接比较条件，可用not in查询不在集合中的记录。",
+          "page": 14
+        },
+        {
+          "term": "between and",
+          "desc": "检索指定范围内的行，边界值符合条件，相当于and连接两个比较条件，not between排除范围。",
+          "page": 15
+        },
+        {
+          "term": "like查询",
+          "desc": "主要用于字符类型数据，%匹配一个或多个字符，_只匹配一个字符，含通配符时用ESCAPE转义。",
+          "page": 16
+        },
+        {
+          "term": "is null",
+          "desc": "column is [not] null查询空值；写成字段=null或<>null按false处理。",
+          "page": 18
+        },
+        {
+          "term": "and多条件",
+          "desc": "符合条件的行出现在结果集中；字符型和日期类型值放单引号内，数值类型直接出现。",
+          "page": 20
+        },
+        {
+          "term": "or多条件",
+          "desc": "只要符合多条件中的一个记录就会被搜索出来，可用多个or连接多个条件表达式。",
+          "page": 21
+        }
+      ],
+      "code": [
+        "select studentno,sname,phone from student where entrance>800;",
+        "select studentno,courseno,daily,final from score where studentno in('20123567897','21135222201','20120203567');",
+        "select studentno,final from score where courseno='c05109' and daily between 80 and 95;",
+        "select sname,birthdate,Email from student where sname like '何%' or sname like '韩%';",
+        "select * from student where sname like '%/_%' escape '/';",
+        "select studentno,courseno,teacherno,score from se_course where score is null;",
+        "select teacherno,tname,major from teacher where department='计算机学院' and (prof='副教授' or prof='教授');"
+      ],
+      "tips": [
+        "like中%可匹配任意长度字符串（长度可为0），_只匹配一个字符"
+      ]
+    },
+    {
+      "id": "2.3",
+      "title": "使用order by子句对结果集排序",
+      "pageRange": "22-24",
+      "summary": "介绍order by子句升序与降序排列规则、null值排序位置及多列排序的应用。",
+      "points": [
+        {
+          "term": "order by",
+          "desc": "对查询结果进行升序asc或降序desc排列，默认情况下结果集按升序排列。",
+          "page": 22
+        },
+        {
+          "term": "null排序",
+          "desc": "对含null值的列排序时，升序null出现在最前面，降序null出现在最后。",
+          "page": 22
+        },
+        {
+          "term": "注意事项",
+          "desc": "order by包含的列不一定出现在选择列表中，可按列名、函数值和表达式排序，不能用text、ntext或image列。",
+          "page": 22
+        },
+        {
+          "term": "多列排序",
+          "desc": "可同时指定多个排序项，如先按课程号升序再按总评成绩降序。",
+          "page": 24
+        }
+      ],
+      "code": [
+        "select studentno 学号,sname 姓名,entrance 入学成绩 from student where entrance>850 order by entrance desc;",
+        "select courseno 课程号, daily*0.2+final*0.8 as '总评',studentno 学号 from score where daily*0.2+final*0.8>90 order by courseno, daily*0.2+final*0.8 desc;"
+      ],
+      "tips": [
+        "默认升序asc，降序用desc；null升序在最前、降序在最后"
+      ]
+    },
+    {
+      "id": "2.4",
+      "title": "用limit限制查询结果的数量",
+      "pageRange": "25-26",
+      "summary": "介绍limit子句限制查询结果数量的方法及两个参数的含义。",
+      "points": [
+        {
+          "term": "limit",
+          "desc": "用来限制查询结果的数量，可指定从哪条记录开始显示以及一共显示多少条记录。",
+          "page": 25
+        },
+        {
+          "term": "参数含义",
+          "desc": "参数1是开始读取的第1条记录的编号（第1条编号为0），参数2是要查询记录的个数。",
+          "page": 25
+        },
+        {
+          "term": "中间取值",
+          "desc": "limit可从查询结果中间部分取值，如limit 2,5从编号2开始查询5条。",
+          "page": 26
+        }
+      ],
+      "code": [
+        "select * from score where final>85 order by daily asc limit 2,5;",
+        "select studentno,sname,birthdate,phone from student order by entrance desc limit 3;"
+      ],
+      "tips": [
+        "总查询结果中第1条记录编号为0"
+      ]
+    },
+    {
+      "id": "3.1",
+      "title": "聚合函数在查询中的应用",
+      "pageRange": "28-32",
+      "summary": "介绍count、sum、avg、max、min五种常用聚合函数的功能及sql_mode的设置。",
+      "points": [
+        {
+          "term": "聚合函数",
+          "desc": "常用有count()、sum()、avg()、max()和min()，分别统计条数、总和、平均值、最大值和最小值。",
+          "page": 28
+        },
+        {
+          "term": "group by配合",
+          "desc": "group by关键字通常需要与聚合函数一起使用。",
+          "page": 28
+        },
+        {
+          "term": "count()",
+          "desc": "对除*外参数返回非null值的行数，对参数*返回所有行数包含null值的行。",
+          "page": 29
+        },
+        {
+          "term": "count(*)优化",
+          "desc": "没有where子句的count(*)经过内部优化，能够快速返回表中所有的记录总数。",
+          "page": 29
+        },
+        {
+          "term": "sum()和avg()",
+          "desc": "sum()求表中某个字段取值的总和，avg()求某个字段取值的平均值。",
+          "page": 30
+        },
+        {
+          "term": "max()和min()",
+          "desc": "max()求字段最大值，min()求字段最小值。",
+          "page": 31
+        },
+        {
+          "term": "sql_mode",
+          "desc": "可重新设置sql_mode去掉ONLY_FULL_GROUP_BY。",
+          "page": 32
+        }
+      ],
+      "code": [
+        "select count(studentno) as '20级学生数' from student where substring(studentno,1,2) ='20';",
+        "select studentno 学号, sum(final) 总分, avg(final) 平均分 from score group by studentno having sum(final)>270 order by studentno;",
+        "select max(final) 最高分, min(final) 最低分, max(final)-min(final) as 分差 from score where (courseno = 'c05109');",
+        "set @@global.sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';"
+      ],
+      "tips": [
+        "count(*)统计包含null值的所有行；count(列名)只统计非null值"
+      ]
+    },
+    {
+      "id": "3.2",
+      "title": "group by子句的使用",
+      "pageRange": "33-39",
+      "summary": "介绍group by分组、group_concat函数、having筛选及with rollup总体统计的用法。",
+      "points": [
+        {
+          "term": "group by",
+          "desc": "将查询结果按属性列或组合在行的方向上分组，每组在这些列上具有相同值。",
+          "page": 33
+        },
+        {
+          "term": "列的要求",
+          "desc": "出现在select列表中的每一列都必须同时出现在group by子句中；无group by时聚合函数只报告一个聚合值。",
+          "page": 33
+        },
+        {
+          "term": "单独使用",
+          "desc": "单独使用group by关键字，查询结果只显示每组的一条记录。",
+          "page": 33
+        },
+        {
+          "term": "group_concat",
+          "desc": "group by与group_concat()函数一起使用，可将每个组中的所有字段值都显示出来。",
+          "page": 35
+        },
+        {
+          "term": "having",
+          "desc": "having通常与group by结合使用，在应用where筛选后要进一步应用的筛选。",
+          "page": 36
+        },
+        {
+          "term": "with rollup",
+          "desc": "在分组统计数据的基础上再进行相同的总体统计。",
+          "page": 38
+        }
+      ],
+      "code": [
+        "select studentno 学号, round(avg(daily*0.3+final*0.7),2) as '平均分' from score group by studentno;",
+        "select courseno 课程号, group_concat(studentno) 选课学生学号 from score group by courseno;",
+        "select studentno 学号,sum(daily*0.3+final*0.7) as '总分' from score where final>=75 group by studentno having count(*)>=3 order by sum(daily*0.3+final*0.7) desc;",
+        "select courseno 课程号,avg(final) 课程期末平均分 from score group by courseno with rollup;"
+      ],
+      "tips": [
+        "having在where筛选后进一步筛选；group by分组后每组只显示一条记录"
+      ]
+    },
+    {
+      "id": "3.3",
+      "title": "窗口函数在查询中的应用",
+      "pageRange": "40-45",
+      "summary": "介绍窗口函数的分类、一般格式以及over、partition、frame等子句的含义与应用示例。",
+      "points": [
+        {
+          "term": "窗口函数分类",
+          "desc": "按功能划分，MySQL8.0支持的窗口函数可分为5类。",
+          "page": 40
+        },
+        {
+          "term": "一般格式",
+          "desc": "语法为window_function_name(expression) over(...)，over内可跟partition、order by和frame子句。",
+          "page": 41
+        },
+        {
+          "term": "over",
+          "desc": "关键字用来指定函数执行的窗口范围，括号中什么都不写表示窗口包含满足where条件的所有行。",
+          "page": 41
+        },
+        {
+          "term": "partition子句",
+          "desc": "指定窗口按哪些字段分组，窗口函数在不同的分组上分别执行。",
+          "page": 41
+        },
+        {
+          "term": "order by与frame",
+          "desc": "order by按字段排序后编号；frame是当前分区的子集，通常作为滑动窗口使用。",
+          "page": 41
+        },
+        {
+          "term": "应用示例",
+          "desc": "rank()输出排序序号，sum(final) over(partition by studentno)求总分，lag()输出前3行学号。",
+          "page": 42
+        }
+      ],
+      "code": [
+        "window_function_name(expression) over ([partition_defintion] [order_definition] [frame_definition])",
+        "select *, rank() over w as 'rank' from score window w as (order by final);",
+        "select studentno, courseno, final, sum(final) over (partition by studentno) total_score from score;",
+        "select *,(final)/(sum(final) over()) as rate from score;",
+        "select *, lag(studentno,3) over ww2 as lag3 from score window ww2 as (order by studentno);"
+      ],
+      "tips": [
+        "窗口函数不会将多行合并为一行，不需要GROUP BY语句"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "多表连接",
+      "pageRange": "46-48",
+      "summary": "介绍连接的概念、连接条件的指定方式以及四种显式连接关键字。",
+      "points": [
+        {
+          "term": "连接",
+          "desc": "关系型数据库常用的多表查询模式，完成复杂查询必须将两张或以上表连接起来。",
+          "page": 46
+        },
+        {
+          "term": "连接条件",
+          "desc": "连接条件可在from或where子句中指定，与where和having条件组合控制选定的行。",
+          "page": 46
+        },
+        {
+          "term": "字段要求",
+          "desc": "连接字段不必同名或同类型，但类型不同时必须兼容或可进行隐性转换。",
+          "page": 47
+        },
+        {
+          "term": "连接关键字",
+          "desc": "包括inner join内连接、left outer join左外连接、right outer join右外连接和cross join交叉连接。",
+          "page": 47
+        }
+      ],
+      "code": [],
+      "tips": [
+        "连接条件可在from或where子句中指定"
+      ]
+    },
+    {
+      "id": "4.1",
+      "title": "内连接",
+      "pageRange": "49-50",
+      "summary": "介绍内连接通过比较共享列检索符合条件行的方法及where子句实现同等结果的方式。",
+      "points": [
+        {
+          "term": "内连接",
+          "desc": "inner join通过比较数据源表间共享列的值从多个源表检索符合条件的行，可用等号或不等连接。",
+          "page": 49
+        },
+        {
+          "term": "示例",
+          "desc": "用student inner join score on studentno相等查询选修c05109课程的学生信息。",
+          "page": 49
+        },
+        {
+          "term": "where实现",
+          "desc": "直接通过where子句的复合条件查询可实现与内连接同样的结果。",
+          "page": 50
+        }
+      ],
+      "code": [
+        "select student.studentno,sname,final from student inner join score on student.studentno=score.studentno where score.courseno = 'c05109';",
+        "select student.studentno,sname,final from student,score where student.studentno=score.studentno and score.courseno = 'c05109';"
+      ],
+      "tips": []
+    },
+    {
+      "id": "4.2",
+      "title": "外连接",
+      "pageRange": "51-54",
+      "summary": "介绍外连接的概念与null值处理，讲解左外连接和右外连接的区别与用法。",
+      "points": [
+        {
+          "term": "外连接",
+          "desc": "包括满足搜索条件的连接表中所有行，甚至包括在其他连接表中没有匹配行的表中的行。",
+          "page": 51
+        },
+        {
+          "term": "null值",
+          "desc": "当一个表中的行与其他表中行不匹配时，为不存在相应行的表的所有结果集列提供null值。",
+          "page": 51
+        },
+        {
+          "term": "左外连接",
+          "desc": "返回内连接数据外还包括左表中不符合条件的数据，并在右表相应列添加null值。",
+          "page": 52
+        },
+        {
+          "term": "右外连接",
+          "desc": "包含join子句中最右侧表的所有行，不匹配时左侧表所有列分配null值。",
+          "page": 54
+        }
+      ],
+      "code": [
+        "select student01.studentno,sname,daily,final from student01 left join score on student01.studentno=score.studentno;",
+        "select teacher.teacherno,tname,major,courseno from teacher right join teach_course on teacher.teacherno=teach_course.teacherno;"
+      ],
+      "tips": [
+        "左外连接保留左表所有行，右外连接保留右表所有行"
+      ]
+    },
+    {
+      "id": "4.3",
+      "title": "交叉连接",
+      "pageRange": "55-55",
+      "summary": "介绍交叉连接产生笛卡儿积的特点及实际应用情况。",
+      "points": [
+        {
+          "term": "交叉连接",
+          "desc": "Cross Join是在没有where子句的情况下产生的表的笛卡儿积。",
+          "page": 55
+        },
+        {
+          "term": "结果集",
+          "desc": "两个表作交叉连接时结果集大小为二者行数之积，该方式在实际过程中用得很少。",
+          "page": 55
+        },
+        {
+          "term": "应用注意",
+          "desc": "交叉连接在实际过程中用得很少。",
+          "page": 55
+        }
+      ],
+      "code": [
+        "select student.studentno,sname,score.* from student cross join score;"
+      ],
+      "tips": [
+        "结果集大小等于两个表行数之积"
+      ]
+    },
+    {
+      "id": "4.4",
+      "title": "连接多个表",
+      "pageRange": "56-57",
+      "summary": "说明连接表数目的限制与所需连接条件数，并通过三表连接示例加以说明。",
+      "points": [
+        {
+          "term": "连接表数目",
+          "desc": "理论上select连接的表数目没有上限，但多于10个表时数据库很可能达不到最优化设计。",
+          "page": 56
+        },
+        {
+          "term": "连接条件数",
+          "desc": "连接n个表至少需要n-1个连接条件，以避免笛卡儿积的出现。",
+          "page": 56
+        },
+        {
+          "term": "应用示例",
+          "desc": "连接score、student、course三表查询20级学生的学号、姓名、课程名、期末成绩及学分。",
+          "page": 57
+        }
+      ],
+      "code": [
+        "select student.studentno,sname,cname,final,round(period/16,1) from score join student on student.studentno=score.studentno join course on score.courseno=course.courseno where substring(student.studentno,1,2)='20';"
+      ],
+      "tips": [
+        "连接n个表至少需要n-1个连接条件"
+      ]
+    },
+    {
+      "id": "4.5",
+      "title": "合并多个结果集",
+      "pageRange": "58-59",
+      "summary": "介绍union操作符合并多个select结果集的作用、要求与语法格式。",
+      "points": [
+        {
+          "term": "union",
+          "desc": "可将多个select语句的返回结果组合到一个结果集中，当单个查询语句无法得到时使用。",
+          "page": 58
+        },
+        {
+          "term": "使用要求",
+          "desc": "所有查询中的列数和列的顺序必须相同且数据类型必须兼容。",
+          "page": 58
+        },
+        {
+          "term": "语法格式",
+          "desc": "select_statement union [all] select_statement；All包括重复行，不指定则删除重复行。",
+          "page": 58
+        },
+        {
+          "term": "应用示例",
+          "desc": "用union合并student01和student表中phone分别含131和132的部分查询结果。",
+          "page": 59
+        }
+      ],
+      "code": [
+        "select_statement union [all] select_statement",
+        "select studentno,sname,phone from student01 where phone like '%131%' union select studentno,sname,phone from teaching.student where phone like '%132%';"
+      ],
+      "tips": [
+        "不指定all时union自动删除重复行"
+      ]
+    },
+    {
+      "id": "5",
+      "title": "子查询",
+      "pageRange": "60-62",
+      "summary": "介绍子查询的概念、非关联执行过程、与连接的关系、类型及使用注意事项。",
+      "points": [
+        {
+          "term": "子查询",
+          "desc": "嵌套在select、insert、update、delete或其他子查询中的查询，可把复杂查询分解成逻辑步骤。",
+          "page": 60
+        },
+        {
+          "term": "执行过程",
+          "desc": "非关联子查询从内层向外层处理，先处理最内层子查询再把结果用于外层查询条件。",
+          "page": 60
+        },
+        {
+          "term": "与连接关系",
+          "desc": "包含子查询的查询语句一般可写成连接查询，多表连接性能有时优于子查询。",
+          "page": 60
+        },
+        {
+          "term": "常见运算",
+          "desc": "子查询中可能包含in、not in、any、all、exists、not exists及=、!=、>、<等比较运算符。",
+          "page": 61
+        },
+        {
+          "term": "四种类型",
+          "desc": "按结果分为表子查询、行子查询、列子查询和标量子查询。",
+          "page": 61
+        },
+        {
+          "term": "注意事项",
+          "desc": "子查询需用括号括起来，嵌套可多至32层；不能检索text/blob/longtext/mediumblob列；order by只能在外层使用。",
+          "page": 62
+        }
+      ],
+      "code": [],
+      "tips": [
+        "子查询必须用括号括起来，嵌套最多32层；子查询中order by只能在外层用"
+      ]
+    },
+    {
+      "id": "5.1",
+      "title": "利用子查询做表达式",
+      "pageRange": "64-64",
+      "summary": "介绍把子查询结果作为普通表达式使用的方法与示例。",
+      "points": [
+        {
+          "term": "做表达式",
+          "desc": "可将子查询结果当成普通表达式用于外查询选择条件，必须返回一个值或单个列值列表。",
+          "page": 64
+        },
+        {
+          "term": "替换in",
+          "desc": "此时的子查询可以替换where子句中包含in关键字的表达式。",
+          "page": 64
+        },
+        {
+          "term": "应用示例",
+          "desc": "查询某学生入学成绩、所有学生平均入学成绩及二者的分差。",
+          "page": 64
+        }
+      ],
+      "code": [
+        "select studentno,sname,entrance,(select avg(entrance) from student) 平均成绩, entrance-(select avg(entrance) from student) 分差 from student where studentno='20125121109';"
+      ],
+      "tips": []
+    },
+    {
+      "id": "5.2",
+      "title": "利用子查询生成派生表",
+      "pageRange": "65-65",
+      "summary": "介绍用子查询生成派生表替代from子句数据源的方法。",
+      "points": [
+        {
+          "term": "派生表",
+          "desc": "可用子查询生成一个派生表替代from子句中的数据源表，派生表可定义一个别名。",
+          "page": 65
+        },
+        {
+          "term": "本质",
+          "desc": "子查询的结果集作为外层查询的源表，在from子句中使用子查询作为派生表数据源。",
+          "page": 65
+        },
+        {
+          "term": "应用示例",
+          "desc": "用(select * from score where final>85) as TT作为源表查询总评成绩高于90分的学生。",
+          "page": 65
+        }
+      ],
+      "code": [
+        "select TT.studentno 学号,TT.courseno 课程号,TT.final*0.8+TT.daily*0.2 总评 from (select * from score where final>85) as TT where TT.final*0.8+TT.daily*0.2>90;"
+      ],
+      "tips": [
+        "派生表就是from子句中的子查询，需要定义别名"
+      ]
+    },
+    {
+      "id": "5.3",
+      "title": "where子句中的子查询",
+      "pageRange": "66-72",
+      "summary": "介绍带比较运算符、in、exists及all/some/any的子查询用法与执行特点。",
+      "points": [
+        {
+          "term": "where子查询",
+          "desc": "将子查询结果作为where条件的一部分，利用这个条件过滤本层查询的数据。",
+          "page": 66
+        },
+        {
+          "term": "比较运算符",
+          "desc": "可用=、!=、>、>=、<、<=等；外部查询有多少行，关联子查询就执行多少次。",
+          "page": 66
+        },
+        {
+          "term": "in子查询",
+          "desc": "子返回结果集是值的列表时用in运算符代替比较运算符，not in作用与in相反。",
+          "page": 68
+        },
+        {
+          "term": "exists子查询",
+          "desc": "内层查询不返回记录而返回逻辑值，true时外层执行查询，not exists工作的方式与之相反。",
+          "page": 69
+        },
+        {
+          "term": "all/some/any",
+          "desc": "all要与子查询结果集中每个值比较都满足才返回true；some或any是同义词，满足某个值即返回true。",
+          "page": 71
+        }
+      ],
+      "code": [
+        "select studentno,courseno,final from score as a where final < (select avg(final) from score as b where a.courseno=b.courseno group by courseno);",
+        "select studentno,sname,phone,Email from student where studentno in (select studentno from score where final>93);",
+        "select studentno,sname,birthdate,phone from student where exists (select * from student where birthdate > '2003-12-12');",
+        "select student.studentno,sname,phone,final from score inner join student on score.studentno=student.studentno where final >all (select final from score where courseno= 'c05109');"
+      ],
+      "tips": [
+        "all要与每个值都比较；some与any是同义词"
+      ]
+    },
+    {
+      "id": "5.4",
+      "title": "利用子查询插入、更新与删除数据",
+      "pageRange": "73-74",
+      "summary": "介绍在insert、update、delete语句中利用子查询成批添加、更新和删除数据。",
+      "points": [
+        {
+          "term": "概述",
+          "desc": "利用一个嵌套在insert、update或delete语句的子查询成批地添加、更新和删除表中的数据。",
+          "page": 73
+        },
+        {
+          "term": "插入记录",
+          "desc": "insert中的select子查询可将其他表或视图的值添加到表中，可同时插入多行。",
+          "page": 73
+        },
+        {
+          "term": "更新数据",
+          "desc": "update中的select子查询可将其他表或视图的值进行更新，把子查询结果作为更新条件的一部分。",
+          "page": 74
+        },
+        {
+          "term": "删除数据",
+          "desc": "delete中利用子查询可删除符合条件的数据行，把子查询结果作为删除条件的一部分。",
+          "page": 74
+        }
+      ],
+      "code": [
+        "insert into student01 (select * from student where birthdate>='2003-12-31');",
+        "update score set final= final*1.05 where studentno in (select studentno from student where entrance <800);"
+      ],
+      "tips": []
+    },
+    {
+      "id": "5.5",
+      "title": "通用表达式",
+      "pageRange": "75-80",
+      "summary": "介绍通用表表达式CTE的概念、语法、递归CTE的限制，以及斐波那契数列示例。",
+      "points": [
+        {
+          "term": "CTE",
+          "desc": "通用表表达式是在语句级别定义的临时结果集，作用范围是在当前语句。",
+          "page": 75
+        },
+        {
+          "term": "语法",
+          "desc": "with [recursive] cte_name [(col_name [, col_name] ...)] as (subquery) [, ...]。",
+          "page": 75
+        },
+        {
+          "term": "with",
+          "desc": "可出现在select、update、delete开始部分；同一语句级别只允许一个with子句，每个CTE必须唯一。",
+          "page": 75
+        },
+        {
+          "term": "recursive",
+          "desc": "CTE子查询引用自己名称称递归CTE，with子句中包含递归CTE必须使用关键字recursive。",
+          "page": 75
+        },
+        {
+          "term": "递归限制",
+          "desc": "递归select部分不能包含聚合函数、窗口函数、group by、order by、limit、distinct等。",
+          "page": 78
+        },
+        {
+          "term": "终止条件",
+          "desc": "递归CTE需包含终止递归条件，可用kill query命令或Ctrl+C终止死循环查询。",
+          "page": 77
+        },
+        {
+          "term": "递归示例",
+          "desc": "用递归CTE生成12个数字的斐波那契数列，n到达12后结束递归过程。",
+          "page": 79
+        }
+      ],
+      "code": [
+        "with [recursive] cte_name [(col_name [, col_name] ...)] as (subquery) [,cte_name [(col_name [, col_name] ...)]as (subquery)] ...",
+        "with cte95 as (select * from score where final>95) select student.studentno,sname,phone,Email,cte95.daily from student join cte95 on student.studentno=cte95.studentno where student.entrance>800;",
+        "with recursive fibnaci(n, fib_n, next_fib_n) as (select 1, 0, 1 union select n + 1, next_fib_n, fib_n + next_fib_n from fibnaci where n < 12) select * from fibnaci;"
+      ],
+      "tips": [
+        "递归CTE必须有终止条件；递归部分不能含聚合、窗口、group by、order by、limit、distinct"
+      ]
+    },
+    {
+      "id": "6",
+      "title": "使用正则表达式进行模糊查询",
+      "pageRange": "81-87",
+      "summary": "介绍正则表达式查询的特点与regexp语法，以及^、$、.、|等匹配选项的应用。",
+      "points": [
+        {
+          "term": "正则表达式",
+          "desc": "用来检索或替换符合某个模式的文本内容，查询能力比通配字符更强大灵活，可用于非常复杂的查询。",
+          "page": 81
+        },
+        {
+          "term": "regexp",
+          "desc": "MySQL中使用regexp关键字匹配查询正则表达式，语法为where 字段名 regexp '操作符'。",
+          "page": 81
+        },
+        {
+          "term": "^",
+          "desc": "用字符^可以匹配以特定字符或字符串开头的记录。",
+          "page": 84
+        },
+        {
+          "term": "$",
+          "desc": "用字符$可以匹配以特定字符或字符串结尾的记录。",
+          "page": 85
+        },
+        {
+          "term": ".",
+          "desc": "用.来替代字符串中的任意一个字符，表示除\\n以外的任何单个字符。",
+          "page": 86
+        },
+        {
+          "term": "|",
+          "desc": "指定多个字符串时用符号|隔开，只要匹配这些字符串中的任意一个即可。",
+          "page": 87
+        }
+      ],
+      "code": [
+        "where 字段名 regexp '操作符'",
+        "select studentno,sname,birthdate,phone from student where sname regexp '^赵';",
+        "select studentno,sname,phone,Email from student where phone regexp '5$';",
+        "select studentno,sname,phone from student where sname regexp '^赵.江$';",
+        "select studentno,sname,phone,Email from student where phone regexp '131|132';"
+      ],
+      "tips": [
+        "regexp查询能力比like通配符更强大灵活"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "ch4-ppt-s01",
+      "type": "single",
+      "stem": "MySQL通过哪个语句实现数据检索？",
+      "options": [
+        "A. insert",
+        "B. select",
+        "C. update",
+        "D. delete"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第2页指出数据检索是按预定条件查询数据并获取所需信息的过程，MySQL通过select语句查询实现数据检索。",
+      "page": 2
+    },
+    {
+      "id": "ch4-ppt-s02",
+      "type": "single",
+      "stem": "在select语句中，“*”代表什么？",
+      "options": [
+        "A. 所有的列",
+        "B. 第一列",
+        "C. 查询条件",
+        "D. 记录条数"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第5页指出使用select语句首先要确定所要查询的列，“*”代表所有的列。",
+      "page": 5
+    },
+    {
+      "id": "ch4-ppt-s03",
+      "type": "single",
+      "stem": "从结果集中除去重复的行应使用哪个子句？",
+      "options": [
+        "A. distinct",
+        "B. all",
+        "C. union",
+        "D. group"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第11页指出如果希望一个列表没有重复值，可利用distinct子句从结果集中除去重复的行。",
+      "page": 11
+    },
+    {
+      "id": "ch4-ppt-s04",
+      "type": "single",
+      "stem": "like运算符中，通配符“%”表示？",
+      "options": [
+        "A. 一个字符",
+        "B. 任意个字符",
+        "C. 一个数字",
+        "D. 空值"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第16页指出like有两种通配符，%可以匹配一个或多个字符代表任意长度字符串，_只匹配一个字符。",
+      "page": 16
+    },
+    {
+      "id": "ch4-ppt-s05",
+      "type": "single",
+      "stem": "order by子句中表示降序排列的关键字是？",
+      "options": [
+        "A. asc",
+        "B. desc",
+        "C. limit",
+        "D. order"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第22页指出利用order by可对结果升序asc或降序desc排列，默认情况下按升序排列。",
+      "page": 22
+    },
+    {
+      "id": "ch4-ppt-s06",
+      "type": "single",
+      "stem": "用来统计记录条数的聚合函数是？",
+      "options": [
+        "A. sum()",
+        "B. avg()",
+        "C. count()",
+        "D. max()"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第28页指出count()用来统计记录的条数，sum()总和、avg()平均值、max()最大值。",
+      "page": 28
+    },
+    {
+      "id": "ch4-ppt-s07",
+      "type": "single",
+      "stem": "将多个select语句的返回结果组合到一个结果集应使用？",
+      "options": [
+        "A. join",
+        "B. union",
+        "C. group by",
+        "D. having"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第58页指出union操作符可以将多个select语句的返回结果组合到一个结果集中。",
+      "page": 58
+    },
+    {
+      "id": "ch4-ppt-s08",
+      "type": "single",
+      "stem": "定义通用表表达式（CTE）使用的关键字是？",
+      "options": [
+        "A. with",
+        "B. select",
+        "C. over",
+        "D. partition"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第75页指出通用表表达式with子句的语法，with是通用表表达式的关键词。",
+      "page": 75
+    },
+    {
+      "id": "ch4-ppt-b01",
+      "type": "blank",
+      "stem": "数据检索是指从数据库中按照预定条件查询数据，MySQL是通过____语句实现的。",
+      "answer": [
+        "select",
+        "SELECT"
+      ],
+      "answerText": "select",
+      "analysis": "解析：PPT第2页指出MySQL是通过select语句查询实现数据检索的。",
+      "page": 2
+    },
+    {
+      "id": "ch4-ppt-b02",
+      "type": "blank",
+      "stem": "在select语句中，“*”代表所有的____。",
+      "answer": [
+        "列",
+        "字段",
+        "列/字段"
+      ],
+      "answerText": "列",
+      "analysis": "解析：PPT第5页指出使用select语句时首先要确定所要查询的列，“*”代表所有的列。",
+      "page": 5
+    },
+    {
+      "id": "ch4-ppt-b03",
+      "type": "blank",
+      "stem": "利用____子句可以从结果集中除去重复的行。",
+      "answer": [
+        "distinct",
+        "DISTINCT"
+      ],
+      "answerText": "distinct",
+      "analysis": "解析：PPT第11页指出如果希望一个列表没有重复值，可利用distinct子句从结果集中除去重复的行。",
+      "page": 11
+    },
+    {
+      "id": "ch4-ppt-b04",
+      "type": "blank",
+      "stem": "order by子句默认情况下，结果集按照____排列。",
+      "answer": [
+        "升序",
+        "asc",
+        "ASC"
+      ],
+      "answerText": "升序",
+      "analysis": "解析：PPT第22页指出默认情况下结果集按照升序排列，可加desc实现降序输出。",
+      "page": 22
+    },
+    {
+      "id": "ch4-ppt-b05",
+      "type": "blank",
+      "stem": "连接n个表至少需要____个连接条件，以避免笛卡儿积的出现。",
+      "answer": [
+        "n-1",
+        "n－1",
+        "n-1个"
+      ],
+      "answerText": "n-1",
+      "analysis": "解析：PPT第56页指出对于3个以上关系表的连接查询，连接n个表至少需要n-1个连接条件，以避免笛卡儿积。",
+      "page": 56
+    },
+    {
+      "id": "ch4-ppt-b06",
+      "type": "blank",
+      "stem": "使用正则表达式查询时，字符____用来匹配以特定字符或字符串开头的记录。",
+      "answer": [
+        "^"
+      ],
+      "answerText": "^",
+      "analysis": "解析：PPT第84页指出使用字符^可以匹配以特定字符或字符串开头的记录。",
+      "page": 84
+    }
+  ]
+}

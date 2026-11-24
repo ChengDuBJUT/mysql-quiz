@@ -1,0 +1,992 @@
+{
+  "chapter": 2,
+  "title": "MySQL8.0语言基础",
+  "goals": [
+    "掌握MySQL基本语法要素：字符集与标识符、常量与变量",
+    "掌握MySQL的数据类型：字符串类型、数字类型、日期和时间类型、二进制类型",
+    "掌握运算符与表达式：算术、比较、逻辑、位运算及运算符优先级",
+    "掌握常用函数：数学函数、字符串函数、日期和时间函数、聚合函数及其他函数"
+  ],
+  "ideology": "",
+  "sections": [
+    {
+      "id": "1.1",
+      "title": "字符集与标识符",
+      "pageRange": "5-11",
+      "summary": "介绍字符与字符序概念、字符序命名惯例，列举utf8mb4、UTF-8、latin1、GB2312、GBK等常用字符集及其特点。",
+      "points": [
+        {
+          "term": "字符(Character)",
+          "desc": "人类语言中最小的表义符号；MySQL8.0支持41种字符集和272个校对原则。",
+          "page": 5
+        },
+        {
+          "term": "字符序",
+          "desc": "同一字符集内字符之间的比较规则，每个字符序唯一对应一种字符集。",
+          "page": 5
+        },
+        {
+          "term": "字符集层次",
+          "desc": "MySQL字符集支持细化到服务器Server、数据库DataBase、数据表Table和连接层Connection四个层次。",
+          "page": 5
+        },
+        {
+          "term": "字符序命名惯例",
+          "desc": "以对应字符集名开头，以_ci大小写不敏感、_cs大小写敏感或_bin按编码值比较结尾。",
+          "page": 6
+        },
+        {
+          "term": "utf8mb4",
+          "desc": "MySQL 8.0默认字符集编码，mb4表示most bytes 4最多占4字节，默认字符序utf8mb4_0900_ai_ci。",
+          "page": 9
+        },
+        {
+          "term": "UTF-8",
+          "desc": "变长字符编码，英文用8位1字节、中文用24位3字节编码，通用性强。",
+          "page": 10
+        },
+        {
+          "term": "GB2312与GBK",
+          "desc": "gb2312是简体中文字符集；GBK在GB2312基础上扩容兼容，用双字节表示中英文字符。",
+          "page": 11
+        },
+        {
+          "term": "字符集转换",
+          "desc": "GBK、GB2312、latin1等与UTF-8之间必须通过Unicode编码才能相互转换。",
+          "page": 11
+        }
+      ],
+      "code": [
+        "show character set;",
+        "show collation like 'utf8mb4%';"
+      ],
+      "tips": [
+        "_ci大小写不敏感、_cs大小写敏感、_bin按编码值比较"
+      ]
+    },
+    {
+      "id": "1.2",
+      "title": "MySQL字符集的转换过程",
+      "pageRange": "12-14",
+      "summary": "介绍通过修改my.ini、使用set命令临时修改字符集的方法，并给出连接层乱码的解决办法。",
+      "points": [
+        {
+          "term": "修改my.ini",
+          "desc": "在my.ini的[mysql]键值下加default-character-set=utf8mb4。",
+          "page": 12
+        },
+        {
+          "term": "重启生效",
+          "desc": "修改配置文件后需重启MySQL服务，再用show variables like 'character%'查看。",
+          "page": 12
+        },
+        {
+          "term": "命令临时修改",
+          "desc": "用set命令修改字符集只是临时更改，服务器重启后恢复默认设置。",
+          "page": 13
+        },
+        {
+          "term": "乱码原因",
+          "desc": "表默认字符集为utf8mb4且用UTF-8发送查询仍乱码，问题通常出在connection连接层。",
+          "page": 14
+        },
+        {
+          "term": "乱码解决",
+          "desc": "发送查询前执行set names('utf8mb4')，等价于设置client、results、connection三者字符集。",
+          "page": 14
+        }
+      ],
+      "code": [
+        "default-character-set=utf8mb4",
+        "show variables like 'character%';",
+        "set character_set_client = utf8mb4;",
+        "set character_set_connection = utf8mb4;",
+        "set character_set_database = utf8mb4;",
+        "set character_set_results = utf8mb4;",
+        "set character_set_server = utf8mb4;",
+        "set names('utf8mb4');"
+      ],
+      "tips": [
+        "set命令修改字符集是临时的，重启后失效；乱码问题多出在connection连接层"
+      ]
+    },
+    {
+      "id": "1.3",
+      "title": "MySQL中的字符集层次设置",
+      "pageRange": "15-18",
+      "summary": "讲解描述字符集的系统变量及服务器、数据库、表、列各层字符集的依存关系。",
+      "points": [
+        {
+          "term": "character_set_server",
+          "desc": "与collation_server一起表示服务器字符集，是默认的内部操作字符集。",
+          "page": 15
+        },
+        {
+          "term": "character_set_client",
+          "desc": "客户端来源数据使用的字符集，决定MySQL如何解释客户端发来的SQL命令文字。",
+          "page": 15
+        },
+        {
+          "term": "character_set_connection",
+          "desc": "与collation_connection一起表示连接层字符集，决定MySQL如何处理客户端发来的SQL命令。",
+          "page": 16
+        },
+        {
+          "term": "character_set_results",
+          "desc": "查询结果字符集，决定发给客户端的结果中文字的编码。",
+          "page": 16
+        },
+        {
+          "term": "character_set_database",
+          "desc": "与collation_database一起表示当前选中数据库的默认字符集。",
+          "page": 16
+        },
+        {
+          "term": "character_set_system",
+          "desc": "系统元数据的字符集utf8mb4，数据库、表和列的定义都使用这个字符集。",
+          "page": 16
+        },
+        {
+          "term": "表与列字符集",
+          "desc": "表的字符集在create table参数里设置并为列提供默认值；列的字符集决定本列文字数据的存储编码。",
+          "page": 17
+        },
+        {
+          "term": "字符集依存关系",
+          "desc": "服务器级决定数据库、客户端、连接层和结果集；数据库决定表；表决定字段。",
+          "page": 18
+        }
+      ],
+      "code": [],
+      "tips": [
+        "collation_开头变量描述校对原则；列的比较规则比collation_connection高"
+      ]
+    },
+    {
+      "id": "1.4",
+      "title": "标识符和关键字",
+      "pageRange": "19-20",
+      "summary": "说明MySQL脚本文件后缀、标识符命名规则与大小写敏感性，以及关键字数量与使用注意事项。",
+      "points": [
+        {
+          "term": "脚本文件",
+          "desc": "MySQL脚本由一条或多条语句组成，保存时文件后缀名一般为.sql。",
+          "page": 19
+        },
+        {
+          "term": "标识符",
+          "desc": "用来命名数据库、表、列、变量等对象，以便在脚本中其他地方引用。",
+          "page": 19
+        },
+        {
+          "term": "命名规则",
+          "desc": "由以字母或下划线开头的字母、数字或下划线(_)序列组成。",
+          "page": 19
+        },
+        {
+          "term": "大小写敏感",
+          "desc": "取决于操作系统，Windows下不敏感，大多数linux/unix系统下大小写敏感。",
+          "page": 19
+        },
+        {
+          "term": "关键字",
+          "desc": "MySQL5.7约有600个关键词，8.0在此基础上增加90多个。",
+          "page": 20
+        },
+        {
+          "term": "使用注意",
+          "desc": "所有关键字都有特定含义，应尽量避免作为标识符使用。",
+          "page": 20
+        }
+      ],
+      "code": [],
+      "tips": [
+        "标识符是否区分大小写取决于操作系统"
+      ]
+    },
+    {
+      "id": "1.5",
+      "title": "常量和变量",
+      "pageRange": "21-25",
+      "summary": "解释常量概念，区分全局系统变量与会话系统变量，说明系统变量的查看、修改与默认值设置方法。",
+      "points": [
+        {
+          "term": "常量",
+          "desc": "也称文字值或标量值，是指某个过程中值始终不改的量。",
+          "page": 21
+        },
+        {
+          "term": "系统变量类型",
+          "desc": "包括全局系统变量和会话系统变量两种类型。",
+          "page": 23
+        },
+        {
+          "term": "全局变量",
+          "desc": "MySQL启动时由服务器初始化为默认值，影响整个实例，修改会影响整个服务器。",
+          "page": 23
+        },
+        {
+          "term": "会话变量",
+          "desc": "每次建立新连接时由MySQL初始化，前面加@符号，会话结束即释放，只影响当前连接。",
+          "page": 23
+        },
+        {
+          "term": "查看系统变量",
+          "desc": "应用于SQL语句时多数系统变量前需加两个@符号，可用show variables like查看。",
+          "page": 24
+        },
+        {
+          "term": "修改系统变量",
+          "desc": "可用set语句修改，如set @@global.sort_buffer_size=25000改变全局值。",
+          "page": 25
+        },
+        {
+          "term": "默认值",
+          "desc": "将系统变量值设为MySQL默认值可使用default关键字。",
+          "page": 25
+        }
+      ],
+      "code": [
+        "select @@version,current_date;",
+        "show [global|session] variables [like '字符串'];",
+        "show variables like 'a%';",
+        "set @@global.sort_buffer_size=25000;",
+        "set @@session.sql_select_limit=100;",
+        "select @@local.sql_select_limit;",
+        "set @@local.sql_select_limit=default;"
+      ],
+      "tips": [
+        "全局变量影响整个服务器，会话变量只影响当前数据库连接"
+      ]
+    },
+    {
+      "id": "2.1",
+      "title": "字符串类型",
+      "pageRange": "27-29",
+      "summary": "介绍字符串类型分为普通文本字符串char/varchar和特殊类型set/enum，并说明char与varchar的区别。",
+      "points": [
+        {
+          "term": "字符串类型",
+          "desc": "在数据库中存储字符串的数据类型，分普通文本字符串和特殊类型两类。",
+          "page": 27
+        },
+        {
+          "term": "普通文本字符串",
+          "desc": "包括char和varchar类型。",
+          "page": 27
+        },
+        {
+          "term": "特殊类型",
+          "desc": "包括set和enum两种特殊字符串类型。",
+          "page": 27
+        },
+        {
+          "term": "char",
+          "desc": "长度被固定为创建表所声明的长度，取值在1~255之间。",
+          "page": 28
+        },
+        {
+          "term": "varchar",
+          "desc": "值是变长的字符串，取值范围和char一样。",
+          "page": 28
+        }
+      ],
+      "code": [],
+      "tips": [
+        "char定长、varchar变长，取值范围均为1~255"
+      ]
+    },
+    {
+      "id": "2.2",
+      "title": "数字类型",
+      "pageRange": "30-33",
+      "summary": "介绍整数类型及unsigned、zerofill、AUTO_INCREMENT属性，讲解浮点与定点类型以及decimal的语法。",
+      "points": [
+        {
+          "term": "整数类型",
+          "desc": "数据库中最基本的数据类型；标准SQL支持integer和smallint，MySQL还扩展tinyint、mediumint、bigint。",
+          "page": 30
+        },
+        {
+          "term": "unsigned",
+          "desc": "默认情况下整数可表示正负整数，只希望表示正整数时用unsigned修饰。",
+          "page": 31
+        },
+        {
+          "term": "zerofill",
+          "desc": "数字位数不够需用0填充时可使用关键字zerofill。",
+          "page": 31
+        },
+        {
+          "term": "显示宽度",
+          "desc": "插入的整数位数大于指定显示宽度时，按整数实际值存储。",
+          "page": 31
+        },
+        {
+          "term": "AUTO_INCREMENT",
+          "desc": "需要产生唯一标识符或顺序值时使用，只适用于整数类型；一个表最多只能有一个该字段。",
+          "page": 32
+        },
+        {
+          "term": "自增字段约束",
+          "desc": "AUTO_INCREMENT字段应为NOT NULL且定义为PRIMARY KEY或UNIQUE，值从1开始每行增加1。",
+          "page": 32
+        },
+        {
+          "term": "浮点数据类型",
+          "desc": "包括单精度float和双精度double；定点数类型就是decimal。",
+          "page": 33
+        },
+        {
+          "term": "decimal",
+          "desc": "精准数据类型，语法DECIMAL(M,D)，M为精度范围1~65默认10，D为标度范围0~30且不超过M。",
+          "page": 33
+        }
+      ],
+      "code": [
+        "DECIMAL(M,D)",
+        "unsigned",
+        "zerofill",
+        "AUTO_INCREMENT"
+      ],
+      "tips": [
+        "AUTO_INCREMENT字段值从1开始，插入NULL时取当前最大值加1"
+      ]
+    },
+    {
+      "id": "2.3",
+      "title": "日期和时间数据类型",
+      "pageRange": "34-36",
+      "summary": "介绍year、date、time、datetime、timestamp五种日期时间类型，说明YEAR取值格式与DATETIME/TIMESTAMP的时区区别。",
+      "points": [
+        {
+          "term": "日期时间类型",
+          "desc": "MySQL有多种表示日期和时间的数据类型。",
+          "page": 34
+        },
+        {
+          "term": "year",
+          "desc": "表示年份。",
+          "page": 34
+        },
+        {
+          "term": "date",
+          "desc": "表示日期。",
+          "page": 34
+        },
+        {
+          "term": "time",
+          "desc": "表示时间。",
+          "page": 34
+        },
+        {
+          "term": "datetime和timestamp",
+          "desc": "表示日期和时间。",
+          "page": 34
+        },
+        {
+          "term": "YEAR取值",
+          "desc": "年份值可为2位或4位默认4位；4位范围1901~2155，2位70~99表示1970~1999，01~69表示2001~2069。",
+          "page": 36
+        },
+        {
+          "term": "时区区别",
+          "desc": "TIMESTAMP类型与时区相关，而DATETIME则与时区无关。",
+          "page": 36
+        },
+        {
+          "term": "TIMESTAMP默认值",
+          "desc": "表中第一个TIMESTAMP字段默认值为CURRENT_TIMESTAMP，第二个默认0000-00-00 00:00:00。",
+          "page": 36
+        }
+      ],
+      "code": [],
+      "tips": [
+        "TIMESTAMP与时区相关，DATETIME与时区无关"
+      ]
+    },
+    {
+      "id": "2.4",
+      "title": "二进制类型",
+      "pageRange": "37-38",
+      "summary": "介绍二进制类型与长文本类型，说明text适合存储长文本、blob适合存储二进制数据。",
+      "points": [
+        {
+          "term": "二进制类型",
+          "desc": "在数据库中存储二进制数据的数据类型。",
+          "page": 37
+        },
+        {
+          "term": "包含类型",
+          "desc": "包括binary、varbinary、bit、tinyblob、blob、mediumblob和longblob类型。",
+          "page": 37
+        },
+        {
+          "term": "长文本类型",
+          "desc": "tinytext、longtext和text等适合存储长文本。",
+          "page": 37
+        },
+        {
+          "term": "text和blob",
+          "desc": "大小可以改变；text适合存储长文本，blob适合存储二进制数据，支持文本、声音和图像等。",
+          "page": 37
+        }
+      ],
+      "code": [],
+      "tips": [
+        "存储图片等二进制文件常用blob类型"
+      ]
+    },
+    {
+      "id": "3.1",
+      "title": "算术运算符",
+      "pageRange": "41-42",
+      "summary": "介绍加、减、乘、除、求余等算术运算符，说明其多操作数运算及除以0返回null的规则。",
+      "points": [
+        {
+          "term": "算术运算符",
+          "desc": "MySQL支持加、减、乘、除、求余五种算术运算符。",
+          "page": 41
+        },
+        {
+          "term": "多操作数",
+          "desc": "加、减、乘可以同时运算多个操作数，除号(/)和求余(%)也可同时计算多个操作数。",
+          "page": 41
+        },
+        {
+          "term": "加运算",
+          "desc": "加(+)可连接两个字符串，或计算某个日期增加的天数、某个时间的秒数等。",
+          "page": 41
+        },
+        {
+          "term": "减运算",
+          "desc": "减(-)可用于计算某个日期减少的天数、某个时间的秒数等。",
+          "page": 41
+        },
+        {
+          "term": "div与mod",
+          "desc": "div()和mod()只有两个参数；除以0是不允许的，MySQL会返回null。",
+          "page": 41
+        },
+        {
+          "term": "select输出",
+          "desc": "select语句具有输出功能，能够显示函数和表达式的值。",
+          "page": 39
+        }
+      ],
+      "code": [
+        "select 3+2,1.5*3,3/5,100-23.5,5%3;"
+      ],
+      "tips": [
+        "除以0返回null而不是报错"
+      ]
+    },
+    {
+      "id": "3.2",
+      "title": "比较运算符",
+      "pageRange": "43-51",
+      "summary": "讲解=、<>、!=、>、is null、between and、in、like、regexp等比较运算符的用法与空值判断规则。",
+      "points": [
+        {
+          "term": "比较运算符",
+          "desc": "查询数据时最常用的一类运算符，用于判断表中哪些记录符合条件。",
+          "page": 43
+        },
+        {
+          "term": "运算符=",
+          "desc": "判断数字、字符串和表达式是否相等，相等返回1否则0；按字符ASCII码比较；不能判断空值。",
+          "page": 44
+        },
+        {
+          "term": "is null",
+          "desc": "判断操作数是否为空值，为null返回1否则0；is not null与之相反。",
+          "page": 46
+        },
+        {
+          "term": "空值判断",
+          "desc": "=、<>、!=、>等都不能判断null，结果返回null；null和'null'不同。",
+          "page": 46
+        },
+        {
+          "term": "between and",
+          "desc": "判断数据是否在某个取值范围，x1大于等于m且小于等于n返回1，可用not取反。",
+          "page": 47
+        },
+        {
+          "term": "in",
+          "desc": "判断数据是否存在于某个集合，等于值1到值n中任何一个返回1，否则返回0。",
+          "page": 48
+        },
+        {
+          "term": "like",
+          "desc": "匹配字符串，%匹配任意个字符，_匹配一个字符。",
+          "page": 49
+        },
+        {
+          "term": "regexp",
+          "desc": "用正则表达式匹配字符串，常与^开头、$结尾和.代表一个字符一起使用。",
+          "page": 50
+        }
+      ],
+      "code": [
+        "x1 between m and n",
+        "x1 in (值1,值2,…,值n)",
+        "x1 like s1",
+        "x1 regexp '匹配方式'"
+      ],
+      "tips": [
+        "判断空值只能用is null或is not null，不能用=或<>"
+      ]
+    },
+    {
+      "id": "3.3",
+      "title": "逻辑运算符",
+      "pageRange": "52-55",
+      "summary": "介绍与、或、非、异或四种逻辑运算符的符号及返回规则。",
+      "points": [
+        {
+          "term": "逻辑运算符",
+          "desc": "用来判断表达式真假，真返回1假返回0；MySQL支持与、或、非和异或四种。",
+          "page": 52
+        },
+        {
+          "term": "与运算",
+          "desc": "&&或and；所有数据非0且非null返回1，存在0返回0，存在null且无0返回null。",
+          "page": 53
+        },
+        {
+          "term": "或运算",
+          "desc": "||或or；存在非0数字返回1，只有0返回0，无0但含null返回null。",
+          "page": 53
+        },
+        {
+          "term": "非运算",
+          "desc": "!或not，返回与操作数据相反的结果；非0返回0，0返回1，null返回null。",
+          "page": 54
+        },
+        {
+          "term": "异或运算",
+          "desc": "xor表示异或运算，只要任何一个操作数据为null时结果返回null。",
+          "page": 55
+        }
+      ],
+      "code": [],
+      "tips": [
+        "&&=and，||=or，!=not，xor为异或"
+      ]
+    },
+    {
+      "id": "3.4",
+      "title": "位运算符",
+      "pageRange": "56-58",
+      "summary": "介绍位运算符在二进制数上计算的过程及六种位运算符。",
+      "points": [
+        {
+          "term": "位运算符",
+          "desc": "在二进制数上进行计算，先将操作数变成二进制数运算，再将结果变回十进制数。",
+          "page": 56
+        },
+        {
+          "term": "六种位运算",
+          "desc": "包括按位与、按位或、按位取反、按位异或、按位左移和按位右移。",
+          "page": 56
+        },
+        {
+          "term": "位运算过程",
+          "desc": "先将操作数变成二进制数进行运算，再将结果变回十进制数。",
+          "page": 56
+        }
+      ],
+      "code": [],
+      "tips": [
+        "位运算先把操作数转二进制，计算结果再转回十进制"
+      ]
+    },
+    {
+      "id": "3.5",
+      "title": "表达式和运算符的优先级",
+      "pageRange": "59-60",
+      "summary": "说明表达式的组成与分类，以及多运算符时按优先级从高到低、同级从左到右的运算规则。",
+      "points": [
+        {
+          "term": "表达式",
+          "desc": "SQL中表达式是常量、变量、列名、复杂计算、运算符和函数的组合，通常有返回值。",
+          "page": 59
+        },
+        {
+          "term": "表达式分类",
+          "desc": "按值的类型分为字符型表达式、数值型表达式和日期型表达式。",
+          "page": 59
+        },
+        {
+          "term": "运算符优先级",
+          "desc": "多个运算符时按先高后低顺序运算，同级从左到右，左边的运算符先运算。",
+          "page": 59
+        }
+      ],
+      "code": [],
+      "tips": [
+        "优先级相同时表达式左边的运算符先运算"
+      ]
+    },
+    {
+      "id": "4.1",
+      "title": "数学函数",
+      "pageRange": "63-65",
+      "summary": "介绍常用数学函数及rand()、round()等函数的使用规则。",
+      "points": [
+        {
+          "term": "数学函数",
+          "desc": "主要用于处理数字包括整型、浮点型，包括绝对值、正弦、余弦、获取随机数等函数。",
+          "page": 63
+        },
+        {
+          "term": "使用方式",
+          "desc": "数学函数可以作为表达式或表达式的一部分使用。",
+          "page": 63
+        },
+        {
+          "term": "rand()",
+          "desc": "rand()返回完全随机的数；rand(x)中x相同时作为种子值返回的值相同。",
+          "page": 65
+        },
+        {
+          "term": "round(x)",
+          "desc": "返回离x最近的整数，即四舍五入；round(x,y)返回x保留到小数点后y位的值。",
+          "page": 65
+        }
+      ],
+      "code": [],
+      "tips": [
+        "round(x,y)在截取时进行四舍五入处理"
+      ]
+    },
+    {
+      "id": "4.2",
+      "title": "字符串函数",
+      "pageRange": "66-67",
+      "summary": "介绍字符串函数的功能类别，包括计算长度、合并、替换、比较和查找字符串位置等函数。",
+      "points": [
+        {
+          "term": "字符串函数",
+          "desc": "主要用于处理字符串数据和表达式。",
+          "page": 66
+        },
+        {
+          "term": "功能类别",
+          "desc": "包括计算字符串长度、合并、替换、比较和查找字符串位置等函数。",
+          "page": 66
+        },
+        {
+          "term": "常用函数",
+          "desc": "concat()用于连接字符串，substring()返回指定字符串，reverse()逆序输出。",
+          "page": 67
+        }
+      ],
+      "code": [
+        "concat()",
+        "substring()",
+        "reverse()"
+      ],
+      "tips": []
+    },
+    {
+      "id": "4.3",
+      "title": "日期和时间函数",
+      "pageRange": "68-74",
+      "summary": "介绍日期时间函数类别，讲解date_add/date_sub及date_format/time_format的语法与格式化代码。",
+      "points": [
+        {
+          "term": "日期和时间函数",
+          "desc": "用于处理表中日期和时间数据，包括获取当前日期、当前时间、计算日期和计算时间的函数。",
+          "page": 68
+        },
+        {
+          "term": "常用函数",
+          "desc": "curdate()返回当前日期、curtime()返回当前时间、now()返回当前日期和时间。",
+          "page": 69
+        },
+        {
+          "term": "date_add/date_sub",
+          "desc": "对日期和时间进行算术操作，分别用来增加和减少日期值。",
+          "page": 71
+        },
+        {
+          "term": "语法格式",
+          "desc": "date_add | date_sub(date, interval int keyword)，interval关键字表示时间间隔。",
+          "page": 71
+        },
+        {
+          "term": "格式化函数",
+          "desc": "date_format()和time_format()用于格式化日期和时间值。",
+          "page": 73
+        }
+      ],
+      "code": [
+        "date_add | date_sub(date, interval int keyword)",
+        "date_format/ time_format(date | time, fmt)"
+      ],
+      "tips": [
+        "date_add增加日期值，date_sub减少日期值"
+      ]
+    },
+    {
+      "id": "4.4",
+      "title": "聚合函数",
+      "pageRange": "75-75",
+      "summary": "介绍聚合函数也称为分组统计函数，常用于对聚合在组内的数据表行进行计算。",
+      "points": [
+        {
+          "term": "聚合函数",
+          "desc": "也叫分组统计函数，主要功能是对聚合在组内的数据表行进行计算。",
+          "page": 75
+        },
+        {
+          "term": "分组统计函数",
+          "desc": "聚合函数也叫分组统计函数，常用于对聚合在组内的数据表行进行计算。",
+          "page": 75
+        },
+        {
+          "term": "聚合运算",
+          "desc": "利用聚合函数可以满足表中记录的聚合运算。",
+          "page": 75
+        }
+      ],
+      "code": [],
+      "tips": []
+    },
+    {
+      "id": "4.5",
+      "title": "其他函数",
+      "pageRange": "76-82",
+      "summary": "介绍系统信息、加密、格式化及窗口函数等各类其他函数的功能与用法。",
+      "points": [
+        {
+          "term": "系统信息函数",
+          "desc": "用来查询MySQL数据库的系统信息，如数据库版本、当前用户等。",
+          "page": 76
+        },
+        {
+          "term": "md5(str)",
+          "desc": "为字符串算出md5 128比特校验和，以32位十六进制数字形式返回，参数为NULL返回NULL。",
+          "page": 78
+        },
+        {
+          "term": "sha(str)",
+          "desc": "从原明文密码str计算并返回加密后的密码字符串，加密算法比md5更加安全。",
+          "page": 79
+        },
+        {
+          "term": "sha2(str,hash_length)",
+          "desc": "利用hash_length作长度加密str，支持224、256、384、512和0，其中0等同于256。",
+          "page": 80
+        },
+        {
+          "term": "format(x,y)",
+          "desc": "把数值格式化为以逗号分隔的数字序列，x是被格式化数据，y是结果的小数位数。",
+          "page": 81
+        },
+        {
+          "term": "窗口函数",
+          "desc": "MySQL8.0新增，类似SUM()、COUNT()但不将多行合并为一行，不需要GROUP BY语句。",
+          "page": 82
+        }
+      ],
+      "code": [
+        "format(x, y)",
+        "md5(str)",
+        "sha(str)",
+        "sha2(str, hash_length)"
+      ],
+      "tips": [
+        "窗口函数不需要GROUP BY，结果放回多行当中"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "ch2-ppt-s01",
+      "type": "single",
+      "stem": "MySQL服务器默认的字符集是？",
+      "options": [
+        "A. latin1",
+        "B. utf8mb4",
+        "C. gb2312",
+        "D. GBK"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第5页指出MySQL服务器默认的字符集是utf8mb4，第9页也说明8.0用utf8mb4作为默认字符编码。",
+      "page": 5
+    },
+    {
+      "id": "ch2-ppt-s02",
+      "type": "single",
+      "stem": "字符序名称以_ci结尾表示？",
+      "options": [
+        "A. 大小写敏感",
+        "B. 大小写不敏感",
+        "C. 按编码值比较",
+        "D. 按字节比较"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第6页指出字符序以_ci表示大小写不敏感、_cs表示大小写敏感、_bin表示按编码值比较。",
+      "page": 6
+    },
+    {
+      "id": "ch2-ppt-s03",
+      "type": "single",
+      "stem": "MySQL脚本文件保存时后缀名一般为？",
+      "options": [
+        "A. .txt",
+        "B. .sql",
+        "C. .mysql",
+        "D. .db"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第19页指出MySQL脚本由一条或多条语句组成，保存时脚本文件后缀名一般为.sql。",
+      "page": 19
+    },
+    {
+      "id": "ch2-ppt-s04",
+      "type": "single",
+      "stem": "char列的长度取值在下列哪个范围？",
+      "options": [
+        "A. 1~255",
+        "B. 1~65535",
+        "C. 0~255",
+        "D. 1~1024"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第28页指出char列的长度被固定为创建表所声明的长度，取值在1~255之间。",
+      "page": 28
+    },
+    {
+      "id": "ch2-ppt-s05",
+      "type": "single",
+      "stem": "下列数据类型中属于MySQL精准数据类型的是？",
+      "options": [
+        "A. float",
+        "B. double",
+        "C. decimal",
+        "D. real"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第33页指出decimal是MySQL中存在的精准数据类型，语法格式为DECIMAL(M,D)。",
+      "page": 33
+    },
+    {
+      "id": "ch2-ppt-s06",
+      "type": "single",
+      "stem": "关于DATETIME与TIMESTAMP，下列说法正确的是？",
+      "options": [
+        "A. DATETIME与时区相关",
+        "B. DATETIME与时区无关",
+        "C. 两者都与时区相关",
+        "D. 两者都不含时间部分"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第36页指出TIMESTAMP类型与时区相关，而DATETIME则与时区无关。",
+      "page": 36
+    },
+    {
+      "id": "ch2-ppt-s07",
+      "type": "single",
+      "stem": "算术运算符中，求余运算符是？",
+      "options": [
+        "A. /",
+        "B. %",
+        "C. *",
+        "D. div"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第41页指出除号(/)和求余运算符(%)，5%3的结果为2。",
+      "page": 41
+    },
+    {
+      "id": "ch2-ppt-s08",
+      "type": "single",
+      "stem": "like运算符中，通配符“_”表示？",
+      "options": [
+        "A. 任意个字符",
+        "B. 一个字符",
+        "C. 零个字符",
+        "D. 一个数字"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第49页指出like用来匹配字符串，%匹配任意个字符，_匹配一个字符。",
+      "page": 49
+    },
+    {
+      "id": "ch2-ppt-b01",
+      "type": "blank",
+      "stem": "MySQL8.0能够支持41种字符集和____个校对原则。",
+      "answer": [
+        "272"
+      ],
+      "answerText": "272",
+      "analysis": "解析：PPT第5页指出MySQL8.0能够支持41种字符集和272个校对原则。",
+      "page": 5
+    },
+    {
+      "id": "ch2-ppt-b02",
+      "type": "blank",
+      "stem": "字符序名称以_ci结尾表示大小写____。",
+      "answer": [
+        "不敏感",
+        "大小写不敏感"
+      ],
+      "answerText": "不敏感",
+      "analysis": "解析：PPT第6页指出字符序以_ci表示大小写不敏感，如utf8mb4_0900_ai_ci中'a'和'A'等价。",
+      "page": 6
+    },
+    {
+      "id": "ch2-ppt-b03",
+      "type": "blank",
+      "stem": "如果整数类型只希望表示正整数，可以使用关键字____来进行修饰。",
+      "answer": [
+        "unsigned",
+        "UNSIGNED"
+      ],
+      "answerText": "unsigned",
+      "analysis": "解析：PPT第31页指出默认整数可表示正负整数，只希望表示正整数可用unsigned修饰。",
+      "page": 31
+    },
+    {
+      "id": "ch2-ppt-b04",
+      "type": "blank",
+      "stem": "一个表中最多只能有____个AUTO_INCREMENT字段。",
+      "answer": [
+        "一个",
+        "1"
+      ],
+      "answerText": "一个",
+      "analysis": "解析：PPT第32页指出一个表中最多只能有一个AUTO_INCREMENT字段，该字段应为NOT NULL并定义为PRIMARY KEY或UNIQUE。",
+      "page": 32
+    },
+    {
+      "id": "ch2-ppt-b05",
+      "type": "blank",
+      "stem": "“is null”运算符用来判断操作数是否为____。",
+      "answer": [
+        "空值",
+        "null",
+        "NULL"
+      ],
+      "answerText": "空值",
+      "analysis": "解析：PPT第46页指出is null用来判断操作数是否为空值(null)，操作数为null时返回1。",
+      "page": 46
+    },
+    {
+      "id": "ch2-ppt-b06",
+      "type": "blank",
+      "stem": "窗口函数是MySQL____新增的函数，不需要GROUP BY语句。",
+      "answer": [
+        "8.0",
+        "MySQL8.0"
+      ],
+      "answerText": "8.0",
+      "analysis": "解析：PPT第82页指出窗口函数是MySQL8.0新增的函数，不需要GROUP BY语句。",
+      "page": 82
+    }
+  ]
+}

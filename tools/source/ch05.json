@@ -1,0 +1,356 @@
+{
+  "chapter": 5,
+  "title": "索引和视图",
+  "goals": [
+    "理解索引的概念、分类与设置原则",
+    "掌握创建、查看和删除索引的方法",
+    "掌握视图的创建、查看、修改和删除",
+    "掌握通过视图管理表数据及检查视图的应用"
+  ],
+  "ideology": "",
+  "sections": [
+    {
+      "id": "1.1",
+      "title": "理解索引",
+      "pageRange": "3-6",
+      "summary": "本节介绍索引的概念：索引是由表中一列或多列组合而成的特殊数据库结构，是为加速数据检索而创建的分散的物理数据结构。索引依赖表建立，由数据库自动管理和维护，编写SQL时有无索引并无区别。最后给出了索引的优点并强调索引并非越多越好。",
+      "points": [
+        { "term": "索引的定义", "desc": "由数据库表中一列或多列组合而成的特殊数据库结构，利用索引可以快速查询表中的特定记录信息。", "page": 3 },
+        { "term": "索引的本质", "desc": "为加速数据检索而创建的分散的、物理的数据结构，包含从表中生成的键以及映射到指定数据行的存储位置指针。", "page": 4 },
+        { "term": "表的存储组成", "desc": "索引依赖于表建立，表的数据存储由表的数据页面和存放索引的索引页面两部分组成。", "page": 4 },
+        { "term": "索引的自动管理", "desc": "索引一旦创建即由数据库自动管理和维护；编写SQL查询时，有索引表与无索引表没有任何区别。", "page": 5 },
+        { "term": "查询优化器", "desc": "MySQL执行查询时，查询优化器会估计多种检索方法的成本，从中选用最有效的查询计划。", "page": 5 },
+        { "term": "索引的优点", "desc": "加速数据检索、优化查询、强制实施行的唯一性；但索引并不是越多越好，应创建合适的索引。", "page": 6 }
+      ],
+      "code": [],
+      "tips": [
+        "索引由数据库自动维护，编写SQL查询时写法与无索引表完全相同",
+        "索引不是越多越好，要正确认识索引的重要性和设计原则"
+      ]
+    },
+    {
+      "id": "1.2",
+      "title": "索引的分类",
+      "pageRange": "7-11",
+      "summary": "本节按不同标准介绍索引分类：普通索引、唯一性索引、主键索引、全文索引和空间索引；按键值列数分单列索引和复合索引；按存储方式分B-Tree索引和Hash索引，并说明各类型的特点与限制。",
+      "points": [
+        { "term": "索引类型概览", "desc": "MySQL索引通常包括普通索引(index)、唯一性索引(unique)、主键(primary key)、全文索引(fulltext)和空间索引(spatial)等类型。", "page": 7 },
+        { "term": "普通索引", "desc": "关键字为index，是MySQL中的基本索引类型，允许在定义索引的列中插入重复值和空值。", "page": 7 },
+        { "term": "主键索引", "desc": "一种特殊的唯一索引，不允许有空值；一个表只能有一个主键索引。", "page": 7 },
+        { "term": "唯一性索引", "desc": "unique索引列的值必须唯一，允许有空值；组合索引则列值组合必须唯一；一个表上可创建多个unique索引。", "page": 8 },
+        { "term": "全文索引", "desc": "fulltext支持在定义列上全文查找，允许重复值和空值；只能对char、varchar和text列编制且只能在MyISAM表中编制，默认对中文作用不大。", "page": 8 },
+        { "term": "空间索引", "desc": "spatial对空间数据类型字段建立，空间类型有geometry、point、linestring、polygon；列必须声明为not null且只能在MyISAM表中创建。", "page": 9 },
+        { "term": "单列索引与复合索引", "desc": "如果按照创建索引键值的列数分类，索引还可以分为单列索引和复合索引。", "page": 10 },
+        { "term": "Hash索引", "desc": "按存储方式分B-Tree索引和Hash索引，MEMORY引擎支持Hash索引。Hash检索效率高，但仅支持“=”、“in”和“<=>”查询，不能使用范围查询。", "page": 11 }
+      ],
+      "code": [],
+      "tips": [
+        "全文索引和空间索引只能在MyISAM存储引擎的表中创建",
+        "Hash索引仅支持=、in、<=>查询，不能范围查询，且不能避免表扫描"
+      ]
+    },
+    {
+      "id": "1.3",
+      "title": "设置索引的原则",
+      "pageRange": "12-13",
+      "summary": "本节给出创建索引时应遵循的基本原则：避免对经常更新的表创建过多索引，对数据量大而更新少的查询表可建多个索引，常排序分组联合的字段应建索引；避免对大量重复值字段建索引，及时删除无用索引，并给出主键索引和索引键长度的说明。",
+      "points": [
+        { "term": "限制索引数目", "desc": "应避免对经常更新的表创建过多的索引，要限制索引的数目。", "page": 12 },
+        { "term": "按更新与查询比例", "desc": "表的数据量大、对数据更新较少而查询较多时，可以创建多个索引来提高性能。", "page": 12 },
+        { "term": "常排序分组字段", "desc": "经常需要排序、分组和联合操作的字段一定要建立索引，即用于join、where判断和order by排序的字段。", "page": 12 },
+        { "term": "避免大量重复值字段", "desc": "不要对含有大量重复值的字段建立索引，否则可能降低性能；不再使用或很少使用的索引要及时删除。", "page": 13 },
+        { "term": "主键上创建索引", "desc": "在InnoDB中通过主键访问数据效率非常高；每个表只能创建一个主键索引。", "page": 13 },
+        { "term": "索引键长度限制", "desc": "InnoDB数据引擎的索引键最长支持767字节，MyISAM数据引擎支持1000字节。", "page": 13 }
+      ],
+      "code": [],
+      "tips": []
+    },
+    {
+      "id": "1.4",
+      "title": "创建索引",
+      "pageRange": "14-20",
+      "summary": "本节介绍三种创建索引的命令方式：create index语句、创建表时附带创建索引、alter table语句，给出基本语法与多个示例，并说明前缀索引、索引命名、唯一索引与主键的关系以及查看索引的方法。",
+      "points": [
+        { "term": "三种创建方式", "desc": "创建索引通常有3种命令方式：create index创建索引、创建表时附带创建索引、使用alter table语句创建索引。", "page": 14 },
+        { "term": "create index语法", "desc": "基本形式为 create [unique|fulltext|spatial] index index_name on table_name (index_col_name,...)。", "page": 15 },
+        { "term": "前缀索引", "desc": "可用col_name(length)对前缀编制索引；char和varchar只用列的一部分即可，blob和text列编制索引必须给出前缀长度。", "page": 16 },
+        { "term": "前缀索引优点", "desc": "使用列的一部分创建索引可使索引文件大大减小、节省磁盘空间，并有可能提高insert操作的速度。", "page": 16 },
+        { "term": "查看索引", "desc": "若要查看表中已经创建的索引情况，可以使用show index from table_name语句实现。", "page": 20 },
+        { "term": "创建索引说明", "desc": "只有表的所有者才能创建索引，索引名在表中必须唯一；主键索引必定唯一，唯一性索引不一定是主键，一张表只能一个主键但可有多个唯一索引。", "page": 20 },
+        { "term": "唯一索引注意", "desc": "创建unique约束时MySQL会自动创建唯一索引；创建列不能含重复数据且不能有两个或两个以上空值，否则索引创建失败。", "page": 20 }
+      ],
+      "code": [
+        "create [unique|fulltext|spatial] index index_name on table_name (index_col_name,...)",
+        "col_name[(length)] [asc | desc]",
+        "create index phone_index on student(phone asc);",
+        "create unique index cname_index on course (cname);",
+        "create index sc_index on score(studentno,courseno);",
+        "create table if not exists teacher1 (teacherno char(6) not null, tname char(8) not null, department char(16) not null, primary key (teacherno), unique index tname_index(tname), index dep_index(department(5)));",
+        "alter table teacher1 add primary key(teacherno), add index mark(tname, prof);",
+        "show index from table_name;"
+      ],
+      "tips": [
+        "blob和text列创建索引时必须给出前缀长度",
+        "主键索引必定是唯一的，但唯一性索引不一定是主键"
+      ]
+    },
+    {
+      "id": "1.5",
+      "title": "删除索引",
+      "pageRange": "21-22",
+      "summary": "本节介绍删除索引的两种方法：drop index语句和alter table语句，给出语法格式与示例，并说明drop index可删除各种类型索引，删除主键索引需使用drop primary key且不需提供索引名。",
+      "points": [
+        { "term": "drop index语法", "desc": "删除不再需要的索引可用drop语句，语法为 drop index index_name on table_name ;。", "page": 21 },
+        { "term": "alter table删除索引", "desc": "语法为 alter [ignore] table table_name | drop primary key | drop index index_name | drop foreign key fk_symbol。", "page": 22 },
+        { "term": "删除主键索引", "desc": "如要删除主键索引，直接使用drop primary key子句，不需要提供索引名称，因为一个表中只有一个主键。", "page": 22 },
+        { "term": "drop index适用范围", "desc": "drop index子句可以删除各种类型的索引，包括唯一索引。", "page": 22 }
+      ],
+      "code": [
+        "drop index index_name on table_name ;",
+        "drop index mark on teacher1;",
+        "alter [ignore] table table_name | drop primary key | drop index index_name | drop foreign key fk_symbol",
+        "alter table course drop index cname_index;"
+      ],
+      "tips": [
+        "删除主键索引用drop primary key，不需要提供索引名称",
+        "drop index可以删除唯一索引等各类索引"
+      ]
+    },
+    {
+      "id": "2.1",
+      "title": "创建视图",
+      "pageRange": "23-32",
+      "summary": "本节先介绍视图是从一个或多个表通过select导出的虚拟表、只存放定义不存放数据，以及简化查询、屏蔽复杂性、安全性等优点；随后给出创建视图的语法、权限要求和多项限制，并演示在单表、多表和已有视图上创建视图。",
+      "points": [
+        { "term": "视图的定义", "desc": "从一个或多个表及其他视图中通过select导出的虚拟表，数据库只存放视图定义而不存放数据，行和列数据在引用视图时动态生成。", "page": 23 },
+        { "term": "视图的优点", "desc": "简化数据查询和处理、屏蔽数据库的复杂性、提供安全性；通过视图可实现对基表数据的查询与修改。", "page": 24 },
+        { "term": "创建视图的权限", "desc": "要求创建用户具有针对视图的create view权限，以及针对select语句选择的每一列上的某些权限。", "page": 26 },
+        { "term": "创建视图语法", "desc": "create [or replace][algorithm ={undefined|merge|temptable}] view view_name [(column_list)] as select_statement [with[cascaded|local] check option];。", "page": 27 },
+        { "term": "创建视图的限制", "desc": "from子句不能用子查询，select不能引用系统或用户变量及预处理语句参数，不能引用temporary表或创建temporary视图，不能将触发程序与视图关联。", "page": 28 },
+        { "term": "视图建立的基础", "desc": "视图可以建立在一张表上，也可以建立在多张表或既有视图上；定义引用的基本表可以来自另一个数据库，只需在表名前加数据库名。", "page": 26 }
+      ],
+      "code": [
+        "create [or replace][algorithm ={ undefined|merge|temptable }] view view_name [(column_list)] as select_statement [ with[ cascaded|local] check option ] ;",
+        "create view teach_view1 as select * from teacher;",
+        "create view stu_score1 as select student.studentno, sname, phone, cname,final from score join student on student.studentno=score.studentno join course on course.courseno=score.courseno where sex='女' and left(student.studentno,2)='20';",
+        "create view teach_view2 as select teacherno, tname, major from teach_view1 where prof like '%教授' and department='计算机学院';"
+      ],
+      "tips": [
+        "视图的from子句中不能使用子查询",
+        "定义中不能引用temporary表，也不能创建temporary视图",
+        "基本表中添加新字段后，已有视图将不包含新字段"
+      ]
+    },
+    {
+      "id": "2.2",
+      "title": "查看视图的定义",
+      "pageRange": "33-35",
+      "summary": "本节介绍查看视图需要show view权限，并给出四种查看视图的方法：describe语句、show table status语句、show create view语句以及查询information_schema.views表。",
+      "points": [
+        { "term": "查看视图的权限", "desc": "查看视图必须要有show view的权限，MySQL数据库下的user表中保存着这个信息。", "page": 33 },
+        { "term": "查看视图的方法", "desc": "包括describe语句、show table status语句、show create view语句和查询information_schema数据库下的views表等。", "page": 33 },
+        { "term": "describe语句", "desc": "describe语句用于查看视图的基本信息，其基本形式与查看表的形式一样。", "page": 33 },
+        { "term": "show table status", "desc": "使用 show table status like 'view_name'; 可以查看视图的基本信息。", "page": 34 },
+        { "term": "show create view", "desc": "使用 show create view view_name 可以查看视图的详细定义。", "page": 34 },
+        { "term": "views表", "desc": "所有视图的定义都存放在information_schema数据库的views表中，用 select * from information_schema.views; 查看详细信息。", "page": 35 }
+      ],
+      "code": [
+        "show table status like 'view_name';",
+        "show create view view_name",
+        "select * from information_schema.views;"
+      ],
+      "tips": []
+    },
+    {
+      "id": "2.3",
+      "title": "修改视图",
+      "pageRange": "36-38",
+      "summary": "本节说明修改视图是修改已存在视图的定义，以保持视图与基本表一致；介绍create or replace view和alter view两种修改方式及alter的语法格式，并给出修改teach_view2的示例。",
+      "points": [
+        { "term": "修改视图的概念", "desc": "修改视图是指修改数据库中已存在视图的定义；当基本表字段改变时可通过修改视图保持两者一致。", "page": 36 },
+        { "term": "create or replace view", "desc": "该语句使用灵活：视图已存在时进行修改，视图不存在时可以创建视图。", "page": 36 },
+        { "term": "alter view语法", "desc": "alter [algorithm = {undefined|merge|temptable}] view view_name [(column_list)] as select语句 [with [cascaded|local]check option];。", "page": 37 },
+        { "term": "修改视图示例", "desc": "例9用alter view修改teach_view2，在视图名后指明视图列名称，统计计算机学院和材料学院教师中的教授和副教授。", "page": 38 }
+      ],
+      "code": [
+        "alter [algorithm = {undefined|merge|temptable}] view view_name [(column_list)] as select语句 [with [cascaded|local]check option];",
+        "alter view teach_view2(教师号,教师名,专业) as select teacherno, tname, major from teach_view1 where prof like '%教授' and (department='计算机学院' or department='材料学院');"
+      ],
+      "tips": []
+    },
+    {
+      "id": "2.4",
+      "title": "删除视图",
+      "pageRange": "39-40",
+      "summary": "本节介绍删除视图使用drop view语句，需拥有drop权限，删除时只删除视图定义不删除数据，并说明可一次删除多个视图及基本语法格式。",
+      "points": [
+        { "term": "删除视图的概念", "desc": "删除视图是删除数据库中已存在的视图；删除时只删除视图的定义，不会删除数据。", "page": 39 },
+        { "term": "drop view权限与多视图", "desc": "用户必须拥有drop权限才能使用drop view；该命令可删除多个视图，各视图名之间用逗号分隔。", "page": 39 },
+        { "term": "drop view语法", "desc": "基本格式为 drop view [if exists] view_name。", "page": 40 }
+      ],
+      "code": [
+        "drop view [if exists] view_name",
+        "drop view V1_student;"
+      ],
+      "tips": [
+        "删除视图只删除定义，不会删除基表数据",
+        "drop view可一次删除多个视图，视图名之间用逗号分隔"
+      ]
+    },
+    {
+      "id": "3.1",
+      "title": "使用视图管理表数据",
+      "pageRange": "41-47",
+      "summary": "本节介绍视图的检索及通过视图对基表进行插入、修改、删除操作：视图查询几乎无限制，更新需有相应权限；说明单表视图可直接更新、多表视图一次只能改一个基表，并列出不可修改视图的各类结构。",
+      "points": [
+        { "term": "视图应用内容", "desc": "视图的使用主要包括视图的检索以及通过视图对基表进行插入、修改、删除操作；检索几乎无限制，更新有一定限制条件。", "page": 41 },
+        { "term": "视图查询", "desc": "使用视图进行查询实际上就是把视图作为数据源，实现查询功能。", "page": 42 },
+        { "term": "视图统计计算", "desc": "可用视图进行统计计算，如创建course_avg视图用avg(final)统计各门课程平均成绩并按课程名称排序。", "page": 43 },
+        { "term": "视图修改基表", "desc": "在视图中进行insert、update和delete等操作而修改基表的数据，需要具有执行相关操作的权限。", "page": 44 },
+        { "term": "单表视图可更新", "desc": "视图若只依赖于一个基表，则可以直接通过更新视图来更新基本表的数据。", "page": 46 },
+        { "term": "多表视图限制", "desc": "若一个视图依赖于多张基表，则一次只能修改一个基表的数据，不能同时修改多个基本表的数据。", "page": 46 },
+        { "term": "不可修改的视图", "desc": "视图列含聚合函数、表达式计算列、distinct、group by/order by/having、union、子查询、from多表或引用不可更新视图时均不可修改。", "page": 47 }
+      ],
+      "code": [
+        "select 学号, 姓名,课程号,成绩 from stu_view2 where 课程号='c08123' and 成绩 > 80;",
+        "create view course_avg as select cname 课程名, avg(final) 平均成绩 from score join course on score.courseno= course.courseno group by cname desc;",
+        "insert into teach_view1(teacherno,tname,major,prof,department) values ('t06027' , '陶期年' , '纳米技术' , '教授' , '材料学院' );",
+        "update teach_view1 set prof = '副教授' where teacherno = 't07019';",
+        "delete from teach_view1 where teacherno = 't08017';"
+      ],
+      "tips": [
+        "依赖多表的视图一次只能修改一个基表的数据",
+        "含聚合函数、distinct、group by、union等结构的视图不可修改"
+      ]
+    },
+    {
+      "id": "3.2",
+      "title": "检查视图的应用",
+      "pageRange": "48-51",
+      "summary": "本节介绍视图分为普通视图与检查视图，说明with check option使更新操作必须满足检查条件，并通过V_dept视图的插入示例展示不满足条件时报ERROR 1369、更新失败。",
+      "points": [
+        { "term": "普通视图与检查视图", "desc": "视图可分为普通视图与检查视图；没有with_check_option（值为0）时为普通视图，不具备检查功能。", "page": 48 },
+        { "term": "with check option", "desc": "使用with check option子句后，通过检查视图更新基表数据时，只有满足检查条件的更新语句才能成功执行。", "page": 48 },
+        { "term": "检查视图示例", "desc": "创建V_dept视图包含所有部门为“计算机学院”的老师数据，并限制插入数据中部门必须为“计算机学院”。", "page": 49 },
+        { "term": "检查失败", "desc": "通过V_dept插入“软件学院”的记录时报 ERROR 1369 (HY000): check option failed，说明检查视图先行检查，不满足条件则更新失败。", "page": 51 }
+      ],
+      "code": [
+        "create view V_dept as select teacherno,tname,major,prof, department from teacher where department ='计算机学院' with check option;",
+        "insert into V_dept values('t08017','时观','金融管理','副教授','计算机学院');"
+      ],
+      "tips": [
+        "with check option要求更新数据满足检查条件，否则报ERROR 1369且更新失败"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "ch5-ppt-s01",
+      "type": "single",
+      "stem": "在MySQL中，索引是为了加速数据检索而创建的一种（ ）。",
+      "options": ["A. 逻辑的数据结构", "B. 分散的、物理的数据结构", "C. 临时表", "D. 虚拟表"],
+      "answer": "B",
+      "analysis": "解析：PPT第4页指出，MySQL的索引是为了加速对数据进行检索而创建的一种分散的、物理的数据结构。故选B。",
+      "page": 4
+    },
+    {
+      "id": "ch5-ppt-s02",
+      "type": "single",
+      "stem": "下列关于MySQL索引的说法，正确的是（ ）。",
+      "options": ["A. 一个表可以有多个主键索引", "B. 唯一性索引一定就是主键索引", "C. 主键索引不允许有空值，一个表只能有一个", "D. 普通索引不允许插入重复值"],
+      "answer": "C",
+      "analysis": "解析：PPT第7页说明主键索引是一种特殊的唯一索引，不允许有空值，一个表只能有一个；第20页说明唯一性索引不一定是主键，普通索引允许重复值。故选C。",
+      "page": 7
+    },
+    {
+      "id": "ch5-ppt-s03",
+      "type": "single",
+      "stem": "MySQL中创建全文索引（fulltext）时，只能在（ ）表中编制。",
+      "options": ["A. InnoDB", "B. MyISAM", "C. MEMORY", "D. 任意存储引擎"],
+      "answer": "B",
+      "analysis": "解析：PPT第8页指出，全文索引只能对char、varchar和text类型的列编制索引，并且只能在MyISAM表中编制，即只有MyISAM存储引擎支持全文索引。故选B。",
+      "page": 8
+    },
+    {
+      "id": "ch5-ppt-s04",
+      "type": "single",
+      "stem": "MySQL中支持Hash索引的存储引擎是（ ）。",
+      "options": ["A. InnoDB", "B. MyISAM", "C. MEMORY", "D. ARCHIVE"],
+      "answer": "C",
+      "analysis": "解析：PPT第11页指出，按存储方式分类MySQL索引分为B-Tree索引和Hash索引，MySQL的MEMORY数据引擎支持Hash索引。故选C。",
+      "page": 11
+    },
+    {
+      "id": "ch5-ppt-s05",
+      "type": "single",
+      "stem": "要删除表中的主键索引，应直接使用的子句是（ ）。",
+      "options": ["A. drop index primary", "B. drop primary key", "C. drop key", "D. drop unique"],
+      "answer": "B",
+      "analysis": "解析：PPT第22页说明，如要删除主键索引，则直接使用drop primary key子句进行删除，不需要提供索引名称，因为一个表中只有一个主键。故选B。",
+      "page": 22
+    },
+    {
+      "id": "ch5-ppt-s06",
+      "type": "single",
+      "stem": "关于MySQL中的视图，下列说法正确的是（ ）。",
+      "options": ["A. 视图中存放了实际的数据", "B. 视图是通过select导出的虚拟表，数据库只存放其定义", "C. 视图不能基于多个表创建", "D. 删除视图时会同时删除基表数据"],
+      "answer": "B",
+      "analysis": "解析：PPT第23页指出，视图是从一个或多个表及其他视图中通过select导出的虚拟表，数据库中只存放视图的定义而不存放数据；第26页说明视图可建在多张表上；第39页说明删除视图只删除定义不删除数据。故选B。",
+      "page": 23
+    },
+    {
+      "id": "ch5-ppt-s07",
+      "type": "single",
+      "stem": "通过检查视图更新基表数据时，只有满足（ ）的更新语句才能成功执行。",
+      "options": ["A. 任意更新", "B. 检查条件", "C. 主键唯一条件", "D. 单表条件"],
+      "answer": "B",
+      "analysis": "解析：PPT第48页指出，如果使用了with check option子句，在通过检查视图更新基表数据时，只有满足检查条件的更新语句才能成功执行。故选B。",
+      "page": 48
+    },
+    {
+      "id": "ch5-ppt-b01",
+      "type": "blank",
+      "stem": "在数据库中使用索引的优点包括加速数据检索、优化查询和强制实施行的____。",
+      "answer": ["唯一性", "唯一"],
+      "answerText": "唯一性",
+      "analysis": "解析：PPT第6页列出使用索引的优点：加速数据检索、优化查询、强制实施行的唯一性。",
+      "page": 6
+    },
+    {
+      "id": "ch5-ppt-b02",
+      "type": "blank",
+      "stem": "按照存储方式分类，MySQL的索引分为B-Tree索引和____索引。",
+      "answer": ["Hash", "hash", "哈希"],
+      "answerText": "Hash",
+      "analysis": "解析：PPT第11页指出，如果按照存储方式分类，MySQL的索引分为B-Tree索引和Hash索引。",
+      "page": 11
+    },
+    {
+      "id": "ch5-ppt-b03",
+      "type": "blank",
+      "stem": "为student表的phone列建立升序普通索引，应写为：create ____ phone_index on student(phone asc);",
+      "answer": ["index", "INDEX"],
+      "answerText": "index",
+      "analysis": "解析：PPT第17页例1给出语句 create index phone_index on student(phone asc);，普通索引的关键字是index。",
+      "page": 17
+    },
+    {
+      "id": "ch5-ppt-b04",
+      "type": "blank",
+      "stem": "若要查看表中已经创建的索引的情况，可以使用____ from table_name语句实现。",
+      "answer": ["show index", "SHOW INDEX", "show indexes"],
+      "answerText": "show index",
+      "analysis": "解析：PPT第20页说明，若要查看表中已经创建索引的情况，可以使用show index from table_name语句实现。",
+      "page": 20
+    },
+    {
+      "id": "ch5-ppt-b05",
+      "type": "blank",
+      "stem": "视图是从一个或多个表中通过select语句导出的虚拟表，数据库中只存放了视图的____，而并没有存放视图中的数据。",
+      "answer": ["定义", "定义（不存放数据）"],
+      "answerText": "定义",
+      "analysis": "解析：PPT第23页指出，数据库中只存放了视图的定义，而并没有存放视图中的数据。",
+      "page": 23
+    }
+  ]
+}

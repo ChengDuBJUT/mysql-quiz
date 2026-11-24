@@ -1,0 +1,1043 @@
+{
+  "chapter": 3,
+  "title": "MySQL8.0数据库和表的基本操作",
+  "goals": [
+    "了解MySQL数据库文件、系统数据库及存储引擎，理解数据库设计过程与规范化",
+    "掌握创建、修改、查看和删除数据库的方法",
+    "掌握InnoDB表空间、创建/查看/修改/删除表及临时表管理",
+    "掌握表记录的插入、修改、删除操作与数据完整性约束"
+  ],
+  "ideology": "",
+  "sections": [
+    {
+      "id": "1.1",
+      "title": "MySQL数据库基本知识",
+      "pageRange": "4-6",
+      "summary": "介绍MySQL8.0数据库文件的存放位置与.ibd文件、自动建立的系统数据库，以及查看数据库的命令。",
+      "points": [
+        {
+          "term": "数据库文件",
+          "desc": "每个数据库文件存放在与数据库同名的文件夹中，默认位置C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Data\\。",
+          "page": 4
+        },
+        {
+          "term": ".ibd文件",
+          "desc": "MySQL8.0数据表文件合并到mysql.ibd中，每个数据表内容存储在同名的扩展名为.ibd的文件中。",
+          "page": 4
+        },
+        {
+          "term": "系统数据库",
+          "desc": "安装完成后在data目录自动创建几个必须的数据库，可用show databases查看。",
+          "page": 5
+        },
+        {
+          "term": "查看数据库",
+          "desc": "使用show databases命令查看MySQL服务器中的所有数据库信息。",
+          "page": 6
+        }
+      ],
+      "code": [
+        "show databases;"
+      ],
+      "tips": [
+        "数据库默认存放位置可通过配置向导或手工配置修改"
+      ]
+    },
+    {
+      "id": "1.2",
+      "title": "MySQL存储引擎",
+      "pageRange": "7-13",
+      "summary": "解释存储引擎概念及MySQL8.0支持的9种引擎，重点介绍InnoDB、MyISAM、MEMORY的特点与选择方法。",
+      "points": [
+        {
+          "term": "存储引擎",
+          "desc": "数据库底层软件组件，决定表在计算机中的存储方式，简而言之就是指表的类型。",
+          "page": 7
+        },
+        {
+          "term": "支持的引擎",
+          "desc": "MySQL8.0支持InnoDB、MyISAM、Memory、CSV、Archive等共9种存储引擎。",
+          "page": 8
+        },
+        {
+          "term": "默认存储引擎",
+          "desc": "MySQL默认存储引擎是InnoDB，可用set default_storage_engine=MyISAM设置其他引擎。",
+          "page": 9
+        },
+        {
+          "term": "InnoDB",
+          "desc": "事务型数据库首选引擎，兼具原子性、一致性、隔离性、持久性，支持提交回滚崩溃恢复、行级锁定和外键。",
+          "page": 10
+        },
+        {
+          "term": "InnoDB特性",
+          "desc": "支持auto_increment和全文检索，提供OLTP支持，适合大量增删修改数据的表。",
+          "page": 10
+        },
+        {
+          "term": "MyISAM",
+          "desc": "不支持事务和外键约束，访问速度快、占用空间小，适合以SELECT/INSERT为主的表。",
+          "page": 12
+        },
+        {
+          "term": "MEMORY",
+          "desc": "所有数据存储在RAM中，快速访问非关键数据，大小受max_heap_table_size变量约束。",
+          "page": 12
+        },
+        {
+          "term": "设置引擎",
+          "desc": "每个表都有存储引擎，可在创建时指定或用alter table修改，通过engine关键字设置。",
+          "page": 13
+        }
+      ],
+      "code": [
+        "set default_storage_engine=MyISAM;",
+        "show engines;",
+        "engine"
+      ],
+      "tips": [
+        "InnoDB支持事务、行级锁和外键；MyISAM不支持事务和外键但访问快"
+      ]
+    },
+    {
+      "id": "2.1",
+      "title": "数据库设计的基本过程",
+      "pageRange": "16-18",
+      "summary": "介绍数据库设计的目标，以及需求分析、概念设计、逻辑设计、物理设计四个阶段的主要任务。",
+      "points": [
+        {
+          "term": "数据库设计",
+          "desc": "对给定应用环境构造优化的数据库逻辑模式和物理结构，建立数据库及应用系统以有效存储管理数据。",
+          "page": 14
+        },
+        {
+          "term": "设计目标",
+          "desc": "为用户和各种应用系统提供信息基础设施和高效率的运行环境。",
+          "page": 14
+        },
+        {
+          "term": "四个阶段",
+          "desc": "数据库设计分为需求分析、概念设计、逻辑设计和物理设计4个阶段。",
+          "page": 16
+        },
+        {
+          "term": "需求分析",
+          "desc": "通过调查研究了解用户的数据要求和处理要求，按一定格式整理形成需求说明书。",
+          "page": 17
+        },
+        {
+          "term": "概念设计",
+          "desc": "对需求说明书的数据和处理要求抽象综合，构造概念模型；实体关系E-R方法最常用。",
+          "page": 17
+        },
+        {
+          "term": "逻辑设计",
+          "desc": "把与DBMS无关的概念数据模型转换成等价的并为特定DBMS接受的逻辑模型。",
+          "page": 18
+        },
+        {
+          "term": "物理设计",
+          "desc": "把逻辑数据库在物理上实现，设计数据存储形式和存取路径如文件结构、索引设计。",
+          "page": 18
+        }
+      ],
+      "code": [],
+      "tips": [
+        "四阶段为需求分析→概念设计→逻辑设计→物理设计，之后是数据库创建和运行维护"
+      ]
+    },
+    {
+      "id": "2.2",
+      "title": "教务管理数据库设计的规范化",
+      "pageRange": "19-25",
+      "summary": "以教务管理数据库为例，说明数据依赖、范式与规范化，并用1NF、2NF、3NF逐步消除冗余与异常。",
+      "points": [
+        {
+          "term": "规范化理论",
+          "desc": "满足一定条件的关系模式称为范式NF，低级范式通过分解投影可转换成多个高级范式，过程称规范化。",
+          "page": 19
+        },
+        {
+          "term": "数据依赖",
+          "desc": "一个关系内部属性与属性之间的约束关系，通过属性值相等与否体现，是数据内在性质和语义体现。",
+          "page": 20
+        },
+        {
+          "term": "单一关系问题",
+          "desc": "用单一关系模式表示学生时存在数据冗余度大、更新异常、插入异常和删除异常问题。",
+          "page": 21
+        },
+        {
+          "term": "第一范式1NF",
+          "desc": "目标是确保每列原子性，每列都是不可再分的最小数据单元。",
+          "page": 22
+        },
+        {
+          "term": "第二范式2NF",
+          "desc": "在1NF基础上确保表中每列都和码相关，每个非主属性都完全函数依赖于码。",
+          "page": 23
+        },
+        {
+          "term": "2NF分解",
+          "desc": "将学生关系分解为学生、课程、选修三个表，消除部分依赖。",
+          "page": 23
+        },
+        {
+          "term": "第三范式3NF",
+          "desc": "在2NF基础上确保每列都和码直接相关而非间接相关，消除非码列间的相互依赖。",
+          "page": 24
+        }
+      ],
+      "code": [
+        "U={学生学号，学生姓名，学生性别，电话，课程号，课程名称，成绩}",
+        "学生 {学生学号，学生姓名，学生性别，电话}",
+        "课程 {课程号，课程名称}",
+        "选修 {学生学号，课程号，成绩}"
+      ],
+      "tips": [
+        "单一关系模式存在冗余大、更新/插入/删除异常，需按范式逐步分解"
+      ]
+    },
+    {
+      "id": "3.1",
+      "title": "创建数据库",
+      "pageRange": "27-28",
+      "summary": "介绍创建数据库的意义，给出create database的语法结构及创建数据库示例。",
+      "points": [
+        {
+          "term": "创建数据库",
+          "desc": "在数据库系统中划分一块空间存储数据，是表操作和数据库管理的基础。",
+          "page": 27
+        },
+        {
+          "term": "语法结构",
+          "desc": "使用create database或create schema命令创建数据库。",
+          "page": 27
+        },
+        {
+          "term": "示例",
+          "desc": "create database if not exists mysqltest创建一个名称为mysqltest的数据库。",
+          "page": 28
+        },
+        {
+          "term": "指定字符集",
+          "desc": "创建teaching数据库时可指定字符集utf8mb4和校对原则utf8mb4_0900_ai_ci。",
+          "page": 28
+        }
+      ],
+      "code": [
+        "create {database|schema}[if not exists]databasename [[default]character set charset_name] [[default]collate collation_name];",
+        "create database if not exists mysqltest;",
+        "create database teaching default character set utf8mb4 default collate utf8mb4_0900_ai_ci;"
+      ],
+      "tips": [
+        "if not exists可避免数据库已存在时报错"
+      ]
+    },
+    {
+      "id": "3.2",
+      "title": "管理数据库",
+      "pageRange": "29-33",
+      "summary": "介绍打开、修改、显示和删除数据库的语句，并提醒删除数据库会删除所有表和数据。",
+      "points": [
+        {
+          "term": "打开数据库",
+          "desc": "用USE语句打开一个数据库，使其成为当前默认数据库。",
+          "page": 29
+        },
+        {
+          "term": "修改数据库",
+          "desc": "用alter {database|schema}修改数据库的字符集和校对原则等参数。",
+          "page": 30
+        },
+        {
+          "term": "修改示例",
+          "desc": "可将mysqltest库字符集改为gb2312、校对原则改为gb2312_chinese_ci。",
+          "page": 31
+        },
+        {
+          "term": "显示结构",
+          "desc": "用show create database查看数据库的相关信息如版本id号、默认字符集等。",
+          "page": 32
+        },
+        {
+          "term": "删除数据库",
+          "desc": "用drop database [if exists]删除已存在数据库，删除后原来分配的空间被收回。",
+          "page": 33
+        },
+        {
+          "term": "删除注意",
+          "desc": "删除数据库会删除该数据库中所有的表和所有数据，删除前最好存有备份。",
+          "page": 33
+        }
+      ],
+      "code": [
+        "use mysqltest;",
+        "alter {database | schema} [db_name] [default] character set charset_name [|[default] collate collation_name];",
+        "alter database mysqltest default character set gb2312 collate gb2312_chinese_ci;",
+        "show create database teaching;",
+        "drop database [if exists] db_name",
+        "drop database mysqltest;"
+      ],
+      "tips": [
+        "删除数据库前最好备份，因为会删除所有表和数据"
+      ]
+    },
+    {
+      "id": "4.1",
+      "title": "InnoDB存储引擎的表空间",
+      "pageRange": "37-43",
+      "summary": "介绍InnoDB表空间管理的共享表空间与独立表空间，讲解查看、比较及相互转换的方法。",
+      "points": [
+        {
+          "term": "表空间",
+          "desc": "InnoDB表空间是MySQL数据表存储空间的管理模式，分共享表空间和独立表空间两种。",
+          "page": 37
+        },
+        {
+          "term": "共享表空间",
+          "desc": "所有InnoDB表的数据、索引、元数据及事务回滚信息全部存放在ibdata1，初始12M可自动扩展。",
+          "page": 38
+        },
+        {
+          "term": "独立表空间",
+          "desc": "每个表以独立文件存储，每个表都有一个.ibd文件，包含表的数据和索引内容。",
+          "page": 38
+        },
+        {
+          "term": "查看表空间",
+          "desc": "用show variables like 'InnoDB_data%'查看表空间信息。",
+          "page": 39
+        },
+        {
+          "term": "共享表空间缺点",
+          "desc": "分配后不能回缩，大量删除后表空间会有大量空隙，不适合频繁删除的统计分析应用。",
+          "page": 40
+        },
+        {
+          "term": "独立表空间优点",
+          "desc": "可实现单表在不同数据库移动，Drop table能自动回收表空间，删除碎片影响小。",
+          "page": 41
+        },
+        {
+          "term": "查看类型",
+          "desc": "show variables like \"InnoDB_file_per_table\"；值为ON代表独立表空间，OFF代表共享表空间。",
+          "page": 42
+        },
+        {
+          "term": "转换方法",
+          "desc": "修改InnoDB_file_per_table参数值可改变表空间管理方式，设置参数为1可将共享转为独立。",
+          "page": 43
+        }
+      ],
+      "code": [
+        "show variables like 'InnoDB_data%';",
+        "show variables like \"InnoDB_file_per_table\";",
+        "alter table TableName engine=innodb;"
+      ],
+      "tips": [
+        "ON代表独立表空间，OFF代表共享表空间；独立表空间Drop table能自动回收"
+      ]
+    },
+    {
+      "id": "4.2",
+      "title": "创建数据库表",
+      "pageRange": "44-52",
+      "summary": "给出创建表的语法结构与字段定义格式，并通过student、course、score、sc等示例说明建表方法。",
+      "points": [
+        {
+          "term": "创建表语法",
+          "desc": "使用create [temporary] table [if not exists] table_name创建表。",
+          "page": 44
+        },
+        {
+          "term": "字段定义",
+          "desc": "col_name type可跟not null、default、auto_increment、primary key、comment等选项。",
+          "page": 45
+        },
+        {
+          "term": "student表",
+          "desc": "含studentno、sname、sex、birthdate、entrance、phone、Email列，主键为studentno。",
+          "page": 46
+        },
+        {
+          "term": "course表",
+          "desc": "含courseno、cname、type、period、exp、term列，主键为courseno。",
+          "page": 47
+        },
+        {
+          "term": "score表",
+          "desc": "主键由studentno和courseno两个列构成，为复合主键。",
+          "page": 48
+        },
+        {
+          "term": "auto_increment",
+          "desc": "整数列可拥有该附加属性，为插入的新记录自动生成唯一序列编码，默认从1开始自增。",
+          "page": 51
+        },
+        {
+          "term": "计数器持久化",
+          "desc": "自增主键计数器持久化到重做日志，数据库重启时InnoDB据此初始化计数器内存值。",
+          "page": 51
+        },
+        {
+          "term": "sc表",
+          "desc": "选课号sc_no为自动增量，选课时间sc_time默认为当前时间。",
+          "page": 52
+        }
+      ],
+      "code": [
+        "create [temporary]table[if not exists]table_name [([column_definition], ...|[index_definition])] [table_option][select_statement];",
+        "col_name type [not null | null] [default default_value] [auto_increment] [unique [key] |[primary] key] [comment 'string'] [reference_definition]",
+        "create table if not exists student (studentno char(11) not null comment'学号', sname char(8) not null comment'姓名', sex enum('男', '女') default '男' comment'性别', birthdate date not null comment'出生日期', entrance int(3) null comment'入学成绩', phone varchar(12) not null comment'电话', Email varchar(20) not null comment'电子信箱', primary key (studentno));",
+        "create table if not exists score (studentno char(11) not null, courseno char(6) not null, daily float(4,1) default 0, final float(4,1) default 0, primary key (studentno , courseno));",
+        "create table sc (sc_no int(6) not null auto_increment, studentno char(11) not null, courseno char(6) not null, teacherno char(6) not null, score float(4,1) null, sc_time timestamp not null default now(), primary key (sc_no));"
+      ],
+      "tips": [
+        "复合主键只能定义为表级完整性约束"
+      ]
+    },
+    {
+      "id": "4.3",
+      "title": "查看表",
+      "pageRange": "53-54",
+      "summary": "介绍用show tables查看已创建的表，用describe和show create table查看表结构与详细信息。",
+      "points": [
+        {
+          "term": "查看表",
+          "desc": "表创建后可用show tables命令查询已创建的表的情况。",
+          "page": 53
+        },
+        {
+          "term": "describe",
+          "desc": "describe语句可以查看表的基本定义，如describe student。",
+          "page": 53
+        },
+        {
+          "term": "show create table",
+          "desc": "可查看表字段名、数据类型、完整性约束条件，以及默认存储引擎和字符编码。",
+          "page": 54
+        }
+      ],
+      "code": [
+        "show tables;",
+        "describe student;",
+        "show create table course;"
+      ],
+      "tips": []
+    },
+    {
+      "id": "4.4",
+      "title": "修改数据库表",
+      "pageRange": "55-59",
+      "summary": "说明修改表无需重新加载数据，介绍用alter table增加字段、修改表名、修改字段类型及删除字段。",
+      "points": [
+        {
+          "term": "修改表",
+          "desc": "修改已存在表的定义，不需要重新加载数据，也不会影响正在进行的服务。",
+          "page": 55
+        },
+        {
+          "term": "增加字段",
+          "desc": "alter table可增加无约束或有约束字段，可在表第一个位置或指定位置之后增加。",
+          "page": 56
+        },
+        {
+          "term": "修改表名",
+          "desc": "用alter table ... rename to修改表名。",
+          "page": 57
+        },
+        {
+          "term": "修改字段类型",
+          "desc": "用modify修改字段的数据类型，如把course表的type字段改为enum类型。",
+          "page": 58
+        },
+        {
+          "term": "删除字段",
+          "desc": "用drop删除表中已定义的某个字段。",
+          "page": 59
+        }
+      ],
+      "code": [
+        "alter table student add address varchar(30) not null after Email;",
+        "alter table sc rename to se_course;",
+        "alter table course modify type enum('必修','选修') default '必修';",
+        "alter table student drop address;"
+      ],
+      "tips": [
+        "after Email可指定新字段插入位置"
+      ]
+    },
+    {
+      "id": "4.5",
+      "title": "删除数据库表",
+      "pageRange": "60-60",
+      "summary": "介绍用drop table删除表及其语法格式，并提醒删除表会删除表中所有数据。",
+      "points": [
+        {
+          "term": "删除表",
+          "desc": "删除数据库中已存在的表，会删除表中的所有数据，需特别注意。",
+          "page": 60
+        },
+        {
+          "term": "语法格式",
+          "desc": "通过drop table语句删除表，基本格式为drop table table_name。",
+          "page": 60
+        },
+        {
+          "term": "删除注意",
+          "desc": "删除表时会删除表中的所有数据，因此删除时要特别注意。",
+          "page": 60
+        }
+      ],
+      "code": [
+        "drop table table_name",
+        "use mytest;",
+        "create table example(today datetime, name char(20));",
+        "desc example;",
+        "drop table example;"
+      ],
+      "tips": [
+        "删除表会删除表中所有数据"
+      ]
+    },
+    {
+      "id": "4.6",
+      "title": "临时表的管理",
+      "pageRange": "61-62",
+      "summary": "介绍临时表适用场景、创建方法、生命周期及使用注意事项。",
+      "points": [
+        {
+          "term": "临时表",
+          "desc": "适合在非常大的表上偶尔运行很多查询获得小子集时，把记录选到临时表可更快。",
+          "page": 61
+        },
+        {
+          "term": "创建",
+          "desc": "用create temporary table创建临时表。",
+          "page": 61
+        },
+        {
+          "term": "生命周期",
+          "desc": "临时表在连接MySQL期间存在，断开时MySQL自动删除并释放空间。",
+          "page": 62
+        },
+        {
+          "term": "注意事项",
+          "desc": "创建需create temporary table权限；show tables不列举临时表；不能用rename重命名临时表。",
+          "page": 62
+        }
+      ],
+      "code": [
+        "create temporary table tmp_emp1 (name varchar(10) not null, value integer not null);",
+        "describe tmp_emp1;",
+        "drop table tmp_table"
+      ],
+      "tips": [
+        "show tables不会列举临时表；不能用rename重命名临时表"
+      ]
+    },
+    {
+      "id": "5.1",
+      "title": "表记录的插入",
+      "pageRange": "64-74",
+      "summary": "介绍insert into、replace into、load data、set子句及图片数据等多种插入数据的方法与说明。",
+      "points": [
+        {
+          "term": "插入方式",
+          "desc": "常见有insert into、replace into插入，也可用load data infile将文本文件数据插入表中。",
+          "page": 64
+        },
+        {
+          "term": "insert语法",
+          "desc": "insert|replace[into]table_name[(col_name,...)] values(...)或set col_name=expr。",
+          "page": 64
+        },
+        {
+          "term": "values注意",
+          "desc": "数据顺序要与列顺序对应；不给出列名时values要给出每列值；列值为空必须置为null。",
+          "page": 69
+        },
+        {
+          "term": "replace into",
+          "desc": "先尝试插入，若已有此行数据（按主键或唯一索引判断）则先删除再插入新数据。",
+          "page": 70
+        },
+        {
+          "term": "插入其他表数据",
+          "desc": "insert into tablename1 select * from tablename2可成批插入，要求两个表结构相同。",
+          "page": 70
+        },
+        {
+          "term": "load data",
+          "desc": "load data infile 'filename.txt' into table tablename将文本文件数据装入表中。",
+          "page": 71
+        },
+        {
+          "term": "set子句",
+          "desc": "用set子句直接赋值可不按列顺序插入数据，对允许空值的列可不插入。",
+          "page": 72
+        },
+        {
+          "term": "图片数据",
+          "desc": "图片以路径形式存储，或用load_file()函数直接插入图片本身，字段要用blob类型。",
+          "page": 73
+        }
+      ],
+      "code": [
+        "insert|replace[into]table_name[(col_name,...)] values({expr|default},...),(...),... |set col_name={expr|default}, ...",
+        "insert into student (studentno,sname,sex,birthdate,entrance,phone,Email) values ('20112100072','许东方','男','2002/2/4',658,'12545678998','su12@163.com');",
+        "replace into course values ('c05103','电子技术','必修','64','16','2');",
+        "insert into tablename1 select * from tablename2;",
+        "load data infile 'filename.txt' into table tablename",
+        "insert into se_course set studentno='21125111109',courseno='c06172',teacherno='t05017';"
+      ],
+      "tips": [
+        "向已有主键记录插入会产生主键冲突错误；图片字段用blob类型"
+      ]
+    },
+    {
+      "id": "5.2",
+      "title": "表记录的修改",
+      "pageRange": "75-77",
+      "summary": "介绍update...set语法及where子句作用，通过示例说明修改单条和多条记录的方法。",
+      "points": [
+        {
+          "term": "update语法",
+          "desc": "update table_name set col_name1=expr1[,...] [where子句]修改表数据。",
+          "page": 75
+        },
+        {
+          "term": "set子句",
+          "desc": "根据where条件对符合条件的数据行修改，若不设where子句则更新所有行。",
+          "page": 75
+        },
+        {
+          "term": "多列修改",
+          "desc": "expr可为常量、变量或表达式，可同时修改多个列值，中间用逗号隔开。",
+          "page": 75
+        },
+        {
+          "term": "示例",
+          "desc": "将学号20112111208学生c06108课程的daily修改为87分。",
+          "page": 76
+        },
+        {
+          "term": "表达式修改",
+          "desc": "可将入学成绩高于700分的entrance增加5%，即entrance=entrance*1.05。",
+          "page": 77
+        }
+      ],
+      "code": [
+        "update table_name set col_name1=expr1 [,col_name2=expr2 ...] [where子句]",
+        "update score set daily=87 where studentno='20112111208' && courseno='c06108';",
+        "update student01 set entrance=entrance*1.05 where entrance>700;"
+      ],
+      "tips": [
+        "不设where子句会更新表中所有行，使用时务必小心"
+      ]
+    },
+    {
+      "id": "5.3",
+      "title": "表记录的删除",
+      "pageRange": "78-79",
+      "summary": "介绍delete from语法及其可选子句，通过示例说明按条件和按排序限制删除记录。",
+      "points": [
+        {
+          "term": "delete语法",
+          "desc": "delete [low_priority] [quick] [ignore] from tbl_name后可跟where、order by、limit子句。",
+          "page": 78
+        },
+        {
+          "term": "条件删除",
+          "desc": "delete from student01 where entrance<750删除入学成绩低于750分的记录。",
+          "page": 79
+        },
+        {
+          "term": "排序限制删除",
+          "desc": "结合order by和limit可删除入学成绩最低的2行记录。",
+          "page": 79
+        }
+      ],
+      "code": [
+        "delete [low_priority] [quick] [ignore] from tbl_name [where子句] [order by子句] [limit row_count]",
+        "delete from student01 where entrance <750;",
+        "delete from student01 order by entrance limit 2;"
+      ],
+      "tips": [
+        "不加where子句会删除表中全部记录"
+      ]
+    },
+    {
+      "id": "6.1",
+      "title": "非空约束",
+      "pageRange": "82-82",
+      "summary": "介绍null与not null的含义及非空约束的作用。",
+      "points": [
+        {
+          "term": "null",
+          "desc": "允许空值，表示数值未确定。",
+          "page": 82
+        },
+        {
+          "term": "not null",
+          "desc": "不允许空值，确保数据列中必须包含有意义的值。",
+          "page": 82
+        },
+        {
+          "term": "非空约束",
+          "desc": "定义表结构时每个字段都要选择是否为null值，这是对表中数据提出的约束条件。",
+          "page": 82
+        }
+      ],
+      "code": [],
+      "tips": []
+    },
+    {
+      "id": "6.2",
+      "title": "主键约束",
+      "pageRange": "83-86",
+      "summary": "介绍主键的作用与特点、表级和列级主键约束的定义方式及修改主键的方法。",
+      "points": [
+        {
+          "term": "主键作用",
+          "desc": "设置主键可帮助MySQL以最快速度查找表中的指定信息。",
+          "page": 83
+        },
+        {
+          "term": "primary key",
+          "desc": "可指定一个字段作主键，也可指定2个及以上字段作复合主键，唯一标识每行且不允许取空值。",
+          "page": 83
+        },
+        {
+          "term": "设置方式",
+          "desc": "包括表的完整性约束和列的完整性约束两种方式，可在建表时创建也可修改。",
+          "page": 83
+        },
+        {
+          "term": "表级约束",
+          "desc": "在语句最后加primary key(col_name,…)，复合主键只能定义为表级约束。",
+          "page": 84
+        },
+        {
+          "term": "列级约束",
+          "desc": "在列定义时加关键字primary key，单一字段主键可用表级或列级约束。",
+          "page": 84
+        },
+        {
+          "term": "修改主键",
+          "desc": "可先drop primary key删除原主键，再add primary key增加新主键。",
+          "page": 86
+        }
+      ],
+      "code": [
+        "create table if not exists course01 (courseno char(6) not null primary key, cname char(6) not null, type char(8) not null, period int(2) not null, exp int(2) not null, term int(2) not null);",
+        "alter table student02 add primary key (sname);",
+        "alter table student02 drop primary key;",
+        "alter table student02 add primary key (studentno);"
+      ],
+      "tips": [
+        "复合主键只能定义为表级完整性约束"
+      ]
+    },
+    {
+      "id": "6.3",
+      "title": "外键约束",
+      "pageRange": "87-89",
+      "summary": "介绍参照完整性、外键的作用与设置原则，讲解外键语法及添加外键的方法。",
+      "points": [
+        {
+          "term": "外键作用",
+          "desc": "建立子表与父表的关联关系，保证子表与父表关联的数据一致性。",
+          "page": 87
+        },
+        {
+          "term": "设置原则",
+          "desc": "必须依赖于数据库中已存在的父表的主键，外键可以为空值。",
+          "page": 87
+        },
+        {
+          "term": "外键语法",
+          "desc": "foreign key(col_name) references table_name(col_name)，可跟on delete/on update规则。",
+          "page": 87
+        },
+        {
+          "term": "添加外键",
+          "desc": "用alter table为已有表添加外键约束。",
+          "page": 88
+        },
+        {
+          "term": "建表时创建",
+          "desc": "创建表时可用foreign key...references定义外键，并指定on update cascade、on delete cascade。",
+          "page": 89
+        }
+      ],
+      "code": [
+        "constraint foreign_key_name foreign key (col_name1 [,col_name2…]) references table_name(col_name1[,col_name2...]) [on delete {restrict | cascade | set null | no action}] [on update {restrict | cascade | set null | no action}]",
+        "alter table score add constraint fk_st_score foreign key(studentno) references student(studentno);",
+        "alter table score add constraint fk_cou_score foreign key(courseno) references course(courseno);"
+      ],
+      "tips": [
+        "必须依赖父表已存在的主键；外键可以为空值"
+      ]
+    },
+    {
+      "id": "6.4",
+      "title": "检查约束",
+      "pageRange": "90-91",
+      "summary": "介绍check约束用于对列限制数值范围，可在建表时定义为列或表完整性约束。",
+      "points": [
+        {
+          "term": "check约束",
+          "desc": "针对数据表的列限制数值范围的约束，用check完整性约束指定。",
+          "page": 90
+        },
+        {
+          "term": "定义方式",
+          "desc": "check约束在创建表时定义，可定义为列完整性约束，也可定义为表完整性约束。",
+          "page": 90
+        },
+        {
+          "term": "示例",
+          "desc": "对student02的birthdate列添加check约束，要求出生日期大于2000-12-31。",
+          "page": 91
+        }
+      ],
+      "code": [
+        "alter table student02 add constraint ch_stu_birth check(birthdate>'2000-12-31');"
+      ],
+      "tips": [
+        "check约束可限制列取值范围"
+      ]
+    },
+    {
+      "id": "6.5",
+      "title": "唯一性约束",
+      "pageRange": "92-93",
+      "summary": "介绍唯一性约束保证字段值不重复，说明其与主键的区别并通过Email列示例验证。",
+      "points": [
+        {
+          "term": "唯一性约束",
+          "desc": "保证所有记录中该字段的值不能重复出现，创建表时为特殊字段加unique约束条件。",
+          "page": 92
+        },
+        {
+          "term": "主键与unique",
+          "desc": "一个数据表只能创建一个主键，但可以有若干个unique约束。",
+          "page": 92
+        },
+        {
+          "term": "null值",
+          "desc": "主键列值不允许为null，unique字段值可取null，但必须使用null或not null声明。",
+          "page": 92
+        },
+        {
+          "term": "索引",
+          "desc": "创建primary key约束时系统自动产生primary key索引，创建unique约束时自动产生unique索引。",
+          "page": 92
+        },
+        {
+          "term": "验证",
+          "desc": "对student表Email列添加唯一约束后，插入重复Email会报ERROR 1062重复键错误。",
+          "page": 93
+        }
+      ],
+      "code": [
+        "alter table student add unique (Email);",
+        "select studentno,sname,email from student limit 3;"
+      ],
+      "tips": [
+        "主键只能有一个，unique约束可以有若干个；unique字段可取null"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "ch3-ppt-s01",
+      "type": "single",
+      "stem": "MySQL 8.0默认的存储引擎是？",
+      "options": [
+        "A. MyISAM",
+        "B. MEMORY",
+        "C. InnoDB",
+        "D. CSV"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第9页指出MySQL的默认存储引擎是InnoDB，第10页也说明MySQL8.0选择InnoDB作为默认存储引擎。",
+      "page": 9
+    },
+    {
+      "id": "ch3-ppt-s02",
+      "type": "single",
+      "stem": "支持事务、行级锁定和外键约束的存储引擎是？",
+      "options": [
+        "A. InnoDB",
+        "B. MyISAM",
+        "C. MEMORY",
+        "D. BLACKHOLE"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第10页指出InnoDB是具有提交、回滚和崩溃恢复能力的事务安全存储引擎，并支持行级锁定和外键约束。",
+      "page": 10
+    },
+    {
+      "id": "ch3-ppt-s03",
+      "type": "single",
+      "stem": "下列不属于数据库设计四个阶段的是？",
+      "options": [
+        "A. 需求分析",
+        "B. 概念设计",
+        "C. 逻辑设计",
+        "D. 软件编码"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第16页指出数据库设计分为需求分析、概念设计、逻辑设计和物理设计4个阶段，软件编码属于之后的软件开发阶段。",
+      "page": 16
+    },
+    {
+      "id": "ch3-ppt-s04",
+      "type": "single",
+      "stem": "创建一个新数据库应使用的SQL语句是？",
+      "options": [
+        "A. create table",
+        "B. create database",
+        "C. use",
+        "D. alter database"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第27页指出使用create database或create schema命令可以创建数据库。",
+      "page": 27
+    },
+    {
+      "id": "ch3-ppt-s05",
+      "type": "single",
+      "stem": "查看MySQL服务器中所有数据库信息的命令是？",
+      "options": [
+        "A. show tables",
+        "B. show databases",
+        "C. describe",
+        "D. select"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第6页指出使用show databases命令查看MySQL服务器中的所有数据库信息。",
+      "page": 6
+    },
+    {
+      "id": "ch3-ppt-s06",
+      "type": "single",
+      "stem": "MySQL数据表分为表结构和下列哪一部分？",
+      "options": [
+        "A. 数据记录",
+        "B. 索引",
+        "C. 视图",
+        "D. 字段"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第63页指出MySQL数据表分为表结构Structure和数据记录Record两部分。",
+      "page": 63
+    },
+    {
+      "id": "ch3-ppt-s07",
+      "type": "single",
+      "stem": "为表中插入的新记录自动生成唯一序列编码的属性是？",
+      "options": [
+        "A. not null",
+        "B. auto_increment",
+        "C. unique",
+        "D. check"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第51页指出auto_increment主要用于为表中插入的新记录自动生成唯一的序列编码，默认从1开始自增。",
+      "page": 51
+    },
+    {
+      "id": "ch3-ppt-s08",
+      "type": "single",
+      "stem": "从单个表中删除指定数据应使用的语句是？",
+      "options": [
+        "A. delete",
+        "B. drop",
+        "C. alter",
+        "D. update"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第78页指出利用delete...from语句可以从单个表中删除指定表数据。",
+      "page": 78
+    },
+    {
+      "id": "ch3-ppt-b01",
+      "type": "blank",
+      "stem": "MySQL8.0中每个数据表的内容存储在一个同名的扩展名为____的文件中。",
+      "answer": [
+        ".ibd",
+        "ibd"
+      ],
+      "answerText": ".ibd",
+      "analysis": "解析：PPT第4页指出MySQL8.0中每个数据表的内容都存储在一个同名的扩展名为.ibd文件中。",
+      "page": 4
+    },
+    {
+      "id": "ch3-ppt-b02",
+      "type": "blank",
+      "stem": "MySQL 8.0默认的存储引擎是____。",
+      "answer": [
+        "InnoDB",
+        "innodb"
+      ],
+      "answerText": "InnoDB",
+      "analysis": "解析：PPT第9页指出MySQL的默认存储引擎是InnoDB。",
+      "page": 9
+    },
+    {
+      "id": "ch3-ppt-b03",
+      "type": "blank",
+      "stem": "InnoDB表空间分为共享表空间和____表空间两种类型。",
+      "answer": [
+        "独立",
+        "独立表空间"
+      ],
+      "answerText": "独立",
+      "analysis": "解析：PPT第37页指出InnoDB表空间分为共享表空间和独立表空间两种类型。",
+      "page": 37
+    },
+    {
+      "id": "ch3-ppt-b04",
+      "type": "blank",
+      "stem": "创建数据库表使用的SQL语句关键字是____。",
+      "answer": [
+        "create table",
+        "CREATE TABLE",
+        "create table 表名"
+      ],
+      "answerText": "create table",
+      "analysis": "解析：PPT第44页给出创建表的语法结构create [temporary]table[if not exists]table_name。",
+      "page": 44
+    },
+    {
+      "id": "ch3-ppt-b05",
+      "type": "blank",
+      "stem": "____约束能唯一标识表中的每一行记录，且其列不允许取空值。",
+      "answer": [
+        "primary key",
+        "PRIMARY KEY",
+        "主键"
+      ],
+      "answerText": "primary key",
+      "analysis": "解析：PPT第83页指出primary key可唯一标识表中每一行记录，且约束中的列不允许取空值。",
+      "page": 83
+    },
+    {
+      "id": "ch3-ppt-b06",
+      "type": "blank",
+      "stem": "一个数据表只能创建一个主键，但可以有若干个____约束。",
+      "answer": [
+        "unique",
+        "唯一",
+        "唯一性"
+      ],
+      "answerText": "unique",
+      "analysis": "解析：PPT第92页指出一个数据表只能创建一个主键，但可以有若干个unique约束。",
+      "page": 92
+    }
+  ]
+}
