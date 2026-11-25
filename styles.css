@@ -477,3 +477,6 @@ body {
   .nav-btn { padding: 7px 11px; font-size: 13px; }
   .question-card { padding: 16px; }
 }
+
+/* 两个勾选框打包，避免换行时被拆到两行 */
+.toggle-group { display: inline-flex; align-items: center; gap: 14px; flex-wrap: nowrap; }

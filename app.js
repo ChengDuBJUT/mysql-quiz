@@ -13,6 +13,7 @@
   var PROGRESS_KEY = 'myq-progress-v1';
   var FAV_KEY = 'myq-fav-v1';
   var THEME_KEY = 'myq-theme';
+  var OPTS_KEY = 'myq-opt-shuffle-v1';
 
   function loadJSON(key, fallback) {
     try { var v = JSON.parse(localStorage.getItem(key)); return v == null ? fallback : v; }
@@ -26,6 +27,12 @@
   var pendingNote = null;
   var noteOpenId = null;      // 当前展开笔记面板的题 id（不持久化）
   var lastRenderedQid = null; // 换题即收起笔记面板
+
+  // 选项乱序（默认开）：题库里 A 做答案的比例偏高，每次打开都换个位置，避免背「选 A」
+  var optShuffle = (function () {
+    try { var v = localStorage.getItem(OPTS_KEY); return v === null ? true : v === '1'; }
+    catch (e) { return true; }
+  })();
 
   function saveNotes() {
     try {
@@ -84,6 +91,59 @@
   function optionList(q) {
     if (!q || q.type !== 'single' || !Array.isArray(q.options)) return [];
     return q.options.filter(function (o) { return /^[A-Za-z][.、．)]\s*\S/.test(String(o).trim()); });
+  }
+
+  /* ---------------- 选项乱序 ----------------
+     库里 A 做答案的题明显偏多（452 道单选里 A 占 149），光靠位置就能蒙对。
+     做法：进会话时把每道单选题「投影」成一份副本——选项重排、答案字母跟着搬位置，
+     其余逻辑（判分 / 看答案 / 问 AI / 快捷键）全部照旧，因为副本本身就是自洽的。
+     已答过的题沿用当初那次的顺序（progress.o），这样「你的答案」还能指对选项。 */
+  var LETTERS = 'ABCDEFGH';
+
+  function seqOrder(n) {
+    var a = [];
+    for (var i = 0; i < n; i++) a.push(i);
+    return a;
+  }
+  function optShuffleOn() { return optShuffle; }
+  function setOptShuffle(on) {
+    optShuffle = !!on;
+    try { localStorage.setItem(OPTS_KEY, optShuffle ? '1' : '0'); } catch (e) {}
+    syncOptShuffleUI();
+  }
+  function syncOptShuffleUI() {
+    ['quiz-opt-shuffle', 'p-opt-shuffle'].forEach(function (id) {
+      var el = byId(id); if (el) el.checked = optShuffle;
+    });
+  }
+  function optBodies(q) {
+    return optionList(q).map(function (o) { return String(o).replace(/^[A-Za-z][.、．)]\s*/, ''); });
+  }
+  function presentQuestion(q) {
+    if (!q || q._presented || q.type !== 'single') return q;
+    var bodies = optBodies(q);
+    if (bodies.length < 2) return q;
+    var p = progress[q.id];
+    var order;
+    if (p && p.a) {
+      // 已经答过：有记录就还原本来的顺序，没有（老数据）就当它是题库原序
+      order = (Array.isArray(p.o) && p.o.length === bodies.length) ? p.o.slice() : seqOrder(bodies.length);
+    } else if (!optShuffleOn()) {
+      order = seqOrder(bodies.length);
+    } else {
+      var base = seqOrder(bodies.length).join('');
+      order = shuffle(seqOrder(bodies.length));
+      for (var t = 0; t < 6 && order.join('') === base; t++) order = shuffle(order);
+    }
+    var oldIdx = String(q.answer == null ? '' : q.answer).toUpperCase().charCodeAt(0) - 65;
+    var pos = order.indexOf(oldIdx);
+    var copy = {};
+    for (var k in q) if (Object.prototype.hasOwnProperty.call(q, k)) copy[k] = q[k];
+    copy.options = order.map(function (src, i) { return LETTERS.charAt(i) + '. ' + bodies[src]; });
+    if (pos >= 0) copy.answer = LETTERS.charAt(pos);
+    copy._order = order;
+    copy._presented = true;
+    return copy;
   }
   // 填空归一化：去掉中英文分隔符与空白，小写化（等价写法判定）
   function normBlank(s) {
@@ -274,6 +334,7 @@
     byId('p-scope').value = byId('quiz-scope').value;
     if (byId('p-limit')) byId('p-limit').value = byId('quiz-limit').value;
     byId('p-shuffle').checked = byId('quiz-shuffle').checked;
+    syncOptShuffleUI();
     setQuizMode(currentMode());
     updateNoteCount();
   }
@@ -340,7 +401,7 @@
       qs = sampleQuestions(qs, quizLimit(), !f.shuffle);
     }
     flushNote();
-    session = { list: qs.slice(), idx: 0, answered: 0, correct: 0, peeked: 0, revealed: false, userAns: null, wasAnswered: false, pendingAns: null, pendingText: '' };
+    session = { list: qs.map(presentQuestion), idx: 0, answered: 0, correct: 0, peeked: 0, revealed: false, userAns: null, wasAnswered: false, pendingAns: null, pendingText: '' };
     noteOpenId = null; lastRenderedQid = null;
     byId('quiz-home').classList.add('hidden');
     byId('quiz-summary').classList.add('hidden');
@@ -637,7 +698,7 @@
     var ok = judge(q, u, peeked);
     var existed = progress[q.id] && progress[q.id].a;
     if (!existed) {
-      progress[q.id] = { a: 1, ok: ok ? 1 : 0, peek: peeked ? 1 : 0, u: u, t: Date.now() };
+      progress[q.id] = { a: 1, ok: ok ? 1 : 0, peek: peeked ? 1 : 0, u: u, o: q._order ? q._order.slice() : undefined, t: Date.now() };
       saveProgress();
       session.answered++; if (ok) session.correct++; if (peeked) session.peeked++;
     } else {
@@ -1019,6 +1080,7 @@
     ['quiz-scope', 'quiz-limit'].forEach(function (id) {
       var el = byId(id); if (el) el.addEventListener('change', updateFilterCount);
     });
+    byId('quiz-opt-shuffle').addEventListener('change', function () { setOptShuffle(this.checked); });
     byId('btn-quiz-start').addEventListener('click', function () { startQuiz(); });
     byId('btn-quiz-wrong').addEventListener('click', function () {
       var ids = wrongIds();
@@ -1037,6 +1099,10 @@
       var el = byId(id); if (el) el.addEventListener('change', applyPracticeFilter);
     });
     byId('p-shuffle').addEventListener('change', applyPracticeFilter);
+    byId('p-opt-shuffle').addEventListener('change', function () {
+      setOptShuffle(this.checked);
+      applyPracticeFilter();
+    });
     byId('btn-p-restart').addEventListener('click', function () { startQuiz(); });
     byId('btn-p-notes-export').addEventListener('click', exportNotes);
     byId('btn-p-notes-import').addEventListener('click', function () { byId('notes-file').click(); });
@@ -1127,7 +1193,7 @@
       var o2 = document.createElement('option'); o2.value = String(c.chapter);
       o2.textContent = '第 ' + c.chapter + ' 章'; psel.appendChild(o2);
     });
-    initTheme(); bind(); updateFavCounts(); updateFilterCount(); updateNoteCount(); renderReviewHome();
+    initTheme(); bind(); syncOptShuffleUI(); updateFavCounts(); updateFilterCount(); updateNoteCount(); renderReviewHome();
     // 对外暴露，便于自动化验收
     window.PPR = {
       setView: setView, startQuiz: startQuiz, openChapter: openChapter,
@@ -1139,7 +1205,10 @@
       syncPracticeToolbar: syncPracticeToolbar,
       getSession: function () { return session; },
       go: go, askAI: askAI, buildPrompt: function (q) { return pickPrompt(q || session.list[session.idx]); },
-      renderQuestion: renderQuestion
+      renderQuestion: renderQuestion,
+      getOptShuffle: function () { return optShuffle; },
+      setOptShuffle: setOptShuffle,
+      presentQuestion: presentQuestion
     };
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

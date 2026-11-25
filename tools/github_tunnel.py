@@ -68,6 +68,27 @@ def probe():
     return [ip for _, ip in good]
 
 
+def connect_upstream(prefer):
+    """按探测顺序挨个试，第一个连上的就用它。间歇性封锁下单一 IP 很容易 15s 卡死。"""
+    try:
+        ips = json.load(open(STATE, encoding='utf-8'))['ips']
+    except Exception:
+        ips = []
+    order = [prefer] + [ip for ip in ips if ip != prefer]
+    last = None
+    for ip in order:
+        try:
+            s = socket.create_connection((ip, PORT), 5)
+            s.settimeout(20)
+            if ip != prefer:
+                print('上游改用', ip)
+            return s
+        except Exception as e:
+            last = e
+            continue
+    raise last or OSError('没有可用上游 IP')
+
+
 def handle(conn, ip):
     """读 CONNECT 请求，回 200，然后双向转发。CONNECT 头绝不转发给上游。"""
     try:
@@ -85,7 +106,7 @@ def handle(conn, ip):
             conn.close(); return
         # 先回 200（手册：CONNECT 头绝不转发给上游），再连上游
         conn.sendall(b'HTTP/1.1 200 Connection established\r\n\r\n')
-        upstream = socket.create_connection((ip, PORT), 15)
+        upstream = connect_upstream(ip)
         upstream.settimeout(15)
         if rest:
             upstream.sendall(rest)
