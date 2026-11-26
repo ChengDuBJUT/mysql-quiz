@@ -4,6 +4,7 @@
 """
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -16,8 +17,29 @@ TITLES = {
 }
 
 
+def page_range(rng):
+    nums = re.findall(r"\d+", str(rng or ""))
+    if not nums:
+        return None
+    a = int(nums[0])
+    b = int(nums[1]) if len(nums) > 1 else a
+    return (min(a, b), max(a, b))
+
+
+def section_of(page, sections):
+    """按课件页码把题落回小节，用于考纲过滤。落不进去返回 None（保守保留）。"""
+    if not isinstance(page, int):
+        return None
+    for s in sections:
+        pr = page_range(s.get("pageRange"))
+        if pr and pr[0] <= page <= pr[1]:
+            return s
+    return None
+
+
 def load_chapters():
     chapters, questions = [], []
+    dropped = 0
     for n in range(1, 8):
         path = os.path.join(SRC, "ch%02d.json" % n)
         if not os.path.exists(path):
@@ -27,12 +49,29 @@ def load_chapters():
             ch = json.load(f)
         ch["chapter"] = int(ch.get("chapter", n))
         ch["title"] = ch.get("title") or TITLES[ch["chapter"]]
-        chapters.append(ch)
+        # 考纲过滤：exam=off 的小节整节剔除（知识点与题目一起下架）
+        secs = ch.get("sections", [])
+        kept_secs = [s for s in secs if s.get("exam") != "off"]
+        off_ids = {s["id"] for s in secs if s.get("exam") == "off"}
+        kept_qs = []
         for q in ch.get("questions", []):
+            s = section_of(q.get("page"), secs)
+            if s and s["id"] in off_ids:
+                dropped += 1
+                continue
+            kept_qs.append(q)
+        ch["sections"] = kept_secs
+        ch["questions"] = kept_qs
+        # 告诉前端哪些小节按考纲隐藏了，精读页显示一行说明更透明
+        ch["hiddenSections"] = [{"id": s["id"], "title": s.get("title", "")} for s in secs if s.get("exam") == "off"]
+        chapters.append(ch)
+        for q in kept_qs:
             q = dict(q)
             q["chapter"] = ch["chapter"]
             q["chapterTitle"] = ch["title"]
             questions.append(q)
+    if dropped:
+        print("按考纲剔除 %d 题（未强调方向）" % dropped)
     return chapters, questions
 
 
@@ -40,6 +79,15 @@ def dump_js(path, varname, obj, header):
     body = json.dumps(obj, ensure_ascii=False, indent=2)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write("/* %s */\nwindow.%s = %s;\n" % (header, varname, body))
+
+
+def load_big():
+    """考试大题（问答题 + 六个实验）：tools/source/exam_big.json"""
+    path = os.path.join(SRC, "exam_big.json")
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8-sig") as f:
+        return json.load(f)
 
 
 def main():
@@ -78,6 +126,29 @@ def main():
     for ch in chapters:
         print("  第%2d章 %-14s 小节 %d / 题 %d" % (
             ch["chapter"], ch["title"], len(ch.get("sections", [])), len(ch.get("questions", []))))
+
+    big = load_big()
+    if big:
+        # 考纲自查表：按关键词统计题库里每个强调点有多少题，避免「说了覆盖其实没有」
+        for row in big.get("syllabus", []):
+            pat = re.compile(row.get("kw", "$^"), re.I)
+            row["hits"] = sum(
+                1 for q in questions
+                if pat.search(" ".join([
+                    str(q.get("stem", "")), " ".join(q.get("options") or []),
+                    str(q.get("analysis", "")),
+                ]))
+            )
+        # 大题 id 唯一性校验
+        ids = [it["id"] for g in big.get("groups", []) for it in g.get("items", [])]
+        if len(ids) != len(set(ids)):
+            print("大题 id 重复：%s" % sorted({i for i in ids if ids.count(i) > 1}), file=sys.stderr)
+            sys.exit(1)
+        dump_js(os.path.join(DATA, "labs.js"), "EXAM_BIG", big,
+                "自动生成，请勿手改。来源 tools/source/exam_big.json")
+        for g in big["groups"]:
+            print("  大题组 %-6s %-30s 题 %d" % (g["id"], g["title"], len(g["items"])))
+        print("大题合计 %d 题" % len(ids))
 
 
 if __name__ == "__main__":

@@ -1,54 +1,6 @@
 /* 自动生成，请勿手改。重建：python tools/build_review.py */
 window.PPT_QUESTIONS = [
   {
-    "id": "ch1-ppt-s01",
-    "type": "single",
-    "stem": "目前MySQL数据库属于下列哪家公司？",
-    "options": [
-      "A. 微软(Microsoft)",
-      "B. 甲骨文(Oracle)",
-      "C. IBM",
-      "D. Sun公司"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第4页指出MySQL目前属于甲骨文公司，2009年4月甲骨文收购Sun公司后MySQL进入Oracle时代。",
-    "page": 4,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s02",
-    "type": "single",
-    "stem": "MySQL 8.0.0正式发布的时间是？",
-    "options": [
-      "A. 1996年",
-      "B. 2003年12月",
-      "C. 2016年9月",
-      "D. 2026年7月"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第4页明确2016年9月MySQL 8.0.0正式发布；2026年7月推出的是26.7.0。",
-    "page": 4,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s03",
-    "type": "single",
-    "stem": "MySQL 8.0默认的字符集是？",
-    "options": [
-      "A. latin1",
-      "B. gb2312",
-      "C. utf8mb4",
-      "D. BIG5"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第7页指出MySQL8.0以utf8mb4为默认字符集，并提供新的排序规则。",
-    "page": 7,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
     "id": "ch1-ppt-s04",
     "type": "single",
     "stem": "下列不属于数据定义语言DDL的动词是？",
@@ -129,20 +81,6 @@ window.PPT_QUESTIONS = [
     "chapterTitle": "MySQL数据库概述"
   },
   {
-    "id": "ch1-ppt-b01",
-    "type": "blank",
-    "stem": "MySQL是一个开放源码的____、跨平台数据库管理系统。",
-    "answer": [
-      "小型",
-      "small"
-    ],
-    "answerText": "小型",
-    "analysis": "解析：PPT第4页首句指出MySQL是一个开放源码的小型、跨平台数据库管理系统。",
-    "page": 4,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
     "id": "ch1-ppt-b02",
     "type": "blank",
     "stem": "数据库(Database，DB)是长期存储在计算机内、有组织、可____的大量数据的集合。",
@@ -209,511 +147,6 @@ window.PPT_QUESTIONS = [
     "answerText": "一",
     "analysis": "解析：PPT第44页指出第一范式（1NF）的目标是确保每列的原子性，每列都是不可再分的最小数据单元。",
     "page": 44,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s09",
-    "type": "single",
-    "stem": "1996年MySQL发布的版本是？",
-    "options": [
-      "A. MySQL 1.0",
-      "B. MySQL 5.0",
-      "C. MySQL 5.7.1",
-      "D. MySQL 8.0.0"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第4页指出1996年发布了能够在小范围内使用的MySQL 1.0版。",
-    "page": 4,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s10",
-    "type": "single",
-    "stem": "2003年12月发布的MySQL版本是？",
-    "options": [
-      "A. MySQL 5.7.1",
-      "B. MySQL 5.0",
-      "C. MySQL 8.0.0",
-      "D. MySQL 26.7.0"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第4页指出2003年12月MySQL 5.0版本发布。",
-    "page": 4,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s11",
-    "type": "single",
-    "stem": "2009年4月甲骨文公司收购Sun公司后，MySQL数据库进入什么时代？",
-    "options": [
-      "A. Google时代",
-      "B. IBM时代",
-      "C. 微软时代",
-      "D. Oracle时代"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第4页指出2009年4月甲骨文公司收购Sun公司，自此MySQL数据库进入Oracle时代。",
-    "page": 4,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s12",
-    "type": "single",
-    "stem": "MySQL 5.7.1发布于？",
-    "options": [
-      "A. 2013年4月",
-      "B. 2009年4月",
-      "C. 2016年9月",
-      "D. 2003年12月"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第4页指出2013年4月发布5.7.1版本。",
-    "page": 4,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b07",
-    "type": "blank",
-    "stem": "2026年7月正式推出的MySQL版本是____，它是第一个采用新的日历版本控制模型的MySQL版本。",
-    "answer": [
-      "26.7.0",
-      "MySQL 26.7.0",
-      "mysql 26.7.0"
-    ],
-    "answerText": "26.7.0",
-    "analysis": "解析：PPT第4页指出2026年7月正式推出MySQL 26.7.0，是第一个采用新的日历版本控制模型的MySQL版本。",
-    "page": 4,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s13",
-    "type": "single",
-    "stem": "关于MySQL的跨平台性，下列说法正确的是？",
-    "options": [
-      "A. 只能在Windows上运行",
-      "B. 可在Windows、UNIX、Linux和Mac OS等操作系统上运行",
-      "C. 只能在Linux上运行",
-      "D. 必须运行在专用小型机上"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第5页指出MySQL可在Windows、UNIX、Linux和Mac OS等操作系统上运行，体现其跨平台性。",
-    "page": 5,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s14",
-    "type": "single",
-    "stem": "MySQL是C/S结构的实现，其服务器守护程序是？",
-    "options": [
-      "A. mysql",
-      "B. mysqladmin",
-      "C. mysqld",
-      "D. mysqldump"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第5页指出MySQL由服务器守护程序mysqld和很多不同的客户程序和库组成；mysql是客户端工具。",
-    "page": 5,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s15",
-    "type": "single",
-    "stem": "关于MySQL的价格优势，说法正确的是？",
-    "options": [
-      "A. 只有企业版免费",
-      "B. 仅教育用户可免费使用",
-      "C. 所有版本都必须付费",
-      "D. 社区版免费使用，付费的附加功能价格也很便宜"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第5页指出MySQL的社区版本免费使用，即使是需要付费的附加功能，其价格也很便宜。",
-    "page": 5,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s16",
-    "type": "single",
-    "stem": "MySQL数据库服务器在并发访问方面的特点是？",
-    "options": [
-      "A. 多用户多线程",
-      "B. 只允许一个连接",
-      "C. 不支持并发访问",
-      "D. 单用户单线程"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第5页指出MySQL数据库是一个多用户、多线程SQL数据库服务器。",
-    "page": 5,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b08",
-    "type": "blank",
-    "stem": "MySQL数据库是____的数据库，用户可以获取并修改其源代码。",
-    "answer": [
-      "开放源代码",
-      "开源",
-      "开放源码"
-    ],
-    "answerText": "开放源代码",
-    "analysis": "解析：PPT第5页首句指出MySQL数据库是开放源代码的数据库，这是其使用优势之一。",
-    "page": 5,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b09",
-    "type": "blank",
-    "stem": "MySQL能够快速、有效和安全地处理大量的数据，并达到快速、健壮和____的目标。",
-    "answer": [
-      "易用"
-    ],
-    "answerText": "易用",
-    "analysis": "解析：PPT第5页指出MySQL能够快速、有效和安全的处理大量数据，并达到快速、健壮和易用的目标。",
-    "page": 5,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s17",
-    "type": "single",
-    "stem": "MySQL使用C和C++编写并用多种编译器测试，其目的是保证源代码的？",
-    "options": [
-      "A. 可移植性",
-      "B. 安全性",
-      "C. 完整性",
-      "D. 一致性"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第6页指出MySQL使用C和C++编写，并使用了多种编译器进行测试，保证源代码的可移植性。",
-    "page": 6,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s18",
-    "type": "single",
-    "stem": "MySQL能够自动优化SQL查询算法，其直接效果是？",
-    "options": [
-      "A. 自动备份数据",
-      "B. 提高信息查询速度",
-      "C. 减少磁盘占用",
-      "D. 增加最大连接数"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第6页指出MySQL能够自动优化SQL查询算法，有效地提高了信息查询速度。",
-    "page": 6,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s19",
-    "type": "single",
-    "stem": "关于MySQL的应用方式，正确的是？",
-    "options": [
-      "A. 只能作为独立应用程序使用",
-      "B. 只能作为库嵌入到其他软件中",
-      "C. 既可单独应用于客户服务器网络环境，也可作为库嵌入其他软件",
-      "D. 只能通过浏览器使用"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第6页指出MySQL能够作为一个单独的应用程序应用在客户端服务器网络环境中，也可以作为一个库嵌入到其他软件中。",
-    "page": 6,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s20",
-    "type": "single",
-    "stem": "下列不属于MySQL提供的数据库连接技术的是？",
-    "options": [
-      "A. TCP/IP",
-      "B. ODBC",
-      "C. JDBC",
-      "D. FTP"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第7页指出MySQL提供TCP/IP、ODBC和JDBC等多种数据库连接技术，未提到FTP。",
-    "page": 7,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b10",
-    "type": "blank",
-    "stem": "MySQL支持多种存储____，并提供用于管理、检查、优化数据库操作的管理工具。",
-    "answer": [
-      "引擎"
-    ],
-    "answerText": "引擎",
-    "analysis": "解析：PPT第7页指出MySQL支持多种存储引擎，提供用于管理、检查、优化数据库操作的管理工具。",
-    "page": 7,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b11",
-    "type": "blank",
-    "stem": "MySQL具有大型数据库所有常用功能，可以处理拥有____条记录级的海量数据。",
-    "answer": [
-      "亿万",
-      "亿"
-    ],
-    "answerText": "亿万",
-    "analysis": "解析：PPT第7页指出MySQL具有大型数据库所有常用功能，可以处理拥有亿万条记录级的海量数据。",
-    "page": 7,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s21",
-    "type": "single",
-    "stem": "MySQL的命名机制由几个数字和1个后缀组成？",
-    "options": [
-      "A. 2个",
-      "B. 3个",
-      "C. 4个",
-      "D. 5个"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第8页指出MySQL的命名机制由3个数字和1个后缀组成，例如MySQL-8.0.39。",
-    "page": 8,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s22",
-    "type": "single",
-    "stem": "MySQL-8.0.39中，第一个数字“8”表示？",
-    "options": [
-      "A. 补丁编号",
-      "B. 发行级别",
-      "C. 主版本号，描述文件格式",
-      "D. 发行系列版本号"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第8页指出第1个数字“8”是主版本号，描述了文件格式，所有版本的发行版都有相同文件格式。",
-    "page": 8,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s23",
-    "type": "single",
-    "stem": "MySQL-8.0.39中，第二个数字“0”表示？",
-    "options": [
-      "A. 修订次数",
-      "B. 发行系列版本号",
-      "C. 主版本号",
-      "D. 发行级别"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第8页指出第2个数字“0”是发行级别，主版本号和发行级别组合在一起构成发行序列号。",
-    "page": 8,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s24",
-    "type": "single",
-    "stem": "MySQL-8.0.39中，第三个数字“39”表示？",
-    "options": [
-      "A. 在此发行系列中的版本号",
-      "B. 发行级别",
-      "C. 编译次数",
-      "D. 主版本号"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第8页指出第3个数字“39”是在此发行系列的版本号，随每次新分发版本递增。",
-    "page": 8,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s25",
-    "type": "single",
-    "stem": "按发布顺序划分，MySQL 8.0属于？",
-    "options": [
-      "A. 预览版",
-      "B. 内部测试版",
-      "C. 普遍可用（GA）的稳定发布系列",
-      "D. 已停止维护的版本"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第8页指出MySQL 8.0是目前最新开发的普遍常用（GA）的稳定发布系列，目前已经可以正常使用。",
-    "page": 8,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b12",
-    "type": "blank",
-    "stem": "社区版（Community Edition）是自由下载而且是免费____的。",
-    "answer": [
-      "开源",
-      "开放源代码",
-      "开放源码"
-    ],
-    "answerText": "开源",
-    "analysis": "解析：PPT第9页指出社区版是自由下载而且是免费开源的。",
-    "page": 9,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b13",
-    "type": "blank",
-    "stem": "企业版需付费使用，官方提供____技术支持。",
-    "answer": [
-      "电话"
-    ],
-    "answerText": "电话",
-    "analysis": "解析：PPT第9页指出企业版需付费使用，官方提供电话技术支持。",
-    "page": 9,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b14",
-    "type": "blank",
-    "stem": "企业版支持事务处理，提供完整的提交、回滚、崩溃恢复和____锁定功能。",
-    "answer": [
-      "行级"
-    ],
-    "answerText": "行级",
-    "analysis": "解析：PPT第9页指出企业版支持事务处理，提供完整的提交、回滚、崩溃恢复和行级锁定功能。",
-    "page": 9,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s26",
-    "type": "single",
-    "stem": "MySQL 8.0将所有数据字典信息和系统表存储在哪个文件中？",
-    "options": [
-      "A. mysql.ibd",
-      "B. ibdata1",
-      "C. mysql.db",
-      "D. slow.log"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第10页指出MySQL 8.0新增事务类型的数据字典，所有数据字典信息和系统表都存储在mysql.ibd文件中。",
-    "page": 10,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s27",
-    "type": "single",
-    "stem": "MySQL 8.0的原子DDL把数据字典更新、存储引擎操作和什么组合到单个原子事务中？",
-    "options": [
-      "A. 慢查询日志",
-      "B. 二进制日志写入",
-      "C. 错误日志",
-      "D. 审计日志"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第10页指出DDL语句将与DDL操作关联的数据字典更新、存储引擎操作和二进制日志写入组合到单个原子事务中。",
-    "page": 10,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s28",
-    "type": "single",
-    "stem": "MySQL 8.0将自增主键的计数器持久化到？",
-    "options": [
-      "A. 数据字典",
-      "B. 临时表",
-      "C. 二进制日志",
-      "D. 重做日志"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第10页指出MySQL 8.0将自增主键的计数器持久化到重做日志中，这是InnoDB增强功能之一。",
-    "page": 10,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s29",
-    "type": "single",
-    "stem": "可用于禁用InnoDB死锁检测的动态变量是？",
-    "options": [
-      "A. innodb_deadlock_detect",
-      "B. innodb_lock_wait_timeout",
-      "C. autocommit",
-      "D. max_connections"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第11页指出新的动态变量innodb_deadlock_detect可用于禁用死锁检测，禁用后可能更有效率。",
-    "page": 11,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s30",
-    "type": "single",
-    "stem": "MySQL 8.0优化器索引的三种方式不包括？",
-    "options": [
-      "A. 隐藏索引",
-      "B. 降序索引",
-      "C. 函数索引",
-      "D. 哈希索引"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第12页指出优化器索引主要包括隐藏索引（Invisible index）、降序索引和函数索引三种方式。",
-    "page": 12,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b15",
-    "type": "blank",
-    "stem": "MySQL 8.0开始支持____（Role），管理员可以创建和删除它。",
-    "answer": [
-      "角色",
-      "role",
-      "Role"
-    ],
-    "answerText": "角色",
-    "analysis": "解析：PPT第11页指出MySQL 8.0开始支持角色（Role），管理员可以创建和删除角色，属于安全和账户管理的新功能。",
-    "page": 11,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b16",
-    "type": "blank",
-    "stem": "MySQL 8.0扩展了对____的支持，性能更好，能结合结构化数据与半结构化数据。",
-    "answer": [
-      "JSON",
-      "json"
-    ],
-    "answerText": "JSON",
-    "analysis": "解析：PPT第12页指出MySQL 8.0扩展了对JSON的支持，能结合MySQL原生的结构化数据和JSON的半结构化数据。",
-    "page": 12,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b17",
-    "type": "blank",
-    "stem": "MySQL 8.0增加了公用表表达式、窗口函数、统计____、备份锁和配置持久化等功能。",
-    "answer": [
-      "直方图"
-    ],
-    "answerText": "直方图",
-    "analysis": "解析：PPT第13页指出MySQL增加了公用表表达式、窗口函数、统计直方图、备份锁和配置持久化等查询优化功能。",
-    "page": 13,
     "chapter": 1,
     "chapterTitle": "MySQL数据库概述"
   },
@@ -1421,594 +854,78 @@ window.PPT_QUESTIONS = [
     "chapterTitle": "MySQL数据库概述"
   },
   {
-    "id": "ch1-ppt-s64",
+    "id": "ch1-ppt-s89",
     "type": "single",
-    "stem": "MySQL数据库官方网站的下载地址是？",
+    "page": 37,
+    "stem": "数据模型的三要素中，用于描述系统静态特性（有哪些实体、属性和联系）的是（  ）。",
     "options": [
-      "A. http://www.mysql.cn",
-      "B. http://www.oracle.com/cn",
-      "C. http://www.apache.org",
-      "D. http://dev.mysql.com/downloads"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第54页指出安装之前需要到MySQL数据库的官方网站(http://dev.mysql.com/downloads)上找到要安装的版本并下载。",
-    "page": 54,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s65",
-    "type": "single",
-    "stem": "MSI方式安装MySQL时，默认安装且无法自行选择安装路径的目录是？",
-    "options": [
-      "A. C:\\mysql",
-      "B. C:\\Program Files\\MySQL",
-      "C. D:\\mysql",
-      "D. 用户主目录"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第55页指出MSI安装会默认将MySQL服务安装在C:\\Program Files\\MySQL目录下并且无法自行选择安装路径，C盘不够用应选ZIP解压版。",
-    "page": 55,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s66",
-    "type": "single",
-    "stem": "my.ini配置文件中，用于设置服务端字符集的配置项是？",
-    "options": [
-      "A. port=3306",
-      "B. max_connections=200",
-      "C. character-set-server=utf8mb4",
-      "D. default-storage-engine=INNODB"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第59页my.ini示例中，character-set-server=utf8mb4用于设置服务端使用的字符集，port设置端口、max_connections设置最大连接数。",
-    "page": 59,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s67",
-    "type": "single",
-    "stem": "在cmd中对MySQL数据库进行初始化，应执行的命令是？",
-    "options": [
-      "A. mysqld --initialize-insecure",
-      "B. mysqld install",
-      "C. net start mysql",
-      "D. mysql -u root -p"
+      "A. 数据结构",
+      "B. 数据操作",
+      "C. 完整性约束",
+      "D. 数据视图"
     ],
     "answer": "A",
-    "analysis": "解析：PPT第68页指出在cmd面板输入mysqld --initialize-insecure对MySQL数据库进行初始化，执行后解压目录会多出data目录。",
-    "page": 68,
+    "analysis": "解析：PPT第37页指出，数据模型由数据结构、数据操作和完整性约束三要素组成；其中数据结构描述系统的静态特性。",
     "chapter": 1,
     "chapterTitle": "MySQL数据库概述"
   },
   {
-    "id": "ch1-ppt-s68",
-    "type": "single",
-    "stem": "PPT中用于修改root用户密码的语句是？",
-    "options": [
-      "A. CREATE USER 'root'@'localhost' IDENTIFIED BY '123456';",
-      "B. GRANT ALL ON *.* TO 'root'@'localhost';",
-      "C. DROP USER 'root'@'localhost';",
-      "D. ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';"
+    "id": "ch1-ppt-b45",
+    "type": "blank",
+    "page": 37,
+    "stem": "数据模型的三要素是数据结构、数据操作和____。",
+    "answer": [
+      "完整性约束",
+      "完整性约束条件"
     ],
-    "answer": "D",
-    "analysis": "解析：PPT第73页指出修改密码输入ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';，其中123456就是密码。",
-    "page": 73,
+    "answerText": "完整性约束",
+    "analysis": "解析：PPT第37页明确数据模型三要素为数据结构、数据操作、完整性约束。",
     "chapter": 1,
     "chapterTitle": "MySQL数据库概述"
   },
   {
-    "id": "ch1-ppt-s69",
+    "id": "ch1-ppt-s90",
     "type": "single",
-    "stem": "msi安装提供的安装类型中，仅安装MySQL服务器产品的是？",
+    "page": 41,
+    "stem": "关系运算中，从关系中找出满足给定条件的元组的操作是（  ）。",
     "options": [
-      "A. Developer Default",
-      "B. Server only",
-      "C. Client only",
-      "D. Full"
+      "A. 投影",
+      "B. 选择",
+      "C. 连接",
+      "D. 除"
     ],
     "answer": "B",
-    "analysis": "解析：PPT第79页指出Server only仅服务器，只安装MySQL服务器产品；Client only只安装客户端产品。",
-    "page": 79,
+    "analysis": "解析：PPT第40-41页，选择（selection）是按给定条件从关系中挑出满足条件的元组；投影是按列选取属性。",
     "chapter": 1,
     "chapterTitle": "MySQL数据库概述"
   },
   {
-    "id": "ch1-ppt-b31",
+    "id": "ch1-ppt-b46",
     "type": "blank",
-    "stem": "添加MySQL服务的命令是mysqld ____ mysql8.0.27，其中服务名可以自己取。",
+    "page": 41,
+    "stem": "关系运算中，从关系中选取若干属性列组成新关系的操作称为____。",
     "answer": [
-      "install"
+      "投影",
+      "投影运算"
     ],
-    "answerText": "install",
-    "analysis": "解析：PPT第69页指出输入mysqld install mysql8.0.27（服务名自己取）添加MySQL服务。",
-    "page": 69,
+    "answerText": "投影",
+    "analysis": "解析：PPT第40-41页，投影是对关系的列进行运算，选择是对行进行运算。",
     "chapter": 1,
     "chapterTitle": "MySQL数据库概述"
   },
   {
-    "id": "ch1-ppt-b32",
-    "type": "blank",
-    "stem": "删除MySQL服务的命令是____ delete mysql8.0.27。",
-    "answer": [
-      "sc",
-      "SC"
-    ],
-    "answerText": "sc",
-    "analysis": "解析：PPT第69页给出删除服务命令：sc delete mysql8.0.27。",
-    "page": 69,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b33",
-    "type": "blank",
-    "stem": "执行mysqld --initialize-insecure初始化后，MySQL解压目录中多出一个____目录，用于放置日志文件和数据库。",
-    "answer": [
-      "data",
-      "DATA"
-    ],
-    "answerText": "data",
-    "analysis": "解析：PPT第68页指出初始化后解压目录多出data目录，用于放置日志文件以及数据库，刚解压出来时没有该目录。",
-    "page": 68,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b34",
-    "type": "blank",
-    "stem": "msi安装的Config Type提供development、server和____三个选项，用于选择MySQL的用途。",
-    "answer": [
-      "dedicate",
-      "dedicated"
-    ],
-    "answerText": "dedicate",
-    "analysis": "解析：PPT第83页指出Config Type提供development、server、dedicate三个选项，本机一般选development，占用系统资源少。",
-    "page": 83,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s70",
+    "id": "ch1-ppt-s91",
     "type": "single",
-    "stem": "MySQL工作流程的第①步是？",
+    "page": 46,
+    "stem": "下列属于专门的关系运算的是（  ）。",
     "options": [
-      "A. 操作系统用户启动MySQL服务",
-      "B. 读取配置文件中的参数",
-      "C. 建立客户机与服务器的通信链路",
-      "D. 服务器向客户机返回响应"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第86页指出工作流程第①步是操作系统用户启动MySQL服务。",
-    "page": 86,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s71",
-    "type": "single",
-    "stem": "MySQL服务启动期间，首先将配置文件中的参数信息读入？",
-    "options": [
-      "A. 二进制日志",
-      "B. 数据字典",
-      "C. 服务器内存",
-      "D. 磁盘文件"
+      "A. 并、差、交",
+      "B. 笛卡尔积",
+      "C. 选择、投影、连接、除",
+      "D. 排序与分组"
     ],
     "answer": "C",
-    "analysis": "解析：PPT第86页指出第②步：MySQL服务启动期间，首先将配置文件中的参数信息读入服务器内存。",
-    "page": 86,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s72",
-    "type": "single",
-    "stem": "根据MySQL配置文件的参数信息或编译时的默认值生成的是？",
-    "options": [
-      "A. 存储引擎",
-      "B. 数据字典",
-      "C. 客户机进程",
-      "D. 服务实例进程（Instance）"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第86页指出第③步：根据配置文件的参数信息或者编译MySQL时参数的默认值生成一个服务实例进程Instance。",
-    "page": 86,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s73",
-    "type": "single",
-    "stem": "MySQL服务实例进程通过什么方式为多个客户机提供服务？",
-    "options": [
-      "A. 派生出多个线程",
-      "B. 创建多个数据库",
-      "C. 启动多个服务实例",
-      "D. 复制多份配置文件"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第86页指出第④步：MySQL服务实例进程派生出多个线程为多个客户机提供服务。",
-    "page": 86,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s74",
-    "type": "single",
-    "stem": "客户机与服务器建立通信链路后，用户在客户机输入的命令沿该链路传送给服务实例，这个过程称为？",
-    "options": [
-      "A. MySQL服务启动",
-      "B. 客户机向MySQL服务器发送请求",
-      "C. MySQL服务器向客户机返回响应",
-      "D. MySQL会话结束"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第87页指出第⑤步建立“通信链路”，第⑥步命令沿链路传送给服务实例，称为客户机向MySQL服务器发送请求。",
-    "page": 87,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b35",
-    "type": "blank",
-    "stem": "MySQL服务实例解析命令并选择执行计划运行，将执行结果沿通信链路返回给客户机，这个过程称为服务器向客户机返回____。",
-    "answer": [
-      "响应"
-    ],
-    "answerText": "响应",
-    "analysis": "解析：PPT第88页指出第⑦步将执行结果沿通信链路返回给客户机，称为MySQL服务器向MySQL客户机返回响应。",
-    "page": 88,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b36",
-    "type": "blank",
-    "stem": "数据库用户关闭MySQL客户机，通信链路被断开，该客户机对应的MySQL____结束。",
-    "answer": [
-      "会话",
-      "session",
-      "Session"
-    ],
-    "answerText": "会话",
-    "analysis": "解析：PPT第88页指出数据库用户关闭MySQL客户机后通信链路断开，该客户机对应的MySQL会话结束。",
-    "page": 88,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s75",
-    "type": "single",
-    "stem": "MySQL的服务器进程（SQL后台程序）是？",
-    "options": [
-      "A. mysqladmin",
-      "B. mysqldump",
-      "C. mysqld",
-      "D. mysql"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第89页指出mysqld是SQL后台程序，即MySQL服务器进程，该程序必须运行之后客户端才能连接服务器访问数据库。",
-    "page": 89,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s76",
-    "type": "single",
-    "stem": "UNIX中的MySQL分发版包括的服务器启动脚本是？",
-    "options": [
-      "A. mysqld",
-      "B. mysqladmin",
-      "C. mysqlshow",
-      "D. mysql.server"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第90页指出mysql.server是服务器启动脚本，UNIX中的MySQL分发版包括mysql.server脚本，可调用mysqld_safe启动服务器。",
-    "page": 90,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s77",
-    "type": "single",
-    "stem": "可以启动或停止系统上安装的多个服务器的脚本是？",
-    "options": [
-      "A. mysql_multi",
-      "B. mysql.server",
-      "C. mysqld_safe",
-      "D. mysql_install_db"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第90页指出mysql_multi是服务器启动脚本，可以启动或停止系统上安装的多个服务器。",
-    "page": 90,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s78",
-    "type": "single",
-    "stem": "交互式输入SQL语句或从文件以批处理模式执行SQL语句的命令行工具是？",
-    "options": [
-      "A. mysqlbinlog",
-      "B. mysql",
-      "C. mysqld",
-      "D. mysqladmin"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第91页指出mysql是交互式输入SQL语句或从文件以批处理模式执行它们的命令行工具。",
-    "page": 91,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s79",
-    "type": "single",
-    "stem": "可执行创建或删除数据库、重载授权表、将表刷新到硬盘等管理操作的客户程序是？",
-    "options": [
-      "A. mysqldump",
-      "B. mysqlshow",
-      "C. mysqladmin",
-      "D. mysql"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第91页指出mysqladmin是执行管理操作的客户程序，例如创建或删除数据库、重载授权表、将表刷新到硬盘上等。",
-    "page": 91,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b37",
-    "type": "blank",
-    "stem": "将MySQL数据库转储到一个文件（例如SQL语句或tab分隔符文本文件）的客户程序是____。",
-    "answer": [
-      "mysqldump",
-      "MYSQLDUMP"
-    ],
-    "answerText": "mysqldump",
-    "analysis": "解析：PPT第92页指出mysqldump是将MySQL数据库转储到一个文件（例如SQL语句或tab分隔符文本文件）的客户程序。",
-    "page": 92,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b38",
-    "type": "blank",
-    "stem": "从二进制日志读取语句、可用来帮助系统从崩溃中恢复的工具是____。",
-    "answer": [
-      "mysqlbinlog",
-      "MYSQLBINLOG"
-    ],
-    "answerText": "mysqlbinlog",
-    "analysis": "解析：PPT第92页指出mysqlbinlog是从二进制日志读取语句的工具，二进制日志包含执行过的语句，可帮助系统从崩溃中恢复。",
-    "page": 92,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b39",
-    "type": "blank",
-    "stem": "用默认权限创建MySQL授权表，通常只在系统首次安装MySQL时执行一次的是____。",
-    "answer": [
-      "mysql_install_db"
-    ],
-    "answerText": "mysql_install_db",
-    "analysis": "解析：PPT第90页指出mysql_install_db该脚本用默认权限创建MySQL授权表，通常只是在系统上首次安装MySQL时执行一次。",
-    "page": 90,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s80",
-    "type": "single",
-    "stem": "在cmd控制台中启动MySQL服务的命令是？",
-    "options": [
-      "A. net stop mysql80",
-      "B. sc delete mysql80",
-      "C. mysqld install",
-      "D. net start mysql80"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第93页指出net start mysql80表示启动MySQL服务，net stop mysql80表示关闭MySQL服务。",
-    "page": 93,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s81",
-    "type": "single",
-    "stem": "Windows“服务”窗口中MySQL服务的启动类型不包括？",
-    "options": [
-      "A. 自动",
-      "B. 手动",
-      "C. 已禁用",
-      "D. 延迟启动"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第94页指出启动类型下拉列表框中可以选择“自动”、“手动”和“已禁用”三个选项。",
-    "page": 94,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s82",
-    "type": "single",
-    "stem": "Windows操作系统下登录MySQL数据库的方式有几种？",
-    "options": [
-      "A. 一种",
-      "B. 两种",
-      "C. 三种",
-      "D. 四种"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第95页指出Windows下有两种登录方式：在DOS窗口中以命令行方式登录，以及在MySQL客户端直接登录。",
-    "page": 95,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s83",
-    "type": "single",
-    "stem": "登录命令mysql -u root -p中，-p表示？",
-    "options": [
-      "A. 数据库名",
-      "B. 端口号",
-      "C. 用户密码",
-      "D. 主机名"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第96页指出-u后面紧跟着数据库的用户名，-p表示用户密码，按Enter键输入密码，输入的密码用星号替代。",
-    "page": 96,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s84",
-    "type": "single",
-    "stem": "MySQL控制台下的命令以什么符号结束？",
-    "options": [
-      "A. 分号(;)或\\g",
-      "B. 冒号(:)",
-      "C. 逗号(,)",
-      "D. 句号(.)"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第98页指出Commands end with ; or \\g，说明MySQL控制台下的命令以分号(;)或“\\g”结束，遇到结束符就开始执行命令。",
-    "page": 98,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b40",
-    "type": "blank",
-    "stem": "Your MySQL connection id表示MySQL数据库的连接____，新安装首次登录显示1。",
-    "answer": [
-      "次数"
-    ],
-    "answerText": "次数",
-    "analysis": "解析：PPT第98页指出id表示MySQL数据库的连接次数，如果数据库是新安装的且第一次登录则显示1。",
-    "page": 98,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b41",
-    "type": "blank",
-    "stem": "登录MySQL后，输入help;或____可以查看帮助信息。",
-    "answer": [
-      "\\h",
-      "h"
-    ],
-    "answerText": "\\h",
-    "analysis": "解析：PPT第98页指出Type 'help;' or '\\h' for help，表示输入“help;”或者\\h可以看到帮助信息。",
-    "page": 98,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b42",
-    "type": "blank",
-    "stem": "在MySQL控制台中查看系统当前时间，可执行select ____();语句。",
-    "answer": [
-      "now",
-      "NOW"
-    ],
-    "answerText": "now",
-    "analysis": "解析：PPT第101页指出如果要查看系统当前时间，可以直接在控制台中输入并执行select now();语句。",
-    "page": 101,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s85",
-    "type": "single",
-    "stem": "下列不属于常用MySQL图形管理工具的是？",
-    "options": [
-      "A. MySQL Workbench",
-      "B. phpMyAdmin",
-      "C. Navicat",
-      "D. mysqld"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第102页指出MySQL的图形管理工具常用的有MySQL Workbench、phpMyAdmin和Navicat等；mysqld是服务器进程。",
-    "page": 102,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s86",
-    "type": "single",
-    "stem": "MySQL Workbench为哪些人员提供可视化设计、模型建立以及数据库管理功能？",
-    "options": [
-      "A. 数据库管理员、程序开发者和系统规划师",
-      "B. 仅终端用户",
-      "C. 仅网络管理员",
-      "D. 仅销售人员"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第102页指出MySQL Workbench为数据库管理员、程序开发者和系统规划师提供可视化设计、模型建立以及数据库管理功能。",
-    "page": 102,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s87",
-    "type": "single",
-    "stem": "MySQL Workbench包含的功能是？",
-    "options": [
-      "A. 仅监控CPU使用率",
-      "B. 创建复杂E-R数据模型、正向和逆向数据库工程以及文档任务管理",
-      "C. 仅执行查询语句",
-      "D. 仅备份数据库"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第102页指出MySQL Workbench包含创建复杂的数据建模E-R模型、正向和逆向数据库工程，也可用于文档任务管理。",
-    "page": 102,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-s88",
-    "type": "single",
-    "stem": "在MySQL Workbench中创建连接，应使用的主菜单命令是？",
-    "options": [
-      "A. Edit|Preferences",
-      "B. Query|Execute",
-      "C. Database|Manage Connections",
-      "D. File|New Model"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第110页指出单击主菜单Database|Manage Connections命令，弹出Manage Server Connections对话框，输入连接名称并Test Connection测试。",
-    "page": 110,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b43",
-    "type": "blank",
-    "stem": "MySQL Workbench可独立于MySQL软件集合安装，PPT中的独立安装版本为mysql-workbench-community-8.0.22-____。",
-    "answer": [
-      "winx64",
-      "winx64版"
-    ],
-    "answerText": "winx64",
-    "analysis": "解析：PPT第103页指出MySQL Workbench除了与MySQL 8.0软件集合安装外还可独立安装，版本为mysql-workbench-community-8.0.22-winx64。",
-    "page": 103,
-    "chapter": 1,
-    "chapterTitle": "MySQL数据库概述"
-  },
-  {
-    "id": "ch1-ppt-b44",
-    "type": "blank",
-    "stem": "在MySQL Workbench中连接成功后，可通过图形界面执行SQL实现数据库、表和数据添加、删除、修改等操作，这种方式称为____操作。",
-    "answer": [
-      "可视化"
-    ],
-    "answerText": "可视化",
-    "analysis": "解析：PPT第110页指出连接后可通过图形界面执行SQL实现数据库、表和数据添加、删除、修改等操作，即数据库的可视化操作。",
-    "page": 110,
+    "analysis": "解析：PPT第42-46页，并、差、交、笛卡尔积属于传统集合运算；选择、投影、连接、除是专门的关系运算。",
     "chapter": 1,
     "chapterTitle": "MySQL数据库概述"
   },
@@ -2856,69 +1773,6 @@ window.PPT_QUESTIONS = [
     "chapterTitle": "MySQL8.0语言基础"
   },
   {
-    "id": "ch2-ppt-s34",
-    "type": "single",
-    "stem": "下列类型中不属于二进制类型的是？",
-    "options": [
-      "A. binary",
-      "B. varbinary",
-      "C. bit",
-      "D. varchar"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第37页指出二进制类型包括binary、varbinary、bit、tinyblob、blob、mediumblob和longblob，varchar属于普通文本字符串类型。",
-    "page": 37,
-    "chapter": 2,
-    "chapterTitle": "MySQL8.0语言基础"
-  },
-  {
-    "id": "ch2-ppt-s35",
-    "type": "single",
-    "stem": "需要存储图片、声音等数据时，应选用哪种类型？",
-    "options": [
-      "A. text",
-      "B. blob",
-      "C. char",
-      "D. enum"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第37页指出text类型适合存储长文本，而blob类型适合存储二进制数据，支持文本、声音和图像等任何数据。",
-    "page": 37,
-    "chapter": 2,
-    "chapterTitle": "MySQL8.0语言基础"
-  },
-  {
-    "id": "ch2-ppt-s36",
-    "type": "single",
-    "stem": "下列适合存储长文本的类型是？",
-    "options": [
-      "A. tinytext、text和longtext",
-      "B. binary和varbinary",
-      "C. blob和longblob",
-      "D. bit"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第37页指出tinytext、longtext和text等适合存储长文本的类型。",
-    "page": 37,
-    "chapter": 2,
-    "chapterTitle": "MySQL8.0语言基础"
-  },
-  {
-    "id": "ch2-ppt-b23",
-    "type": "blank",
-    "stem": "text和blob类型的大小可以改变，其中text类型适合存储长文本，而blob类型适合存储____数据。",
-    "answer": [
-      "二进制",
-      "binary",
-      "BINARY"
-    ],
-    "answerText": "二进制",
-    "analysis": "解析：PPT第37页指出blob类型适合存储二进制数据，支持文本、声音和图像等。",
-    "page": 37,
-    "chapter": 2,
-    "chapterTitle": "MySQL8.0语言基础"
-  },
-  {
     "id": "ch2-ppt-s37",
     "type": "single",
     "stem": "进行除法和求余运算时，除以0会怎样？",
@@ -3628,6 +2482,65 @@ window.PPT_QUESTIONS = [
     "chapterTitle": "MySQL8.0语言基础"
   },
   {
+    "id": "ch2-ppt-s70",
+    "type": "single",
+    "page": 16,
+    "stem": "MySQL 的字符集支持 4 个层次，从高到低依次是（  ）。",
+    "options": [
+      "A. 服务器 → 数据库 → 表 → 列",
+      "B. 数据库 → 服务器 → 表 → 列",
+      "C. 列 → 表 → 数据库 → 服务器",
+      "D. 服务器 → 表 → 数据库 → 列"
+    ],
+    "answer": "A",
+    "analysis": "解析：PPT第15-16页，字符集层次由高到低为服务器级、数据库级、表级、列级，低层次默认继承高层次的设置。",
+    "chapter": 2,
+    "chapterTitle": "MySQL8.0语言基础"
+  },
+  {
+    "id": "ch2-ppt-b37",
+    "type": "blank",
+    "page": 16,
+    "stem": "MySQL 字符集的 4 个层次由低到高依次是列级、表级、数据库级和____级。",
+    "answer": [
+      "服务器",
+      "服务器级"
+    ],
+    "answerText": "服务器",
+    "analysis": "解析：PPT第15-16页，字符集层次为服务器、数据库、表、列四级，设置时低层次未指定则继承上一层次。",
+    "chapter": 2,
+    "chapterTitle": "MySQL8.0语言基础"
+  },
+  {
+    "id": "ch2-ppt-s71",
+    "type": "single",
+    "page": 19,
+    "stem": "关于 MySQL 标识符的命名规则，下列说法正确的是（  ）。",
+    "options": [
+      "A. 标识符可以包含空格，用引号括起来即可",
+      "B. 标识符必须以字母或下划线开头，可包含字母、数字和下划线",
+      "C. 标识符长度不能超过 8 个字符",
+      "D. 关键字可以直接作为标识符使用"
+    ],
+    "answer": "B",
+    "analysis": "解析：PPT第19-20页，标识符由字母、数字、下划线和 $ 组成，必须以字母或下划线开头，不能含空格，长度不超过 64 个字符，关键字不能直接作标识符。",
+    "chapter": 2,
+    "chapterTitle": "MySQL8.0语言基础"
+  },
+  {
+    "id": "ch2-ppt-b38",
+    "type": "blank",
+    "page": 19,
+    "stem": "MySQL 标识符的最大长度为____个字符。",
+    "answer": [
+      "64"
+    ],
+    "answerText": "64",
+    "analysis": "解析：PPT第19页，标识符（数据库名、表名、列名等）最长 64 个字符。",
+    "chapter": 2,
+    "chapterTitle": "MySQL8.0语言基础"
+  },
+  {
     "id": "ch3-ppt-s01",
     "type": "single",
     "stem": "MySQL 8.0默认的存储引擎是？",
@@ -3780,20 +2693,6 @@ window.PPT_QUESTIONS = [
     "answerText": "InnoDB",
     "analysis": "解析：PPT第9页指出MySQL的默认存储引擎是InnoDB。",
     "page": 9,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-b03",
-    "type": "blank",
-    "stem": "InnoDB表空间分为共享表空间和____表空间两种类型。",
-    "answer": [
-      "独立",
-      "独立表空间"
-    ],
-    "answerText": "独立",
-    "analysis": "解析：PPT第37页指出InnoDB表空间分为共享表空间和独立表空间两种类型。",
-    "page": 37,
     "chapter": 3,
     "chapterTitle": "MySQL8.0数据库和表的基本操作"
   },
@@ -4393,116 +3292,6 @@ window.PPT_QUESTIONS = [
     "chapterTitle": "MySQL8.0数据库和表的基本操作"
   },
   {
-    "id": "ch3-ppt-s35",
-    "type": "single",
-    "stem": "InnoDB共享表空间默认的文件名和初始大小分别是？",
-    "options": [
-      "A. ibdata1、12M",
-      "B. ib_logfile1、12M",
-      "C. mysql.ibd、12M",
-      "D. ibdata1、8M"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第38页指出共享表空间文件位于数据库根目录下，文件名ibdata1，初始大小12M，能自动扩展。",
-    "page": 38,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-s36",
-    "type": "single",
-    "stem": "独立表空间中每个表对应的.ibd文件包含的内容是？",
-    "options": [
-      "A. 只有数据字典元数据",
-      "B. 表的数据内容和索引内容",
-      "C. 只有表结构定义",
-      "D. 只有事务回滚信息"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第38页指出独立表空间中每个表都有一个.ibd文件，该文件包括一个表单独的数据内容以及索引内容。",
-    "page": 38,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-b16",
-    "type": "blank",
-    "stem": "查看数据库的表空间信息，可使用 show variables like '____';",
-    "answer": [
-      "InnoDB_data%",
-      "innodb_data%",
-      "InnoDB_data"
-    ],
-    "answerText": "InnoDB_data%",
-    "analysis": "解析：PPT第39页给出命令 show variables like 'InnoDB_data%'; 用于查看数据库的表空间。",
-    "page": 39,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-s37",
-    "type": "single",
-    "stem": "共享表空间的主要缺点是？",
-    "options": [
-      "A. 分配后不能回缩，大量删除后表空间中会有大量空隙",
-      "B. 不能存放索引",
-      "C. 不能自动扩展",
-      "D. 不能存放事务回滚信息"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第40页指出共享表空间分配后不能回缩，大量删除后会有大量空隙，不适合经常删除的统计分析类应用。",
-    "page": 40,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-s38",
-    "type": "single",
-    "stem": "对于使用独立表空间的表，哪种操作能自动回收表空间？",
-    "options": [
-      "A. update",
-      "B. delete",
-      "C. select",
-      "D. drop table"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第41页指出独立表空间的Drop table操作能自动回收表空间。",
-    "page": 41,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-b17",
-    "type": "blank",
-    "stem": "系统变量InnoDB_file_per_table的值为ON时，代表使用____表空间管理。",
-    "answer": [
-      "独立",
-      "独立表空间",
-      "独立表空间管理"
-    ],
-    "answerText": "独立",
-    "analysis": "解析：PPT第42页指出InnoDB_file_per_table的值为ON代表独立表空间管理，OFF代表共享表空间管理。",
-    "page": 42,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-s39",
-    "type": "single",
-    "stem": "把共享表空间转换为独立表空间，需要把参数InnoDB_file_per_table设置为？",
-    "options": [
-      "A. 1",
-      "B. OFF",
-      "C. NULL",
-      "D. 0"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第43页指出共享表空间转化为独立表空间需要设置参数InnoDB_file_per_table=1。",
-    "page": 43,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
     "id": "ch3-ppt-s40",
     "type": "single",
     "stem": "下列选项中，不属于列定义 col_name type 之后可跟的选项的是？",
@@ -4808,67 +3597,6 @@ window.PPT_QUESTIONS = [
     "answerText": "datetime",
     "analysis": "解析：PPT第60页例16中create table example(today datetime, name char(20))，today列为datetime类型。",
     "page": 60,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-s51",
-    "type": "single",
-    "stem": "临时表最适合的应用场景是？",
-    "options": [
-      "A. 替代所有永久表",
-      "B. 在非常大的表上偶尔运行查询，获得一个小的数据子集",
-      "C. 存放系统元数据",
-      "D. 长期保存核心业务数据"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第61页指出临时表适合在非常大的表上偶尔运行很多查询获得一个小的子集时使用。",
-    "page": 61,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-s52",
-    "type": "single",
-    "stem": "创建临时表使用的语句是？",
-    "options": [
-      "A. create table",
-      "B. create view",
-      "C. create temp database",
-      "D. create temporary table"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第61页例中使用create temporary table tmp_emp1创建临时表。",
-    "page": 61,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-b27",
-    "type": "blank",
-    "stem": "临时表将在____期间存在，断开时MySQL自动删除表并释放空间。",
-    "answer": [
-      "连接MySQL",
-      "连接",
-      "连接数据库"
-    ],
-    "answerText": "连接MySQL",
-    "analysis": "解析：PPT第62页指出临时表将在连接MySQL期间存在，断开时MySQL自动删除表并释放所用的空间。",
-    "page": 62,
-    "chapter": 3,
-    "chapterTitle": "MySQL8.0数据库和表的基本操作"
-  },
-  {
-    "id": "ch3-ppt-b28",
-    "type": "blank",
-    "stem": "show ____ 语句不会列举临时表。",
-    "answer": [
-      "tables",
-      "TABLES"
-    ],
-    "answerText": "tables",
-    "analysis": "解析：PPT第62页说明show tables语句不会列举临时表，且不能用rename重命名临时表。",
-    "page": 62,
     "chapter": 3,
     "chapterTitle": "MySQL8.0数据库和表的基本操作"
   },
@@ -5591,22 +4319,6 @@ window.PPT_QUESTIONS = [
     "chapterTitle": "数据检索"
   },
   {
-    "id": "ch4-ppt-s08",
-    "type": "single",
-    "stem": "定义通用表表达式（CTE）使用的关键字是？",
-    "options": [
-      "A. with",
-      "B. select",
-      "C. over",
-      "D. partition"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第75页指出通用表表达式with子句的语法，with是通用表表达式的关键词。",
-    "page": 75,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
     "id": "ch4-ppt-b01",
     "type": "blank",
     "stem": "数据检索是指从数据库中按照预定条件查询数据，MySQL是通过____语句实现的。",
@@ -6216,128 +4928,6 @@ window.PPT_QUESTIONS = [
     "answerText": "rollup",
     "analysis": "解析：PPT第38页指出with rollup可以在分组的统计数据基础上再进行相同的总体统计，如既求每门课平均值又求全部成绩平均值。",
     "page": 38,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-s31",
-    "type": "single",
-    "stem": "按照功能划分，MySQL 8.0支持的窗口函数可分为几类？",
-    "options": [
-      "A. 3类",
-      "B. 4类",
-      "C. 5类",
-      "D. 6类"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第40页指出按照功能划分，可以把MySQL8.0支持的窗口函数分为5类。",
-    "page": 40,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-s32",
-    "type": "single",
-    "stem": "窗口函数的一般格式是？",
-    "options": [
-      "A. window_function_name(expression) group by(...)",
-      "B. window_function_name(expression) join(...)",
-      "C. window_function_name(expression) having(...)",
-      "D. window_function_name(expression) over([partition_defintion] [order_definition] [frame_definition])"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第41页给出窗口函数一般格式：window_function_name(expression) over([partition_defintion] [order_definition] [frame_definition])。",
-    "page": 41,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-s33",
-    "type": "single",
-    "stem": "窗口函数中，用来指定函数执行的窗口范围的关键字是？",
-    "options": [
-      "A. over",
-      "B. partition",
-      "C. frame",
-      "D. window"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第41页指出over是关键字，用来指定函数执行的窗口范围，括号中什么都不写表示窗口包含满足where条件的所有行。",
-    "page": 41,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-b19",
-    "type": "blank",
-    "stem": "窗口函数中over后面括号内什么都不写，表示窗口包含满足____条件的所有行，函数基于所有行进行计算。",
-    "answer": [
-      "where",
-      "WHERE"
-    ],
-    "answerText": "where",
-    "analysis": "解析：PPT第41页指出over括号中什么都不写，则表示窗口包含满足where条件的所有行。",
-    "page": 41,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-s34",
-    "type": "single",
-    "stem": "窗口函数中partition子句的作用是？",
-    "options": [
-      "A. 合并多个分组",
-      "B. 指定窗口按哪些字段分组，窗口函数在不同分组上分别执行",
-      "C. 对结果集排序",
-      "D. 限制分组的数量"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第41页指出partition子句指定窗口按照哪些字段进行分组，窗口函数在不同的分组上分别执行。",
-    "page": 41,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-b20",
-    "type": "blank",
-    "stem": "窗口函数中frame是当前分区的一个子集，用来定义子集的规则，通常用来作为____窗口使用。",
-    "answer": [
-      "滑动",
-      "滑动窗口"
-    ],
-    "answerText": "滑动",
-    "analysis": "解析：PPT第41页指出frame是当前分区的一个子集，其子句用来定义子集的规则，通常用来作为滑动窗口使用。",
-    "page": 41,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-s35",
-    "type": "single",
-    "stem": "select *, rank() over w as 'rank' from score window w as (order by final) 中rank()输出的是什么？",
-    "options": [
-      "A. 每门课的平均分",
-      "B. 记录的行号",
-      "C. 按final排序后的序号",
-      "D. 每名学生的总分"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第42页例23利用rank()函数输出按照final排序的记录行序数值，窗口w定义为 order by final。",
-    "page": 42,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-b21",
-    "type": "blank",
-    "stem": "例26中 lag(studentno,3) over ww2 用于输出每行数据的前____行的学号。",
-    "answer": [
-      "3",
-      "三"
-    ],
-    "answerText": "3",
-    "analysis": "解析：PPT第45页例26利用lag()输出每行数据的前3行的学号，lag的第二个参数3表示偏移3行。",
-    "page": 45,
     "chapter": 4,
     "chapterTitle": "数据检索"
   },
@@ -7097,114 +5687,6 @@ window.PPT_QUESTIONS = [
     "answer": "A",
     "analysis": "解析：PPT第74页例40将student表中入学成绩低于800的所有学生的期末成绩增加5%，子查询结果作为更新条件的一部分。",
     "page": 74,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-s70",
-    "type": "single",
-    "stem": "通用表表达式（CTE）的作用范围是？",
-    "options": [
-      "A. 整个数据库",
-      "B. 当前语句",
-      "C. 当前会话",
-      "D. 全局所有用户"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第75页指出MySQL 8.0的通用表表达式是一个在语句级别定义的临时结果集，其作用范围是在当前语句。",
-    "page": 75,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-s71",
-    "type": "single",
-    "stem": "关于CTE的语法，下列说法正确的是？",
-    "options": [
-      "A. 必须使用recursive关键字",
-      "B. CTE名称可以重复",
-      "C. as 后面的括号不能省略",
-      "D. as 后面的括号可以省略"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第75页指出subquery用于产生CTE的结果集，as后面的括号不能省略。",
-    "page": 75,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-s72",
-    "type": "single",
-    "stem": "当with子句中包含递归CTE时，必须使用哪个关键字？",
-    "options": [
-      "A. repeat",
-      "B. loop",
-      "C. cycle",
-      "D. recursive"
-    ],
-    "answer": "D",
-    "analysis": "解析：PPT第75页指出如果CTE的子查询中引用了自己的名称即为递归CTE，with子句中包含任何递归CTE时必须使用关键字recursive。",
-    "page": 75,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-b37",
-    "type": "blank",
-    "stem": "递归select部分不能包含聚合函数、窗口函数、group by、order by、limit、____等。",
-    "answer": [
-      "distinct",
-      "DISTINCT"
-    ],
-    "answerText": "distinct",
-    "analysis": "解析：PPT第78页列出的递归CTE语法限制包括：递归select部分不能包含聚合函数、窗口函数、group by、order by、limit、distinct等。",
-    "page": 78,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-s73",
-    "type": "single",
-    "stem": "下列哪一项不属于递归select部分的语法限制？",
-    "options": [
-      "A. 不能引用其他表",
-      "B. 不能包含聚合函数",
-      "C. 不能包含group by",
-      "D. 不能包含limit"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第78页指出递归select部分可以引用其他的表，并且可以将它们与CTE进行连接查询，故“不能引用其他表”不是限制。",
-    "page": 78,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-s74",
-    "type": "single",
-    "stem": "递归查询因没有执行时间限制而导致死循环时，可以从另一个会话使用什么命令终止该查询？",
-    "options": [
-      "A. shutdown",
-      "B. kill query",
-      "C. drop table",
-      "D. rollback"
-    ],
-    "answer": "B",
-    "analysis": "解析：PPT第77页指出如果某个递归查询由于没有执行时间限制而导致了死循环，可以从另一个会话中使用kill query命令终止该查询。",
-    "page": 77,
-    "chapter": 4,
-    "chapterTitle": "数据检索"
-  },
-  {
-    "id": "ch4-ppt-b38",
-    "type": "blank",
-    "stem": "例42用递归CTE生成斐波那契数列，当n到达____之后，就结束递归过程。",
-    "answer": [
-      "12",
-      "十二"
-    ],
-    "answerText": "12",
-    "analysis": "解析：PPT第79、80页例42用 where n<12 控制递归，当n到达12之后结束递归过程，共生成12个数字。",
-    "page": 79,
     "chapter": 4,
     "chapterTitle": "数据检索"
   },
@@ -8376,6 +6858,52 @@ window.PPT_QUESTIONS = [
     "chapterTitle": "索引和视图"
   },
   {
+    "id": "ch5-ppt-s48",
+    "type": "single",
+    "page": 24,
+    "stem": "下列选项中，不属于视图优点的是（  ）。",
+    "options": [
+      "A. 简化用户的操作",
+      "B. 使用户能以多种角度看待同一数据",
+      "C. 提高数据的物理存储效率",
+      "D. 为数据库重构提供一定程度的逻辑独立性"
+    ],
+    "answer": "C",
+    "analysis": "解析：PPT第23-24页，视图是虚表、不存储实际数据，优点为简化操作、多角度查看数据、提高安全性、提供逻辑独立性；它不改变物理存储效率。",
+    "chapter": 5,
+    "chapterTitle": "索引和视图"
+  },
+  {
+    "id": "ch5-ppt-b23",
+    "type": "blank",
+    "page": 24,
+    "stem": "视图是从一个或多个基本表导出的虚表，数据库中只存放视图的____，不存放对应的数据。",
+    "answer": [
+      "定义",
+      "定义信息"
+    ],
+    "answerText": "定义",
+    "analysis": "解析：PPT第23页，视图是虚表，数据库中只保存视图的定义，其数据仍存放在基本表中。",
+    "chapter": 5,
+    "chapterTitle": "索引和视图"
+  },
+  {
+    "id": "ch5-ppt-s49",
+    "type": "single",
+    "page": 12,
+    "stem": "按照设置索引的原则，下列做法最恰当的是（  ）。",
+    "options": [
+      "A. 对更新操作频繁的列尽量多建索引",
+      "B. 在 where 子句和连接条件中频繁使用的列上建索引",
+      "C. 为每一列都建立索引",
+      "D. 在取值很少的列（如性别）上建索引"
+    ],
+    "answer": "B",
+    "analysis": "解析：PPT第12-13页，索引应建在查询、连接、排序频繁使用的列上；更新频繁、重复值多（选择性低）的列不宜建索引，索引过多会拖慢更新。",
+    "chapter": 5,
+    "chapterTitle": "索引和视图"
+  },
+  {
     "id": "ch6-ppt-s01",
     "type": "single",
     "stem": "MySQL脚本文件保存时，后缀名一般为（ ）。",
@@ -8804,68 +7332,6 @@ window.PPT_QUESTIONS = [
     "answerText": "using",
     "analysis": "解析：PPT第23页指出，若预处理语句包含参数制造符，必须提供列举用户会话变量的using子句，且变量数目须与参数制作符数量相同。",
     "page": 23,
-    "chapter": 6,
-    "chapterTitle": "MySQL8.0编程基础"
-  },
-  {
-    "id": "ch6-ppt-s19",
-    "type": "single",
-    "stem": "使用双连线“--”作注释时，其后必须加一个（ ）。",
-    "options": [
-      "A. 空格",
-      "B. 分号",
-      "C. 逗号",
-      "D. 引号"
-    ],
-    "answer": "A",
-    "analysis": "解析：PPT第28页特别提示，双连线“--”后一定要加一个空格，否则不构成注释。考点为“--注释”。故选A。",
-    "page": 28,
-    "chapter": 6,
-    "chapterTitle": "MySQL8.0编程基础"
-  },
-  {
-    "id": "ch6-ppt-s20",
-    "type": "single",
-    "stem": "下列注释方式中，可对多行内容进行块注释的是（ ）。",
-    "options": [
-      "A. #",
-      "B. --",
-      "C. /* … */",
-      "D. //"
-    ],
-    "answer": "C",
-    "analysis": "解析：PPT第28页指出，开始注释对“/*”和结束注释对“*/”之间的所有内容均视为注释，可跨行；#和--都只注释到行尾。考点为“/*…*/注释”。故选C。",
-    "page": 28,
-    "chapter": 6,
-    "chapterTitle": "MySQL8.0编程基础"
-  },
-  {
-    "id": "ch6-ppt-b11",
-    "type": "blank",
-    "stem": "使用井号“#”注释时，从该字符到____都是注释内容。",
-    "answer": [
-      "行尾",
-      "行末",
-      "该行末尾"
-    ],
-    "answerText": "行尾",
-    "analysis": "解析：PPT第28页指出，井号字符“#”从该字符到行尾都是注释内容。",
-    "page": 28,
-    "chapter": 6,
-    "chapterTitle": "MySQL8.0编程基础"
-  },
-  {
-    "id": "ch6-ppt-b12",
-    "type": "blank",
-    "stem": "注释是程序代码中____的文本字符串，用于对代码进行说明或诊断。",
-    "answer": [
-      "不被执行",
-      "不执行",
-      "不会被执行"
-    ],
-    "answerText": "不被执行",
-    "analysis": "解析：PPT第28页给出注释的概念：注释是程序代码中不被执行的文本字符串，用于对代码进行说明或进行诊断。",
-    "page": 28,
     "chapter": 6,
     "chapterTitle": "MySQL8.0编程基础"
   },
@@ -10507,6 +8973,96 @@ window.PPT_QUESTIONS = [
     "answerText": "rename",
     "analysis": "解析：PPT第72页例21中重命名事件的语句为alter event test1_insert rename to insert_test1 comment '表test1的数据操作';。",
     "page": 72,
+    "chapter": 7,
+    "chapterTitle": "存储过程和触发器"
+  },
+  {
+    "id": "ch7-ppt-s57",
+    "type": "single",
+    "page": 28,
+    "stem": "关于存储过程与自定义函数的区别，下列说法正确的是（  ）。",
+    "options": [
+      "A. 函数只能返回一个值，存储过程可以通过 out 参数返回多个值",
+      "B. 存储过程只能返回一个值，函数可以返回多个值",
+      "C. 两者都不允许带参数",
+      "D. 两者都可以用 call 语句调用"
+    ],
+    "answer": "A",
+    "analysis": "解析：PPT第28-30页，函数用 returns 指定返回类型、只能返回一个值且可直接在 SQL 表达式中调用；存储过程用 call 调用，可通过 out/inout 参数返回多个结果。",
+    "chapter": 7,
+    "chapterTitle": "存储过程和触发器"
+  },
+  {
+    "id": "ch7-ppt-s58",
+    "type": "single",
+    "page": 29,
+    "stem": "下列语句中，不能出现在自定义函数体中的是（  ）。",
+    "options": [
+      "A. select ... into 变量",
+      "B. set 语句",
+      "C. commit / rollback 事务控制语句",
+      "D. if ... then 条件语句"
+    ],
+    "answer": "C",
+    "analysis": "解析：PPT第28-29页，函数体内不允许使用事务控制语句（commit、rollback），也不能返回结果集；需要事务或多结果集时应改用存储过程。",
+    "chapter": 7,
+    "chapterTitle": "存储过程和触发器"
+  },
+  {
+    "id": "ch7-ppt-b31",
+    "type": "blank",
+    "page": 29,
+    "stem": "存储过程用____语句调用，而自定义函数像内置函数一样直接出现在表达式中。",
+    "answer": [
+      "call",
+      "CALL"
+    ],
+    "answerText": "call",
+    "analysis": "解析：PPT第28页，调用存储过程使用 call 语句；函数在 select 等表达式中直接引用。",
+    "chapter": 7,
+    "chapterTitle": "存储过程和触发器"
+  },
+  {
+    "id": "ch7-ppt-s59",
+    "type": "single",
+    "page": 8,
+    "stem": "下列选项中，不属于存储过程优点的是（  ）。",
+    "options": [
+      "A. 第一次执行后即被编译并保存在数据库中，后续调用执行更快",
+      "B. 减少应用程序与数据库之间的网络传输量",
+      "C. 可以把权限控制到过程一级，提高安全性",
+      "D. 可以脱离数据库直接在其他 DBMS 中复用"
+    ],
+    "answer": "D",
+    "analysis": "解析：PPT第6-10页，存储过程的优点是预编译执行快、减少网络流量、可复用、模块化、可控制权限；它是数据库对象，不能脱离本 DBMS 直接复用。",
+    "chapter": 7,
+    "chapterTitle": "存储过程和触发器"
+  },
+  {
+    "id": "ch7-ppt-b32",
+    "type": "blank",
+    "page": 8,
+    "stem": "存储过程在第一次执行时被____并保存在数据库中，后续调用可以直接执行，因此提高了执行效率。",
+    "answer": [
+      "编译",
+      "预编译"
+    ],
+    "answerText": "编译",
+    "analysis": "解析：PPT第6-8页，存储过程创建时由数据库分析并编译，第一次执行后常驻数据库，后续调用省去解析编译开销。",
+    "chapter": 7,
+    "chapterTitle": "存储过程和触发器"
+  },
+  {
+    "id": "ch7-ppt-b33",
+    "type": "blank",
+    "page": 8,
+    "stem": "存储过程可以只把____权限授予用户，而不必授予表的直接访问权限，因此提高了数据的安全性。",
+    "answer": [
+      "执行",
+      "execute"
+    ],
+    "answerText": "执行",
+    "analysis": "解析：PPT第7-9页，存储过程的一大优点是安全性：应用只需获得过程的 execute 权限，无需直接访问底层表。",
     "chapter": 7,
     "chapterTitle": "存储过程和触发器"
   }

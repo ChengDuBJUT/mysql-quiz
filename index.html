@@ -31,14 +31,14 @@
     </header>
 
     <div class="scope-note">
-      <strong>当前范围</strong>：课件知识点分析 + 基于 PPT 出的选择 / 填空题。作业大题等资料齐全后再补入「大题」板块（下方已预留入口）。
+      <strong>当前范围</strong>：已按期末复习范围裁剪——只保留老师点名的考点与编程题方向，共 587 道选择 / 填空；另加「考试大题」53 道（问答题 13 + 六个实验 40），题干与参考答案均可对照。
     </div>
 
     <nav class="top-nav" id="top-nav" aria-label="主导航">
       <button type="button" class="nav-btn active" data-view="review" id="nav-review">📖 章节精读</button>
       <button type="button" class="nav-btn" data-view="quiz" id="nav-quiz">✍️ PPT 自测</button>
       <button type="button" class="nav-btn" data-view="stats" id="nav-stats">📊 学习统计</button>
-      <button type="button" class="nav-btn" data-view="essay" id="nav-essay">📝 大题（待补）</button>
+      <button type="button" class="nav-btn" data-view="essay" id="nav-essay">📝 考试大题</button>
     </nav>
 
     <!-- ============ 章节精读 ============ -->
@@ -200,25 +200,27 @@
       <p class="tiny-note">换设备或清浏览器前先导出备份。导入会按题 id 合并，同一题以备份为准。</p>
     </section>
 
-    <!-- ============ 大题（预留） ============ -->
+    <!-- ============ 考试大题 ============ -->
     <section id="view-essay" class="view">
-      <div class="placeholder-card">
-        <div class="placeholder-icon">📝</div>
-        <h2>大题板块 · 待资料齐全后补入</h2>
-        <p>作业大题、综合题的权威题干与答案尚未收齐。收齐后会在本板块提供：题干浏览、参考答案对照、自评记录。</p>
-        <p class="tiny-note">当前可先用「章节精读」梳理 PPT 知识点，用「PPT 自测」巩固选择 / 填空。</p>
-        <button type="button" class="btn btn-primary" id="btn-essay-go-review">去看章节精读</button>
+      <div class="lead">
+        <p>期末大题的来源：问答题 20 分（老师复习 PPT 点名的考点）+ 编程题 60 分（六个实验）。先自己写一遍，再展开参考答案对照——写不出来的地方就是明天的复习重点。</p>
       </div>
+      <div class="stats big-stats" id="big-stats"></div>
+      <div class="card syllabus-card" id="syllabus"></div>
+      <div class="big-tabs" id="big-tabs" role="tablist" aria-label="大题分组"></div>
+      <div class="big-list" id="big-list"></div>
+      <p class="tiny-note">「我的草稿」和「已掌握」只存在这台浏览器，会自动保存；换设备前用「学习统计」里的导出备份。</p>
     </section>
 
     <footer class="app-footer">
-      <span>数据源：配套 PPT 第 1–7 章（知识点 + 自出题均标注课件幻灯片序号）</span>
+      <span>数据源：配套 PPT 第 1–7 章 + 期末复习范围 + 实验一~六作业</span>
       <span class="footer-note">纯静态站点 · 进度只存本机浏览器</span>
     </footer>
   </div>
 
-  <script src="data/review.js?v=20261124h"></script>
-  <script src="data/questions.js?v=20261124h"></script>
-  <script src="app.js?v=20261124h"></script>
+  <script src="data/review.js?v=20261126a"></script>
+  <script src="data/questions.js?v=20261126a"></script>
+  <script src="data/labs.js?v=20261126a"></script>
+  <script src="app.js?v=20261126a"></script>
 </body>
 </html>

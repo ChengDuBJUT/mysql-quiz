@@ -3,7 +3,7 @@
 
 用法：
     python tools/make_word.py [输出路径]
-默认输出：E:/mysql/MySQL数据库复习题库_682题.docx
+默认输出：E:/mysql/MySQL数据库复习题库_考纲版.docx（只含期末范围内的题）
 """
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ from docx.shared import Cm, Pt, RGBColor
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "tools", "source")
-DEFAULT_OUT = r"E:/mysql/MySQL数据库复习题库_682题.docx"
+DEFAULT_OUT = r"E:/mysql/MySQL数据库复习题库_考纲版.docx"
 
 INK = RGBColor(0x1A, 0x1A, 0x1A)
 ACCENT = RGBColor(0x1F, 0x4E, 0x79)   # 深蓝：答案
@@ -172,10 +172,10 @@ def visual_width(s):
 
 
 def load_chapters():
-    chapters = []
-    for path in sorted(glob.glob(os.path.join(SRC, "ch[0-9][0-9].json"))):
-        with io.open(path, encoding="utf-8-sig") as f:
-            chapters.append(json.load(f))
+    """复用站点构建的考纲过滤：exam=off 的小节连同题目一起跳过。"""
+    sys.path.insert(0, os.path.join(ROOT, "tools"))
+    from build_review import load_chapters as load_scoped
+    chapters, _ = load_scoped()
     chapters.sort(key=lambda d: d["chapter"])
     return chapters
 

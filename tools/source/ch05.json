@@ -50,7 +50,8 @@
       "tips": [
         "索引由数据库自动维护，编写SQL查询时写法与无索引表完全相同",
         "索引不是越多越好，要正确认识索引的重要性和设计原则"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "1.2",
@@ -103,7 +104,8 @@
       "tips": [
         "全文索引和空间索引只能在MyISAM存储引擎的表中创建",
         "Hash索引仅支持=、in、<=>查询，不能范围查询，且不能避免表扫描"
-      ]
+      ],
+      "exam": "keep"
     },
     {
       "id": "1.3",
@@ -143,7 +145,8 @@
         }
       ],
       "code": [],
-      "tips": []
+      "tips": [],
+      "exam": "core"
     },
     {
       "id": "1.4",
@@ -200,7 +203,8 @@
       "tips": [
         "blob和text列创建索引时必须给出前缀长度",
         "主键索引必定是唯一的，但唯一性索引不一定是主键"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "1.5",
@@ -238,7 +242,8 @@
       "tips": [
         "删除主键索引用drop primary key，不需要提供索引名称",
         "drop index可以删除唯一索引等各类索引"
-      ]
+      ],
+      "exam": "keep"
     },
     {
       "id": "2.1",
@@ -287,7 +292,8 @@
         "视图的from子句中不能使用子查询",
         "定义中不能引用temporary表，也不能创建temporary视图",
         "基本表中添加新字段后，已有视图将不包含新字段"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "2.2",
@@ -331,7 +337,8 @@
         "show create view view_name",
         "select * from information_schema.views;"
       ],
-      "tips": []
+      "tips": [],
+      "exam": "keep"
     },
     {
       "id": "2.3",
@@ -364,7 +371,8 @@
         "alter [algorithm = {undefined|merge|temptable}] view view_name [(column_list)] as select语句 [with [cascaded|local]check option];",
         "alter view teach_view2(教师号,教师名,专业) as select teacherno, tname, major from teach_view1 where prof like '%教授' and (department='计算机学院' or department='材料学院');"
       ],
-      "tips": []
+      "tips": [],
+      "exam": "keep"
     },
     {
       "id": "2.4",
@@ -395,7 +403,8 @@
       "tips": [
         "删除视图只删除定义，不会删除基表数据",
         "drop view可一次删除多个视图，视图名之间用逗号分隔"
-      ]
+      ],
+      "exam": "keep"
     },
     {
       "id": "3.1",
@@ -449,7 +458,8 @@
       "tips": [
         "依赖多表的视图一次只能修改一个基表的数据",
         "含聚合函数、distinct、group by、union等结构的视图不可修改"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "3.2",
@@ -484,7 +494,8 @@
       ],
       "tips": [
         "with check option要求更新数据满足检查条件，否则报ERROR 1369且更新失败"
-      ]
+      ],
+      "exam": "keep"
     }
   ],
   "questions": [
@@ -1423,6 +1434,46 @@
       "answerText": "check",
       "analysis": "解析：考点是“with check option”。PPT第49页例14在select语句后使用 with check option 创建检查视图V_dept。",
       "page": 49
+    },
+    {
+      "id": "ch5-ppt-s48",
+      "type": "single",
+      "page": 24,
+      "stem": "下列选项中，不属于视图优点的是（  ）。",
+      "options": [
+        "A. 简化用户的操作",
+        "B. 使用户能以多种角度看待同一数据",
+        "C. 提高数据的物理存储效率",
+        "D. 为数据库重构提供一定程度的逻辑独立性"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第23-24页，视图是虚表、不存储实际数据，优点为简化操作、多角度查看数据、提高安全性、提供逻辑独立性；它不改变物理存储效率。"
+    },
+    {
+      "id": "ch5-ppt-b23",
+      "type": "blank",
+      "page": 24,
+      "stem": "视图是从一个或多个基本表导出的虚表，数据库中只存放视图的____，不存放对应的数据。",
+      "answer": [
+        "定义",
+        "定义信息"
+      ],
+      "answerText": "定义",
+      "analysis": "解析：PPT第23页，视图是虚表，数据库中只保存视图的定义，其数据仍存放在基本表中。"
+    },
+    {
+      "id": "ch5-ppt-s49",
+      "type": "single",
+      "page": 12,
+      "stem": "按照设置索引的原则，下列做法最恰当的是（  ）。",
+      "options": [
+        "A. 对更新操作频繁的列尽量多建索引",
+        "B. 在 where 子句和连接条件中频繁使用的列上建索引",
+        "C. 为每一列都建立索引",
+        "D. 在取值很少的列（如性别）上建索引"
+      ],
+      "answer": "B",
+      "analysis": "解析：PPT第12-13页，索引应建在查询、连接、排序频繁使用的列上；更新频繁、重复值多（选择性低）的列不宜建索引，索引过多会拖慢更新。"
     }
   ]
 }

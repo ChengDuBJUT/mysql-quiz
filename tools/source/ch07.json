@@ -48,7 +48,8 @@
       "tips": [
         "调用存储过程必须用call语句，执行需execute权限",
         "调用时参数个数必须等于存储过程的参数个数"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "1.2",
@@ -115,7 +116,8 @@
         "continue表示遇错不处理继续执行，exit表示遇错马上退出",
         "sqlstate_value为长度5的字符串错误代码，mysql_error_code为数值型错误代码",
         "自定义错误触发条件和处理程序可在触发器、函数及存储过程中使用"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "1.3",
@@ -143,7 +145,8 @@
         "alter procedure sp_name [characteristic ...]",
         "alter procedure do_insert modifies sql data sql security invoker;"
       ],
-      "tips": []
+      "tips": [],
+      "exam": "keep"
     },
     {
       "id": "1.4",
@@ -171,7 +174,8 @@
         "drop procedure [if exists] sp_name",
         "drop procedure if exists do_insert;"
       ],
-      "tips": []
+      "tips": [],
+      "exam": "keep"
     },
     {
       "id": "1.5",
@@ -209,7 +213,8 @@
       "tips": [
         "函数必须有且仅有一个返回值，存储过程可有多个（用out/inout定义）",
         "函数可嵌入SQL，存储过程必须用call调用"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "2.1",
@@ -245,7 +250,8 @@
       "tips": [
         "游标只能在存储过程内部使用",
         "游标使用顺序为：声明→打开→提取→关闭"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "2.2",
@@ -275,7 +281,8 @@
       ],
       "tips": [
         "使用游标前必须先打开游标"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "2.3",
@@ -322,7 +329,8 @@
       "tips": [
         "fetch每次只提取一行，必须配合循环使用",
         "游标错误处理程序要放在声明游标语句之后"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "2.4",
@@ -355,7 +363,8 @@
       ],
       "tips": [
         "未明确关闭的游标会在begin-end块末尾自动关闭"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "3.1",
@@ -412,7 +421,8 @@
         "insert只有new合法，delete只有old合法，update可同时使用new和old",
         "执行顺序是before触发器、表数据修改操作、after触发器",
         "触发器不能与temporary表或视图关联"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "3.2",
@@ -442,7 +452,8 @@
         "show triggers;",
         "select * from information_schema.triggers;"
       ],
-      "tips": []
+      "tips": [],
+      "exam": "core"
     },
     {
       "id": "3.3",
@@ -495,7 +506,8 @@
         "同一个表不能创建两个相同触发时间、触发事件的触发程序",
         "before触发程序中auto_increment字段的new值为0",
         "触发程序不能对本表使用update语句，可用set命令替代以免死循环"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "3.4",
@@ -523,7 +535,8 @@
         "drop trigger [schema_name.]trigger_name",
         "drop trigger stu_score;"
       ],
-      "tips": []
+      "tips": [],
+      "exam": "keep"
     },
     {
       "id": "4.1",
@@ -560,7 +573,8 @@
       ],
       "tips": [
         "创建事件前必须先打开事件调度器"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "4.2",
@@ -609,7 +623,8 @@
       "tips": [
         "at用于某个时刻发生，every用于周期性发生",
         "事件体包含多条语句时需用begin…end复合结构"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "4.3",
@@ -649,7 +664,8 @@
       ],
       "tips": [
         "alter event可临时关闭或开启事件、改名、修改调度与注释"
-      ]
+      ],
+      "exam": "core"
     }
   ],
   "questions": [
@@ -1796,6 +1812,84 @@
       "answerText": "rename",
       "analysis": "解析：PPT第72页例21中重命名事件的语句为alter event test1_insert rename to insert_test1 comment '表test1的数据操作';。",
       "page": 72
+    },
+    {
+      "id": "ch7-ppt-s57",
+      "type": "single",
+      "page": 28,
+      "stem": "关于存储过程与自定义函数的区别，下列说法正确的是（  ）。",
+      "options": [
+        "A. 函数只能返回一个值，存储过程可以通过 out 参数返回多个值",
+        "B. 存储过程只能返回一个值，函数可以返回多个值",
+        "C. 两者都不允许带参数",
+        "D. 两者都可以用 call 语句调用"
+      ],
+      "answer": "A",
+      "analysis": "解析：PPT第28-30页，函数用 returns 指定返回类型、只能返回一个值且可直接在 SQL 表达式中调用；存储过程用 call 调用，可通过 out/inout 参数返回多个结果。"
+    },
+    {
+      "id": "ch7-ppt-s58",
+      "type": "single",
+      "page": 29,
+      "stem": "下列语句中，不能出现在自定义函数体中的是（  ）。",
+      "options": [
+        "A. select ... into 变量",
+        "B. set 语句",
+        "C. commit / rollback 事务控制语句",
+        "D. if ... then 条件语句"
+      ],
+      "answer": "C",
+      "analysis": "解析：PPT第28-29页，函数体内不允许使用事务控制语句（commit、rollback），也不能返回结果集；需要事务或多结果集时应改用存储过程。"
+    },
+    {
+      "id": "ch7-ppt-b31",
+      "type": "blank",
+      "page": 29,
+      "stem": "存储过程用____语句调用，而自定义函数像内置函数一样直接出现在表达式中。",
+      "answer": [
+        "call",
+        "CALL"
+      ],
+      "answerText": "call",
+      "analysis": "解析：PPT第28页，调用存储过程使用 call 语句；函数在 select 等表达式中直接引用。"
+    },
+    {
+      "id": "ch7-ppt-s59",
+      "type": "single",
+      "page": 8,
+      "stem": "下列选项中，不属于存储过程优点的是（  ）。",
+      "options": [
+        "A. 第一次执行后即被编译并保存在数据库中，后续调用执行更快",
+        "B. 减少应用程序与数据库之间的网络传输量",
+        "C. 可以把权限控制到过程一级，提高安全性",
+        "D. 可以脱离数据库直接在其他 DBMS 中复用"
+      ],
+      "answer": "D",
+      "analysis": "解析：PPT第6-10页，存储过程的优点是预编译执行快、减少网络流量、可复用、模块化、可控制权限；它是数据库对象，不能脱离本 DBMS 直接复用。"
+    },
+    {
+      "id": "ch7-ppt-b32",
+      "type": "blank",
+      "page": 8,
+      "stem": "存储过程在第一次执行时被____并保存在数据库中，后续调用可以直接执行，因此提高了执行效率。",
+      "answer": [
+        "编译",
+        "预编译"
+      ],
+      "answerText": "编译",
+      "analysis": "解析：PPT第6-8页，存储过程创建时由数据库分析并编译，第一次执行后常驻数据库，后续调用省去解析编译开销。"
+    },
+    {
+      "id": "ch7-ppt-b33",
+      "type": "blank",
+      "page": 8,
+      "stem": "存储过程可以只把____权限授予用户，而不必授予表的直接访问权限，因此提高了数据的安全性。",
+      "answer": [
+        "执行",
+        "execute"
+      ],
+      "answerText": "执行",
+      "analysis": "解析：PPT第7-9页，存储过程的一大优点是安全性：应用只需获得过程的 execute 权限，无需直接访问底层表。"
     }
   ]
 }

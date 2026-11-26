@@ -183,6 +183,7 @@
     if (name === 'review') renderReviewHome();
     if (name === 'stats') renderStats();
     if (name === 'quiz') updateFavCounts();
+    if (name === 'essay') renderBig();
     // 做题时收起顶部的范围说明，腾出空间；回到自测首页再显示
     setScopeNote(!(name === 'quiz' && !byId('quiz-card').classList.contains('hidden')));
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -237,13 +238,21 @@
       html += '<div class="goal-box"><h4>学习目标</h4><ul>' +
         c.goals.map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('') + '</ul></div>';
     }
+    if ((c.hiddenSections || []).length) {
+      var hid = c.hiddenSections;
+      var ids = hid.map(function (h) { return h.id; }).join('、');
+      var full = hid.map(function (h) { return h.id + ' ' + h.title; }).join(' / ');
+      html += '<p class="scope-hidden" title="' + esc(full) + '">已按期末范围隐藏 ' + hid.length +
+        ' 个未考小节：' + esc(ids) + '（悬停看标题）</p>';
+    }
     if (c.ideology) {
       html += '<div class="goal-box" style="border-left-color:var(--cinnabar)"><h4 style="color:var(--cinnabar)">思政内涵</h4><div style="font-size:14px">' + esc(c.ideology) + '</div></div>';
     }
 
     (c.sections || []).forEach(function (sec) {
-      html += '<div class="section-block">' +
+      html += '<div class="section-block' + (sec.exam === 'core' ? ' is-core' : '') + '">' +
         '<div class="section-head"><h3>' + esc(sec.id + '  ' + sec.title) + '</h3>' +
+        (sec.exam === 'core' ? '<span class="exam-tag">考纲重点</span>' : '') +
         (sec.pageRange ? '<span class="page-tag">课件 P' + esc(sec.pageRange) + '</span>' : '') + '</div>' +
         (sec.summary ? '<p class="section-summary">' + esc(sec.summary) + '</p>' : '');
       if ((sec.points || []).length) {
@@ -979,6 +988,195 @@
     reader.readAsText(file, 'utf-8');
   }
 
+  /* ---------------- 考试大题（问答题 + 六个实验） ---------------- */
+  var BIG = (window.EXAM_BIG && Array.isArray(window.EXAM_BIG.groups)) ? window.EXAM_BIG : { groups: [] };
+  var BIG_DRAFT_KEY = 'myq-bigdraft-v1';
+  var BIG_DONE_KEY = 'myq-bigdone-v1';
+  var bigDraft = loadJSON(BIG_DRAFT_KEY, {});   // { itemId: 草稿文本 }
+  var bigDone = loadJSON(BIG_DONE_KEY, {});     // { itemId: true }
+  var bigTab = 'all';
+  var bigTimer = null;
+  var bigPending = null;
+  var BIG_ITEMS = {};   // id -> item，导入备份时用来校验
+  BIG.groups.forEach(function (g) {
+    (g.items || []).forEach(function (it) { BIG_ITEMS[it.id] = it; });
+  });
+
+  function bigAllItems() {
+    var out = [];
+    BIG.groups.forEach(function (g) { (g.items || []).forEach(function (it) { out.push({ g: g, it: it }); }); });
+    return out;
+  }
+  function saveBigStore(key, obj) {
+    try { localStorage.setItem(key, JSON.stringify(obj)); } catch (e) {}
+  }
+  function flushBigDraft() {
+    if (!bigPending) return;
+    var p = bigPending; bigPending = null;
+    if (bigTimer) { clearTimeout(bigTimer); bigTimer = null; }
+    if (p.value && p.value.trim()) bigDraft[p.id] = p.value; else delete bigDraft[p.id];
+    saveBigStore(BIG_DRAFT_KEY, bigDraft);
+  }
+  function bigDoneCount() {
+    return Object.keys(bigDone).filter(function (k) { return bigDone[k]; }).length;
+  }
+  function renderBigStats() {
+    var all = bigAllItems();
+    var drafted = Object.keys(bigDraft).filter(function (k) { return bigDraft[k]; }).length;
+    byId('big-stats').innerHTML = [
+      stat(all.length, '大题'),
+      stat(BIG.groups.length, '分组'),
+      stat(drafted, '写过草稿'),
+      stat(bigDoneCount(), '已掌握')
+    ].join('');
+  }
+  function renderBigTabs() {
+    var html = '<button type="button" class="chip' + (bigTab === 'all' ? ' active' : '') +
+      '" data-tab="all">全部 <span class="chip-n">' + bigAllItems().length + '</span></button>';
+    html += BIG.groups.map(function (g) {
+      var done = (g.items || []).filter(function (it) { return bigDone[it.id]; }).length;
+      return '<button type="button" class="chip' + (bigTab === g.id ? ' active' : '') + '" data-tab="' + g.id + '">' +
+        esc(g.short || g.title) + ' <span class="chip-n">' + done + '/' + (g.items || []).length + '</span></button>';
+    }).join('');
+    byId('big-tabs').innerHTML = html;
+  }
+  function bigCardHtml(g, it, idx) {
+    var done = !!bigDone[it.id];
+    var draft = bigDraft[it.id] || '';
+    var html = '<article class="big-card' + (done ? ' done' : '') + '" data-id="' + it.id + '">';
+    html += '<div class="big-head"><div class="big-head-l">' +
+      '<span class="big-tag">' + (g.kind === 'qa' ? '问答题' : '编程题') + '</span>' +
+      (g.kind === 'qa' ? '' : '<span class="big-src">' + esc(g.title) + '</span>') + '</div>' +
+      '<button type="button" class="big-done-btn' + (done ? ' on' : '') + '" aria-pressed="' + (done ? 'true' : 'false') + '">' +
+      (done ? '✓ 已掌握' : '标记已掌握') + '</button></div>';
+    html += '<h3 class="big-title">' + idx + '. ' + esc(it.title) + '</h3>';
+    html += '<p class="big-ask">' + esc(it.ask) + '</p>';
+    html += '<textarea class="big-draft" rows="3" placeholder="' +
+      (g.kind === 'qa' ? '先写自己的要点，再对照参考答案…' : '先自己写 SQL，再对照参考答案…') +
+      '">' + esc(draft) + '</textarea>';
+    html += '<div class="big-actions"><button type="button" class="btn btn-sm big-reveal">看参考答案</button>' +
+      '<span class="big-hint">' + (it.points ? '要点 ' + it.points.length + ' 条' : '') +
+      (it.sql ? (it.points ? ' · ' : '') + it.sql.length + ' 种写法' : '') + '</span></div>';
+    html += '<div class="big-answer hidden">';
+    if (it.points && it.points.length) {
+      html += '<div class="big-points"><h4>答题要点</h4><ul>' +
+        it.points.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul></div>';
+    }
+    if (it.answer) html += '<div class="big-answer-text">' + esc(it.answer).replace(/\n/g, '<br>') + '</div>';
+    if (it.sql && it.sql.length) {
+      html += it.sql.map(function (s) {
+        return '<pre class="sql-block"><code>' + esc(s) + '</code></pre>';
+      }).join('');
+    }
+    if (it.note) html += '<p class="big-note">💡 ' + esc(it.note) + '</p>';
+    html += '</div></article>';
+    return html;
+  }
+  function renderSyllabus() {
+    var box = byId('syllabus'); if (!box) return;
+    var rows = BIG.syllabus || [];
+    if (!rows.length) { box.classList.add('hidden'); return; }
+    var html = '<div class="syl-head"><h3>考纲自查 · 复习 PPT 点名的 12 个点</h3>' +
+      '<p class="tiny-note">老师在第 3 页列出的考点，逐个核对有没有题目兜住；点任意一行直接跳到对应的问答题。</p></div>' +
+      '<div class="syl-rows">' + rows.map(function (r) {
+        var chs = (r.chapters || []).map(function (c) { return '第' + c + '章'; }).join(' / ');
+        return '<button type="button" class="syl-row" data-qa="' + r.qa + '">' +
+          '<span class="syl-no">' + r.no + '</span>' +
+          '<span class="syl-name">' + esc(r.name) + '</span>' +
+          '<span class="syl-meta"><i class="syl-ch">' + esc(chs) + '</i>' +
+          '<i class="syl-hit' + (r.hits ? '' : ' zero') + '">' + (r.hits || 0) + ' 题</i>' +
+          '<i class="syl-go">问答题 →</i></span></button>';
+      }).join('') + '</div>';
+    box.innerHTML = html;
+  }
+  function jumpToBig(qaId) {
+    bigTab = 'qa';
+    renderBig();
+    var card = document.querySelector('.big-card[data-id="' + qaId + '"]');
+    if (!card) return;
+    var box = card.querySelector('.big-answer');
+    if (box && box.classList.contains('hidden')) card.querySelector('.big-reveal').click();
+    card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    card.classList.add('flash');
+    setTimeout(function () { card.classList.remove('flash'); }, 1800);
+  }
+  function renderBig() {
+    if (!byId('big-list')) return;
+    renderSyllabus();
+    renderBigStats();
+    renderBigTabs();
+    var groups = BIG.groups.filter(function (g) { return bigTab === 'all' || g.id === bigTab; });
+    if (!groups.length) {
+      byId('big-list').innerHTML = '<p class="tiny-note">这个分组还没有内容。</p>';
+      return;
+    }
+    var html = '';
+    groups.forEach(function (g) {
+      if (bigTab === 'all') {
+        html += '<div class="big-group-head"><h3>' + esc(g.title) + '</h3>' +
+          (g.desc ? '<p class="tiny-note">' + esc(g.desc) + '</p>' : '') + '</div>';
+      }
+      html += (g.items || []).map(function (it, i) { return bigCardHtml(g, it, i + 1); }).join('');
+    });
+    byId('big-list').innerHTML = html;
+  }
+  function bindBig() {
+    var tabs = byId('big-tabs');
+    if (tabs) {
+      tabs.addEventListener('click', function (e) {
+        var chip = e.target.closest('.chip'); if (!chip) return;
+        flushBigDraft();
+        bigTab = chip.getAttribute('data-tab');
+        renderBig();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+    var syl = byId('syllabus');
+    if (syl) {
+      syl.addEventListener('click', function (e) {
+        var row = e.target.closest('.syl-row'); if (!row) return;
+        jumpToBig(row.getAttribute('data-qa'));
+      });
+    }
+    var list = byId('big-list');
+    if (!list) return;
+    list.addEventListener('click', function (e) {
+      var card = e.target.closest('.big-card'); if (!card) return;
+      var id = card.getAttribute('data-id');
+      if (e.target.closest('.big-reveal')) {
+        var box = card.querySelector('.big-answer');
+        var btn = e.target.closest('.big-reveal');
+        var closed = box.classList.toggle('hidden');
+        btn.textContent = closed ? '看参考答案' : '收起参考答案';
+        return;
+      }
+      if (e.target.closest('.big-done-btn')) {
+        var on = !bigDone[id];
+        if (on) bigDone[id] = true; else delete bigDone[id];
+        saveBigStore(BIG_DONE_KEY, bigDone);
+        card.classList.toggle('done', on);
+        var b = e.target.closest('.big-done-btn');
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        b.textContent = on ? '✓ 已掌握' : '标记已掌握';
+        renderBigStats(); renderBigTabs();
+      }
+    });
+    list.addEventListener('input', function (e) {
+      var ta = e.target.closest('.big-draft'); if (!ta) return;
+      var card = ta.closest('.big-card');
+      bigPending = { id: card.getAttribute('data-id'), value: ta.value };
+      if (bigTimer) clearTimeout(bigTimer);
+      bigTimer = setTimeout(function () {
+        flushBigDraft();
+        renderBigStats();
+      }, 400);
+    });
+    list.addEventListener('focusout', function (e) {
+      if (e.target.closest('.big-draft')) { flushBigDraft(); renderBigStats(); }
+    });
+  }
+
   /* ---------------- 统计 ---------------- */
   function renderStats() {
     var answered = BANK.filter(function (q) { var p = progress[q.id]; return p && p.a; });
@@ -1003,7 +1201,8 @@
   }
 
   function exportData() {
-    var data = { app: 'myq', version: 1, exportedAt: new Date().toISOString(), progress: progress, favs: favs };
+    var data = { app: 'myq', version: 2, exportedAt: new Date().toISOString(), progress: progress, favs: favs,
+      bigDraft: bigDraft, bigDone: bigDone };
     var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -1024,7 +1223,15 @@
         if (Array.isArray(d.favs)) {
           d.favs.forEach(function (id) { if (BY_ID[id] && favs.indexOf(id) === -1) favs.push(id); });
         }
-        saveProgress(); saveFavs(); renderStats(); updateFavCounts();
+        if (d.bigDraft && typeof d.bigDraft === 'object') {
+          Object.keys(d.bigDraft).forEach(function (id) { if (BIG_ITEMS[id]) bigDraft[id] = String(d.bigDraft[id]); });
+          saveBigStore(BIG_DRAFT_KEY, bigDraft);
+        }
+        if (d.bigDone && typeof d.bigDone === 'object') {
+          Object.keys(d.bigDone).forEach(function (id) { if (BIG_ITEMS[id] && d.bigDone[id]) bigDone[id] = true; });
+          saveBigStore(BIG_DONE_KEY, bigDone);
+        }
+        saveProgress(); saveFavs(); renderStats(); updateFavCounts(); renderBig();
         alert('导入完成。');
       } catch (e) { alert('导入失败：文件不是有效的备份 JSON。'); }
     };
@@ -1068,7 +1275,6 @@
       byId('quiz-chapter').value = ch;
       setView('quiz'); updateFilterCount(); startQuiz();
     });
-    byId('btn-essay-go-review').addEventListener('click', function () { setView('review'); });
 
     byId('quiz-modes').addEventListener('click', function (e) {
       var chip = e.target.closest('.chip'); if (!chip) return;
@@ -1193,7 +1399,7 @@
       var o2 = document.createElement('option'); o2.value = String(c.chapter);
       o2.textContent = '第 ' + c.chapter + ' 章'; psel.appendChild(o2);
     });
-    initTheme(); bind(); syncOptShuffleUI(); updateFavCounts(); updateFilterCount(); updateNoteCount(); renderReviewHome();
+    initTheme(); bind(); bindBig(); syncOptShuffleUI(); updateFavCounts(); updateFilterCount(); updateNoteCount(); renderReviewHome(); renderBig();
     // 对外暴露，便于自动化验收
     window.PPR = {
       setView: setView, startQuiz: startQuiz, openChapter: openChapter,

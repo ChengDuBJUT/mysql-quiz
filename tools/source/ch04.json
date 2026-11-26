@@ -2,10 +2,10 @@
   "chapter": 4,
   "title": "数据检索",
   "goals": [
-    "掌握select基本查询语句与单表查询（where、order by、limit）",
-    "掌握函数查询：聚合函数、group by分组与窗口函数",
+    "掌握 select 基本查询与单表查询（where、order by、limit）",
+    "掌握分组查询：聚合函数、group by 与 having",
     "掌握多表连接（内连接、外连接、交叉连接、union）与子查询",
-    "掌握正则表达式模糊查询与通用表表达式CTE"
+    "掌握正则表达式模糊查询（regexp）"
   ],
   "ideology": "",
   "sections": [
@@ -43,7 +43,8 @@
       ],
       "tips": [
         "select语句是SQL从数据库中获取信息的基本语句"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "2.1",
@@ -79,7 +80,8 @@
       ],
       "tips": [
         "Select和from子句在数据库表查询时都是必选项"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "2.2",
@@ -134,7 +136,8 @@
       ],
       "tips": [
         "like中%可匹配任意长度字符串（长度可为0），_只匹配一个字符"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "2.3",
@@ -169,7 +172,8 @@
       ],
       "tips": [
         "默认升序asc，降序用desc；null升序在最前、降序在最后"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "2.4",
@@ -199,7 +203,8 @@
       ],
       "tips": [
         "总查询结果中第1条记录编号为0"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "3.1",
@@ -251,7 +256,8 @@
       ],
       "tips": [
         "count(*)统计包含null值的所有行；count(列名)只统计非null值"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "3.2",
@@ -298,7 +304,8 @@
       ],
       "tips": [
         "having在where筛选后进一步筛选；group by分组后每组只显示一条记录"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "3.3",
@@ -346,7 +353,8 @@
       ],
       "tips": [
         "窗口函数不会将多行合并为一行，不需要GROUP BY语句"
-      ]
+      ],
+      "exam": "off"
     },
     {
       "id": "4",
@@ -378,7 +386,8 @@
       "code": [],
       "tips": [
         "连接条件可在from或where子句中指定"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "4.1",
@@ -406,7 +415,8 @@
         "select student.studentno,sname,final from student inner join score on student.studentno=score.studentno where score.courseno = 'c05109';",
         "select student.studentno,sname,final from student,score where student.studentno=score.studentno and score.courseno = 'c05109';"
       ],
-      "tips": []
+      "tips": [],
+      "exam": "core"
     },
     {
       "id": "4.2",
@@ -441,7 +451,8 @@
       ],
       "tips": [
         "左外连接保留左表所有行，右外连接保留右表所有行"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "4.3",
@@ -470,7 +481,8 @@
       ],
       "tips": [
         "结果集大小等于两个表行数之积"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "4.4",
@@ -499,7 +511,8 @@
       ],
       "tips": [
         "连接n个表至少需要n-1个连接条件"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "4.5",
@@ -534,7 +547,8 @@
       ],
       "tips": [
         "不指定all时union自动删除重复行"
-      ]
+      ],
+      "exam": "keep"
     },
     {
       "id": "5",
@@ -576,7 +590,8 @@
       "code": [],
       "tips": [
         "子查询必须用括号括起来，嵌套最多32层；子查询中order by只能在外层用"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "5.1",
@@ -603,7 +618,8 @@
       "code": [
         "select studentno,sname,entrance,(select avg(entrance) from student) 平均成绩, entrance-(select avg(entrance) from student) 分差 from student where studentno='20125121109';"
       ],
-      "tips": []
+      "tips": [],
+      "exam": "core"
     },
     {
       "id": "5.2",
@@ -632,7 +648,8 @@
       ],
       "tips": [
         "派生表就是from子句中的子查询，需要定义别名"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "5.3",
@@ -674,7 +691,8 @@
       ],
       "tips": [
         "all要与每个值都比较；some与any是同义词"
-      ]
+      ],
+      "exam": "core"
     },
     {
       "id": "5.4",
@@ -707,7 +725,8 @@
         "insert into student01 (select * from student where birthdate>='2003-12-31');",
         "update score set final= final*1.05 where studentno in (select studentno from student where entrance <800);"
       ],
-      "tips": []
+      "tips": [],
+      "exam": "core"
     },
     {
       "id": "5.5",
@@ -758,7 +777,8 @@
       ],
       "tips": [
         "递归CTE必须有终止条件；递归部分不能含聚合、窗口、group by、order by、limit、distinct"
-      ]
+      ],
+      "exam": "off"
     },
     {
       "id": "6",
@@ -806,7 +826,8 @@
       ],
       "tips": [
         "regexp查询能力比like通配符更强大灵活"
-      ]
+      ],
+      "exam": "keep"
     }
   ],
   "questions": [

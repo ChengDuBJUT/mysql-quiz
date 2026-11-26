@@ -480,3 +480,106 @@ body {
 
 /* 两个勾选框打包，避免换行时被拆到两行 */
 .toggle-group { display: inline-flex; align-items: center; gap: 14px; flex-wrap: nowrap; }
+
+/* ============================================================
+   考试大题（问答题 + 六个实验）
+   ============================================================ */
+.big-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 18px; }
+.big-tabs .chip { max-width: 100%; }
+.big-group-head { margin: 26px 0 12px; }
+.big-group-head:first-child { margin-top: 6px; }
+.big-group-head h3 { font-size: 16px; margin: 0 0 4px; color: var(--ink); }
+.big-group-head .tiny-note { margin: 0; line-height: 1.7; }
+
+.big-card {
+  background: var(--surface); border: 1px solid var(--line-soft); border-radius: 12px;
+  padding: 16px 18px; margin-bottom: 12px;
+}
+.big-card.done { border-color: var(--accent-line); background: var(--surface-3); }
+.big-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.big-head-l { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.big-tag {
+  flex: none; font-size: 11.5px; padding: 2px 8px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-line);
+}
+.big-src { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.big-done-btn {
+  flex: none; border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+  border-radius: 999px; padding: 4px 12px; font-size: 12px; cursor: pointer; font-family: var(--sans);
+}
+.big-done-btn.on { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--on-accent); }
+.big-title { font-size: 15.5px; margin: 10px 0 6px; }
+.big-ask { font-size: 14px; line-height: 1.8; margin: 0 0 12px; color: var(--ink); white-space: pre-wrap; }
+
+.big-draft {
+  width: 100%; box-sizing: border-box; resize: vertical; min-height: 74px;
+  border: 1px dashed var(--line); background: var(--surface-2); color: var(--ink);
+  border-radius: 10px; padding: 10px 12px; font-size: 13.5px; line-height: 1.75;
+  font-family: var(--mono, "Cascadia Code", Consolas, "Courier New", monospace);
+}
+.big-draft:focus { outline: none; border-style: solid; border-color: var(--accent); background: var(--surface); }
+
+.big-actions { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+.btn-sm { padding: 7px 14px; font-size: 13px; }
+.big-hint { font-size: 12px; color: var(--muted); }
+
+.big-answer { margin-top: 14px; border-top: 1px solid var(--line-soft); padding-top: 14px; }
+.big-points h4 { font-size: 12.5px; color: var(--muted); margin: 0 0 6px; letter-spacing: .04em; }
+.big-points ul { margin: 0 0 12px; padding-left: 20px; }
+.big-points li { font-size: 13.5px; line-height: 1.85; color: var(--ink); }
+.big-answer-text {
+  background: var(--answer-bg); border: 1px solid var(--answer-line); border-radius: 10px;
+  padding: 12px 14px; font-size: 14px; line-height: 1.9; margin-bottom: 12px;
+}
+.sql-block {
+  background: var(--code-bg); color: var(--code-ink); border-radius: 10px;
+  padding: 12px 14px; margin: 0 0 10px; overflow-x: auto;
+  font-family: var(--mono, "Cascadia Code", Consolas, "Courier New", monospace);
+  font-size: 12.8px; line-height: 1.75; white-space: pre-wrap; word-break: break-word;
+}
+.big-note {
+  font-size: 12.5px; line-height: 1.8; color: var(--cinnabar);
+  background: var(--cinnabar-soft); border-radius: 8px; padding: 9px 12px; margin: 0;
+}
+
+/* 考纲重点标记（复习 PPT 点名的考点所在小节） */
+.exam-tag {
+  font-size: 11px; padding: 2px 8px; border-radius: 999px; flex: none;
+  background: var(--cinnabar-soft); color: var(--cinnabar); border: 1px solid var(--cinnabar);
+  opacity: .95;
+}
+.section-block.is-core { border-left: 3px solid var(--cinnabar); }
+
+.scope-hidden {
+  font-size: 12px; color: var(--muted); background: var(--surface-2);
+  border: 1px dashed var(--line); border-radius: 8px; padding: 8px 12px; margin: 0 0 14px;
+}
+
+/* 考纲自查表 */
+.syllabus-card { margin-bottom: 18px; }
+.syl-head h3 { font-size: 15px; margin: 0 0 4px; }
+.syl-head .tiny-note { margin: 0 0 12px; line-height: 1.7; }
+.syl-rows { display: flex; flex-direction: column; gap: 4px; }
+.syl-row {
+  display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+  border: 1px solid transparent; background: none; border-radius: 8px;
+  padding: 8px 10px; cursor: pointer; font-family: var(--sans); color: inherit;
+}
+.syl-row:hover { background: var(--surface-2); border-color: var(--line-soft); }
+.syl-no {
+  flex: none; width: 20px; height: 20px; border-radius: 50%; font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); color: var(--accent); font-weight: 600;
+}
+.syl-name { font-size: 13.5px; flex: 1 1 auto; min-width: 0; }
+.syl-meta { flex: none; display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--muted); }
+.syl-meta i { font-style: normal; }
+.syl-ch { opacity: .85; }
+.syl-hit { background: var(--surface-2); border: 1px solid var(--line-soft); border-radius: 999px; padding: 1px 7px; }
+.syl-hit.zero { color: var(--warn); border-color: var(--warn); }
+.syl-go { color: var(--accent); }
+.big-card.flash { animation: bigFlash 1.8s ease; }
+@keyframes bigFlash {
+  0%, 100% { box-shadow: none; }
+  20%, 60% { box-shadow: 0 0 0 3px var(--accent-soft); border-color: var(--accent); }
+}

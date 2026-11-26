@@ -4,253 +4,13 @@ window.REVIEW_DATA = [
     "chapter": 1,
     "title": "MySQL数据库概述",
     "goals": [
-      "认识MySQL数据库：了解发展背景、使用优势、系统特性、发行版本与8.0新功能",
-      "掌握数据、信息、数据库、SQL、DBMS、DBS等基本概念",
-      "理解概念模型、数据模型、关系运算与数据完整性",
-      "了解MySQL 8.0的安装配置、工作流程、常用工具与可视化操作"
+      "掌握数据、信息、数据库、DBMS、DBS 等基本概念（选择填空的常识底子）",
+      "理解概念模型及其表示方法，能画 E-R 图并转换为关系模型",
+      "掌握数据模型的三要素：数据结构、数据操作、完整性约束",
+      "掌握关系运算：并、差、交、笛卡尔积，以及选择、投影、连接、除"
     ],
     "ideology": "",
     "sections": [
-      {
-        "id": "1.1",
-        "title": "MySQL数据库的发展背景",
-        "pageRange": "4-4",
-        "summary": "介绍MySQL作为开放源码、跨平台的数据库管理系统，属于甲骨文公司，并梳理从1996年1.0版到2026年26.7.0版的发布历程。",
-        "points": [
-          {
-            "term": "MySQL",
-            "desc": "开放源码的小型、跨平台数据库管理系统，广泛应用于Internet中小型网站，目前属于甲骨文公司。",
-            "page": 4
-          },
-          {
-            "term": "MySQL 1.0",
-            "desc": "1996年发布，是能够在小范围内使用的版本。",
-            "page": 4
-          },
-          {
-            "term": "MySQL 5.0",
-            "desc": "2003年12月发布。",
-            "page": 4
-          },
-          {
-            "term": "进入Oracle时代",
-            "desc": "2009年4月甲骨文公司收购Sun公司，MySQL自此进入Oracle时代。",
-            "page": 4
-          },
-          {
-            "term": "MySQL 5.7.1",
-            "desc": "2013年4月发布。",
-            "page": 4
-          },
-          {
-            "term": "MySQL 8.0.0",
-            "desc": "2016年9月正式发布。",
-            "page": 4
-          },
-          {
-            "term": "MySQL 26.7.0",
-            "desc": "2026年7月正式推出，是第一个采用新日历版本控制模型的MySQL版本。",
-            "page": 4
-          }
-        ],
-        "code": [],
-        "tips": []
-      },
-      {
-        "id": "1.2",
-        "title": "MySQL使用优势",
-        "pageRange": "5-5",
-        "summary": "从开放源代码、跨平台性、价格优势以及功能强大使用方便四个方面说明MySQL的使用优势。",
-        "points": [
-          {
-            "term": "开放源代码",
-            "desc": "MySQL数据库是开放源代码的数据库。",
-            "page": 5
-          },
-          {
-            "term": "跨平台性",
-            "desc": "可在Windows、UNIX、Linux和Mac OS等操作系统上运行。",
-            "page": 5
-          },
-          {
-            "term": "价格优势",
-            "desc": "社区版本免费使用，需要付费的附加功能价格也很便宜。",
-            "page": 5
-          },
-          {
-            "term": "多用户多线程",
-            "desc": "MySQL是多用户、多线程SQL数据库服务器，是C/S结构的实现。",
-            "page": 5
-          },
-          {
-            "term": "组成结构",
-            "desc": "由一个服务器守护程序mysqld和很多不同的客户程序和库组成。",
-            "page": 5
-          },
-          {
-            "term": "处理能力",
-            "desc": "能够快速、有效、安全地处理大量数据，达到快速、健壮和易用的目标。",
-            "page": 5
-          }
-        ],
-        "code": [],
-        "tips": [
-          "C/S结构由服务器守护程序mysqld与多个客户程序、库组成"
-        ]
-      },
-      {
-        "id": "1.3",
-        "title": "MySQL系统特性",
-        "pageRange": "6-7",
-        "summary": "介绍MySQL的可移植性、查询优化能力、多语言支持、多种连接技术与存储引擎，以及处理海量数据的能力。",
-        "points": [
-          {
-            "term": "可移植性",
-            "desc": "用C和C++编写并用多种编译器测试，为PHP、Java、C、C++、Python和Perl等提供API。",
-            "page": 6
-          },
-          {
-            "term": "自动优化查询",
-            "desc": "能够自动优化SQL查询算法，有效提高信息查询速度。",
-            "page": 6
-          },
-          {
-            "term": "应用方式",
-            "desc": "可作为单独应用程序用于客户服务器网络环境，也可作为库嵌入其他软件。",
-            "page": 6
-          },
-          {
-            "term": "多语言支持",
-            "desc": "GB2312、BIG5、UTF-8等可用作数据表名和列名；8.0以utf8mb4为默认字符集。",
-            "page": 7
-          },
-          {
-            "term": "连接技术",
-            "desc": "提供TCP/IP、ODBC和JDBC等多种数据库连接技术。",
-            "page": 7
-          },
-          {
-            "term": "存储引擎",
-            "desc": "支持多种存储引擎，提供管理、检查、优化数据库操作的管理工具。",
-            "page": 7
-          },
-          {
-            "term": "海量数据",
-            "desc": "具有大型数据库所有常用功能，可处理拥有亿万条记录级的海量数据。",
-            "page": 7
-          }
-        ],
-        "code": [],
-        "tips": [
-          "MySQL8.0默认字符集为utf8mb4，并提供utf8mb4_ja_0900_as_cs等新排序规则"
-        ]
-      },
-      {
-        "id": "1.4",
-        "title": "MySQL发行版本",
-        "pageRange": "8-9",
-        "summary": "讲解按操作系统和发布顺序划分版本的方法，说明三段式命名机制，并对比社区版与企业版的区别。",
-        "points": [
-          {
-            "term": "版本划分",
-            "desc": "按操作系统类型划分下载版本；按发布顺序划分，MySQL 8.0是普遍可用GA的稳定发布系列。",
-            "page": 8
-          },
-          {
-            "term": "命名机制",
-            "desc": "由3个数字和1个后缀组成，如MySQL-8.0.39。",
-            "page": 8
-          },
-          {
-            "term": "主版本号",
-            "desc": "第1个数字8，描述文件格式，所有版本的发行版都有相同文件格式。",
-            "page": 8
-          },
-          {
-            "term": "发行级别",
-            "desc": "第2个数字0，与主版本号组合构成发行序列号。",
-            "page": 8
-          },
-          {
-            "term": "发行系列版本号",
-            "desc": "第3个数字39，在此发行系列中的版本号，随每次新分发版本递增。",
-            "page": 8
-          },
-          {
-            "term": "社区版",
-            "desc": "Community Edition，可自由下载、免费开源。",
-            "page": 9
-          },
-          {
-            "term": "企业版",
-            "desc": "Enterprise提供最全面高级功能、管理工具和技术支持，需付费，官方提供电话技术支持。",
-            "page": 9
-          },
-          {
-            "term": "企业版特性",
-            "desc": "支持事务处理，提供完整的提交、回滚、崩溃恢复和行级锁定功能。",
-            "page": 9
-          }
-        ],
-        "code": [
-          "MySQL-8.0.39"
-        ],
-        "tips": [
-          "社区版免费开源；企业版付费并提供电话技术支持"
-        ]
-      },
-      {
-        "id": "1.5",
-        "title": "MySQL 8.0的新功能",
-        "pageRange": "10-13",
-        "summary": "概述MySQL 8.0在数据字典、原子DDL、InnoDB增强、安全账户管理、索引优化、JSON、资源管理及查询优化等方面的新功能。",
-        "points": [
-          {
-            "term": "数据字典",
-            "desc": "新增事务类型数据字典，所有数据字典信息和系统表存储在mysql.ibd，元数据用InnoDB存储。",
-            "page": 10
-          },
-          {
-            "term": "原子数据定义语句",
-            "desc": "支持原子DDL，将字典更新、存储引擎操作和二进制日志写入组合到单个原子事务中。",
-            "page": 10
-          },
-          {
-            "term": "InnoDB增强",
-            "desc": "自增主键计数器持久化到重做日志；索引损坏标志写入重做日志使其安全。",
-            "page": 10
-          },
-          {
-            "term": "死锁检测",
-            "desc": "动态变量innodb_deadlock_detect可用于禁用死锁检测，禁用后可能更有效率。",
-            "page": 11
-          },
-          {
-            "term": "安全和账户管理",
-            "desc": "授权表统一为InnoDB事务表；支持角色Role；维护密码历史；允许账户具有双密码。",
-            "page": 11
-          },
-          {
-            "term": "优化器索引",
-            "desc": "主要包括隐藏索引Invisible index、降序索引和函数索引三种方式。",
-            "page": 12
-          },
-          {
-            "term": "JSON增强",
-            "desc": "扩展对JSON的支持，性能更好，能结合结构化数据与JSON半结构化数据。",
-            "page": 12
-          },
-          {
-            "term": "查询的优化",
-            "desc": "增加公用表表达式、窗口函数、统计直方图、备份锁和配置持久化等功能。",
-            "page": 13
-          }
-        ],
-        "code": [],
-        "tips": [
-          "Grant授权语句不再支持隐式创建用户"
-        ]
-      },
       {
         "id": "2.1",
         "title": "信息与数据库",
@@ -296,7 +56,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "信息是具有特定意义的数据；数据是信息的载体"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "2.2",
@@ -348,7 +109,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "select属于DML，也称DQL；where、order by、group by、having是DQL常用保留字"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "2.3",
@@ -395,7 +157,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "DBMS系统架构包括存储管理、查询处理、事务管理、恢复管理4部分"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "2.4",
@@ -447,7 +210,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "DBA负责创建、监控和维护整个数据库，一般由业务水平较高、资历较深的人员担任"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "3.1",
@@ -499,7 +263,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "E-R图：实体型长方框、属性椭圆框、联系菱形框，边上标联系类型"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "3.2",
@@ -541,7 +306,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "数据模型三要素：数据结构、数据操作、完整性约束条件"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "3.3",
@@ -593,327 +359,11 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "1NF原子性→2NF完全依赖主码→3NF直接依赖码；重复组非规范化"
-        ]
-      },
-      {
-        "id": "4.1",
-        "title": "MySQL 8.0安装和配置步骤",
-        "pageRange": "54-84",
-        "summary": "讲解官网下载、zip解压式与msi式安装，说明解压目录、my.ini配置、环境变量、服务安装启动、登录改密以及安装类型与配置用途。",
-        "points": [
-          {
-            "term": "下载来源",
-            "desc": "到MySQL官方网站(http://dev.mysql.com/downloads)找到要安装的版本下载。",
-            "page": 54
-          },
-          {
-            "term": "安装方式",
-            "desc": "zip解压式和msi式；MSI默认安装到C:\\Program Files\\MySQL且无法选择路径，C盘不足可选ZIP版。",
-            "page": 55
-          },
-          {
-            "term": "my.ini配置",
-            "desc": "设置port=3306、basedir、datadir、max_connections=200、字符集utf8mb4和默认引擎INNODB等。",
-            "page": 59
-          },
-          {
-            "term": "初始化",
-            "desc": "mysqld --initialize-insecure 对数据库初始化，执行后解压目录多出data目录存放日志和数据库。",
-            "page": 68
-          },
-          {
-            "term": "服务管理",
-            "desc": "mysqld install添加服务，sc delete删除服务，net start启动服务。",
-            "page": 69
-          },
-          {
-            "term": "登录与改密",
-            "desc": "mysql -u root -p -P3306登录；用ALTER USER修改密码；flush privileges刷新权限。",
-            "page": 72
-          },
-          {
-            "term": "安装类型",
-            "desc": "msi安装提供Developer Default、Server only、Client only、Full、Custom五种类型。",
-            "page": 79
-          },
-          {
-            "term": "Config Type",
-            "desc": "提供development、server、dedicated三种用途选项，本机一般选development占用资源少。",
-            "page": 83
-          }
         ],
-        "code": [
-          "port=3306",
-          "basedir=D:/mysql8.0.27/mysql-8.0.27-winx64",
-          "datadir=D:/mysql8.0.27/mysql-8.0.27-winx64/data",
-          "max_connections=200",
-          "max_connect_errors=10",
-          "character-set-server=utf8mb4",
-          "default-storage-engine=INNODB",
-          "default_authentication_plugin=mysql_native_password",
-          "mysqld --initialize-insecure",
-          "mysqld install mysql8.0.27",
-          "sc delete mysql8.0.27",
-          "net start mysql8.0.27",
-          "mysql -u root -p -P3306",
-          "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';",
-          "flush privileges",
-          "exit 或者 quit",
-          "mysql -h localhost -u root -p"
-        ],
-        "tips": [
-          "删除服务用sc delete；修改密码后需flush privileges刷新权限"
-        ]
-      },
-      {
-        "id": "4.2",
-        "title": "MySQL的工作流程",
-        "pageRange": "85-88",
-        "summary": "按七个步骤说明MySQL服务启动、读取配置、生成实例进程、派生线程、建立通信链路、发送请求到返回响应的完整工作流程。",
-        "points": [
-          {
-            "term": "启动服务",
-            "desc": "操作系统用户启动MySQL服务。",
-            "page": 86
-          },
-          {
-            "term": "读取配置",
-            "desc": "服务启动期间首先将配置文件中的参数信息读入服务器内存。",
-            "page": 86
-          },
-          {
-            "term": "生成实例进程",
-            "desc": "根据配置参数或编译默认值生成一个服务实例进程Instance。",
-            "page": 86
-          },
-          {
-            "term": "派生线程",
-            "desc": "服务实例进程派生出多个线程为多个客户机提供服务。",
-            "page": 86
-          },
-          {
-            "term": "建立通信链路",
-            "desc": "数据库用户选择登录主机、开启客户机、输入账户名密码，建立客户机与服务器的通信链路。",
-            "page": 87
-          },
-          {
-            "term": "发送请求",
-            "desc": "用户在客户机输入MySQL命令或SQL语句，沿通信链路传送给服务实例。",
-            "page": 87
-          },
-          {
-            "term": "返回响应",
-            "desc": "服务实例解析命令并选择执行计划运行，将结果沿通信链路返回给客户机。",
-            "page": 88
-          },
-          {
-            "term": "会话结束",
-            "desc": "数据库用户关闭客户机，通信链路断开，该客户机对应的MySQL会话结束。",
-            "page": 88
-          }
-        ],
-        "code": [],
-        "tips": [
-          "请求：客户机→服务器；响应：服务器→客户机"
-        ]
-      },
-      {
-        "id": "4.3",
-        "title": "MySQL数据库工具简介",
-        "pageRange": "89-92",
-        "summary": "介绍MySQL服务器端和客户端的常用命令行工具，包括mysqld、mysql.server、mysql、mysqladmin、mysqldump等的作用。",
-        "points": [
-          {
-            "term": "mysqld",
-            "desc": "SQL后台程序即MySQL服务器进程，必须运行之后客户端才能连接服务器访问数据库。",
-            "page": 89
-          },
-          {
-            "term": "mysql.server",
-            "desc": "服务器启动脚本，UNIX分发版包括，可调用mysqld_safe来启动MySQL服务器。",
-            "page": 90
-          },
-          {
-            "term": "mysql_multi",
-            "desc": "服务器启动脚本，可以启动或停止系统上安装的多个服务器。",
-            "page": 90
-          },
-          {
-            "term": "mysql_install_db",
-            "desc": "用默认权限创建MySQL授权表，通常只在系统首次安装MySQL时执行一次。",
-            "page": 90
-          },
-          {
-            "term": "mysql",
-            "desc": "客户端工具，交互式输入SQL语句或从文件以批处理模式执行。",
-            "page": 91
-          },
-          {
-            "term": "mysqladmin",
-            "desc": "执行管理操作的客户程序，如创建删除数据库、重载授权表、刷新表到硬盘等。",
-            "page": 91
-          },
-          {
-            "term": "mysqlbinlog",
-            "desc": "从二进制日志读取语句的工具，可帮助系统从崩溃中恢复。",
-            "page": 92
-          },
-          {
-            "term": "mysqldump",
-            "desc": "将MySQL数据库转储到一个文件（如SQL语句或文本文件）的客户程序。",
-            "page": 92
-          }
-        ],
-        "code": [],
-        "tips": [
-          "mysqld是服务器进程；mysql是交互式客户端工具"
-        ]
-      },
-      {
-        "id": "4.4",
-        "title": "MySQL8.0的启动和登录",
-        "pageRange": "93-101",
-        "summary": "说明Windows下启动服务的两种方式与三种启动类型，介绍DOS窗口和客户端两种登录方式及登录成功后的提示信息含义。",
-        "points": [
-          {
-            "term": "启动方式",
-            "desc": "Windows下通过cmd控制台(net start/stop mysql80)或手动执行services.msc两种方式启动服务。",
-            "page": 93
-          },
-          {
-            "term": "启动类型",
-            "desc": "服务启动类型有自动、手动和已禁用三种。",
-            "page": 94
-          },
-          {
-            "term": "登录方式",
-            "desc": "Windows下有两种：DOS窗口命令行方式登录，或在MySQL客户端直接登录。",
-            "page": 95
-          },
-          {
-            "term": "登录命令",
-            "desc": "mysql -u root -p，-u后紧跟用户名，-p表示用户密码，按Enter输入密码。",
-            "page": 96
-          },
-          {
-            "term": "命令结束符",
-            "desc": "MySQL控制台命令以分号(;)或\\g结束，遇到结束符就开始执行命令。",
-            "page": 98
-          },
-          {
-            "term": "连接id",
-            "desc": "Your MySQL connection id表示数据库连接次数，新安装首次登录显示1。",
-            "page": 98
-          },
-          {
-            "term": "帮助命令",
-            "desc": "输入help;或\\h可以查看帮助信息，\\c可清除当前输入语句。",
-            "page": 100
-          },
-          {
-            "term": "查看时间",
-            "desc": "select now();可查看系统当前时间。",
-            "page": 101
-          }
-        ],
-        "code": [
-          "net start mysql80",
-          "net stop mysql80",
-          "services.msc",
-          "mysql -u root -p",
-          "help;",
-          "select now();"
-        ],
-        "tips": [
-          "连接的id表示连接次数，新安装首次登录显示1"
-        ]
-      },
-      {
-        "id": "4.5",
-        "title": "MySQL常用可视化软件的基本操作",
-        "pageRange": "102-110",
-        "summary": "介绍MySQL Workbench、phpMyAdmin和Navicat等图形管理工具，说明Workbench的安装步骤与创建连接、测试连接的操作。",
-        "points": [
-          {
-            "term": "图形管理工具",
-            "desc": "常用的有MySQL Workbench、phpMyAdmin和Navicat等软件。",
-            "page": 102
-          },
-          {
-            "term": "MySQL Workbench",
-            "desc": "为数据库管理员、程序开发者和系统规划师提供可视化设计、模型建立及数据库管理功能。",
-            "page": 102
-          },
-          {
-            "term": "Workbench功能",
-            "desc": "包含创建复杂E-R数据模型、正向和逆向数据库工程，以及文档任务管理。",
-            "page": 102
-          },
-          {
-            "term": "独立安装",
-            "desc": "mysql-workbench-community-8.0.22-winx64版本可独立于软件集合安装。",
-            "page": 103
-          },
-          {
-            "term": "连接数据库",
-            "desc": "通过Database|Manage Connections命令输入连接名称，Test Connection测试并输入root密码。",
-            "page": 110
-          },
-          {
-            "term": "可视化操作",
-            "desc": "连接后可通过图形界面执行SQL实现数据库、表和数据添加、删除、修改等操作。",
-            "page": 110
-          }
-        ],
-        "code": [],
-        "tips": [
-          "创建连接后需Test Connection并输入root密码，测试成功再单击OK"
-        ]
+        "exam": "core"
       }
     ],
     "questions": [
-      {
-        "id": "ch1-ppt-s01",
-        "type": "single",
-        "stem": "目前MySQL数据库属于下列哪家公司？",
-        "options": [
-          "A. 微软(Microsoft)",
-          "B. 甲骨文(Oracle)",
-          "C. IBM",
-          "D. Sun公司"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第4页指出MySQL目前属于甲骨文公司，2009年4月甲骨文收购Sun公司后MySQL进入Oracle时代。",
-        "page": 4
-      },
-      {
-        "id": "ch1-ppt-s02",
-        "type": "single",
-        "stem": "MySQL 8.0.0正式发布的时间是？",
-        "options": [
-          "A. 1996年",
-          "B. 2003年12月",
-          "C. 2016年9月",
-          "D. 2026年7月"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第4页明确2016年9月MySQL 8.0.0正式发布；2026年7月推出的是26.7.0。",
-        "page": 4
-      },
-      {
-        "id": "ch1-ppt-s03",
-        "type": "single",
-        "stem": "MySQL 8.0默认的字符集是？",
-        "options": [
-          "A. latin1",
-          "B. gb2312",
-          "C. utf8mb4",
-          "D. BIG5"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第7页指出MySQL8.0以utf8mb4为默认字符集，并提供新的排序规则。",
-        "page": 7
-      },
       {
         "id": "ch1-ppt-s04",
         "type": "single",
@@ -985,18 +435,6 @@ window.REVIEW_DATA = [
         "page": 44
       },
       {
-        "id": "ch1-ppt-b01",
-        "type": "blank",
-        "stem": "MySQL是一个开放源码的____、跨平台数据库管理系统。",
-        "answer": [
-          "小型",
-          "small"
-        ],
-        "answerText": "小型",
-        "analysis": "解析：PPT第4页首句指出MySQL是一个开放源码的小型、跨平台数据库管理系统。",
-        "page": 4
-      },
-      {
         "id": "ch1-ppt-b02",
         "type": "blank",
         "stem": "数据库(Database，DB)是长期存储在计算机内、有组织、可____的大量数据的集合。",
@@ -1055,445 +493,6 @@ window.REVIEW_DATA = [
         "answerText": "一",
         "analysis": "解析：PPT第44页指出第一范式（1NF）的目标是确保每列的原子性，每列都是不可再分的最小数据单元。",
         "page": 44
-      },
-      {
-        "id": "ch1-ppt-s09",
-        "type": "single",
-        "stem": "1996年MySQL发布的版本是？",
-        "options": [
-          "A. MySQL 1.0",
-          "B. MySQL 5.0",
-          "C. MySQL 5.7.1",
-          "D. MySQL 8.0.0"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第4页指出1996年发布了能够在小范围内使用的MySQL 1.0版。",
-        "page": 4
-      },
-      {
-        "id": "ch1-ppt-s10",
-        "type": "single",
-        "stem": "2003年12月发布的MySQL版本是？",
-        "options": [
-          "A. MySQL 5.7.1",
-          "B. MySQL 5.0",
-          "C. MySQL 8.0.0",
-          "D. MySQL 26.7.0"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第4页指出2003年12月MySQL 5.0版本发布。",
-        "page": 4
-      },
-      {
-        "id": "ch1-ppt-s11",
-        "type": "single",
-        "stem": "2009年4月甲骨文公司收购Sun公司后，MySQL数据库进入什么时代？",
-        "options": [
-          "A. Google时代",
-          "B. IBM时代",
-          "C. 微软时代",
-          "D. Oracle时代"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第4页指出2009年4月甲骨文公司收购Sun公司，自此MySQL数据库进入Oracle时代。",
-        "page": 4
-      },
-      {
-        "id": "ch1-ppt-s12",
-        "type": "single",
-        "stem": "MySQL 5.7.1发布于？",
-        "options": [
-          "A. 2013年4月",
-          "B. 2009年4月",
-          "C. 2016年9月",
-          "D. 2003年12月"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第4页指出2013年4月发布5.7.1版本。",
-        "page": 4
-      },
-      {
-        "id": "ch1-ppt-b07",
-        "type": "blank",
-        "stem": "2026年7月正式推出的MySQL版本是____，它是第一个采用新的日历版本控制模型的MySQL版本。",
-        "answer": [
-          "26.7.0",
-          "MySQL 26.7.0",
-          "mysql 26.7.0"
-        ],
-        "answerText": "26.7.0",
-        "analysis": "解析：PPT第4页指出2026年7月正式推出MySQL 26.7.0，是第一个采用新的日历版本控制模型的MySQL版本。",
-        "page": 4
-      },
-      {
-        "id": "ch1-ppt-s13",
-        "type": "single",
-        "stem": "关于MySQL的跨平台性，下列说法正确的是？",
-        "options": [
-          "A. 只能在Windows上运行",
-          "B. 可在Windows、UNIX、Linux和Mac OS等操作系统上运行",
-          "C. 只能在Linux上运行",
-          "D. 必须运行在专用小型机上"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第5页指出MySQL可在Windows、UNIX、Linux和Mac OS等操作系统上运行，体现其跨平台性。",
-        "page": 5
-      },
-      {
-        "id": "ch1-ppt-s14",
-        "type": "single",
-        "stem": "MySQL是C/S结构的实现，其服务器守护程序是？",
-        "options": [
-          "A. mysql",
-          "B. mysqladmin",
-          "C. mysqld",
-          "D. mysqldump"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第5页指出MySQL由服务器守护程序mysqld和很多不同的客户程序和库组成；mysql是客户端工具。",
-        "page": 5
-      },
-      {
-        "id": "ch1-ppt-s15",
-        "type": "single",
-        "stem": "关于MySQL的价格优势，说法正确的是？",
-        "options": [
-          "A. 只有企业版免费",
-          "B. 仅教育用户可免费使用",
-          "C. 所有版本都必须付费",
-          "D. 社区版免费使用，付费的附加功能价格也很便宜"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第5页指出MySQL的社区版本免费使用，即使是需要付费的附加功能，其价格也很便宜。",
-        "page": 5
-      },
-      {
-        "id": "ch1-ppt-s16",
-        "type": "single",
-        "stem": "MySQL数据库服务器在并发访问方面的特点是？",
-        "options": [
-          "A. 多用户多线程",
-          "B. 只允许一个连接",
-          "C. 不支持并发访问",
-          "D. 单用户单线程"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第5页指出MySQL数据库是一个多用户、多线程SQL数据库服务器。",
-        "page": 5
-      },
-      {
-        "id": "ch1-ppt-b08",
-        "type": "blank",
-        "stem": "MySQL数据库是____的数据库，用户可以获取并修改其源代码。",
-        "answer": [
-          "开放源代码",
-          "开源",
-          "开放源码"
-        ],
-        "answerText": "开放源代码",
-        "analysis": "解析：PPT第5页首句指出MySQL数据库是开放源代码的数据库，这是其使用优势之一。",
-        "page": 5
-      },
-      {
-        "id": "ch1-ppt-b09",
-        "type": "blank",
-        "stem": "MySQL能够快速、有效和安全地处理大量的数据，并达到快速、健壮和____的目标。",
-        "answer": [
-          "易用"
-        ],
-        "answerText": "易用",
-        "analysis": "解析：PPT第5页指出MySQL能够快速、有效和安全的处理大量数据，并达到快速、健壮和易用的目标。",
-        "page": 5
-      },
-      {
-        "id": "ch1-ppt-s17",
-        "type": "single",
-        "stem": "MySQL使用C和C++编写并用多种编译器测试，其目的是保证源代码的？",
-        "options": [
-          "A. 可移植性",
-          "B. 安全性",
-          "C. 完整性",
-          "D. 一致性"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第6页指出MySQL使用C和C++编写，并使用了多种编译器进行测试，保证源代码的可移植性。",
-        "page": 6
-      },
-      {
-        "id": "ch1-ppt-s18",
-        "type": "single",
-        "stem": "MySQL能够自动优化SQL查询算法，其直接效果是？",
-        "options": [
-          "A. 自动备份数据",
-          "B. 提高信息查询速度",
-          "C. 减少磁盘占用",
-          "D. 增加最大连接数"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第6页指出MySQL能够自动优化SQL查询算法，有效地提高了信息查询速度。",
-        "page": 6
-      },
-      {
-        "id": "ch1-ppt-s19",
-        "type": "single",
-        "stem": "关于MySQL的应用方式，正确的是？",
-        "options": [
-          "A. 只能作为独立应用程序使用",
-          "B. 只能作为库嵌入到其他软件中",
-          "C. 既可单独应用于客户服务器网络环境，也可作为库嵌入其他软件",
-          "D. 只能通过浏览器使用"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第6页指出MySQL能够作为一个单独的应用程序应用在客户端服务器网络环境中，也可以作为一个库嵌入到其他软件中。",
-        "page": 6
-      },
-      {
-        "id": "ch1-ppt-s20",
-        "type": "single",
-        "stem": "下列不属于MySQL提供的数据库连接技术的是？",
-        "options": [
-          "A. TCP/IP",
-          "B. ODBC",
-          "C. JDBC",
-          "D. FTP"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第7页指出MySQL提供TCP/IP、ODBC和JDBC等多种数据库连接技术，未提到FTP。",
-        "page": 7
-      },
-      {
-        "id": "ch1-ppt-b10",
-        "type": "blank",
-        "stem": "MySQL支持多种存储____，并提供用于管理、检查、优化数据库操作的管理工具。",
-        "answer": [
-          "引擎"
-        ],
-        "answerText": "引擎",
-        "analysis": "解析：PPT第7页指出MySQL支持多种存储引擎，提供用于管理、检查、优化数据库操作的管理工具。",
-        "page": 7
-      },
-      {
-        "id": "ch1-ppt-b11",
-        "type": "blank",
-        "stem": "MySQL具有大型数据库所有常用功能，可以处理拥有____条记录级的海量数据。",
-        "answer": [
-          "亿万",
-          "亿"
-        ],
-        "answerText": "亿万",
-        "analysis": "解析：PPT第7页指出MySQL具有大型数据库所有常用功能，可以处理拥有亿万条记录级的海量数据。",
-        "page": 7
-      },
-      {
-        "id": "ch1-ppt-s21",
-        "type": "single",
-        "stem": "MySQL的命名机制由几个数字和1个后缀组成？",
-        "options": [
-          "A. 2个",
-          "B. 3个",
-          "C. 4个",
-          "D. 5个"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第8页指出MySQL的命名机制由3个数字和1个后缀组成，例如MySQL-8.0.39。",
-        "page": 8
-      },
-      {
-        "id": "ch1-ppt-s22",
-        "type": "single",
-        "stem": "MySQL-8.0.39中，第一个数字“8”表示？",
-        "options": [
-          "A. 补丁编号",
-          "B. 发行级别",
-          "C. 主版本号，描述文件格式",
-          "D. 发行系列版本号"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第8页指出第1个数字“8”是主版本号，描述了文件格式，所有版本的发行版都有相同文件格式。",
-        "page": 8
-      },
-      {
-        "id": "ch1-ppt-s23",
-        "type": "single",
-        "stem": "MySQL-8.0.39中，第二个数字“0”表示？",
-        "options": [
-          "A. 修订次数",
-          "B. 发行系列版本号",
-          "C. 主版本号",
-          "D. 发行级别"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第8页指出第2个数字“0”是发行级别，主版本号和发行级别组合在一起构成发行序列号。",
-        "page": 8
-      },
-      {
-        "id": "ch1-ppt-s24",
-        "type": "single",
-        "stem": "MySQL-8.0.39中，第三个数字“39”表示？",
-        "options": [
-          "A. 在此发行系列中的版本号",
-          "B. 发行级别",
-          "C. 编译次数",
-          "D. 主版本号"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第8页指出第3个数字“39”是在此发行系列的版本号，随每次新分发版本递增。",
-        "page": 8
-      },
-      {
-        "id": "ch1-ppt-s25",
-        "type": "single",
-        "stem": "按发布顺序划分，MySQL 8.0属于？",
-        "options": [
-          "A. 预览版",
-          "B. 内部测试版",
-          "C. 普遍可用（GA）的稳定发布系列",
-          "D. 已停止维护的版本"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第8页指出MySQL 8.0是目前最新开发的普遍常用（GA）的稳定发布系列，目前已经可以正常使用。",
-        "page": 8
-      },
-      {
-        "id": "ch1-ppt-b12",
-        "type": "blank",
-        "stem": "社区版（Community Edition）是自由下载而且是免费____的。",
-        "answer": [
-          "开源",
-          "开放源代码",
-          "开放源码"
-        ],
-        "answerText": "开源",
-        "analysis": "解析：PPT第9页指出社区版是自由下载而且是免费开源的。",
-        "page": 9
-      },
-      {
-        "id": "ch1-ppt-b13",
-        "type": "blank",
-        "stem": "企业版需付费使用，官方提供____技术支持。",
-        "answer": [
-          "电话"
-        ],
-        "answerText": "电话",
-        "analysis": "解析：PPT第9页指出企业版需付费使用，官方提供电话技术支持。",
-        "page": 9
-      },
-      {
-        "id": "ch1-ppt-b14",
-        "type": "blank",
-        "stem": "企业版支持事务处理，提供完整的提交、回滚、崩溃恢复和____锁定功能。",
-        "answer": [
-          "行级"
-        ],
-        "answerText": "行级",
-        "analysis": "解析：PPT第9页指出企业版支持事务处理，提供完整的提交、回滚、崩溃恢复和行级锁定功能。",
-        "page": 9
-      },
-      {
-        "id": "ch1-ppt-s26",
-        "type": "single",
-        "stem": "MySQL 8.0将所有数据字典信息和系统表存储在哪个文件中？",
-        "options": [
-          "A. mysql.ibd",
-          "B. ibdata1",
-          "C. mysql.db",
-          "D. slow.log"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第10页指出MySQL 8.0新增事务类型的数据字典，所有数据字典信息和系统表都存储在mysql.ibd文件中。",
-        "page": 10
-      },
-      {
-        "id": "ch1-ppt-s27",
-        "type": "single",
-        "stem": "MySQL 8.0的原子DDL把数据字典更新、存储引擎操作和什么组合到单个原子事务中？",
-        "options": [
-          "A. 慢查询日志",
-          "B. 二进制日志写入",
-          "C. 错误日志",
-          "D. 审计日志"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第10页指出DDL语句将与DDL操作关联的数据字典更新、存储引擎操作和二进制日志写入组合到单个原子事务中。",
-        "page": 10
-      },
-      {
-        "id": "ch1-ppt-s28",
-        "type": "single",
-        "stem": "MySQL 8.0将自增主键的计数器持久化到？",
-        "options": [
-          "A. 数据字典",
-          "B. 临时表",
-          "C. 二进制日志",
-          "D. 重做日志"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第10页指出MySQL 8.0将自增主键的计数器持久化到重做日志中，这是InnoDB增强功能之一。",
-        "page": 10
-      },
-      {
-        "id": "ch1-ppt-s29",
-        "type": "single",
-        "stem": "可用于禁用InnoDB死锁检测的动态变量是？",
-        "options": [
-          "A. innodb_deadlock_detect",
-          "B. innodb_lock_wait_timeout",
-          "C. autocommit",
-          "D. max_connections"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第11页指出新的动态变量innodb_deadlock_detect可用于禁用死锁检测，禁用后可能更有效率。",
-        "page": 11
-      },
-      {
-        "id": "ch1-ppt-s30",
-        "type": "single",
-        "stem": "MySQL 8.0优化器索引的三种方式不包括？",
-        "options": [
-          "A. 隐藏索引",
-          "B. 降序索引",
-          "C. 函数索引",
-          "D. 哈希索引"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第12页指出优化器索引主要包括隐藏索引（Invisible index）、降序索引和函数索引三种方式。",
-        "page": 12
-      },
-      {
-        "id": "ch1-ppt-b15",
-        "type": "blank",
-        "stem": "MySQL 8.0开始支持____（Role），管理员可以创建和删除它。",
-        "answer": [
-          "角色",
-          "role",
-          "Role"
-        ],
-        "answerText": "角色",
-        "analysis": "解析：PPT第11页指出MySQL 8.0开始支持角色（Role），管理员可以创建和删除角色，属于安全和账户管理的新功能。",
-        "page": 11
-      },
-      {
-        "id": "ch1-ppt-b16",
-        "type": "blank",
-        "stem": "MySQL 8.0扩展了对____的支持，性能更好，能结合结构化数据与半结构化数据。",
-        "answer": [
-          "JSON",
-          "json"
-        ],
-        "answerText": "JSON",
-        "analysis": "解析：PPT第12页指出MySQL 8.0扩展了对JSON的支持，能结合MySQL原生的结构化数据和JSON的半结构化数据。",
-        "page": 12
-      },
-      {
-        "id": "ch1-ppt-b17",
-        "type": "blank",
-        "stem": "MySQL 8.0增加了公用表表达式、窗口函数、统计____、备份锁和配置持久化等功能。",
-        "answer": [
-          "直方图"
-        ],
-        "answerText": "直方图",
-        "analysis": "解析：PPT第13页指出MySQL增加了公用表表达式、窗口函数、统计直方图、备份锁和配置持久化等查询优化功能。",
-        "page": 13
       },
       {
         "id": "ch1-ppt-s31",
@@ -2107,518 +1106,112 @@ window.REVIEW_DATA = [
         "page": 50
       },
       {
-        "id": "ch1-ppt-s64",
+        "id": "ch1-ppt-s89",
         "type": "single",
-        "stem": "MySQL数据库官方网站的下载地址是？",
+        "page": 37,
+        "stem": "数据模型的三要素中，用于描述系统静态特性（有哪些实体、属性和联系）的是（  ）。",
         "options": [
-          "A. http://www.mysql.cn",
-          "B. http://www.oracle.com/cn",
-          "C. http://www.apache.org",
-          "D. http://dev.mysql.com/downloads"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第54页指出安装之前需要到MySQL数据库的官方网站(http://dev.mysql.com/downloads)上找到要安装的版本并下载。",
-        "page": 54
-      },
-      {
-        "id": "ch1-ppt-s65",
-        "type": "single",
-        "stem": "MSI方式安装MySQL时，默认安装且无法自行选择安装路径的目录是？",
-        "options": [
-          "A. C:\\mysql",
-          "B. C:\\Program Files\\MySQL",
-          "C. D:\\mysql",
-          "D. 用户主目录"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第55页指出MSI安装会默认将MySQL服务安装在C:\\Program Files\\MySQL目录下并且无法自行选择安装路径，C盘不够用应选ZIP解压版。",
-        "page": 55
-      },
-      {
-        "id": "ch1-ppt-s66",
-        "type": "single",
-        "stem": "my.ini配置文件中，用于设置服务端字符集的配置项是？",
-        "options": [
-          "A. port=3306",
-          "B. max_connections=200",
-          "C. character-set-server=utf8mb4",
-          "D. default-storage-engine=INNODB"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第59页my.ini示例中，character-set-server=utf8mb4用于设置服务端使用的字符集，port设置端口、max_connections设置最大连接数。",
-        "page": 59
-      },
-      {
-        "id": "ch1-ppt-s67",
-        "type": "single",
-        "stem": "在cmd中对MySQL数据库进行初始化，应执行的命令是？",
-        "options": [
-          "A. mysqld --initialize-insecure",
-          "B. mysqld install",
-          "C. net start mysql",
-          "D. mysql -u root -p"
+          "A. 数据结构",
+          "B. 数据操作",
+          "C. 完整性约束",
+          "D. 数据视图"
         ],
         "answer": "A",
-        "analysis": "解析：PPT第68页指出在cmd面板输入mysqld --initialize-insecure对MySQL数据库进行初始化，执行后解压目录会多出data目录。",
-        "page": 68
+        "analysis": "解析：PPT第37页指出，数据模型由数据结构、数据操作和完整性约束三要素组成；其中数据结构描述系统的静态特性。"
       },
       {
-        "id": "ch1-ppt-s68",
-        "type": "single",
-        "stem": "PPT中用于修改root用户密码的语句是？",
-        "options": [
-          "A. CREATE USER 'root'@'localhost' IDENTIFIED BY '123456';",
-          "B. GRANT ALL ON *.* TO 'root'@'localhost';",
-          "C. DROP USER 'root'@'localhost';",
-          "D. ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';"
+        "id": "ch1-ppt-b45",
+        "type": "blank",
+        "page": 37,
+        "stem": "数据模型的三要素是数据结构、数据操作和____。",
+        "answer": [
+          "完整性约束",
+          "完整性约束条件"
         ],
-        "answer": "D",
-        "analysis": "解析：PPT第73页指出修改密码输入ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';，其中123456就是密码。",
-        "page": 73
+        "answerText": "完整性约束",
+        "analysis": "解析：PPT第37页明确数据模型三要素为数据结构、数据操作、完整性约束。"
       },
       {
-        "id": "ch1-ppt-s69",
+        "id": "ch1-ppt-s90",
         "type": "single",
-        "stem": "msi安装提供的安装类型中，仅安装MySQL服务器产品的是？",
+        "page": 41,
+        "stem": "关系运算中，从关系中找出满足给定条件的元组的操作是（  ）。",
         "options": [
-          "A. Developer Default",
-          "B. Server only",
-          "C. Client only",
-          "D. Full"
+          "A. 投影",
+          "B. 选择",
+          "C. 连接",
+          "D. 除"
         ],
         "answer": "B",
-        "analysis": "解析：PPT第79页指出Server only仅服务器，只安装MySQL服务器产品；Client only只安装客户端产品。",
-        "page": 79
+        "analysis": "解析：PPT第40-41页，选择（selection）是按给定条件从关系中挑出满足条件的元组；投影是按列选取属性。"
       },
       {
-        "id": "ch1-ppt-b31",
+        "id": "ch1-ppt-b46",
         "type": "blank",
-        "stem": "添加MySQL服务的命令是mysqld ____ mysql8.0.27，其中服务名可以自己取。",
+        "page": 41,
+        "stem": "关系运算中，从关系中选取若干属性列组成新关系的操作称为____。",
         "answer": [
-          "install"
+          "投影",
+          "投影运算"
         ],
-        "answerText": "install",
-        "analysis": "解析：PPT第69页指出输入mysqld install mysql8.0.27（服务名自己取）添加MySQL服务。",
-        "page": 69
+        "answerText": "投影",
+        "analysis": "解析：PPT第40-41页，投影是对关系的列进行运算，选择是对行进行运算。"
       },
       {
-        "id": "ch1-ppt-b32",
-        "type": "blank",
-        "stem": "删除MySQL服务的命令是____ delete mysql8.0.27。",
-        "answer": [
-          "sc",
-          "SC"
-        ],
-        "answerText": "sc",
-        "analysis": "解析：PPT第69页给出删除服务命令：sc delete mysql8.0.27。",
-        "page": 69
-      },
-      {
-        "id": "ch1-ppt-b33",
-        "type": "blank",
-        "stem": "执行mysqld --initialize-insecure初始化后，MySQL解压目录中多出一个____目录，用于放置日志文件和数据库。",
-        "answer": [
-          "data",
-          "DATA"
-        ],
-        "answerText": "data",
-        "analysis": "解析：PPT第68页指出初始化后解压目录多出data目录，用于放置日志文件以及数据库，刚解压出来时没有该目录。",
-        "page": 68
-      },
-      {
-        "id": "ch1-ppt-b34",
-        "type": "blank",
-        "stem": "msi安装的Config Type提供development、server和____三个选项，用于选择MySQL的用途。",
-        "answer": [
-          "dedicate",
-          "dedicated"
-        ],
-        "answerText": "dedicate",
-        "analysis": "解析：PPT第83页指出Config Type提供development、server、dedicate三个选项，本机一般选development，占用系统资源少。",
-        "page": 83
-      },
-      {
-        "id": "ch1-ppt-s70",
+        "id": "ch1-ppt-s91",
         "type": "single",
-        "stem": "MySQL工作流程的第①步是？",
+        "page": 46,
+        "stem": "下列属于专门的关系运算的是（  ）。",
         "options": [
-          "A. 操作系统用户启动MySQL服务",
-          "B. 读取配置文件中的参数",
-          "C. 建立客户机与服务器的通信链路",
-          "D. 服务器向客户机返回响应"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第86页指出工作流程第①步是操作系统用户启动MySQL服务。",
-        "page": 86
-      },
-      {
-        "id": "ch1-ppt-s71",
-        "type": "single",
-        "stem": "MySQL服务启动期间，首先将配置文件中的参数信息读入？",
-        "options": [
-          "A. 二进制日志",
-          "B. 数据字典",
-          "C. 服务器内存",
-          "D. 磁盘文件"
+          "A. 并、差、交",
+          "B. 笛卡尔积",
+          "C. 选择、投影、连接、除",
+          "D. 排序与分组"
         ],
         "answer": "C",
-        "analysis": "解析：PPT第86页指出第②步：MySQL服务启动期间，首先将配置文件中的参数信息读入服务器内存。",
-        "page": 86
+        "analysis": "解析：PPT第42-46页，并、差、交、笛卡尔积属于传统集合运算；选择、投影、连接、除是专门的关系运算。"
+      }
+    ],
+    "hiddenSections": [
+      {
+        "id": "1.1",
+        "title": "MySQL数据库的发展背景"
       },
       {
-        "id": "ch1-ppt-s72",
-        "type": "single",
-        "stem": "根据MySQL配置文件的参数信息或编译时的默认值生成的是？",
-        "options": [
-          "A. 存储引擎",
-          "B. 数据字典",
-          "C. 客户机进程",
-          "D. 服务实例进程（Instance）"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第86页指出第③步：根据配置文件的参数信息或者编译MySQL时参数的默认值生成一个服务实例进程Instance。",
-        "page": 86
+        "id": "1.2",
+        "title": "MySQL使用优势"
       },
       {
-        "id": "ch1-ppt-s73",
-        "type": "single",
-        "stem": "MySQL服务实例进程通过什么方式为多个客户机提供服务？",
-        "options": [
-          "A. 派生出多个线程",
-          "B. 创建多个数据库",
-          "C. 启动多个服务实例",
-          "D. 复制多份配置文件"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第86页指出第④步：MySQL服务实例进程派生出多个线程为多个客户机提供服务。",
-        "page": 86
+        "id": "1.3",
+        "title": "MySQL系统特性"
       },
       {
-        "id": "ch1-ppt-s74",
-        "type": "single",
-        "stem": "客户机与服务器建立通信链路后，用户在客户机输入的命令沿该链路传送给服务实例，这个过程称为？",
-        "options": [
-          "A. MySQL服务启动",
-          "B. 客户机向MySQL服务器发送请求",
-          "C. MySQL服务器向客户机返回响应",
-          "D. MySQL会话结束"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第87页指出第⑤步建立“通信链路”，第⑥步命令沿链路传送给服务实例，称为客户机向MySQL服务器发送请求。",
-        "page": 87
+        "id": "1.4",
+        "title": "MySQL发行版本"
       },
       {
-        "id": "ch1-ppt-b35",
-        "type": "blank",
-        "stem": "MySQL服务实例解析命令并选择执行计划运行，将执行结果沿通信链路返回给客户机，这个过程称为服务器向客户机返回____。",
-        "answer": [
-          "响应"
-        ],
-        "answerText": "响应",
-        "analysis": "解析：PPT第88页指出第⑦步将执行结果沿通信链路返回给客户机，称为MySQL服务器向MySQL客户机返回响应。",
-        "page": 88
+        "id": "1.5",
+        "title": "MySQL 8.0的新功能"
       },
       {
-        "id": "ch1-ppt-b36",
-        "type": "blank",
-        "stem": "数据库用户关闭MySQL客户机，通信链路被断开，该客户机对应的MySQL____结束。",
-        "answer": [
-          "会话",
-          "session",
-          "Session"
-        ],
-        "answerText": "会话",
-        "analysis": "解析：PPT第88页指出数据库用户关闭MySQL客户机后通信链路断开，该客户机对应的MySQL会话结束。",
-        "page": 88
+        "id": "4.1",
+        "title": "MySQL 8.0安装和配置步骤"
       },
       {
-        "id": "ch1-ppt-s75",
-        "type": "single",
-        "stem": "MySQL的服务器进程（SQL后台程序）是？",
-        "options": [
-          "A. mysqladmin",
-          "B. mysqldump",
-          "C. mysqld",
-          "D. mysql"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第89页指出mysqld是SQL后台程序，即MySQL服务器进程，该程序必须运行之后客户端才能连接服务器访问数据库。",
-        "page": 89
+        "id": "4.2",
+        "title": "MySQL的工作流程"
       },
       {
-        "id": "ch1-ppt-s76",
-        "type": "single",
-        "stem": "UNIX中的MySQL分发版包括的服务器启动脚本是？",
-        "options": [
-          "A. mysqld",
-          "B. mysqladmin",
-          "C. mysqlshow",
-          "D. mysql.server"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第90页指出mysql.server是服务器启动脚本，UNIX中的MySQL分发版包括mysql.server脚本，可调用mysqld_safe启动服务器。",
-        "page": 90
+        "id": "4.3",
+        "title": "MySQL数据库工具简介"
       },
       {
-        "id": "ch1-ppt-s77",
-        "type": "single",
-        "stem": "可以启动或停止系统上安装的多个服务器的脚本是？",
-        "options": [
-          "A. mysql_multi",
-          "B. mysql.server",
-          "C. mysqld_safe",
-          "D. mysql_install_db"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第90页指出mysql_multi是服务器启动脚本，可以启动或停止系统上安装的多个服务器。",
-        "page": 90
+        "id": "4.4",
+        "title": "MySQL8.0的启动和登录"
       },
       {
-        "id": "ch1-ppt-s78",
-        "type": "single",
-        "stem": "交互式输入SQL语句或从文件以批处理模式执行SQL语句的命令行工具是？",
-        "options": [
-          "A. mysqlbinlog",
-          "B. mysql",
-          "C. mysqld",
-          "D. mysqladmin"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第91页指出mysql是交互式输入SQL语句或从文件以批处理模式执行它们的命令行工具。",
-        "page": 91
-      },
-      {
-        "id": "ch1-ppt-s79",
-        "type": "single",
-        "stem": "可执行创建或删除数据库、重载授权表、将表刷新到硬盘等管理操作的客户程序是？",
-        "options": [
-          "A. mysqldump",
-          "B. mysqlshow",
-          "C. mysqladmin",
-          "D. mysql"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第91页指出mysqladmin是执行管理操作的客户程序，例如创建或删除数据库、重载授权表、将表刷新到硬盘上等。",
-        "page": 91
-      },
-      {
-        "id": "ch1-ppt-b37",
-        "type": "blank",
-        "stem": "将MySQL数据库转储到一个文件（例如SQL语句或tab分隔符文本文件）的客户程序是____。",
-        "answer": [
-          "mysqldump",
-          "MYSQLDUMP"
-        ],
-        "answerText": "mysqldump",
-        "analysis": "解析：PPT第92页指出mysqldump是将MySQL数据库转储到一个文件（例如SQL语句或tab分隔符文本文件）的客户程序。",
-        "page": 92
-      },
-      {
-        "id": "ch1-ppt-b38",
-        "type": "blank",
-        "stem": "从二进制日志读取语句、可用来帮助系统从崩溃中恢复的工具是____。",
-        "answer": [
-          "mysqlbinlog",
-          "MYSQLBINLOG"
-        ],
-        "answerText": "mysqlbinlog",
-        "analysis": "解析：PPT第92页指出mysqlbinlog是从二进制日志读取语句的工具，二进制日志包含执行过的语句，可帮助系统从崩溃中恢复。",
-        "page": 92
-      },
-      {
-        "id": "ch1-ppt-b39",
-        "type": "blank",
-        "stem": "用默认权限创建MySQL授权表，通常只在系统首次安装MySQL时执行一次的是____。",
-        "answer": [
-          "mysql_install_db"
-        ],
-        "answerText": "mysql_install_db",
-        "analysis": "解析：PPT第90页指出mysql_install_db该脚本用默认权限创建MySQL授权表，通常只是在系统上首次安装MySQL时执行一次。",
-        "page": 90
-      },
-      {
-        "id": "ch1-ppt-s80",
-        "type": "single",
-        "stem": "在cmd控制台中启动MySQL服务的命令是？",
-        "options": [
-          "A. net stop mysql80",
-          "B. sc delete mysql80",
-          "C. mysqld install",
-          "D. net start mysql80"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第93页指出net start mysql80表示启动MySQL服务，net stop mysql80表示关闭MySQL服务。",
-        "page": 93
-      },
-      {
-        "id": "ch1-ppt-s81",
-        "type": "single",
-        "stem": "Windows“服务”窗口中MySQL服务的启动类型不包括？",
-        "options": [
-          "A. 自动",
-          "B. 手动",
-          "C. 已禁用",
-          "D. 延迟启动"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第94页指出启动类型下拉列表框中可以选择“自动”、“手动”和“已禁用”三个选项。",
-        "page": 94
-      },
-      {
-        "id": "ch1-ppt-s82",
-        "type": "single",
-        "stem": "Windows操作系统下登录MySQL数据库的方式有几种？",
-        "options": [
-          "A. 一种",
-          "B. 两种",
-          "C. 三种",
-          "D. 四种"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第95页指出Windows下有两种登录方式：在DOS窗口中以命令行方式登录，以及在MySQL客户端直接登录。",
-        "page": 95
-      },
-      {
-        "id": "ch1-ppt-s83",
-        "type": "single",
-        "stem": "登录命令mysql -u root -p中，-p表示？",
-        "options": [
-          "A. 数据库名",
-          "B. 端口号",
-          "C. 用户密码",
-          "D. 主机名"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第96页指出-u后面紧跟着数据库的用户名，-p表示用户密码，按Enter键输入密码，输入的密码用星号替代。",
-        "page": 96
-      },
-      {
-        "id": "ch1-ppt-s84",
-        "type": "single",
-        "stem": "MySQL控制台下的命令以什么符号结束？",
-        "options": [
-          "A. 分号(;)或\\g",
-          "B. 冒号(:)",
-          "C. 逗号(,)",
-          "D. 句号(.)"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第98页指出Commands end with ; or \\g，说明MySQL控制台下的命令以分号(;)或“\\g”结束，遇到结束符就开始执行命令。",
-        "page": 98
-      },
-      {
-        "id": "ch1-ppt-b40",
-        "type": "blank",
-        "stem": "Your MySQL connection id表示MySQL数据库的连接____，新安装首次登录显示1。",
-        "answer": [
-          "次数"
-        ],
-        "answerText": "次数",
-        "analysis": "解析：PPT第98页指出id表示MySQL数据库的连接次数，如果数据库是新安装的且第一次登录则显示1。",
-        "page": 98
-      },
-      {
-        "id": "ch1-ppt-b41",
-        "type": "blank",
-        "stem": "登录MySQL后，输入help;或____可以查看帮助信息。",
-        "answer": [
-          "\\h",
-          "h"
-        ],
-        "answerText": "\\h",
-        "analysis": "解析：PPT第98页指出Type 'help;' or '\\h' for help，表示输入“help;”或者\\h可以看到帮助信息。",
-        "page": 98
-      },
-      {
-        "id": "ch1-ppt-b42",
-        "type": "blank",
-        "stem": "在MySQL控制台中查看系统当前时间，可执行select ____();语句。",
-        "answer": [
-          "now",
-          "NOW"
-        ],
-        "answerText": "now",
-        "analysis": "解析：PPT第101页指出如果要查看系统当前时间，可以直接在控制台中输入并执行select now();语句。",
-        "page": 101
-      },
-      {
-        "id": "ch1-ppt-s85",
-        "type": "single",
-        "stem": "下列不属于常用MySQL图形管理工具的是？",
-        "options": [
-          "A. MySQL Workbench",
-          "B. phpMyAdmin",
-          "C. Navicat",
-          "D. mysqld"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第102页指出MySQL的图形管理工具常用的有MySQL Workbench、phpMyAdmin和Navicat等；mysqld是服务器进程。",
-        "page": 102
-      },
-      {
-        "id": "ch1-ppt-s86",
-        "type": "single",
-        "stem": "MySQL Workbench为哪些人员提供可视化设计、模型建立以及数据库管理功能？",
-        "options": [
-          "A. 数据库管理员、程序开发者和系统规划师",
-          "B. 仅终端用户",
-          "C. 仅网络管理员",
-          "D. 仅销售人员"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第102页指出MySQL Workbench为数据库管理员、程序开发者和系统规划师提供可视化设计、模型建立以及数据库管理功能。",
-        "page": 102
-      },
-      {
-        "id": "ch1-ppt-s87",
-        "type": "single",
-        "stem": "MySQL Workbench包含的功能是？",
-        "options": [
-          "A. 仅监控CPU使用率",
-          "B. 创建复杂E-R数据模型、正向和逆向数据库工程以及文档任务管理",
-          "C. 仅执行查询语句",
-          "D. 仅备份数据库"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第102页指出MySQL Workbench包含创建复杂的数据建模E-R模型、正向和逆向数据库工程，也可用于文档任务管理。",
-        "page": 102
-      },
-      {
-        "id": "ch1-ppt-s88",
-        "type": "single",
-        "stem": "在MySQL Workbench中创建连接，应使用的主菜单命令是？",
-        "options": [
-          "A. Edit|Preferences",
-          "B. Query|Execute",
-          "C. Database|Manage Connections",
-          "D. File|New Model"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第110页指出单击主菜单Database|Manage Connections命令，弹出Manage Server Connections对话框，输入连接名称并Test Connection测试。",
-        "page": 110
-      },
-      {
-        "id": "ch1-ppt-b43",
-        "type": "blank",
-        "stem": "MySQL Workbench可独立于MySQL软件集合安装，PPT中的独立安装版本为mysql-workbench-community-8.0.22-____。",
-        "answer": [
-          "winx64",
-          "winx64版"
-        ],
-        "answerText": "winx64",
-        "analysis": "解析：PPT第103页指出MySQL Workbench除了与MySQL 8.0软件集合安装外还可独立安装，版本为mysql-workbench-community-8.0.22-winx64。",
-        "page": 103
-      },
-      {
-        "id": "ch1-ppt-b44",
-        "type": "blank",
-        "stem": "在MySQL Workbench中连接成功后，可通过图形界面执行SQL实现数据库、表和数据添加、删除、修改等操作，这种方式称为____操作。",
-        "answer": [
-          "可视化"
-        ],
-        "answerText": "可视化",
-        "analysis": "解析：PPT第110页指出连接后可通过图形界面执行SQL实现数据库、表和数据添加、删除、修改等操作，即数据库的可视化操作。",
-        "page": 110
+        "id": "4.5",
+        "title": "MySQL常用可视化软件的基本操作"
       }
     ]
   },
@@ -2626,10 +1219,10 @@ window.REVIEW_DATA = [
     "chapter": 2,
     "title": "MySQL8.0语言基础",
     "goals": [
-      "掌握MySQL基本语法要素：字符集与标识符、常量与变量",
-      "掌握MySQL的数据类型：字符串类型、数字类型、日期和时间类型、二进制类型",
-      "掌握运算符与表达式：算术、比较、逻辑、位运算及运算符优先级",
-      "掌握常用函数：数学函数、字符串函数、日期和时间函数、聚合函数及其他函数"
+      "掌握 MySQL 语法要素：字符集及其层次设置、字符序、标识符命名规则",
+      "掌握常用数据类型：字符串类型、数字类型、日期和时间类型",
+      "掌握运算符与表达式：算术、比较、逻辑运算符及优先级",
+      "掌握常用函数：数学、字符串、日期和时间、聚合及其他函数（实验一的全部考点）"
     ],
     "ideology": "",
     "sections": [
@@ -2686,7 +1279,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "_ci大小写不敏感、_cs大小写敏感、_bin按编码值比较"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "1.2",
@@ -2732,7 +1326,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "set命令修改字符集是临时的，重启后失效；乱码问题多出在connection连接层"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "1.3",
@@ -2784,7 +1379,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "collation_开头变量描述校对原则；列的比较规则比collation_connection高"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "1.4",
@@ -2826,7 +1422,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "标识符是否区分大小写取决于操作系统"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "1.5",
@@ -2881,7 +1478,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "全局变量影响整个服务器，会话变量只影响当前数据库连接"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "2.1",
@@ -2918,7 +1516,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "char定长、varchar变长，取值范围均为1~255"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "2.2",
@@ -2975,7 +1574,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "AUTO_INCREMENT字段值从1开始，插入NULL时取当前最大值加1"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "2.3",
@@ -3027,39 +1627,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "TIMESTAMP与时区相关，DATETIME与时区无关"
-        ]
-      },
-      {
-        "id": "2.4",
-        "title": "二进制类型",
-        "pageRange": "37-38",
-        "summary": "介绍二进制类型与长文本类型，说明text适合存储长文本、blob适合存储二进制数据。",
-        "points": [
-          {
-            "term": "二进制类型",
-            "desc": "在数据库中存储二进制数据的数据类型。",
-            "page": 37
-          },
-          {
-            "term": "包含类型",
-            "desc": "包括binary、varbinary、bit、tinyblob、blob、mediumblob和longblob类型。",
-            "page": 37
-          },
-          {
-            "term": "长文本类型",
-            "desc": "tinytext、longtext和text等适合存储长文本。",
-            "page": 37
-          },
-          {
-            "term": "text和blob",
-            "desc": "大小可以改变；text适合存储长文本，blob适合存储二进制数据，支持文本、声音和图像等。",
-            "page": 37
-          }
         ],
-        "code": [],
-        "tips": [
-          "存储图片等二进制文件常用blob类型"
-        ]
+        "exam": "keep"
       },
       {
         "id": "3.1",
@@ -3103,7 +1672,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "除以0返回null而不是报错"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "3.2",
@@ -3160,7 +1730,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "判断空值只能用is null或is not null，不能用=或<>"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "3.3",
@@ -3197,7 +1768,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "&&=and，||=or，!=not，xor为异或"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "3.4",
@@ -3224,7 +1796,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "位运算先把操作数转二进制，计算结果再转回十进制"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "3.5",
@@ -3251,7 +1824,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "优先级相同时表达式左边的运算符先运算"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "4.1",
@@ -3283,7 +1857,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "round(x,y)在截取时进行四舍五入处理"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "4.2",
@@ -3312,7 +1887,8 @@ window.REVIEW_DATA = [
           "substring()",
           "reverse()"
         ],
-        "tips": []
+        "tips": [],
+        "exam": "keep"
       },
       {
         "id": "4.3",
@@ -3352,7 +1928,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "date_add增加日期值，date_sub减少日期值"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "4.4",
@@ -3377,7 +1954,8 @@ window.REVIEW_DATA = [
           }
         ],
         "code": [],
-        "tips": []
+        "tips": [],
+        "exam": "keep"
       },
       {
         "id": "4.5",
@@ -3424,7 +2002,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "窗口函数不需要GROUP BY，结果放回多行当中"
-        ]
+        ],
+        "exam": "keep"
       }
     ],
     "questions": [
@@ -4162,61 +2741,6 @@ window.REVIEW_DATA = [
         "page": 36
       },
       {
-        "id": "ch2-ppt-s34",
-        "type": "single",
-        "stem": "下列类型中不属于二进制类型的是？",
-        "options": [
-          "A. binary",
-          "B. varbinary",
-          "C. bit",
-          "D. varchar"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第37页指出二进制类型包括binary、varbinary、bit、tinyblob、blob、mediumblob和longblob，varchar属于普通文本字符串类型。",
-        "page": 37
-      },
-      {
-        "id": "ch2-ppt-s35",
-        "type": "single",
-        "stem": "需要存储图片、声音等数据时，应选用哪种类型？",
-        "options": [
-          "A. text",
-          "B. blob",
-          "C. char",
-          "D. enum"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第37页指出text类型适合存储长文本，而blob类型适合存储二进制数据，支持文本、声音和图像等任何数据。",
-        "page": 37
-      },
-      {
-        "id": "ch2-ppt-s36",
-        "type": "single",
-        "stem": "下列适合存储长文本的类型是？",
-        "options": [
-          "A. tinytext、text和longtext",
-          "B. binary和varbinary",
-          "C. blob和longblob",
-          "D. bit"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第37页指出tinytext、longtext和text等适合存储长文本的类型。",
-        "page": 37
-      },
-      {
-        "id": "ch2-ppt-b23",
-        "type": "blank",
-        "stem": "text和blob类型的大小可以改变，其中text类型适合存储长文本，而blob类型适合存储____数据。",
-        "answer": [
-          "二进制",
-          "binary",
-          "BINARY"
-        ],
-        "answerText": "二进制",
-        "analysis": "解析：PPT第37页指出blob类型适合存储二进制数据，支持文本、声音和图像等。",
-        "page": 37
-      },
-      {
         "id": "ch2-ppt-s37",
         "type": "single",
         "stem": "进行除法和求余运算时，除以0会怎样？",
@@ -4832,6 +3356,63 @@ window.REVIEW_DATA = [
         "answerText": "256",
         "analysis": "解析：PPT第80页指出sha2(str,hash_length)利用hash_length作长度加密str，0等同于256，224比256少32位。",
         "page": 80
+      },
+      {
+        "id": "ch2-ppt-s70",
+        "type": "single",
+        "page": 16,
+        "stem": "MySQL 的字符集支持 4 个层次，从高到低依次是（  ）。",
+        "options": [
+          "A. 服务器 → 数据库 → 表 → 列",
+          "B. 数据库 → 服务器 → 表 → 列",
+          "C. 列 → 表 → 数据库 → 服务器",
+          "D. 服务器 → 表 → 数据库 → 列"
+        ],
+        "answer": "A",
+        "analysis": "解析：PPT第15-16页，字符集层次由高到低为服务器级、数据库级、表级、列级，低层次默认继承高层次的设置。"
+      },
+      {
+        "id": "ch2-ppt-b37",
+        "type": "blank",
+        "page": 16,
+        "stem": "MySQL 字符集的 4 个层次由低到高依次是列级、表级、数据库级和____级。",
+        "answer": [
+          "服务器",
+          "服务器级"
+        ],
+        "answerText": "服务器",
+        "analysis": "解析：PPT第15-16页，字符集层次为服务器、数据库、表、列四级，设置时低层次未指定则继承上一层次。"
+      },
+      {
+        "id": "ch2-ppt-s71",
+        "type": "single",
+        "page": 19,
+        "stem": "关于 MySQL 标识符的命名规则，下列说法正确的是（  ）。",
+        "options": [
+          "A. 标识符可以包含空格，用引号括起来即可",
+          "B. 标识符必须以字母或下划线开头，可包含字母、数字和下划线",
+          "C. 标识符长度不能超过 8 个字符",
+          "D. 关键字可以直接作为标识符使用"
+        ],
+        "answer": "B",
+        "analysis": "解析：PPT第19-20页，标识符由字母、数字、下划线和 $ 组成，必须以字母或下划线开头，不能含空格，长度不超过 64 个字符，关键字不能直接作标识符。"
+      },
+      {
+        "id": "ch2-ppt-b38",
+        "type": "blank",
+        "page": 19,
+        "stem": "MySQL 标识符的最大长度为____个字符。",
+        "answer": [
+          "64"
+        ],
+        "answerText": "64",
+        "analysis": "解析：PPT第19页，标识符（数据库名、表名、列名等）最长 64 个字符。"
+      }
+    ],
+    "hiddenSections": [
+      {
+        "id": "2.4",
+        "title": "二进制类型"
       }
     ]
   },
@@ -4839,10 +3420,10 @@ window.REVIEW_DATA = [
     "chapter": 3,
     "title": "MySQL8.0数据库和表的基本操作",
     "goals": [
-      "了解MySQL数据库文件、系统数据库及存储引擎，理解数据库设计过程与规范化",
-      "掌握创建、修改、查看和删除数据库的方法",
-      "掌握InnoDB表空间、创建/查看/修改/删除表及临时表管理",
-      "掌握表记录的插入、修改、删除操作与数据完整性约束"
+      "了解 MySQL 系统数据库与存储引擎，掌握 InnoDB 与 MyISAM 的主要区别",
+      "掌握创建、修改、查看和删除数据库（含字符集与字符序设置）",
+      "掌握创建、查看、修改和删除表",
+      "掌握表记录的插入、修改、删除与五类数据完整性约束"
     ],
     "ideology": "",
     "sections": [
@@ -4878,7 +3459,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "数据库默认存放位置可通过配置向导或手工配置修改"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "1.2",
@@ -4934,7 +3516,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "InnoDB支持事务、行级锁和外键；MyISAM不支持事务和外键但访问快"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.1",
@@ -4981,7 +3564,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "四阶段为需求分析→概念设计→逻辑设计→物理设计，之后是数据库创建和运行维护"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "2.2",
@@ -5033,7 +3617,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "单一关系模式存在冗余大、更新/插入/删除异常，需按范式逐步分解"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "3.1",
@@ -5069,7 +3654,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "if not exists可避免数据库已存在时报错"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "3.2",
@@ -5118,63 +3704,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "删除数据库前最好备份，因为会删除所有表和数据"
-        ]
-      },
-      {
-        "id": "4.1",
-        "title": "InnoDB存储引擎的表空间",
-        "pageRange": "37-43",
-        "summary": "介绍InnoDB表空间管理的共享表空间与独立表空间，讲解查看、比较及相互转换的方法。",
-        "points": [
-          {
-            "term": "表空间",
-            "desc": "InnoDB表空间是MySQL数据表存储空间的管理模式，分共享表空间和独立表空间两种。",
-            "page": 37
-          },
-          {
-            "term": "共享表空间",
-            "desc": "所有InnoDB表的数据、索引、元数据及事务回滚信息全部存放在ibdata1，初始12M可自动扩展。",
-            "page": 38
-          },
-          {
-            "term": "独立表空间",
-            "desc": "每个表以独立文件存储，每个表都有一个.ibd文件，包含表的数据和索引内容。",
-            "page": 38
-          },
-          {
-            "term": "查看表空间",
-            "desc": "用show variables like 'InnoDB_data%'查看表空间信息。",
-            "page": 39
-          },
-          {
-            "term": "共享表空间缺点",
-            "desc": "分配后不能回缩，大量删除后表空间会有大量空隙，不适合频繁删除的统计分析应用。",
-            "page": 40
-          },
-          {
-            "term": "独立表空间优点",
-            "desc": "可实现单表在不同数据库移动，Drop table能自动回收表空间，删除碎片影响小。",
-            "page": 41
-          },
-          {
-            "term": "查看类型",
-            "desc": "show variables like \"InnoDB_file_per_table\"；值为ON代表独立表空间，OFF代表共享表空间。",
-            "page": 42
-          },
-          {
-            "term": "转换方法",
-            "desc": "修改InnoDB_file_per_table参数值可改变表空间管理方式，设置参数为1可将共享转为独立。",
-            "page": 43
-          }
         ],
-        "code": [
-          "show variables like 'InnoDB_data%';",
-          "show variables like \"InnoDB_file_per_table\";",
-          "alter table TableName engine=innodb;"
-        ],
-        "tips": [
-          "ON代表独立表空间，OFF代表共享表空间；独立表空间Drop table能自动回收"
-        ]
+        "exam": "keep"
       },
       {
         "id": "4.2",
@@ -5232,7 +3763,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "复合主键只能定义为表级完整性约束"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "4.3",
@@ -5261,7 +3793,8 @@ window.REVIEW_DATA = [
           "describe student;",
           "show create table course;"
         ],
-        "tips": []
+        "tips": [],
+        "exam": "keep"
       },
       {
         "id": "4.4",
@@ -5303,7 +3836,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "after Email可指定新字段插入位置"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "4.5",
@@ -5336,43 +3870,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "删除表会删除表中所有数据"
-        ]
-      },
-      {
-        "id": "4.6",
-        "title": "临时表的管理",
-        "pageRange": "61-62",
-        "summary": "介绍临时表适用场景、创建方法、生命周期及使用注意事项。",
-        "points": [
-          {
-            "term": "临时表",
-            "desc": "适合在非常大的表上偶尔运行很多查询获得小子集时，把记录选到临时表可更快。",
-            "page": 61
-          },
-          {
-            "term": "创建",
-            "desc": "用create temporary table创建临时表。",
-            "page": 61
-          },
-          {
-            "term": "生命周期",
-            "desc": "临时表在连接MySQL期间存在，断开时MySQL自动删除并释放空间。",
-            "page": 62
-          },
-          {
-            "term": "注意事项",
-            "desc": "创建需create temporary table权限；show tables不列举临时表；不能用rename重命名临时表。",
-            "page": 62
-          }
         ],
-        "code": [
-          "create temporary table tmp_emp1 (name varchar(10) not null, value integer not null);",
-          "describe tmp_emp1;",
-          "drop table tmp_table"
-        ],
-        "tips": [
-          "show tables不会列举临时表；不能用rename重命名临时表"
-        ]
+        "exam": "keep"
       },
       {
         "id": "5.1",
@@ -5431,7 +3930,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "向已有主键记录插入会产生主键冲突错误；图片字段用blob类型"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "5.2",
@@ -5472,7 +3972,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "不设where子句会更新表中所有行，使用时务必小心"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "5.3",
@@ -5503,7 +4004,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "不加where子句会删除表中全部记录"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "6.1",
@@ -5528,7 +4030,8 @@ window.REVIEW_DATA = [
           }
         ],
         "code": [],
-        "tips": []
+        "tips": [],
+        "exam": "core"
       },
       {
         "id": "6.2",
@@ -5575,7 +4078,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "复合主键只能定义为表级完整性约束"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "6.3",
@@ -5616,7 +4120,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "必须依赖父表已存在的主键；外键可以为空值"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "6.4",
@@ -5645,7 +4150,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "check约束可限制列取值范围"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "6.5",
@@ -5685,7 +4191,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "主键只能有一个，unique约束可以有若干个；unique字段可取null"
-        ]
+        ],
+        "exam": "core"
       }
     ],
     "questions": [
@@ -5824,18 +4331,6 @@ window.REVIEW_DATA = [
         "answerText": "InnoDB",
         "analysis": "解析：PPT第9页指出MySQL的默认存储引擎是InnoDB。",
         "page": 9
-      },
-      {
-        "id": "ch3-ppt-b03",
-        "type": "blank",
-        "stem": "InnoDB表空间分为共享表空间和____表空间两种类型。",
-        "answer": [
-          "独立",
-          "独立表空间"
-        ],
-        "answerText": "独立",
-        "analysis": "解析：PPT第37页指出InnoDB表空间分为共享表空间和独立表空间两种类型。",
-        "page": 37
       },
       {
         "id": "ch3-ppt-b04",
@@ -6357,102 +4852,6 @@ window.REVIEW_DATA = [
         "page": 33
       },
       {
-        "id": "ch3-ppt-s35",
-        "type": "single",
-        "stem": "InnoDB共享表空间默认的文件名和初始大小分别是？",
-        "options": [
-          "A. ibdata1、12M",
-          "B. ib_logfile1、12M",
-          "C. mysql.ibd、12M",
-          "D. ibdata1、8M"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第38页指出共享表空间文件位于数据库根目录下，文件名ibdata1，初始大小12M，能自动扩展。",
-        "page": 38
-      },
-      {
-        "id": "ch3-ppt-s36",
-        "type": "single",
-        "stem": "独立表空间中每个表对应的.ibd文件包含的内容是？",
-        "options": [
-          "A. 只有数据字典元数据",
-          "B. 表的数据内容和索引内容",
-          "C. 只有表结构定义",
-          "D. 只有事务回滚信息"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第38页指出独立表空间中每个表都有一个.ibd文件，该文件包括一个表单独的数据内容以及索引内容。",
-        "page": 38
-      },
-      {
-        "id": "ch3-ppt-b16",
-        "type": "blank",
-        "stem": "查看数据库的表空间信息，可使用 show variables like '____';",
-        "answer": [
-          "InnoDB_data%",
-          "innodb_data%",
-          "InnoDB_data"
-        ],
-        "answerText": "InnoDB_data%",
-        "analysis": "解析：PPT第39页给出命令 show variables like 'InnoDB_data%'; 用于查看数据库的表空间。",
-        "page": 39
-      },
-      {
-        "id": "ch3-ppt-s37",
-        "type": "single",
-        "stem": "共享表空间的主要缺点是？",
-        "options": [
-          "A. 分配后不能回缩，大量删除后表空间中会有大量空隙",
-          "B. 不能存放索引",
-          "C. 不能自动扩展",
-          "D. 不能存放事务回滚信息"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第40页指出共享表空间分配后不能回缩，大量删除后会有大量空隙，不适合经常删除的统计分析类应用。",
-        "page": 40
-      },
-      {
-        "id": "ch3-ppt-s38",
-        "type": "single",
-        "stem": "对于使用独立表空间的表，哪种操作能自动回收表空间？",
-        "options": [
-          "A. update",
-          "B. delete",
-          "C. select",
-          "D. drop table"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第41页指出独立表空间的Drop table操作能自动回收表空间。",
-        "page": 41
-      },
-      {
-        "id": "ch3-ppt-b17",
-        "type": "blank",
-        "stem": "系统变量InnoDB_file_per_table的值为ON时，代表使用____表空间管理。",
-        "answer": [
-          "独立",
-          "独立表空间",
-          "独立表空间管理"
-        ],
-        "answerText": "独立",
-        "analysis": "解析：PPT第42页指出InnoDB_file_per_table的值为ON代表独立表空间管理，OFF代表共享表空间管理。",
-        "page": 42
-      },
-      {
-        "id": "ch3-ppt-s39",
-        "type": "single",
-        "stem": "把共享表空间转换为独立表空间，需要把参数InnoDB_file_per_table设置为？",
-        "options": [
-          "A. 1",
-          "B. OFF",
-          "C. NULL",
-          "D. 0"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第43页指出共享表空间转化为独立表空间需要设置参数InnoDB_file_per_table=1。",
-        "page": 43
-      },
-      {
         "id": "ch3-ppt-s40",
         "type": "single",
         "stem": "下列选项中，不属于列定义 col_name type 之后可跟的选项的是？",
@@ -6720,59 +5119,6 @@ window.REVIEW_DATA = [
         "answerText": "datetime",
         "analysis": "解析：PPT第60页例16中create table example(today datetime, name char(20))，today列为datetime类型。",
         "page": 60
-      },
-      {
-        "id": "ch3-ppt-s51",
-        "type": "single",
-        "stem": "临时表最适合的应用场景是？",
-        "options": [
-          "A. 替代所有永久表",
-          "B. 在非常大的表上偶尔运行查询，获得一个小的数据子集",
-          "C. 存放系统元数据",
-          "D. 长期保存核心业务数据"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第61页指出临时表适合在非常大的表上偶尔运行很多查询获得一个小的子集时使用。",
-        "page": 61
-      },
-      {
-        "id": "ch3-ppt-s52",
-        "type": "single",
-        "stem": "创建临时表使用的语句是？",
-        "options": [
-          "A. create table",
-          "B. create view",
-          "C. create temp database",
-          "D. create temporary table"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第61页例中使用create temporary table tmp_emp1创建临时表。",
-        "page": 61
-      },
-      {
-        "id": "ch3-ppt-b27",
-        "type": "blank",
-        "stem": "临时表将在____期间存在，断开时MySQL自动删除表并释放空间。",
-        "answer": [
-          "连接MySQL",
-          "连接",
-          "连接数据库"
-        ],
-        "answerText": "连接MySQL",
-        "analysis": "解析：PPT第62页指出临时表将在连接MySQL期间存在，断开时MySQL自动删除表并释放所用的空间。",
-        "page": 62
-      },
-      {
-        "id": "ch3-ppt-b28",
-        "type": "blank",
-        "stem": "show ____ 语句不会列举临时表。",
-        "answer": [
-          "tables",
-          "TABLES"
-        ],
-        "answerText": "tables",
-        "analysis": "解析：PPT第62页说明show tables语句不会列举临时表，且不能用rename重命名临时表。",
-        "page": 62
       },
       {
         "id": "ch3-ppt-s53",
@@ -7302,16 +5648,26 @@ window.REVIEW_DATA = [
         "analysis": "解析：PPT第93页例34插入重复han@163.com时提示ERROR 1062 Duplicate entry，违反唯一性约束。",
         "page": 93
       }
+    ],
+    "hiddenSections": [
+      {
+        "id": "4.1",
+        "title": "InnoDB存储引擎的表空间"
+      },
+      {
+        "id": "4.6",
+        "title": "临时表的管理"
+      }
     ]
   },
   {
     "chapter": 4,
     "title": "数据检索",
     "goals": [
-      "掌握select基本查询语句与单表查询（where、order by、limit）",
-      "掌握函数查询：聚合函数、group by分组与窗口函数",
+      "掌握 select 基本查询与单表查询（where、order by、limit）",
+      "掌握分组查询：聚合函数、group by 与 having",
       "掌握多表连接（内连接、外连接、交叉连接、union）与子查询",
-      "掌握正则表达式模糊查询与通用表表达式CTE"
+      "掌握正则表达式模糊查询（regexp）"
     ],
     "ideology": "",
     "sections": [
@@ -7349,7 +5705,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "select语句是SQL从数据库中获取信息的基本语句"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.1",
@@ -7385,7 +5742,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "Select和from子句在数据库表查询时都是必选项"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.2",
@@ -7440,7 +5798,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "like中%可匹配任意长度字符串（长度可为0），_只匹配一个字符"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.3",
@@ -7475,7 +5834,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "默认升序asc，降序用desc；null升序在最前、降序在最后"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.4",
@@ -7505,7 +5865,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "总查询结果中第1条记录编号为0"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "3.1",
@@ -7557,7 +5918,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "count(*)统计包含null值的所有行；count(列名)只统计非null值"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "3.2",
@@ -7604,55 +5966,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "having在where筛选后进一步筛选；group by分组后每组只显示一条记录"
-        ]
-      },
-      {
-        "id": "3.3",
-        "title": "窗口函数在查询中的应用",
-        "pageRange": "40-45",
-        "summary": "介绍窗口函数的分类、一般格式以及over、partition、frame等子句的含义与应用示例。",
-        "points": [
-          {
-            "term": "窗口函数分类",
-            "desc": "按功能划分，MySQL8.0支持的窗口函数可分为5类。",
-            "page": 40
-          },
-          {
-            "term": "一般格式",
-            "desc": "语法为window_function_name(expression) over(...)，over内可跟partition、order by和frame子句。",
-            "page": 41
-          },
-          {
-            "term": "over",
-            "desc": "关键字用来指定函数执行的窗口范围，括号中什么都不写表示窗口包含满足where条件的所有行。",
-            "page": 41
-          },
-          {
-            "term": "partition子句",
-            "desc": "指定窗口按哪些字段分组，窗口函数在不同的分组上分别执行。",
-            "page": 41
-          },
-          {
-            "term": "order by与frame",
-            "desc": "order by按字段排序后编号；frame是当前分区的子集，通常作为滑动窗口使用。",
-            "page": 41
-          },
-          {
-            "term": "应用示例",
-            "desc": "rank()输出排序序号，sum(final) over(partition by studentno)求总分，lag()输出前3行学号。",
-            "page": 42
-          }
         ],
-        "code": [
-          "window_function_name(expression) over ([partition_defintion] [order_definition] [frame_definition])",
-          "select *, rank() over w as 'rank' from score window w as (order by final);",
-          "select studentno, courseno, final, sum(final) over (partition by studentno) total_score from score;",
-          "select *,(final)/(sum(final) over()) as rate from score;",
-          "select *, lag(studentno,3) over ww2 as lag3 from score window ww2 as (order by studentno);"
-        ],
-        "tips": [
-          "窗口函数不会将多行合并为一行，不需要GROUP BY语句"
-        ]
+        "exam": "core"
       },
       {
         "id": "4",
@@ -7684,7 +5999,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "连接条件可在from或where子句中指定"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "4.1",
@@ -7712,7 +6028,8 @@ window.REVIEW_DATA = [
           "select student.studentno,sname,final from student inner join score on student.studentno=score.studentno where score.courseno = 'c05109';",
           "select student.studentno,sname,final from student,score where student.studentno=score.studentno and score.courseno = 'c05109';"
         ],
-        "tips": []
+        "tips": [],
+        "exam": "core"
       },
       {
         "id": "4.2",
@@ -7747,7 +6064,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "左外连接保留左表所有行，右外连接保留右表所有行"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "4.3",
@@ -7776,7 +6094,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "结果集大小等于两个表行数之积"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "4.4",
@@ -7805,7 +6124,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "连接n个表至少需要n-1个连接条件"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "4.5",
@@ -7840,7 +6160,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "不指定all时union自动删除重复行"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "5",
@@ -7882,7 +6203,8 @@ window.REVIEW_DATA = [
         "code": [],
         "tips": [
           "子查询必须用括号括起来，嵌套最多32层；子查询中order by只能在外层用"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "5.1",
@@ -7909,7 +6231,8 @@ window.REVIEW_DATA = [
         "code": [
           "select studentno,sname,entrance,(select avg(entrance) from student) 平均成绩, entrance-(select avg(entrance) from student) 分差 from student where studentno='20125121109';"
         ],
-        "tips": []
+        "tips": [],
+        "exam": "core"
       },
       {
         "id": "5.2",
@@ -7938,7 +6261,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "派生表就是from子句中的子查询，需要定义别名"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "5.3",
@@ -7980,7 +6304,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "all要与每个值都比较；some与any是同义词"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "5.4",
@@ -8013,58 +6338,8 @@ window.REVIEW_DATA = [
           "insert into student01 (select * from student where birthdate>='2003-12-31');",
           "update score set final= final*1.05 where studentno in (select studentno from student where entrance <800);"
         ],
-        "tips": []
-      },
-      {
-        "id": "5.5",
-        "title": "通用表达式",
-        "pageRange": "75-80",
-        "summary": "介绍通用表表达式CTE的概念、语法、递归CTE的限制，以及斐波那契数列示例。",
-        "points": [
-          {
-            "term": "CTE",
-            "desc": "通用表表达式是在语句级别定义的临时结果集，作用范围是在当前语句。",
-            "page": 75
-          },
-          {
-            "term": "语法",
-            "desc": "with [recursive] cte_name [(col_name [, col_name] ...)] as (subquery) [, ...]。",
-            "page": 75
-          },
-          {
-            "term": "with",
-            "desc": "可出现在select、update、delete开始部分；同一语句级别只允许一个with子句，每个CTE必须唯一。",
-            "page": 75
-          },
-          {
-            "term": "recursive",
-            "desc": "CTE子查询引用自己名称称递归CTE，with子句中包含递归CTE必须使用关键字recursive。",
-            "page": 75
-          },
-          {
-            "term": "递归限制",
-            "desc": "递归select部分不能包含聚合函数、窗口函数、group by、order by、limit、distinct等。",
-            "page": 78
-          },
-          {
-            "term": "终止条件",
-            "desc": "递归CTE需包含终止递归条件，可用kill query命令或Ctrl+C终止死循环查询。",
-            "page": 77
-          },
-          {
-            "term": "递归示例",
-            "desc": "用递归CTE生成12个数字的斐波那契数列，n到达12后结束递归过程。",
-            "page": 79
-          }
-        ],
-        "code": [
-          "with [recursive] cte_name [(col_name [, col_name] ...)] as (subquery) [,cte_name [(col_name [, col_name] ...)]as (subquery)] ...",
-          "with cte95 as (select * from score where final>95) select student.studentno,sname,phone,Email,cte95.daily from student join cte95 on student.studentno=cte95.studentno where student.entrance>800;",
-          "with recursive fibnaci(n, fib_n, next_fib_n) as (select 1, 0, 1 union select n + 1, next_fib_n, fib_n + next_fib_n from fibnaci where n < 12) select * from fibnaci;"
-        ],
-        "tips": [
-          "递归CTE必须有终止条件；递归部分不能含聚合、窗口、group by、order by、limit、distinct"
-        ]
+        "tips": [],
+        "exam": "core"
       },
       {
         "id": "6",
@@ -8112,7 +6387,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "regexp查询能力比like通配符更强大灵活"
-        ]
+        ],
+        "exam": "keep"
       }
     ],
     "questions": [
@@ -8213,20 +6489,6 @@ window.REVIEW_DATA = [
         "answer": "B",
         "analysis": "解析：PPT第58页指出union操作符可以将多个select语句的返回结果组合到一个结果集中。",
         "page": 58
-      },
-      {
-        "id": "ch4-ppt-s08",
-        "type": "single",
-        "stem": "定义通用表表达式（CTE）使用的关键字是？",
-        "options": [
-          "A. with",
-          "B. select",
-          "C. over",
-          "D. partition"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第75页指出通用表表达式with子句的语法，with是通用表表达式的关键词。",
-        "page": 75
       },
       {
         "id": "ch4-ppt-b01",
@@ -8760,112 +7022,6 @@ window.REVIEW_DATA = [
         "answerText": "rollup",
         "analysis": "解析：PPT第38页指出with rollup可以在分组的统计数据基础上再进行相同的总体统计，如既求每门课平均值又求全部成绩平均值。",
         "page": 38
-      },
-      {
-        "id": "ch4-ppt-s31",
-        "type": "single",
-        "stem": "按照功能划分，MySQL 8.0支持的窗口函数可分为几类？",
-        "options": [
-          "A. 3类",
-          "B. 4类",
-          "C. 5类",
-          "D. 6类"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第40页指出按照功能划分，可以把MySQL8.0支持的窗口函数分为5类。",
-        "page": 40
-      },
-      {
-        "id": "ch4-ppt-s32",
-        "type": "single",
-        "stem": "窗口函数的一般格式是？",
-        "options": [
-          "A. window_function_name(expression) group by(...)",
-          "B. window_function_name(expression) join(...)",
-          "C. window_function_name(expression) having(...)",
-          "D. window_function_name(expression) over([partition_defintion] [order_definition] [frame_definition])"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第41页给出窗口函数一般格式：window_function_name(expression) over([partition_defintion] [order_definition] [frame_definition])。",
-        "page": 41
-      },
-      {
-        "id": "ch4-ppt-s33",
-        "type": "single",
-        "stem": "窗口函数中，用来指定函数执行的窗口范围的关键字是？",
-        "options": [
-          "A. over",
-          "B. partition",
-          "C. frame",
-          "D. window"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第41页指出over是关键字，用来指定函数执行的窗口范围，括号中什么都不写表示窗口包含满足where条件的所有行。",
-        "page": 41
-      },
-      {
-        "id": "ch4-ppt-b19",
-        "type": "blank",
-        "stem": "窗口函数中over后面括号内什么都不写，表示窗口包含满足____条件的所有行，函数基于所有行进行计算。",
-        "answer": [
-          "where",
-          "WHERE"
-        ],
-        "answerText": "where",
-        "analysis": "解析：PPT第41页指出over括号中什么都不写，则表示窗口包含满足where条件的所有行。",
-        "page": 41
-      },
-      {
-        "id": "ch4-ppt-s34",
-        "type": "single",
-        "stem": "窗口函数中partition子句的作用是？",
-        "options": [
-          "A. 合并多个分组",
-          "B. 指定窗口按哪些字段分组，窗口函数在不同分组上分别执行",
-          "C. 对结果集排序",
-          "D. 限制分组的数量"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第41页指出partition子句指定窗口按照哪些字段进行分组，窗口函数在不同的分组上分别执行。",
-        "page": 41
-      },
-      {
-        "id": "ch4-ppt-b20",
-        "type": "blank",
-        "stem": "窗口函数中frame是当前分区的一个子集，用来定义子集的规则，通常用来作为____窗口使用。",
-        "answer": [
-          "滑动",
-          "滑动窗口"
-        ],
-        "answerText": "滑动",
-        "analysis": "解析：PPT第41页指出frame是当前分区的一个子集，其子句用来定义子集的规则，通常用来作为滑动窗口使用。",
-        "page": 41
-      },
-      {
-        "id": "ch4-ppt-s35",
-        "type": "single",
-        "stem": "select *, rank() over w as 'rank' from score window w as (order by final) 中rank()输出的是什么？",
-        "options": [
-          "A. 每门课的平均分",
-          "B. 记录的行号",
-          "C. 按final排序后的序号",
-          "D. 每名学生的总分"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第42页例23利用rank()函数输出按照final排序的记录行序数值，窗口w定义为 order by final。",
-        "page": 42
-      },
-      {
-        "id": "ch4-ppt-b21",
-        "type": "blank",
-        "stem": "例26中 lag(studentno,3) over ww2 用于输出每行数据的前____行的学号。",
-        "answer": [
-          "3",
-          "三"
-        ],
-        "answerText": "3",
-        "analysis": "解析：PPT第45页例26利用lag()输出每行数据的前3行的学号，lag的第二个参数3表示偏移3行。",
-        "page": 45
       },
       {
         "id": "ch4-ppt-s36",
@@ -9529,100 +7685,6 @@ window.REVIEW_DATA = [
         "page": 74
       },
       {
-        "id": "ch4-ppt-s70",
-        "type": "single",
-        "stem": "通用表表达式（CTE）的作用范围是？",
-        "options": [
-          "A. 整个数据库",
-          "B. 当前语句",
-          "C. 当前会话",
-          "D. 全局所有用户"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第75页指出MySQL 8.0的通用表表达式是一个在语句级别定义的临时结果集，其作用范围是在当前语句。",
-        "page": 75
-      },
-      {
-        "id": "ch4-ppt-s71",
-        "type": "single",
-        "stem": "关于CTE的语法，下列说法正确的是？",
-        "options": [
-          "A. 必须使用recursive关键字",
-          "B. CTE名称可以重复",
-          "C. as 后面的括号不能省略",
-          "D. as 后面的括号可以省略"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第75页指出subquery用于产生CTE的结果集，as后面的括号不能省略。",
-        "page": 75
-      },
-      {
-        "id": "ch4-ppt-s72",
-        "type": "single",
-        "stem": "当with子句中包含递归CTE时，必须使用哪个关键字？",
-        "options": [
-          "A. repeat",
-          "B. loop",
-          "C. cycle",
-          "D. recursive"
-        ],
-        "answer": "D",
-        "analysis": "解析：PPT第75页指出如果CTE的子查询中引用了自己的名称即为递归CTE，with子句中包含任何递归CTE时必须使用关键字recursive。",
-        "page": 75
-      },
-      {
-        "id": "ch4-ppt-b37",
-        "type": "blank",
-        "stem": "递归select部分不能包含聚合函数、窗口函数、group by、order by、limit、____等。",
-        "answer": [
-          "distinct",
-          "DISTINCT"
-        ],
-        "answerText": "distinct",
-        "analysis": "解析：PPT第78页列出的递归CTE语法限制包括：递归select部分不能包含聚合函数、窗口函数、group by、order by、limit、distinct等。",
-        "page": 78
-      },
-      {
-        "id": "ch4-ppt-s73",
-        "type": "single",
-        "stem": "下列哪一项不属于递归select部分的语法限制？",
-        "options": [
-          "A. 不能引用其他表",
-          "B. 不能包含聚合函数",
-          "C. 不能包含group by",
-          "D. 不能包含limit"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第78页指出递归select部分可以引用其他的表，并且可以将它们与CTE进行连接查询，故“不能引用其他表”不是限制。",
-        "page": 78
-      },
-      {
-        "id": "ch4-ppt-s74",
-        "type": "single",
-        "stem": "递归查询因没有执行时间限制而导致死循环时，可以从另一个会话使用什么命令终止该查询？",
-        "options": [
-          "A. shutdown",
-          "B. kill query",
-          "C. drop table",
-          "D. rollback"
-        ],
-        "answer": "B",
-        "analysis": "解析：PPT第77页指出如果某个递归查询由于没有执行时间限制而导致了死循环，可以从另一个会话中使用kill query命令终止该查询。",
-        "page": 77
-      },
-      {
-        "id": "ch4-ppt-b38",
-        "type": "blank",
-        "stem": "例42用递归CTE生成斐波那契数列，当n到达____之后，就结束递归过程。",
-        "answer": [
-          "12",
-          "十二"
-        ],
-        "answerText": "12",
-        "analysis": "解析：PPT第79、80页例42用 where n<12 控制递归，当n到达12之后结束递归过程，共生成12个数字。",
-        "page": 79
-      },
-      {
         "id": "ch4-ppt-s75",
         "type": "single",
         "stem": "与通配字符查询相比，正则表达式的查询能力如何？",
@@ -9703,6 +7765,16 @@ window.REVIEW_DATA = [
         "analysis": "解析：PPT第87页例46用 regexp '131|132' 查询电话号码出现131或132数字的学生信息，|表示“或”。",
         "page": 87
       }
+    ],
+    "hiddenSections": [
+      {
+        "id": "3.3",
+        "title": "窗口函数在查询中的应用"
+      },
+      {
+        "id": "5.5",
+        "title": "通用表达式"
+      }
     ]
   },
   {
@@ -9757,7 +7829,8 @@ window.REVIEW_DATA = [
         "tips": [
           "索引由数据库自动维护，编写SQL查询时写法与无索引表完全相同",
           "索引不是越多越好，要正确认识索引的重要性和设计原则"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "1.2",
@@ -9810,7 +7883,8 @@ window.REVIEW_DATA = [
         "tips": [
           "全文索引和空间索引只能在MyISAM存储引擎的表中创建",
           "Hash索引仅支持=、in、<=>查询，不能范围查询，且不能避免表扫描"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "1.3",
@@ -9850,7 +7924,8 @@ window.REVIEW_DATA = [
           }
         ],
         "code": [],
-        "tips": []
+        "tips": [],
+        "exam": "core"
       },
       {
         "id": "1.4",
@@ -9907,7 +7982,8 @@ window.REVIEW_DATA = [
         "tips": [
           "blob和text列创建索引时必须给出前缀长度",
           "主键索引必定是唯一的，但唯一性索引不一定是主键"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "1.5",
@@ -9945,7 +8021,8 @@ window.REVIEW_DATA = [
         "tips": [
           "删除主键索引用drop primary key，不需要提供索引名称",
           "drop index可以删除唯一索引等各类索引"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "2.1",
@@ -9994,7 +8071,8 @@ window.REVIEW_DATA = [
           "视图的from子句中不能使用子查询",
           "定义中不能引用temporary表，也不能创建temporary视图",
           "基本表中添加新字段后，已有视图将不包含新字段"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.2",
@@ -10038,7 +8116,8 @@ window.REVIEW_DATA = [
           "show create view view_name",
           "select * from information_schema.views;"
         ],
-        "tips": []
+        "tips": [],
+        "exam": "keep"
       },
       {
         "id": "2.3",
@@ -10071,7 +8150,8 @@ window.REVIEW_DATA = [
           "alter [algorithm = {undefined|merge|temptable}] view view_name [(column_list)] as select语句 [with [cascaded|local]check option];",
           "alter view teach_view2(教师号,教师名,专业) as select teacherno, tname, major from teach_view1 where prof like '%教授' and (department='计算机学院' or department='材料学院');"
         ],
-        "tips": []
+        "tips": [],
+        "exam": "keep"
       },
       {
         "id": "2.4",
@@ -10102,7 +8182,8 @@ window.REVIEW_DATA = [
         "tips": [
           "删除视图只删除定义，不会删除基表数据",
           "drop view可一次删除多个视图，视图名之间用逗号分隔"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "3.1",
@@ -10156,7 +8237,8 @@ window.REVIEW_DATA = [
         "tips": [
           "依赖多表的视图一次只能修改一个基表的数据",
           "含聚合函数、distinct、group by、union等结构的视图不可修改"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "3.2",
@@ -10191,7 +8273,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "with check option要求更新数据满足检查条件，否则报ERROR 1369且更新失败"
-        ]
+        ],
+        "exam": "keep"
       }
     ],
     "questions": [
@@ -11130,8 +9213,49 @@ window.REVIEW_DATA = [
         "answerText": "check",
         "analysis": "解析：考点是“with check option”。PPT第49页例14在select语句后使用 with check option 创建检查视图V_dept。",
         "page": 49
+      },
+      {
+        "id": "ch5-ppt-s48",
+        "type": "single",
+        "page": 24,
+        "stem": "下列选项中，不属于视图优点的是（  ）。",
+        "options": [
+          "A. 简化用户的操作",
+          "B. 使用户能以多种角度看待同一数据",
+          "C. 提高数据的物理存储效率",
+          "D. 为数据库重构提供一定程度的逻辑独立性"
+        ],
+        "answer": "C",
+        "analysis": "解析：PPT第23-24页，视图是虚表、不存储实际数据，优点为简化操作、多角度查看数据、提高安全性、提供逻辑独立性；它不改变物理存储效率。"
+      },
+      {
+        "id": "ch5-ppt-b23",
+        "type": "blank",
+        "page": 24,
+        "stem": "视图是从一个或多个基本表导出的虚表，数据库中只存放视图的____，不存放对应的数据。",
+        "answer": [
+          "定义",
+          "定义信息"
+        ],
+        "answerText": "定义",
+        "analysis": "解析：PPT第23页，视图是虚表，数据库中只保存视图的定义，其数据仍存放在基本表中。"
+      },
+      {
+        "id": "ch5-ppt-s49",
+        "type": "single",
+        "page": 12,
+        "stem": "按照设置索引的原则，下列做法最恰当的是（  ）。",
+        "options": [
+          "A. 对更新操作频繁的列尽量多建索引",
+          "B. 在 where 子句和连接条件中频繁使用的列上建索引",
+          "C. 为每一列都建立索引",
+          "D. 在取值很少的列（如性别）上建索引"
+        ],
+        "answer": "B",
+        "analysis": "解析：PPT第12-13页，索引应建在查询、连接、排序频繁使用的列上；更新频繁、重复值多（选择性低）的列不宜建索引，索引过多会拖慢更新。"
       }
-    ]
+    ],
+    "hiddenSections": []
   },
   {
     "chapter": 6,
@@ -11201,7 +9325,8 @@ window.REVIEW_DATA = [
           "用户会话变量以一个@开头，系统会话变量以两个@开头",
           "用户会话变量不能用declare定义；局部变量名前无@，不能与表字段名同名",
           "用户会话变量的作用范围与生存周期大于局部变量"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "1.2",
@@ -11231,7 +9356,8 @@ window.REVIEW_DATA = [
           }
         ],
         "code": [],
-        "tips": []
+        "tips": [],
+        "exam": "keep"
       },
       {
         "id": "1.3",
@@ -11268,7 +9394,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "创建存储程序前先用delimiter改结束符，结束后要改回分号"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "1.4",
@@ -11324,43 +9451,8 @@ window.REVIEW_DATA = [
           "预处理语句可在存储过程中使用，但不能在存储函数和触发程序中使用",
           "参数制作符?只能用于数据值应该出现的地方，不能用于SQL关键词和标识符",
           "预处理语句不能嵌套，也不能用于API函数预备"
-        ]
-      },
-      {
-        "id": "1.5",
-        "title": "注释",
-        "pageRange": "28-28",
-        "summary": "本节介绍注释的概念及MySQL中三种注释方式：井号#、双连线--（后须加空格）和正斜杠星号/*…*/，并给出示例代码。",
-        "points": [
-          {
-            "term": "注释的概念",
-            "desc": "注释是程序代码中不被执行的文本字符串，用于对代码进行说明或进行诊断的部分语句。",
-            "page": 28
-          },
-          {
-            "term": "#注释",
-            "desc": "井号字符#：从该字符到行尾都是注释内容。",
-            "page": 28
-          },
-          {
-            "term": "--注释",
-            "desc": "双连线字符--：从该字符到行尾都是注释内容，注意双连线后一定要加一个空格。",
-            "page": 28
-          },
-          {
-            "term": "/*…*/注释",
-            "desc": "开始注释对/*和结束注释对*/之间的所有内容均视为注释。",
-            "page": 28
-          }
         ],
-        "code": [
-          "USE  teaching;     -- 打开数据库",
-          "#查看学生的所有信息",
-          "/*  查看所有女生的学号、姓名、和电话  附加条件是女生  */"
-        ],
-        "tips": [
-          "双连线--后一定要加一个空格才是注释"
-        ]
+        "exam": "core"
       },
       {
         "id": "2.1",
@@ -11409,7 +9501,8 @@ window.REVIEW_DATA = [
         "tips": [
           "自定义函数定义时需要指定当前数据库",
           "函数体内必须有return语句返回函数值"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.2",
@@ -11453,7 +9546,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "alter function不能修改函数参数和函数体，需修改函数体只能drop后重建"
-        ]
+        ],
+        "exam": "keep"
       },
       {
         "id": "3.1",
@@ -11507,7 +9601,8 @@ window.REVIEW_DATA = [
         "tips": [
           "case语句有简单case和搜索case两种语法形式",
           "ifnull(v1,v2)在v1为null时返回v2"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "3.2",
@@ -11557,7 +9652,8 @@ window.REVIEW_DATA = [
         "tips": [
           "leave结束整个循环，iterate只结束本次循环",
           "repeat先执行后判断，while先判断后执行"
-        ]
+        ],
+        "exam": "core"
       }
     ],
     "questions": [
@@ -11938,60 +10034,6 @@ window.REVIEW_DATA = [
         "page": 23
       },
       {
-        "id": "ch6-ppt-s19",
-        "type": "single",
-        "stem": "使用双连线“--”作注释时，其后必须加一个（ ）。",
-        "options": [
-          "A. 空格",
-          "B. 分号",
-          "C. 逗号",
-          "D. 引号"
-        ],
-        "answer": "A",
-        "analysis": "解析：PPT第28页特别提示，双连线“--”后一定要加一个空格，否则不构成注释。考点为“--注释”。故选A。",
-        "page": 28
-      },
-      {
-        "id": "ch6-ppt-s20",
-        "type": "single",
-        "stem": "下列注释方式中，可对多行内容进行块注释的是（ ）。",
-        "options": [
-          "A. #",
-          "B. --",
-          "C. /* … */",
-          "D. //"
-        ],
-        "answer": "C",
-        "analysis": "解析：PPT第28页指出，开始注释对“/*”和结束注释对“*/”之间的所有内容均视为注释，可跨行；#和--都只注释到行尾。考点为“/*…*/注释”。故选C。",
-        "page": 28
-      },
-      {
-        "id": "ch6-ppt-b11",
-        "type": "blank",
-        "stem": "使用井号“#”注释时，从该字符到____都是注释内容。",
-        "answer": [
-          "行尾",
-          "行末",
-          "该行末尾"
-        ],
-        "answerText": "行尾",
-        "analysis": "解析：PPT第28页指出，井号字符“#”从该字符到行尾都是注释内容。",
-        "page": 28
-      },
-      {
-        "id": "ch6-ppt-b12",
-        "type": "blank",
-        "stem": "注释是程序代码中____的文本字符串，用于对代码进行说明或诊断。",
-        "answer": [
-          "不被执行",
-          "不执行",
-          "不会被执行"
-        ],
-        "answerText": "不被执行",
-        "analysis": "解析：PPT第28页给出注释的概念：注释是程序代码中不被执行的文本字符串，用于对代码进行说明或进行诊断。",
-        "page": 28
-      },
-      {
         "id": "ch6-ppt-s21",
         "type": "single",
         "stem": "在MySQL中，利用create function语句创建自定义函数必须具有（ ）权限。",
@@ -12274,6 +10316,12 @@ window.REVIEW_DATA = [
         "analysis": "解析：PPT第57页提醒，编写循环类程序时应特别注意函数参数和函数体内变量值的变化情况，否则容易出现数据错误、死循环等问题。",
         "page": 57
       }
+    ],
+    "hiddenSections": [
+      {
+        "id": "1.5",
+        "title": "注释"
+      }
     ]
   },
   {
@@ -12326,7 +10374,8 @@ window.REVIEW_DATA = [
         "tips": [
           "调用存储过程必须用call语句，执行需execute权限",
           "调用时参数个数必须等于存储过程的参数个数"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "1.2",
@@ -12393,7 +10442,8 @@ window.REVIEW_DATA = [
           "continue表示遇错不处理继续执行，exit表示遇错马上退出",
           "sqlstate_value为长度5的字符串错误代码，mysql_error_code为数值型错误代码",
           "自定义错误触发条件和处理程序可在触发器、函数及存储过程中使用"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "1.3",
@@ -12421,7 +10471,8 @@ window.REVIEW_DATA = [
           "alter procedure sp_name [characteristic ...]",
           "alter procedure do_insert modifies sql data sql security invoker;"
         ],
-        "tips": []
+        "tips": [],
+        "exam": "keep"
       },
       {
         "id": "1.4",
@@ -12449,7 +10500,8 @@ window.REVIEW_DATA = [
           "drop procedure [if exists] sp_name",
           "drop procedure if exists do_insert;"
         ],
-        "tips": []
+        "tips": [],
+        "exam": "keep"
       },
       {
         "id": "1.5",
@@ -12487,7 +10539,8 @@ window.REVIEW_DATA = [
         "tips": [
           "函数必须有且仅有一个返回值，存储过程可有多个（用out/inout定义）",
           "函数可嵌入SQL，存储过程必须用call调用"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.1",
@@ -12523,7 +10576,8 @@ window.REVIEW_DATA = [
         "tips": [
           "游标只能在存储过程内部使用",
           "游标使用顺序为：声明→打开→提取→关闭"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.2",
@@ -12553,7 +10607,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "使用游标前必须先打开游标"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.3",
@@ -12600,7 +10655,8 @@ window.REVIEW_DATA = [
         "tips": [
           "fetch每次只提取一行，必须配合循环使用",
           "游标错误处理程序要放在声明游标语句之后"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "2.4",
@@ -12633,7 +10689,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "未明确关闭的游标会在begin-end块末尾自动关闭"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "3.1",
@@ -12690,7 +10747,8 @@ window.REVIEW_DATA = [
           "insert只有new合法，delete只有old合法，update可同时使用new和old",
           "执行顺序是before触发器、表数据修改操作、after触发器",
           "触发器不能与temporary表或视图关联"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "3.2",
@@ -12720,7 +10778,8 @@ window.REVIEW_DATA = [
           "show triggers;",
           "select * from information_schema.triggers;"
         ],
-        "tips": []
+        "tips": [],
+        "exam": "core"
       },
       {
         "id": "3.3",
@@ -12773,7 +10832,8 @@ window.REVIEW_DATA = [
           "同一个表不能创建两个相同触发时间、触发事件的触发程序",
           "before触发程序中auto_increment字段的new值为0",
           "触发程序不能对本表使用update语句，可用set命令替代以免死循环"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "3.4",
@@ -12801,7 +10861,8 @@ window.REVIEW_DATA = [
           "drop trigger [schema_name.]trigger_name",
           "drop trigger stu_score;"
         ],
-        "tips": []
+        "tips": [],
+        "exam": "keep"
       },
       {
         "id": "4.1",
@@ -12838,7 +10899,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "创建事件前必须先打开事件调度器"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "4.2",
@@ -12887,7 +10949,8 @@ window.REVIEW_DATA = [
         "tips": [
           "at用于某个时刻发生，every用于周期性发生",
           "事件体包含多条语句时需用begin…end复合结构"
-        ]
+        ],
+        "exam": "core"
       },
       {
         "id": "4.3",
@@ -12927,7 +10990,8 @@ window.REVIEW_DATA = [
         ],
         "tips": [
           "alter event可临时关闭或开启事件、改名、修改调度与注释"
-        ]
+        ],
+        "exam": "core"
       }
     ],
     "questions": [
@@ -14074,7 +12138,86 @@ window.REVIEW_DATA = [
         "answerText": "rename",
         "analysis": "解析：PPT第72页例21中重命名事件的语句为alter event test1_insert rename to insert_test1 comment '表test1的数据操作';。",
         "page": 72
+      },
+      {
+        "id": "ch7-ppt-s57",
+        "type": "single",
+        "page": 28,
+        "stem": "关于存储过程与自定义函数的区别，下列说法正确的是（  ）。",
+        "options": [
+          "A. 函数只能返回一个值，存储过程可以通过 out 参数返回多个值",
+          "B. 存储过程只能返回一个值，函数可以返回多个值",
+          "C. 两者都不允许带参数",
+          "D. 两者都可以用 call 语句调用"
+        ],
+        "answer": "A",
+        "analysis": "解析：PPT第28-30页，函数用 returns 指定返回类型、只能返回一个值且可直接在 SQL 表达式中调用；存储过程用 call 调用，可通过 out/inout 参数返回多个结果。"
+      },
+      {
+        "id": "ch7-ppt-s58",
+        "type": "single",
+        "page": 29,
+        "stem": "下列语句中，不能出现在自定义函数体中的是（  ）。",
+        "options": [
+          "A. select ... into 变量",
+          "B. set 语句",
+          "C. commit / rollback 事务控制语句",
+          "D. if ... then 条件语句"
+        ],
+        "answer": "C",
+        "analysis": "解析：PPT第28-29页，函数体内不允许使用事务控制语句（commit、rollback），也不能返回结果集；需要事务或多结果集时应改用存储过程。"
+      },
+      {
+        "id": "ch7-ppt-b31",
+        "type": "blank",
+        "page": 29,
+        "stem": "存储过程用____语句调用，而自定义函数像内置函数一样直接出现在表达式中。",
+        "answer": [
+          "call",
+          "CALL"
+        ],
+        "answerText": "call",
+        "analysis": "解析：PPT第28页，调用存储过程使用 call 语句；函数在 select 等表达式中直接引用。"
+      },
+      {
+        "id": "ch7-ppt-s59",
+        "type": "single",
+        "page": 8,
+        "stem": "下列选项中，不属于存储过程优点的是（  ）。",
+        "options": [
+          "A. 第一次执行后即被编译并保存在数据库中，后续调用执行更快",
+          "B. 减少应用程序与数据库之间的网络传输量",
+          "C. 可以把权限控制到过程一级，提高安全性",
+          "D. 可以脱离数据库直接在其他 DBMS 中复用"
+        ],
+        "answer": "D",
+        "analysis": "解析：PPT第6-10页，存储过程的优点是预编译执行快、减少网络流量、可复用、模块化、可控制权限；它是数据库对象，不能脱离本 DBMS 直接复用。"
+      },
+      {
+        "id": "ch7-ppt-b32",
+        "type": "blank",
+        "page": 8,
+        "stem": "存储过程在第一次执行时被____并保存在数据库中，后续调用可以直接执行，因此提高了执行效率。",
+        "answer": [
+          "编译",
+          "预编译"
+        ],
+        "answerText": "编译",
+        "analysis": "解析：PPT第6-8页，存储过程创建时由数据库分析并编译，第一次执行后常驻数据库，后续调用省去解析编译开销。"
+      },
+      {
+        "id": "ch7-ppt-b33",
+        "type": "blank",
+        "page": 8,
+        "stem": "存储过程可以只把____权限授予用户，而不必授予表的直接访问权限，因此提高了数据的安全性。",
+        "answer": [
+          "执行",
+          "execute"
+        ],
+        "answerText": "执行",
+        "analysis": "解析：PPT第7-9页，存储过程的一大优点是安全性：应用只需获得过程的 execute 权限，无需直接访问底层表。"
       }
-    ]
+    ],
+    "hiddenSections": []
   }
 ];

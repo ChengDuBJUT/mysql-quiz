@@ -351,20 +351,22 @@ function check(ok, label, extra) {
   });
   check(/^mysql-quiz-notes-\d{8}\.json$/.test(dlName || ''), '导出笔记生成备份文件名', String(dlName));
 
-  await p.evaluate(() => {
+  const noteId = await p.evaluate(() => PPR.getBank()[0].id);
+  await p.evaluate((id) => {
     const payload = {
       app: 'mysql-quiz', kind: 'notes', version: 1,
-      notes: { 'ch1-ppt-s01': { stem: '', note: '导入测试用的笔记' } }
+      notes: {}
     };
+    payload.notes[id] = { stem: '', note: '导入测试用的笔记' };
     const file = new File([JSON.stringify(payload)], 'notes.json', { type: 'application/json' });
     const dt = new DataTransfer();
     dt.items.add(file);
     const input = document.getElementById('notes-file');
     input.files = dt.files;
     input.dispatchEvent(new Event('change'));
-  });
+  }, noteId);
   await new Promise(r => setTimeout(r, 600));
-  const imported = await p.evaluate(() => PPR.getNotes()['ch1-ppt-s01'] || '');
+  const imported = await p.evaluate((id) => PPR.getNotes()[id] || '', noteId);
   check(imported === '导入测试用的笔记', '导入笔记写入成功', imported);
 
   console.log('\n[15] 题量：默认全部 / 分组 / 再来一组');

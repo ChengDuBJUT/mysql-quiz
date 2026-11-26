@@ -78,9 +78,15 @@ function check(cond, label, detail) {
   check(await p.$eval('#view-quiz', e => e.classList.contains('active')), '切到自测视图');
   await p.click('#nav-stats'); await sleep(150);
   check(await p.$eval('#view-stats', e => e.classList.contains('active')), '切到统计视图');
-  await p.click('#nav-essay'); await sleep(150);
-  const essay = await p.$eval('#view-essay', e => e.textContent.includes('待资料齐全'));
-  check(essay, '大题预留入口显示待补说明');
+  await p.click('#nav-essay'); await sleep(250);
+  const essay = await p.evaluate(() => ({
+    cards: document.querySelectorAll('.big-card').length,
+    tabs: document.querySelectorAll('#big-tabs .chip').length,
+    hasQa: !!document.querySelector('.big-card .big-tag') &&
+      Array.from(document.querySelectorAll('.big-tag')).some(e => e.textContent.includes('问答题'))
+  }));
+  check(essay.cards === 53 && essay.tabs === 8 && essay.hasQa,
+    '大题模块 53 道 / 8 个分组 / 含问答题', JSON.stringify(essay));
   await p.click('#nav-quiz'); await sleep(150);
 
   // 5. 自测：选一道单选，答对
@@ -91,13 +97,15 @@ function check(cond, label, detail) {
   const first = await p.evaluate(() => {
     const q = window.PPT_QUESTIONS.find(x => x.type === 'single');
     window.PPR.startQuiz([q]);
-    return { id: q.id, answer: q.answer };
+    // 选项乱序后答案字母以会话里的呈现为准
+    const v = window.PPR.getSession().list[0];
+    return { id: v.id, answer: v.answer };
   });
   await sleep(150);
   await p.click(`.option[data-key="${first.answer}"]`);
   await p.click('#btn-submit'); await sleep(150);
   const verdict = await p.$eval('.verdict', e => e.textContent);
-  check(verdict.includes('正确'), '单选判分正确', verdict);
+  check(/✓ 回答正确/.test(verdict), '单选判分正确', verdict);
   check(await p.$eval('.answer-panel .src', e => /课件 P\d+/.test(e.textContent)), '解析含课件出处');
   // 收藏（题头胶囊按钮）
   await p.click('#btn-quiz-fav'); await sleep(100);
