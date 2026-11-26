@@ -51,8 +51,9 @@ const strip = s => String(s).replace(/^[A-Za-z][.、．)]\s*/, '');
     function o_strip(s) { return String(s).replace(/^[A-Za-z][.、．)]\s*/, ''); }
     return { c, n: bank.length, moved, sameText, bankDist: bank.reduce((m, q) => (m[q.answer] = (m[q.answer] || 0) + 1, m), {}) };
   });
-  const fair = ['A', 'B', 'C', 'D'].every(k => dist.c[k] >= 75 && dist.c[k] <= 155);
-  check(fair, '打乱后 A/B/C/D 分布均衡（各约 113）', JSON.stringify(dist.c) + ' / 原分布 ' + JSON.stringify(dist.bankDist));
+  const lo = Math.floor(dist.n * 0.18), hi = Math.ceil(dist.n * 0.32);
+  const fair = ['A', 'B', 'C', 'D'].every(k => dist.c[k] >= lo && dist.c[k] <= hi);
+  check(fair, '打乱后 A/B/C/D 分布均衡（各约 ' + Math.round(dist.n / 4) + ' 题）', JSON.stringify(dist.c) + ' / 原分布 ' + JSON.stringify(dist.bankDist));
   check(dist.moved / dist.n > 0.6, '大部分题的正确项已离开原位置', dist.moved + '/' + dist.n);
   check(dist.sameText === dist.n, '答案字母搬家后指向的正文仍是原正确项', dist.sameText + '/' + dist.n);
 
